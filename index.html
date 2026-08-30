@@ -19,109 +19,57 @@
 body{overflow:hidden;background:#000;font-family:var(--ff-b);direction:rtl;color:var(--cream)}
 canvas{display:block;position:fixed;inset:0;z-index:0}
 
-/* overlay */
 #game-root{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:20;pointer-events:none}
-.screen{
-  display:none;flex-direction:column;align-items:center;gap:18px;
-  width:min(700px,96vw);max-height:93vh;overflow-y:auto;
-  padding:28px 24px;background:var(--panel);
-  border:1px solid var(--border);border-radius:20px;
-  box-shadow:var(--shadow),0 0 60px rgba(245,200,66,0.07);
-  backdrop-filter:blur(22px);pointer-events:all;
-  scrollbar-width:thin;scrollbar-color:var(--border) transparent;
-}
+.screen{display:none;flex-direction:column;align-items:center;gap:18px;width:min(700px,96vw);max-height:93vh;overflow-y:auto;padding:28px 24px;background:var(--panel);border:1px solid var(--border);border-radius:20px;box-shadow:var(--shadow),0 0 60px rgba(245,200,66,0.07);backdrop-filter:blur(22px);pointer-events:all;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
 .screen.active{display:flex}
 .screen::-webkit-scrollbar{width:4px}
 .screen::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
 
-/* narrator */
 .narrator{display:flex;align-items:flex-end;gap:12px;width:100%}
 .narrator.flip{flex-direction:row-reverse}
-.avatar{
-  width:52px;height:52px;border-radius:50%;display:flex;align-items:center;
-  justify-content:center;font-size:26px;flex-shrink:0;
-  background:radial-gradient(circle at 38% 35%,#fff87a,#ffd000 55%,#ff8800);
-  box-shadow:0 0 22px rgba(255,200,0,0.5);
-  animation:gpulse 2.4s ease-in-out infinite;
-}
+.avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;background:radial-gradient(circle at 38% 35%,#fff87a,#ffd000 55%,#ff8800);box-shadow:0 0 22px rgba(255,200,0,0.5);animation:gpulse 2.4s ease-in-out infinite}
 .avatar.blue{background:radial-gradient(circle at 38% 35%,#aaddff,#4488cc)}
 @keyframes gpulse{0%,100%{box-shadow:0 0 16px rgba(255,200,0,0.4)}50%{box-shadow:0 0 34px rgba(255,200,0,0.75)}}
-.bubble{
-  background:rgba(255,255,255,0.055);border:1px solid rgba(255,255,255,0.11);
-  border-radius:16px 16px 4px 16px;padding:13px 16px;
-  font-size:15px;line-height:1.65;max-width:540px;flex:1;
-}
+.bubble{background:rgba(255,255,255,0.055);border:1px solid rgba(255,255,255,0.11);border-radius:16px 16px 4px 16px;padding:13px 16px;font-size:15px;line-height:1.65;max-width:540px;flex:1}
 .narrator.flip .bubble{border-radius:16px 16px 16px 4px}
 
-/* typography */
 .screen-title{font-family:var(--ff-h);font-size:clamp(20px,4vw,30px);color:var(--gold);text-align:center;line-height:1.2}
 .sub{font-size:14px;color:var(--dim);text-align:center;line-height:1.6;max-width:520px}
 
-/* buttons */
-.btn{
-  display:inline-flex;align-items:center;gap:8px;padding:13px 34px;
-  background:linear-gradient(135deg,var(--gold),var(--amber));
-  color:#1a0f00;font-family:var(--ff-h);font-size:17px;
-  border:none;border-radius:999px;cursor:pointer;
-  box-shadow:0 4px 20px rgba(245,200,66,0.32);
-  transition:transform .15s,box-shadow .15s;
-}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 34px;background:linear-gradient(135deg,var(--gold),var(--amber));color:#1a0f00;font-family:var(--ff-h);font-size:17px;border:none;border-radius:999px;cursor:pointer;box-shadow:0 4px 20px rgba(245,200,66,0.32);transition:transform .15s,box-shadow .15s}
 .btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,200,66,0.5)}
 .btn:active{transform:translateY(0)}
-.btn-sec{
-  background:transparent;border:1px solid var(--border);color:var(--dim);
-  font-size:13px;padding:7px 18px;border-radius:999px;cursor:pointer;
-  transition:border-color .2s,color .2s;
-}
+.btn-sec{background:transparent;border:1px solid var(--border);color:var(--dim);font-size:13px;padding:7px 18px;border-radius:999px;cursor:pointer;transition:border-color .2s,color .2s}
 .btn-sec:hover{border-color:var(--gold);color:var(--gold)}
 
-/* ── INTRO ── */
+/* intro */
 .balloons{display:flex;justify-content:center;gap:10px;font-size:34px}
 .balloon{animation:fbal 3s ease-in-out infinite}
 .balloon:nth-child(2){animation-delay:.6s}.balloon:nth-child(3){animation-delay:1.2s}
 .balloon:nth-child(4){animation-delay:1.8s}.balloon:nth-child(5){animation-delay:.3s}
 @keyframes fbal{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
-.party-banner{
-  width:100%;background:linear-gradient(135deg,rgba(245,200,66,.1),rgba(255,100,100,.08));
-  border:1px solid rgba(245,200,66,.18);border-radius:14px;padding:20px;text-align:center;
-}
+.party-banner{width:100%;background:linear-gradient(135deg,rgba(245,200,66,.1),rgba(255,100,100,.08));border:1px solid rgba(245,200,66,.18);border-radius:14px;padding:20px;text-align:center}
 .party-text{font-family:var(--ff-h);font-size:19px;color:var(--gold);margin-top:8px}
 
-/* ── PRE-ASSESSMENT ── */
+/* pre */
 .prog-wrap{width:100%;height:6px;background:rgba(255,255,255,.07);border-radius:999px;overflow:hidden}
 .prog-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--gold));border-radius:999px;transition:width .4s ease}
 .q-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);align-self:flex-start}
-.q-text{font-family:var(--ff-h);font-size:19px;text-align:center;line-height:1.4}
+.q-text{font-family:var(--ff-h);font-size:19px;text-align:center;line-height:1.4;width:100%}
 .opts{display:flex;flex-direction:column;gap:9px;width:100%}
-.opt-btn{
-  width:100%;padding:13px 18px;background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.1);border-radius:12px;
-  color:var(--cream);font-family:var(--ff-b);font-size:15px;
-  cursor:pointer;text-align:right;
-  transition:background .15s,border-color .15s;
-}
+.opt-btn{width:100%;padding:13px 18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;color:var(--cream);font-family:var(--ff-b);font-size:15px;cursor:pointer;text-align:right;transition:background .15s,border-color .15s}
 .opt-btn:hover:not(:disabled){background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.22)}
 .opt-btn.correct{background:rgba(78,205,196,.18);border-color:var(--teal);color:var(--teal)}
 .opt-btn.wrong{background:rgba(255,107,107,.14);border-color:var(--rose)}
 .opt-btn:disabled{cursor:default}
-.expln{
-  background:rgba(78,205,196,.07);border:1px solid rgba(78,205,196,.2);
-  border-radius:12px;padding:13px 16px;font-size:14px;line-height:1.65;
-  color:var(--teal);width:100%;
-}
+.expln{background:rgba(78,205,196,.07);border:1px solid rgba(78,205,196,.2);border-radius:12px;padding:13px 16px;font-size:14px;line-height:1.65;color:var(--teal);width:100%}
 
-/* ── SORT ── */
+/* sort */
 .score-row{display:flex;gap:16px;align-items:center}
 .pill{padding:4px 13px;border-radius:999px;font-size:13px;background:rgba(255,255,255,.06)}
 .pill span{font-family:var(--ff-h);color:var(--gold)}
 .items-grid{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;width:100%}
-.item-card{
-  display:flex;flex-direction:column;align-items:center;gap:5px;
-  padding:12px 10px;min-width:84px;
-  background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.1);
-  border-radius:13px;cursor:pointer;user-select:none;
-  transition:transform .15s,border-color .15s,background .15s;
-}
+.item-card{display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 10px;min-width:82px;background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.1);border-radius:13px;cursor:pointer;user-select:none;transition:transform .15s,border-color .15s,background .15s}
 .item-card:hover:not(.placed):not(.selected){background:rgba(255,255,255,.09);transform:translateY(-2px)}
 .item-card.selected{border-color:var(--gold);background:rgba(245,200,66,.12);transform:translateY(-4px) scale(1.04);box-shadow:0 6px 20px rgba(245,200,66,.28)}
 .item-card.placed{opacity:.3;pointer-events:none;transform:none}
@@ -130,11 +78,7 @@ canvas{display:block;position:fixed;inset:0;z-index:0}
 .item-emoji{font-size:26px;line-height:1}
 .item-name{font-size:11px;color:var(--dim);text-align:center}
 .drop-zones{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%}
-.drop-zone{
-  min-height:110px;border:2px dashed rgba(255,255,255,.14);
-  border-radius:15px;padding:12px;display:flex;flex-direction:column;gap:7px;
-  transition:border-color .2s,background .2s;cursor:pointer;
-}
+.drop-zone{min-height:110px;border:2px dashed rgba(255,255,255,.14);border-radius:15px;padding:12px;display:flex;flex-direction:column;gap:7px;transition:border-color .2s,background .2s;cursor:pointer}
 .dz-emit{border-color:rgba(245,200,66,.28)}.dz-refl{border-color:rgba(78,205,196,.28)}
 .drop-zone:hover{background:rgba(255,255,255,.04)}
 .dz-emit:hover{border-color:var(--gold)}.dz-refl:hover{border-color:var(--teal)}
@@ -146,15 +90,11 @@ canvas{display:block;position:fixed;inset:0;z-index:0}
 @keyframes chipin{from{transform:scale(.7) translateY(5px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
 .chip-emit{background:rgba(245,200,66,.15);color:var(--gold)}
 .chip-refl{background:rgba(78,205,196,.13);color:var(--teal)}
-.hint-box{
-  background:rgba(255,159,69,.09);border:1px solid rgba(255,159,69,.24);
-  border-radius:12px;padding:11px 15px;font-size:13px;color:var(--amber);
-  text-align:center;width:100%;display:none;
-}
+.hint-box{background:rgba(255,159,69,.09);border:1px solid rgba(255,159,69,.24);border-radius:12px;padding:11px 15px;font-size:13px;color:var(--amber);text-align:center;width:100%;display:none}
 .hint-box.on{display:block;animation:fin .4s ease}
 @keyframes fin{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── REWARD ── */
+/* reward */
 .reward-wrap{display:flex;flex-direction:column;align-items:center;gap:18px}
 .fl-icon{font-size:78px;animation:flspin 1.1s ease-out forwards,glfl 1.6s ease-in-out infinite 1s;filter:drop-shadow(0 0 18px rgba(255,240,100,.65))}
 @keyframes flspin{0%{transform:scale(0) rotate(-30deg);opacity:0}60%{transform:scale(1.15) rotate(8deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
@@ -167,7 +107,7 @@ canvas{display:block;position:fixed;inset:0;z-index:0}
 .toolbar-slot{width:42px;height:42px;border:2px solid var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:26px;background:rgba(245,200,66,.13);animation:slotin .5s ease 1.1s backwards}
 @keyframes slotin{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
 
-/* ── MAP ── */
+/* map */
 .maze-map{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%}
 .room-card{padding:18px 12px;border-radius:15px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
 .room-done{background:rgba(126,232,162,.09);border:1px solid rgba(126,232,162,.24)}
@@ -176,187 +116,331 @@ canvas{display:block;position:fixed;inset:0;z-index:0}
 .sunrise-msg{background:linear-gradient(135deg,rgba(245,200,66,.1),rgba(255,159,69,.08));border:1px solid rgba(245,200,66,.18);border-radius:13px;padding:16px 20px;text-align:center;width:100%}
 .sunrise-msg p{font-size:14px;line-height:1.7}
 
-@media(max-width:560px){
-  .screen{padding:18px 14px;gap:13px}
-  .drop-zones{grid-template-columns:1fr}
-  .maze-map{grid-template-columns:1fr}
-}
+@media(max-width:560px){.screen{padding:18px 14px;gap:13px}.drop-zones{grid-template-columns:1fr}.maze-map{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
 <div id="game-root">
 
-  <!-- ── SCREEN 1: INTRO ─────────────────────────────────────────────────── -->
+  <!-- INTRO -->
   <div id="s-intro" class="screen active">
     <div class="balloons">
       <span class="balloon">🎈</span><span class="balloon">🎉</span>
       <span class="balloon">🎂</span><span class="balloon">🎊</span><span class="balloon">🎈</span>
     </div>
     <h1 class="screen-title">מסיבת ההפתעה שנעלמה</h1>
-
     <div class="narrator">
       <div class="avatar">💡</div>
-      <div class="bubble">
-        שלום! אני <strong style="color:var(--gold)">לומינוס</strong> — שומר האור.<br>
-        הייתה אמורה להיות הלילה מסיבת הפתעה נהדרת, אבל משהו קרה!
-      </div>
+      <div class="bubble">שלום! אני <strong style="color:var(--gold)">לומינוס</strong> — שומר האור.<br>הייתה אמורה להיות הלילה מסיבת הפתעה נהדרת, אבל משהו קרה!</div>
     </div>
-
     <div class="party-banner">
       <p style="font-size:13px;color:var(--dim);margin-bottom:10px">לפני רגע...</p>
       <div style="font-size:34px">🎂🕯️💡🌟✨</div>
       <p class="party-text">מסיבה מדהימה עם אורות בכל מקום!</p>
     </div>
-
     <div class="narrator">
       <div class="avatar">💡</div>
-      <div class="bubble">
-        לפתע — <strong style="color:var(--rose)">כל האורות כבו!</strong> 🌑<br>
-        הנרות, המנורות — הכל חשוך. המסיבה הושמדה!<br><br>
-        כדי להדליק הכל מחדש, עליכם להבין:<br>
-        מה הוא <em>מקור אור</em>, ומה הוא גוף שרק <em>מחזיר</em> אור?
-      </div>
+      <div class="bubble">לפתע — <strong style="color:var(--rose)">כל האורות כבו!</strong> 🌑<br>הנרות, המנורות — הכל חשוך. המסיבה הושמדה!<br><br>כדי להדליק הכל מחדש, עליכם להבין:<br>מה הוא <em>מקור אור</em>, ומה הוא גוף שרק <em>מחזיר</em> אור?</div>
     </div>
-
     <div class="narrator flip">
       <div class="avatar blue">🌊</div>
-      <div class="bubble">
-        אתם עומדים מעל אוקיינוס בלילה.<br>
-        כשתפתרו את תעלומת האור — השמש תזרח ומסיבת ההפתעה תחזור!
-      </div>
+      <div class="bubble">אתם עומדים מעל אוקיינוס בלילה.<br>כשתפתרו את תעלומת האור — השמש תזרח ומסיבת ההפתעה תחזור!</div>
     </div>
-
     <button class="btn" onclick="startPre()">בואו נדליק! 💡</button>
     <p class="sub">כיתה ו׳ · יחידה: אנרגיית קרינה · חדר 1 מתוך 3</p>
   </div>
 
-  <!-- ── SCREEN 2: PRE-ASSESSMENT ────────────────────────────────────────── -->
+  <!-- PRE-ASSESSMENT -->
   <div id="s-pre" class="screen">
     <div class="prog-wrap"><div class="prog-fill" id="pre-prog" style="width:0%"></div></div>
-    <p class="q-label" id="pre-counter">שאלה 1 מתוך 5</p>
-
+    <p class="q-label" id="pre-counter"></p>
     <div class="narrator">
       <div class="avatar">💡</div>
-      <div class="bubble" id="pre-bubble">לפני שניגש לחדר — בואו נראה מה כבר ידוע לכם על אור!</div>
+      <div class="bubble" id="pre-bubble"></div>
     </div>
-
     <p class="q-text" id="pre-q"></p>
     <div class="opts" id="pre-opts"></div>
     <div class="expln" id="pre-exp" style="display:none"></div>
     <button class="btn" id="pre-next" style="display:none" onclick="nextPreQ()">המשך ←</button>
   </div>
 
-  <!-- ── SCREEN 3: SORT ──────────────────────────────────────────────────── -->
+  <!-- SORT -->
   <div id="s-sort" class="screen">
     <h2 class="screen-title">חדר 1: מיון גופי אור 🔦</h2>
-
     <div class="narrator">
       <div class="avatar">💡</div>
-      <div class="bubble" id="sort-bubble">
-        לחצו על פריט ואז על הקטגוריה:<br>
-        <strong style="color:var(--gold)">מקור אור</strong> — מייצר אור בעצמו &nbsp;|&nbsp;
-        <strong style="color:var(--teal)">מחזיר אור</strong> — רק מחזיר אור ממקור אחר
-      </div>
+      <div class="bubble" id="sort-bubble">לחצו על פריט ואז על הקטגוריה:<br><strong style="color:var(--gold)">מקור אור</strong> — מייצר אור בעצמו &nbsp;|&nbsp; <strong style="color:var(--teal)">מחזיר אור</strong> — רק מחזיר</div>
     </div>
-
     <div class="score-row">
       <div class="pill">נכון: <span id="sort-ok">0</span>/10</div>
       <div class="pill">ניסיונות: <span id="sort-tries">0</span></div>
     </div>
-
     <div class="items-grid" id="items-grid"></div>
-
     <div class="drop-zones">
-      <div class="drop-zone dz-emit" id="dz-emit" onclick="place('emit')">
+      <div class="drop-zone dz-emit" onclick="place('emit')">
         <div class="zone-title">☀️ מקורות אור</div>
         <div class="zone-sub">מייצרים אור בעצמם</div>
         <div class="zone-chips" id="chips-emit"></div>
       </div>
-      <div class="drop-zone dz-refl" id="dz-refl" onclick="place('refl')">
+      <div class="drop-zone dz-refl" onclick="place('refl')">
         <div class="zone-title">🌙 מחזירי אור</div>
         <div class="zone-sub">מחזירים אור ממקור אחר</div>
         <div class="zone-chips" id="chips-refl"></div>
       </div>
     </div>
-
     <div style="display:flex;align-items:center;gap:10px;width:100%">
       <button class="btn-sec" onclick="showHint()">💡 רמז</button>
       <div class="hint-box" id="hint-box"></div>
     </div>
   </div>
 
-  <!-- ── SCREEN 4: REWARD ────────────────────────────────────────────────── -->
+  <!-- REWARD -->
   <div id="s-reward" class="screen">
     <h2 class="screen-title">כל הכבוד! השגתם פנס! 🎉</h2>
     <div class="reward-wrap">
-      <div class="stars-row">
-        <span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span>
-      </div>
+      <div class="stars-row"><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span></div>
       <div class="fl-icon">🔦</div>
       <div class="narrator">
         <div class="avatar">💡</div>
-        <div class="bubble">
-          הצלחתם! כי הבנתם את ההבדל בין מקורות אור למחזירים —<br>
-          קיבלתם <strong style="color:var(--gold)">פנס קסם</strong> שיאיר לכם את הדרך בחדרים הבאים!
-        </div>
+        <div class="bubble">הצלחתם! כי הבנתם את ההבדל בין מקורות אור למחזירים —<br>קיבלתם <strong style="color:var(--gold)">פנס קסם</strong> שיאיר לכם את הדרך בחדרים הבאים!</div>
       </div>
       <div class="toolbar-demo">
         <span>🎒</span><span>📚</span>
         <div class="toolbar-slot">🔦</div>
         <span style="font-size:13px;color:var(--dim)">סרגל הכלים שלך</span>
       </div>
-      <p class="sub">
-        שימו לב לשינוי בשמיים! ככל שתלמדו יותר,<br>
-        <strong style="color:var(--gold)">השמש תזרח</strong> והמסיבה תחזור לחיים. 🌅
-      </p>
+      <p class="sub">שימו לב לשינוי בשמיים! ככל שתלמדו יותר,<br><strong style="color:var(--gold)">השמש תזרח</strong> והמסיבה תחזור לחיים. 🌅</p>
     </div>
     <button class="btn" onclick="showMap()">המשיכו למפה 🗺️</button>
   </div>
 
-  <!-- ── SCREEN 5: MAP ───────────────────────────────────────────────────── -->
+  <!-- MAP -->
   <div id="s-map" class="screen">
     <h2 class="screen-title">מפת מבוך האור 🗺️</h2>
     <div class="narrator">
       <div class="avatar">💡</div>
-      <div class="bubble">
-        כל חדר שתשלימו יחזיר עוד אור לשמיים!<br>
-        שלמתם את <strong style="color:var(--emerald)">חדר 1</strong> — עצמאי! 🌟
-      </div>
+      <div class="bubble">כל חדר שתשלימו יחזיר עוד אור לשמיים!<br>שלמתם את <strong style="color:var(--emerald)">חדר 1</strong> — עצמאי! 🌟</div>
     </div>
     <div class="maze-map">
-      <div class="room-card room-done">
-        <div class="room-icon">💡</div>
-        <div class="room-name">חדר 1</div>
-        <div class="room-tag" style="color:var(--emerald)">✓ הושלם</div>
-        <div style="font-size:11px;color:var(--dim)">מקורות ומחזירים</div>
-      </div>
-      <div class="room-card room-locked">
-        <div class="room-icon">🔒</div>
-        <div class="room-name">חדר 2</div>
-        <div class="room-tag">נעול</div>
-        <div style="font-size:11px;color:var(--dim)">שקיפות והחזרה</div>
-      </div>
-      <div class="room-card room-locked">
-        <div class="room-icon">🔒</div>
-        <div class="room-name">חדר 3</div>
-        <div class="room-tag">נעול</div>
-        <div style="font-size:11px;color:var(--dim)">מנסרה וקשת</div>
-      </div>
+      <div class="room-card room-done"><div class="room-icon">💡</div><div class="room-name">חדר 1</div><div class="room-tag" style="color:var(--emerald)">✓ הושלם</div><div style="font-size:11px;color:var(--dim)">מקורות ומחזירים</div></div>
+      <div class="room-card room-locked"><div class="room-icon">🔒</div><div class="room-name">חדר 2</div><div class="room-tag">נעול</div><div style="font-size:11px;color:var(--dim)">שקיפות והחזרה</div></div>
+      <div class="room-card room-locked"><div class="room-icon">🔒</div><div class="room-name">חדר 3</div><div class="room-tag">נעול</div><div style="font-size:11px;color:var(--dim)">מנסרה וקשת</div></div>
     </div>
-    <div class="sunrise-msg">
-      <p>
-        שימו לב לאוקיינוס מאחוריכם — <strong>הזריחה הגיעה!</strong><br>
-        כשתשלימו את כל החדרים, השמש תזרח במלואה<br>
-        והמסיבה תחזור לחיים. ☀️🎉
-      </p>
-    </div>
+    <div class="sunrise-msg"><p>שימו לב לאוקיינוס מאחוריכם — <strong>הזריחה הגיעה!</strong><br>כשתשלימו את כל החדרים, השמש תזרח במלואה והמסיבה תחזור לחיים. ☀️🎉</p></div>
     <button class="btn" onclick="location.reload()">🔄 שחק שוב</button>
   </div>
 
 </div><!-- /#game-root -->
 
-<!-- ── Three.js UMD ───────────────────────────────────────────────────────── -->
+<!-- ═══════════════════════════════════════════════════════════
+     BLOCK 1 — GAME LOGIC (runs first, no Three.js dependency)
+     ═══════════════════════════════════════════════════════════ -->
+<script>
+// ── Sky bridge — Three.js sets this after it boots ──────────────────────────
+var targetHour = 3.0;   // Three.js animate() reads this
+
+// ── Pilot data ───────────────────────────────────────────────────────────────
+var pilotData = {startTime: Date.now(), preAnswers: [], sortAttempts: 0, sortWrong: 0, hintsUsed: 0, sortStartTime: null, totalTime: null};
+
+// ── Pre-assessment data ───────────────────────────────────────────────────────
+var PRE_Q = [
+  {q:"מה הופך גוף למקור אור?",            opts:["הוא גדול ובוהק","הוא מייצר אנרגיית אור בעצמו","הוא לבן ומבריק","הוא קרוב אלינו"],         ans:1, exp:"מקור אור הוא גוף שמייצר אנרגיית אור בעצמו — כמו שמש, נר או מנורה."},
+  {q:"למה אנחנו רואים את הירח?",           opts:["הירח מייצר אור צהוב","הירח קולט ומייצר אנרגיה","הירח מחזיר אור מהשמש","הירח קרוב מאוד"], ans:2, exp:"הירח אינו מקור אור — הוא מחזיר את אור השמש שפוגע בו."},
+  {q:"איזה מהבאים מפיק אור בעצמו?",       opts:["ירח","מראה","ענן","כוכב"],                                                                ans:3, exp:"כוכבים, כמו השמש, מייצרים אנרגיית אור בעצמם."},
+  {q:"ספר לבן בחדר חשוך — לא רואים אותו. מדוע?", opts:["הוא בלתי נראה","אין מקור אור שיאיר אותו","הוא שחור","הוא שקוף"],                 ans:1, exp:"אנחנו רואים עצמים כי הם מחזירים אור אל עינינו. בחושך — אין אור לחזור."},
+  {q:"מה קורה כשאור פוגע במראה?",          opts:["האור נבלע","האור נמחק","האור מוחזר כמעט לגמרי","האור עובר דרך המראה"],                  ans:2, exp:"מראה מחזירה כמעט את כל האור שפוגע בה — זו הסיבה לשתקפות."},
+];
+
+// ── Sort data ─────────────────────────────────────────────────────────────────
+var ITEMS = [
+  {id:'sun',   emoji:'☀️', name:'שמש',          cat:'emit'},
+  {id:'candle',emoji:'🕯️', name:'נר דולק',      cat:'emit'},
+  {id:'lamp',  emoji:'💡', name:'מנורה',         cat:'emit'},
+  {id:'star',  emoji:'⭐', name:'כוכב',          cat:'emit'},
+  {id:'phone', emoji:'📱', name:'מסך נדלק',     cat:'emit'},
+  {id:'moon',  emoji:'🌙', name:'ירח',           cat:'refl'},
+  {id:'mirror',emoji:'🪞', name:'מראה',          cat:'refl'},
+  {id:'paper', emoji:'📄', name:'דף לבן',        cat:'refl'},
+  {id:'spoon', emoji:'🥄', name:'כף מתכת',       cat:'refl'},
+  {id:'cat',   emoji:'🐱', name:'עיני חתול',     cat:'refl'},
+];
+
+// ── Game state ────────────────────────────────────────────────────────────────
+var preIdx = 0, preAnswered = false;
+var selId = null, sortOk = 0, placed = {}, wrongStreak = 0, hintShown = false, hintTimer = null;
+
+// ── Screen management ─────────────────────────────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+}
+
+// ── PRE-ASSESSMENT ────────────────────────────────────────────────────────────
+function startPre() {
+  showScreen('s-pre');
+  targetHour = 3.6;
+  renderPreQ(0);
+}
+
+function renderPreQ(idx) {
+  preAnswered = false;
+  preIdx = idx;
+  var q = PRE_Q[idx];
+  document.getElementById('pre-counter').textContent = 'שאלה ' + (idx + 1) + ' מתוך ' + PRE_Q.length;
+  document.getElementById('pre-prog').style.width = (idx / PRE_Q.length * 100) + '%';
+  document.getElementById('pre-q').textContent = q.q;
+  document.getElementById('pre-exp').style.display = 'none';
+  document.getElementById('pre-next').style.display = 'none';
+  document.getElementById('pre-bubble').textContent = idx === 0
+    ? 'לפני שניגש לחדר — בואו נראה מה כבר ידוע לכם על אור!'
+    : 'יפה! שאלה נוספת:';
+  var optsEl = document.getElementById('pre-opts');
+  optsEl.innerHTML = '';
+  q.opts.forEach(function(o, i) {
+    var btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.textContent = o;
+    btn.onclick = function() { answerPre(i, btn); };
+    optsEl.appendChild(btn);
+  });
+}
+
+function answerPre(chosen, btn) {
+  if (preAnswered) return;
+  preAnswered = true;
+  var q = PRE_Q[preIdx];
+  var ok = chosen === q.ans;
+  document.querySelectorAll('.opt-btn').forEach(function(b, i) {
+    b.disabled = true;
+    if (i === q.ans) b.classList.add('correct');
+    if (i === chosen && !ok) b.classList.add('wrong');
+  });
+  document.getElementById('pre-exp').textContent = q.exp;
+  document.getElementById('pre-exp').style.display = 'block';
+  document.getElementById('pre-next').style.display = 'inline-flex';
+  pilotData.preAnswers.push({q: preIdx, correct: ok});
+  console.log('[Pilot] Pre Q' + (preIdx + 1), ok ? '✓' : '✗');
+}
+
+function nextPreQ() {
+  var n = preIdx + 1;
+  if (n >= PRE_Q.length) { finishPre(); } else { renderPreQ(n); }
+}
+
+function finishPre() {
+  targetHour = 5.2;
+  showScreen('s-sort');
+  initSort();
+  console.log('[Pilot] Pre done:', pilotData.preAnswers.filter(function(a){ return a.correct; }).length + '/' + PRE_Q.length);
+}
+
+// ── SORT ──────────────────────────────────────────────────────────────────────
+function initSort() {
+  selId = null; sortOk = 0; placed = {}; wrongStreak = 0; hintShown = false;
+  pilotData.sortStartTime = Date.now();
+  document.getElementById('sort-ok').textContent = '0';
+  document.getElementById('sort-tries').textContent = '0';
+  document.getElementById('chips-emit').innerHTML = '';
+  document.getElementById('chips-refl').innerHTML = '';
+  document.getElementById('hint-box').classList.remove('on');
+  var shuffled = ITEMS.slice().sort(function(){ return Math.random() - .5; });
+  var grid = document.getElementById('items-grid');
+  grid.innerHTML = '';
+  shuffled.forEach(function(item) {
+    var c = document.createElement('div');
+    c.className = 'item-card';
+    c.id = 'c-' + item.id;
+    c.innerHTML = '<span class="item-emoji">' + item.emoji + '</span><span class="item-name">' + item.name + '</span>';
+    c.onclick = function() { selectItem(item.id); };
+    grid.appendChild(c);
+  });
+  if (hintTimer) clearTimeout(hintTimer);
+  hintTimer = setTimeout(function() { if (sortOk < ITEMS.length) showHint(); }, 30000);
+}
+
+function selectItem(id) {
+  if (placed[id]) return;
+  document.querySelectorAll('.item-card').forEach(function(c){ c.classList.remove('selected'); });
+  if (selId === id) {
+    selId = null;
+    setSortBubble('לחצו על פריט ואז על הקטגוריה המתאימה למטה.');
+    return;
+  }
+  selId = id;
+  document.getElementById('c-' + id).classList.add('selected');
+  var item = ITEMS.filter(function(x){ return x.id === id; })[0];
+  setSortBubble('בחרתם: <strong>' + item.emoji + ' ' + item.name + '</strong><br>עכשיו לחצו על הקטגוריה המתאימה למטה.');
+}
+
+function place(zone) {
+  if (!selId) { setSortBubble('קודם בחרו פריט מהרשימה למעלה!'); return; }
+  var item = ITEMS.filter(function(x){ return x.id === selId; })[0];
+  pilotData.sortAttempts++;
+  document.getElementById('sort-tries').textContent = pilotData.sortAttempts;
+  if (item.cat === zone) {
+    sortOk++;
+    placed[item.id] = true;
+    document.getElementById('sort-ok').textContent = sortOk;
+    var card = document.getElementById('c-' + item.id);
+    card.classList.remove('selected');
+    card.classList.add('placed');
+    var chip = document.createElement('div');
+    chip.className = 'zone-chip chip-' + zone;
+    chip.textContent = item.emoji + ' ' + item.name;
+    document.getElementById('chips-' + zone).appendChild(chip);
+    wrongStreak = 0; selId = null;
+    setSortBubble('✅ נכון! <strong>' + item.emoji + ' ' + item.name + '</strong> הוא ' + (zone === 'emit' ? 'מקור אור' : 'מחזיר אור') + '.');
+    console.log('[Pilot] ✓', item.id);
+    if (sortOk === ITEMS.length) {
+      clearTimeout(hintTimer);
+      pilotData.sortTime = (Date.now() - pilotData.sortStartTime) / 1000;
+      setTimeout(finishSort, 800);
+    }
+  } else {
+    pilotData.sortWrong++;
+    wrongStreak++;
+    var card2 = document.getElementById('c-' + item.id);
+    card2.classList.remove('selected');
+    card2.classList.add('shake');
+    setTimeout(function() { card2.classList.remove('shake'); card2.classList.add('selected'); }, 460);
+    setSortBubble('❌ לא בדיוק — האם <strong>' + item.emoji + ' ' + item.name + '</strong> מייצר אור, או מחזיר?');
+    console.log('[Pilot] ✗', item.id, '→', zone, 'should be', item.cat);
+    if (wrongStreak >= 2) showHint();
+  }
+}
+
+function showHint() {
+  if (hintShown) return;
+  hintShown = true;
+  pilotData.hintsUsed++;
+  var box = document.getElementById('hint-box');
+  box.classList.add('on');
+  if (selId) {
+    var item = ITEMS.filter(function(x){ return x.id === selId; })[0];
+    box.innerHTML = '💡 רמז: <strong>' + item.emoji + ' ' + item.name + '</strong> — ' + (item.cat === 'emit' ? 'מייצר אור בעצמו (מקור)' : 'רק מחזיר אור ממקור אחר') + '.';
+  } else {
+    var emList = ITEMS.filter(function(x){ return !placed[x.id] && x.cat === 'emit'; }).map(function(x){ return x.emoji + x.name; }).join('، ');
+    box.innerHTML = '💡 רמז: מקורות אור מייצרים אנרגיה — ' + (emList || 'כבר מיינתם אותם!');
+  }
+}
+
+function setSortBubble(html) { document.getElementById('sort-bubble').innerHTML = html; }
+
+function finishSort() {
+  targetHour = 7.2;
+  showScreen('s-reward');
+  console.log('[Pilot] Sort done! t=' + Math.round(pilotData.sortTime) + 's attempts=' + pilotData.sortAttempts + ' hints=' + pilotData.hintsUsed);
+}
+
+function showMap() {
+  pilotData.totalTime = (Date.now() - pilotData.startTime) / 1000;
+  showScreen('s-map');
+  console.log('[Pilot] Complete. Total=' + Math.round(pilotData.totalTime) + 's', JSON.stringify(pilotData));
+}
+</script>
+
+<!-- Three.js CDN scripts -->
 <script src="https://cdn.jsdelivr.net/npm/three@0.148.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/controls/OrbitControls.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/objects/Sky.js"></script>
@@ -368,11 +452,15 @@ canvas{display:block;position:fixed;inset:0;z-index:0}
 <script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/postprocessing/ShaderPass.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
 
+<!-- ═══════════════════════════════════════════════════════════
+     BLOCK 2 — THREE.JS SCENE (try-catch so game survives 3D failure)
+     ═══════════════════════════════════════════════════════════ -->
 <script>
-// ═══════════════════════════════════════════════════════════════════════════
-// THREE.JS SCENE
-// ═══════════════════════════════════════════════════════════════════════════
-const renderer = new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});
+(function() {
+'use strict';
+try {
+
+var renderer = new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});
 renderer.setPixelRatio(Math.min(devicePixelRatio,2));
 renderer.setSize(innerWidth,innerHeight);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -381,482 +469,326 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.body.prepend(renderer.domElement);
 
-const scene  = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(55,innerWidth/innerHeight,0.1,20000);
-camera.position.set(0,7,28);
+var scene  = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera(55, innerWidth/innerHeight, 0.1, 20000);
+camera.position.set(0, 7, 28);
 
-const controls = new THREE.OrbitControls(camera,renderer.domElement);
+var controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.04;
-controls.target.set(0,1,0);
-controls.maxPolarAngle = Math.PI*0.488;
+controls.target.set(0, 1, 0);
+controls.maxPolarAngle = Math.PI * 0.488;
 controls.minDistance = 3;
 controls.maxDistance = 900;
 
 // lights
-const sunLight = new THREE.DirectionalLight(0xfff0cc,0.08);
+var sunLight = new THREE.DirectionalLight(0xfff0cc, 0.08);
 sunLight.castShadow = true;
 sunLight.shadow.mapSize.set(2048,2048);
 sunLight.shadow.camera.near = 1; sunLight.shadow.camera.far = 500;
 sunLight.shadow.camera.left = -80; sunLight.shadow.camera.right = 80;
-sunLight.shadow.camera.top = 80;  sunLight.shadow.camera.bottom = -80;
+sunLight.shadow.camera.top = 80; sunLight.shadow.camera.bottom = -80;
 sunLight.shadow.bias = -0.0005; sunLight.shadow.normalBias = 0.02; sunLight.shadow.radius = 10;
 scene.add(sunLight);
 
-const hemiLight = new THREE.HemisphereLight(0x8899ff,0x002233,0.08);
+var hemiLight = new THREE.HemisphereLight(0x8899ff, 0x002233, 0.08);
 scene.add(hemiLight);
 
-const moonLight = new THREE.DirectionalLight(0x3355aa,0.85);
-moonLight.position.set(-80,120,-200);
+var moonLight = new THREE.DirectionalLight(0x3355aa, 0.85);
+moonLight.position.set(-80, 120, -200);
 scene.add(moonLight);
 
 // sky
-const sky = new THREE.Sky();
+var sky = new THREE.Sky();
 sky.scale.setScalar(10000);
 scene.add(sky);
 
-const sunPos = new THREE.Vector3();
-const pmrem  = new THREE.PMREMGenerator(renderer);
+var sunPos = new THREE.Vector3();
+var pmrem  = new THREE.PMREMGenerator(renderer);
 pmrem.compileEquirectangularShader();
-let envTex = null;
-let waterMat = null;
+var envTex = null;
+var waterMat = null;   // shared with game (referenced via closure)
 
-let currentHour = 3.0, targetHour = 3.0, lastSkyRebuild = -999;
+var currentHour    = 3.0;
+var lastSkyRebuild = -999;
 
-function updateSky(hour){
-  const elevation = Math.sin((hour-6)/12*Math.PI)*85;
-  const phi = THREE.MathUtils.degToRad(90-elevation);
-  sunPos.setFromSphericalCoords(1,phi,THREE.MathUtils.degToRad(180));
-  const u = sky.material.uniforms;
+function updateSky(hour) {
+  var elevation = Math.sin((hour-6)/12*Math.PI)*85;
+  var phi = THREE.MathUtils.degToRad(90-elevation);
+  sunPos.setFromSphericalCoords(1, phi, THREE.MathUtils.degToRad(180));
+  var u = sky.material.uniforms;
   u.sunPosition.value.copy(sunPos);
-  u.turbidity.value       = 7+(1-Math.max(0,elevation/85))*6;
-  u.rayleigh.value        = 1.5+(1-Math.max(0,elevation/85))*0.8;
+  u.turbidity.value       = 7 + (1 - Math.max(0, elevation/85)) * 6;
+  u.rayleigh.value        = 1.5 + (1 - Math.max(0, elevation/85)) * 0.8;
   u.mieCoefficient.value  = 0.005;
   u.mieDirectionalG.value = 0.85;
-  if(envTex) envTex.dispose();
+  if (envTex) envTex.dispose();
   envTex = pmrem.fromObject(sky).texture;
   scene.environment = envTex;
-  const h = Math.max(0,elevation/85);
+  var h = Math.max(0, elevation/85);
   sunLight.position.copy(sunPos).multiplyScalar(250);
-  sunLight.intensity = h*6.5+0.08;
-  const warm = 1-Math.min(1,(1-h)*2.5);
-  sunLight.color.setRGB(1.0,0.82+warm*0.18,0.55+warm*0.45);
+  sunLight.intensity = h * 6.5 + 0.08;
+  var warm = 1 - Math.min(1, (1-h)*2.5);
+  sunLight.color.setRGB(1.0, 0.82+warm*0.18, 0.55+warm*0.45);
   hemiLight.intensity = h*0.5+0.08;
-  hemiLight.color.setHSL(0.6,0.6,h*0.28+0.06);
-  hemiLight.groundColor.setHSL(0.12,0.4,h*0.08+0.01);
-  renderer.toneMappingExposure = 0.3+h*1.0;
-  moonLight.intensity = Math.max(0,0.85-h*2.5);
-  if(waterMat){
+  hemiLight.color.setHSL(0.6, 0.6, h*0.28+0.06);
+  hemiLight.groundColor.setHSL(0.12, 0.4, h*0.08+0.01);
+  renderer.toneMappingExposure = 0.3 + h*1.0;
+  moonLight.intensity = Math.max(0, 0.85 - h*2.5);
+  if (waterMat) {
     waterMat.uniforms.uSunDir.value.copy(sunPos);
-    waterMat.uniforms.uSunColor.value.setRGB(sunLight.color.r,sunLight.color.g,sunLight.color.b);
-    const hz = new THREE.Color().setHSL(0.08+h*0.5,0.6,h*0.4+0.15);
-    const zn = new THREE.Color().setHSL(0.6,0.7,h*0.35+0.05);
+    waterMat.uniforms.uSunColor.value.setRGB(sunLight.color.r, sunLight.color.g, sunLight.color.b);
+    var hz = new THREE.Color().setHSL(0.08+h*0.5, 0.6, h*0.4+0.15);
+    var zn = new THREE.Color().setHSL(0.6, 0.7, h*0.35+0.05);
     waterMat.uniforms.uSkyHorizon.value.copy(hz);
     waterMat.uniforms.uSkyZenith.value.copy(zn);
   }
 }
 
 // stars
-(function(){
-  const N=2000,pos=new Float32Array(N*3);
-  for(let i=0;i<N;i++){
-    const th=Math.random()*Math.PI*2,ph=Math.acos(2*Math.random()-1),r=8000;
-    pos[i*3]=r*Math.sin(ph)*Math.cos(th);
-    pos[i*3+1]=Math.abs(r*Math.cos(ph));
-    pos[i*3+2]=r*Math.sin(ph)*Math.sin(th);
+var starsMesh;
+(function() {
+  var N=2000, pos=new Float32Array(N*3);
+  for (var i=0; i<N; i++) {
+    var th=Math.random()*Math.PI*2, ph=Math.acos(2*Math.random()-1), r=8000;
+    pos[i*3]  = r*Math.sin(ph)*Math.cos(th);
+    pos[i*3+1]= Math.abs(r*Math.cos(ph));
+    pos[i*3+2]= r*Math.sin(ph)*Math.sin(th);
   }
-  const sg=new THREE.BufferGeometry();
-  sg.setAttribute('position',new THREE.BufferAttribute(pos,3));
-  window._stars=new THREE.Points(sg,new THREE.PointsMaterial({color:0xffffff,size:3.5,sizeAttenuation:true,transparent:true,opacity:0.9}));
-  scene.add(window._stars);
+  var sg=new THREE.BufferGeometry();
+  sg.setAttribute('position', new THREE.BufferAttribute(pos,3));
+  starsMesh=new THREE.Points(sg, new THREE.PointsMaterial({color:0xffffff,size:3.5,sizeAttenuation:true,transparent:true,opacity:0.9}));
+  scene.add(starsMesh);
 })();
 
 // water shader
-const wVert=`
-precision highp float;
-#define PI 3.14159265359
-uniform float uTime,uScale;
-varying vec3 vWorld,vNorm;
-varying float vFoam,vHeight;
-vec3 gerstner(vec2 pos,vec2 dir,float amp,float len,float Q,float t,inout vec3 n){
-  float k=2.0*PI/len,c=sqrt(9.81/k);
-  vec2 d=normalize(dir);
-  float f=k*(dot(d,pos)-c*t),cf=cos(f),sf=sin(f);
-  n.x-=d.x*k*amp*cf; n.z-=d.y*k*amp*cf; n.y-=Q*k*amp*sf;
-  return vec3(d.x*Q*amp*cf,amp*sf,d.y*Q*amp*cf);
-}
-void main(){
-  vec3 p=position,n=vec3(0,1,0);
-  float s=uScale,t=uTime;
-  p+=gerstner(p.xz,vec2( 1.00, 0.20),1.80*s,90.0,0.70,t,n);
-  p+=gerstner(p.xz,vec2(-0.40, 1.00),1.40*s,70.0,0.62,t,n);
-  p+=gerstner(p.xz,vec2( 0.90, 0.70),0.90*s,40.0,0.52,t*1.10,n);
-  p+=gerstner(p.xz,vec2(-0.70,-0.60),0.70*s,30.0,0.46,t*0.92,n);
-  p+=gerstner(p.xz,vec2( 0.20, 1.00),0.50*s,22.0,0.40,t*1.18,n);
-  p+=gerstner(p.xz,vec2(-1.00, 0.30),0.28*s,13.0,0.32,t*1.30,n);
-  p+=gerstner(p.xz,vec2( 0.60,-0.80),0.18*s, 8.0,0.25,t*1.44,n);
-  p+=gerstner(p.xz,vec2(-0.30,-1.00),0.12*s, 5.5,0.20,t*1.55,n);
-  p+=gerstner(p.xz,vec2( 0.80, 0.10),0.06*s, 3.0,0.12,t*1.80,n);
-  p+=gerstner(p.xz,vec2(-0.50, 0.70),0.04*s, 2.0,0.10,t*2.00,n);
-  float mH=(1.8+1.4+0.9+0.7+0.5)*s;
-  vFoam=smoothstep(mH*0.58,mH*0.96,p.y);
-  vHeight=p.y;
-  vWorld=(modelMatrix*vec4(p,1.0)).xyz;
-  vNorm=normalize(mat3(modelMatrix)*n);
-  gl_Position=projectionMatrix*viewMatrix*vec4(vWorld,1.0);
-}`;
-const wFrag=`
-precision highp float;
-#define PI 3.14159265359
-uniform float uTime;
-uniform vec3 uCamPos,uSunDir,uSunColor,uSkyZenith,uSkyHorizon;
-varying vec3 vWorld,vNorm;
-varying float vFoam,vHeight;
-float bD(float h,float r){float r2=r*r,n2=h*h;return exp((n2-1.0)/max(r2*n2,1e-5))/max(PI*r2*n2*n2,1e-5);}
-vec3 skyA(vec3 R){
-  float up=max(0.0,R.y);
-  vec3 col=mix(uSkyHorizon,uSkyZenith,up*up);
-  col+=uSunColor*(pow(max(0.0,dot(R,uSunDir)),800.0)*6.0+pow(max(0.0,dot(R,uSunDir)),28.0)*0.12);
-  return col;
-}
-vec3 dN(vec3 N,float t){
-  vec2 u1=vWorld.xz*0.06+vec2(t*0.022,t*0.018),u2=vWorld.xz*0.11-vec2(t*0.019,-t*0.027);
-  return normalize(N+vec3(sin(u1.x*6.1+t*0.4)*0.04+sin(u2.x*9.3-t*0.6)*0.025,0,sin(u1.y*5.8-t*0.3)*0.04+sin(u2.y*8.7+t*0.5)*0.025));
-}
-void main(){
-  vec3 N0=normalize(vNorm),N=dN(N0,uTime),V=normalize(uCamPos-vWorld),L=normalize(uSunDir),H=normalize(V+L);
-  float NV=max(0.001,dot(N,V)),NL=max(0.0,dot(N,L)),NH=max(0.001,dot(N,H)),VH=max(0.001,dot(V,H));
-  float F=0.02+0.98*pow(1.0-NV,5.0);
-  vec3 refl=skyA(reflect(-V,N));
-  vec3 wc=mix(vec3(0,0.05,0.14),vec3(0.02,0.20,0.32),smoothstep(-1.0,3.0,vHeight));
-  float D=bD(NH,0.013),G=min(1.0,min(2.0*NH*NV/VH,2.0*NH*NL/VH));
-  vec3 spec=uSunColor*(D*G*F)/(4.0*NV*max(NL,0.001))*NL*4.0;
-  vec3 sss=vec3(0.02,0.38,0.30)*(pow(max(0.0,dot(L,-N0)),3.0)*0.45+pow(max(0.0,dot(V,-L)),3.5)*0.18)*NL;
-  vec3 col=mix(wc,refl,clamp(F*0.9+0.08,0.0,1.0))+spec+sss;
-  col=mix(col,vec3(0.88,0.93,1.0),vFoam*0.65);
-  col=mix(col,uSkyHorizon,smoothstep(250.0,1400.0,length(vWorld.xz-uCamPos.xz))*0.45);
-  gl_FragColor=vec4(col,mix(0.72,0.97,F+vFoam*0.4));
-}`;
+var wVert=[
+'precision highp float;',
+'#define PI 3.14159265359',
+'uniform float uTime,uScale;',
+'varying vec3 vWorld,vNorm; varying float vFoam,vHeight;',
+'vec3 gerstner(vec2 pos,vec2 dir,float amp,float len,float Q,float t,inout vec3 n){',
+'  float k=2.0*PI/len,c=sqrt(9.81/k); vec2 d=normalize(dir);',
+'  float f=k*(dot(d,pos)-c*t),cf=cos(f),sf=sin(f);',
+'  n.x-=d.x*k*amp*cf; n.z-=d.y*k*amp*cf; n.y-=Q*k*amp*sf;',
+'  return vec3(d.x*Q*amp*cf,amp*sf,d.y*Q*amp*cf);',
+'}',
+'void main(){',
+'  vec3 p=position,n=vec3(0,1,0); float s=uScale,t=uTime;',
+'  p+=gerstner(p.xz,vec2( 1.00, 0.20),1.80*s,90.0,0.70,t,n);',
+'  p+=gerstner(p.xz,vec2(-0.40, 1.00),1.40*s,70.0,0.62,t,n);',
+'  p+=gerstner(p.xz,vec2( 0.90, 0.70),0.90*s,40.0,0.52,t*1.10,n);',
+'  p+=gerstner(p.xz,vec2(-0.70,-0.60),0.70*s,30.0,0.46,t*0.92,n);',
+'  p+=gerstner(p.xz,vec2( 0.20, 1.00),0.50*s,22.0,0.40,t*1.18,n);',
+'  p+=gerstner(p.xz,vec2(-1.00, 0.30),0.28*s,13.0,0.32,t*1.30,n);',
+'  p+=gerstner(p.xz,vec2( 0.60,-0.80),0.18*s, 8.0,0.25,t*1.44,n);',
+'  p+=gerstner(p.xz,vec2(-0.30,-1.00),0.12*s, 5.5,0.20,t*1.55,n);',
+'  p+=gerstner(p.xz,vec2( 0.80, 0.10),0.06*s, 3.0,0.12,t*1.80,n);',
+'  p+=gerstner(p.xz,vec2(-0.50, 0.70),0.04*s, 2.0,0.10,t*2.00,n);',
+'  float mH=(1.8+1.4+0.9+0.7+0.5)*s;',
+'  vFoam=smoothstep(mH*0.58,mH*0.96,p.y); vHeight=p.y;',
+'  vWorld=(modelMatrix*vec4(p,1.0)).xyz; vNorm=normalize(mat3(modelMatrix)*n);',
+'  gl_Position=projectionMatrix*viewMatrix*vec4(vWorld,1.0);',
+'}'
+].join('\n');
 
-(function buildOcean(){
-  const geo=new THREE.PlaneGeometry(3000,3000,256,256);
+var wFrag=[
+'precision highp float;',
+'#define PI 3.14159265359',
+'uniform float uTime; uniform vec3 uCamPos,uSunDir,uSunColor,uSkyZenith,uSkyHorizon;',
+'varying vec3 vWorld,vNorm; varying float vFoam,vHeight;',
+'float bD(float h,float r){float r2=r*r,n2=h*h;return exp((n2-1.0)/max(r2*n2,1e-5))/max(PI*r2*n2*n2,1e-5);}',
+'vec3 skyA(vec3 R){',
+'  float up=max(0.0,R.y); vec3 col=mix(uSkyHorizon,uSkyZenith,up*up);',
+'  col+=uSunColor*(pow(max(0.0,dot(R,uSunDir)),800.0)*6.0+pow(max(0.0,dot(R,uSunDir)),28.0)*0.12);',
+'  return col;',
+'}',
+'vec3 dN(vec3 N,float t){',
+'  vec2 u1=vWorld.xz*0.06+vec2(t*0.022,t*0.018),u2=vWorld.xz*0.11-vec2(t*0.019,-t*0.027);',
+'  return normalize(N+vec3(sin(u1.x*6.1+t*0.4)*0.04+sin(u2.x*9.3-t*0.6)*0.025,0.0,sin(u1.y*5.8-t*0.3)*0.04+sin(u2.y*8.7+t*0.5)*0.025));',
+'}',
+'void main(){',
+'  vec3 N0=normalize(vNorm),N=dN(N0,uTime),V=normalize(uCamPos-vWorld),L=normalize(uSunDir),H=normalize(V+L);',
+'  float NV=max(0.001,dot(N,V)),NL=max(0.0,dot(N,L)),NH=max(0.001,dot(N,H)),VH=max(0.001,dot(V,H));',
+'  float F=0.02+0.98*pow(1.0-NV,5.0);',
+'  vec3 refl=skyA(reflect(-V,N));',
+'  vec3 wc=mix(vec3(0.0,0.05,0.14),vec3(0.02,0.20,0.32),smoothstep(-1.0,3.0,vHeight));',
+'  float D=bD(NH,0.013),G=min(1.0,min(2.0*NH*NV/VH,2.0*NH*NL/VH));',
+'  vec3 spec=uSunColor*(D*G*F)/(4.0*NV*max(NL,0.001))*NL*4.0;',
+'  vec3 sss=vec3(0.02,0.38,0.30)*(pow(max(0.0,dot(L,-N0)),3.0)*0.45+pow(max(0.0,dot(V,-L)),3.5)*0.18)*NL;',
+'  vec3 col=mix(wc,refl,clamp(F*0.9+0.08,0.0,1.0))+spec+sss;',
+'  col=mix(col,vec3(0.88,0.93,1.0),vFoam*0.65);',
+'  col=mix(col,uSkyHorizon,smoothstep(250.0,1400.0,length(vWorld.xz-uCamPos.xz))*0.45);',
+'  gl_FragColor=vec4(col,mix(0.72,0.97,F+vFoam*0.4));',
+'}'
+].join('\n');
+
+(function buildOcean() {
+  var geo = new THREE.PlaneGeometry(3000, 3000, 256, 256);
   geo.rotateX(-Math.PI/2);
-  waterMat=new THREE.ShaderMaterial({
-    vertexShader:wVert,fragmentShader:wFrag,
-    uniforms:{
-      uTime:{value:0},uScale:{value:1},uCamPos:{value:new THREE.Vector3()},
-      uSunDir:{value:new THREE.Vector3(0,1,0)},uSunColor:{value:new THREE.Color(1,0.88,0.65)},
-      uSkyZenith:{value:new THREE.Color(0.03,0.05,0.18)},uSkyHorizon:{value:new THREE.Color(0.02,0.03,0.12)},
+  waterMat = new THREE.ShaderMaterial({
+    vertexShader: wVert, fragmentShader: wFrag,
+    uniforms: {
+      uTime:      {value:0}, uScale:     {value:1},
+      uCamPos:    {value:new THREE.Vector3()},
+      uSunDir:    {value:new THREE.Vector3(0,1,0)},
+      uSunColor:  {value:new THREE.Color(1,0.88,0.65)},
+      uSkyZenith: {value:new THREE.Color(0.03,0.05,0.18)},
+      uSkyHorizon:{value:new THREE.Color(0.02,0.03,0.12)},
     },
-    transparent:true,side:THREE.FrontSide,depthWrite:false,
+    transparent:true, side:THREE.FrontSide, depthWrite:false,
   });
-  scene.add(new THREE.Mesh(geo,waterMat));
+  scene.add(new THREE.Mesh(geo, waterMat));
 })();
 
-function waveH(x,z,t){
-  const PI=Math.PI,W=[
+function waveH(x, z, t) {
+  var PI=Math.PI, W=[
     [[1.00,0.20],1.80,90,1.00],[[-0.40,1.00],1.40,70,1.00],
-    [[0.90,0.70],0.90,40,1.10],[[-0.70,-0.60],0.70,30,0.92],[[0.20,1.00],0.50,22,1.18],
-  ];
-  let y=0;
-  for(const[[dx,dz],amp,len,tm]of W){
-    const k=2*PI/len,c=Math.sqrt(9.81/k),dn=Math.hypot(dx,dz);
-    y+=amp*Math.sin(k*((dx/dn)*x+(dz/dz||1)*z-c*t*tm));
+    [[0.90,0.70],0.90,40,1.10],[[-0.70,-0.60],0.70,30,0.92],
+    [[0.20,1.00],0.50,22,1.18],
+  ], y=0;
+  for (var i=0; i<W.length; i++) {
+    var dx=W[i][0][0], dz=W[i][0][1], amp=W[i][1], len=W[i][2], tm=W[i][3];
+    var k=2*PI/len, c=Math.sqrt(9.81/k), dn=Math.sqrt(dx*dx+dz*dz);
+    y += amp * Math.sin(k*((dx/dn)*x+(dz/dn)*z - c*t*tm));
   }
   return y;
 }
 
-const floaters=[];
-function addObj(geo,mat,px,pz,by){
-  const m=new THREE.Mesh(geo,mat);
+var floaters=[];
+function addObj(geo, mat, px, pz, by) {
+  var m=new THREE.Mesh(geo,mat);
   m.castShadow=m.receiveShadow=true;
   m.position.set(px,by,pz);
-  m.userData={by,px,pz};
-  scene.add(m);floaters.push(m);
+  m.userData={by:by,px:px,pz:pz};
+  scene.add(m); floaters.push(m);
 }
-const S64=new THREE.SphereGeometry(1,64,64);
+var S64=new THREE.SphereGeometry(1,64,64);
 addObj(S64,new THREE.MeshPhysicalMaterial({color:0xffd060,metalness:1,roughness:0.06,envMapIntensity:2.5}),-6,-2,3.5);
 addObj(S64,new THREE.MeshPhysicalMaterial({color:0xffffff,metalness:1,roughness:0.0,envMapIntensity:3.2}),-2,-5,4.2);
 addObj(S64,new THREE.MeshPhysicalMaterial({color:0xb87030,metalness:1,roughness:0.18,envMapIntensity:2.0}),3,-1,3.0);
 addObj(S64,new THREE.MeshPhysicalMaterial({color:0xaadefc,metalness:0,roughness:0,transmission:0.97,thickness:2.2,ior:1.52,envMapIntensity:2.8,transparent:true}),7,-4,4.0);
 addObj(S64,new THREE.MeshPhysicalMaterial({color:0x111122,metalness:0.75,roughness:0.32,envMapIntensity:1.4}),6,2,3.2);
-addObj(S64,new THREE.MeshPhysicalMaterial({color:0x99aaff,metalness:0.1,roughness:0.02,iridescence:1.0,iridescenceIOR:1.3,iridescenceThicknessRange:[80,420],envMapIntensity:3.0}),0,-8,5.0);
+addObj(S64,new THREE.MeshPhysicalMaterial({color:0x99aaff,metalness:0.1,roughness:0.02,iridescence:1.0,iridescenceIOR:1.3,envMapIntensity:3.0}),0,-8,5.0);
 
-const torus=new THREE.Mesh(new THREE.TorusKnotGeometry(1.3,0.38,160,32),new THREE.MeshPhysicalMaterial({color:0xffc830,metalness:1,roughness:0.04,envMapIntensity:2.5}));
-torus.castShadow=true;torus.position.set(-4,5,-8);scene.add(torus);
+var torus=new THREE.Mesh(new THREE.TorusKnotGeometry(1.3,0.38,160,32),new THREE.MeshPhysicalMaterial({color:0xffc830,metalness:1,roughness:0.04,envMapIntensity:2.5}));
+torus.castShadow=true; torus.position.set(-4,5,-8); scene.add(torus);
 
-const rockMat=new THREE.MeshPhysicalMaterial({color:0x252520,metalness:0.05,roughness:0.92,envMapIntensity:0.4});
+var rockMat=new THREE.MeshPhysicalMaterial({color:0x252520,metalness:0.05,roughness:0.92,envMapIntensity:0.4});
 [
   [[-18,-2,-24],[4,5.5,3.8]],[[-15,-1,-20],[2.5,3,2.4]],
   [[-21,-1.5,-26],[2,2.8,2]],[[-14,-1,-26],[1.5,2,1.6]],
-].forEach(([pos,scl])=>{
-  const r=new THREE.Mesh(new THREE.IcosahedronGeometry(1,1),rockMat);
-  r.position.set(...pos);r.scale.set(...scl);r.castShadow=r.receiveShadow=true;scene.add(r);
+].forEach(function(e){
+  var r=new THREE.Mesh(new THREE.IcosahedronGeometry(1,1),rockMat);
+  r.position.set(e[0][0],e[0][1],e[0][2]); r.scale.set(e[1][0],e[1][1],e[1][2]);
+  r.castShadow=r.receiveShadow=true; scene.add(r);
 });
 
-const PC=4000,pPos=new Float32Array(PC*3),pVel=[],pLt=new Float32Array(PC),pSd=new Float32Array(PC);
-for(let i=0;i<PC;i++){
-  pSd[i]=Math.random();pLt[i]=Math.random();
-  const r=Math.sqrt(Math.random())*70,a=Math.random()*Math.PI*2;
-  pPos[i*3]=Math.cos(a)*r;pPos[i*3+1]=0;pPos[i*3+2]=Math.sin(a)*r;
-  pVel.push([(Math.random()-.5)*1.8,Math.random()*4+0.5,(Math.random()-.5)*1.8]);
+var PC=4000, pPos=new Float32Array(PC*3), pVel=[], pLt=new Float32Array(PC), pSd=new Float32Array(PC);
+for (var pi=0; pi<PC; pi++) {
+  pSd[pi]=Math.random(); pLt[pi]=Math.random();
+  var pr=Math.sqrt(Math.random())*70, pa=Math.random()*Math.PI*2;
+  pPos[pi*3]=Math.cos(pa)*pr; pPos[pi*3+1]=0; pPos[pi*3+2]=Math.sin(pa)*pr;
+  pVel.push([(Math.random()-.5)*1.8, Math.random()*4+0.5, (Math.random()-.5)*1.8]);
 }
-const spGeo=new THREE.BufferGeometry(),posA=new THREE.BufferAttribute(pPos,3);
+var spGeo=new THREE.BufferGeometry(), posA=new THREE.BufferAttribute(pPos,3);
 spGeo.setAttribute('position',posA);
-const spMat=new THREE.PointsMaterial({color:0xbbd8ff,size:0.15,transparent:true,opacity:0.2,blending:THREE.AdditiveBlending,depthWrite:false});
+var spMat=new THREE.PointsMaterial({color:0xbbd8ff,size:0.15,transparent:true,opacity:0.2,blending:THREE.AdditiveBlending,depthWrite:false});
 scene.add(new THREE.Points(spGeo,spMat));
 
-const composer=new THREE.EffectComposer(renderer);
+var composer=new THREE.EffectComposer(renderer);
 composer.addPass(new THREE.RenderPass(scene,camera));
-const bloomPass=new THREE.UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight),0.85,0.55,0.72);
+var bloomPass=new THREE.UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight),0.85,0.55,0.72);
 composer.addPass(bloomPass);
-const fSh={
+var fSh={
   uniforms:{tDiffuse:{value:null},uTime:{value:0},uGrain:{value:0.042},uVig:{value:0.58}},
-  vertexShader:`varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
-  fragmentShader:`
-    uniform sampler2D tDiffuse;uniform float uTime,uGrain,uVig;varying vec2 vUv;
-    float h2(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
-    void main(){
-      vec2 ctr=vUv-.5,off=ctr*.0006;
-      vec3 col=vec3(texture2D(tDiffuse,vUv+off).r,texture2D(tDiffuse,vUv).g,texture2D(tDiffuse,vUv-off).b);
-      col+=(h2(vUv+fract(uTime*.013))*2.-1.)*uGrain;
-      col*=1.-smoothstep(.28,1.,length(ctr)*1.7)*uVig;
-      col+=vec3(.004,.002,0)*(1.-col);
-      gl_FragColor=vec4(max(col,vec3(0)),1.);
-    }`,
+  vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+  fragmentShader:[
+    'uniform sampler2D tDiffuse;uniform float uTime,uGrain,uVig;varying vec2 vUv;',
+    'float h2(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}',
+    'void main(){',
+    '  vec2 ctr=vUv-.5,off=ctr*.0006;',
+    '  vec3 col=vec3(texture2D(tDiffuse,vUv+off).r,texture2D(tDiffuse,vUv).g,texture2D(tDiffuse,vUv-off).b);',
+    '  col+=(h2(vUv+fract(uTime*.013))*2.-1.)*uGrain;',
+    '  col*=1.-smoothstep(.28,1.,length(ctr)*1.7)*uVig;',
+    '  col+=vec3(.004,.002,0)*(1.-col);',
+    '  gl_FragColor=vec4(max(col,vec3(0)),1.);',
+    '}'
+  ].join('\n'),
 };
-const finalePass=new THREE.ShaderPass(fSh);
+var finalePass=new THREE.ShaderPass(fSh);
 finalePass.renderToScreen=true;
 composer.addPass(finalePass);
 
-window.addEventListener('resize',()=>{
-  camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();
-  renderer.setSize(innerWidth,innerHeight);composer.setSize(innerWidth,innerHeight);
+window.addEventListener('resize', function() {
+  camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight); composer.setSize(innerWidth,innerHeight);
 });
 
-updateSky(3.0);lastSkyRebuild=3.0;
+updateSky(3.0); lastSkyRebuild=3.0;
 
-const clock=new THREE.Clock();
-let T=0;
+var clock=new THREE.Clock(), T=0;
 
-function animate(){
+function animate() {
   requestAnimationFrame(animate);
-  const dt=Math.min(clock.getDelta(),0.05);
-  T+=dt;
-  currentHour+=(targetHour-currentHour)*dt*0.22;
-  if(Math.abs(currentHour-lastSkyRebuild)>0.22){updateSky(currentHour);lastSkyRebuild=currentHour;}
-  if(window._stars){
-    const el=Math.sin((currentHour-6)/12*Math.PI)*85;
-    window._stars.material.opacity=Math.max(0,0.9-Math.max(0,el/85)*3.5);
+  var dt=Math.min(clock.getDelta(), 0.05);
+  T += dt;
+
+  // read game-driven targetHour (defined in Block 1)
+  currentHour += (targetHour - currentHour) * dt * 0.22;
+  if (Math.abs(currentHour - lastSkyRebuild) > 0.22) {
+    updateSky(currentHour);
+    lastSkyRebuild = currentHour;
   }
+
+  // fade stars with sun
+  if (starsMesh) {
+    var el = Math.sin((currentHour-6)/12*Math.PI)*85;
+    starsMesh.material.opacity = Math.max(0, 0.9 - Math.max(0, el/85)*3.5);
+  }
+
   controls.update();
-  const wt=T*0.5;
-  if(waterMat){waterMat.uniforms.uTime.value=wt;waterMat.uniforms.uCamPos.value.copy(camera.position);}
-  finalePass.uniforms.uTime.value=T;
-  const sc=waterMat?waterMat.uniforms.uScale.value:1;
-  floaters.forEach((m,i)=>{
-    const hy=waveH(m.userData.px,m.userData.pz,wt)*sc;
-    m.position.y+=(hy+m.userData.by-m.position.y)*0.08;
-    m.rotation.y+=dt*(0.08+i*0.015)*(i%2?1:-1);
-    m.rotation.x+=dt*0.04*(i%3?1:-1);
-  });
-  torus.rotation.x+=dt*0.22;torus.rotation.y+=dt*0.16;
+  var wt=T*0.5;
+  if (waterMat) {
+    waterMat.uniforms.uTime.value = wt;
+    waterMat.uniforms.uCamPos.value.copy(camera.position);
+  }
+  finalePass.uniforms.uTime.value = T;
+
+  var sc = waterMat ? waterMat.uniforms.uScale.value : 1;
+  for (var fi=0; fi<floaters.length; fi++) {
+    var m=floaters[fi];
+    var hy=waveH(m.userData.px, m.userData.pz, wt)*sc;
+    m.position.y += (hy + m.userData.by - m.position.y)*0.08;
+    m.rotation.y += dt*(0.08+fi*0.015)*(fi%2?1:-1);
+    m.rotation.x += dt*0.04*(fi%3?1:-1);
+  }
+  torus.rotation.x+=dt*0.22; torus.rotation.y+=dt*0.16;
   torus.position.y=5+Math.sin(T*0.4)*0.6;
-  for(let i=0;i<PC;i++){
-    pLt[i]+=dt*(0.45+pSd[i]*0.55);
-    if(pLt[i]>1){
-      pLt[i]=0;
-      const r2=Math.sqrt(Math.random())*55,a2=Math.random()*Math.PI*2;
-      posA.setXYZ(i,Math.cos(a2)*r2,0,Math.sin(a2)*r2);
-      pVel[i]=[(Math.random()-.5)*1.8,(Math.random()*3.5+0.5)*sc,(Math.random()-.5)*1.8];
+
+  for (var pi2=0; pi2<PC; pi2++) {
+    pLt[pi2]+=dt*(0.45+pSd[pi2]*0.55);
+    if (pLt[pi2]>1) {
+      pLt[pi2]=0;
+      var r2=Math.sqrt(Math.random())*55, a2=Math.random()*Math.PI*2;
+      posA.setXYZ(pi2, Math.cos(a2)*r2, 0, Math.sin(a2)*r2);
+      pVel[pi2]=[(Math.random()-.5)*1.8,(Math.random()*3.5+0.5)*sc,(Math.random()-.5)*1.8];
     }
-    posA.setX(i,posA.getX(i)+pVel[i][0]*dt);
-    posA.setY(i,posA.getY(i)+pVel[i][1]*dt-4.5*pLt[i]*pLt[i]*dt);
-    posA.setZ(i,posA.getZ(i)+pVel[i][2]*dt);
+    posA.setX(pi2, posA.getX(pi2)+pVel[pi2][0]*dt);
+    posA.setY(pi2, posA.getY(pi2)+pVel[pi2][1]*dt-4.5*pLt[pi2]*pLt[pi2]*dt);
+    posA.setZ(pi2, posA.getZ(pi2)+pVel[pi2][2]*dt);
   }
   posA.needsUpdate=true;
   spMat.opacity=0.1+Math.min(sc*0.1,0.25);
+
   composer.render();
 }
 animate();
 
-// ═══════════════════════════════════════════════════════════════════════════
-// GAME LOGIC
-// ═══════════════════════════════════════════════════════════════════════════
-const pilotData={startTime:Date.now(),preAnswers:[],sortAttempts:0,sortWrong:0,hintsUsed:0,sortStartTime:null,totalTime:null};
-
-function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+} catch(e) {
+  console.warn('[Three.js] Scene failed to start:', e);
 }
-
-// ── PRE-ASSESSMENT ──────────────────────────────────────────────────────────
-const PRE_Q=[
-  {q:"מה הופך גוף למקור אור?",opts:["הוא גדול ובוהק","הוא מייצר אנרגיית אור בעצמו","הוא לבן ומבריק","הוא קרוב אלינו"],ans:1,exp:"מקור אור הוא גוף שמייצר אנרגיית אור בעצמו — כמו שמש, נר או מנורה."},
-  {q:"למה אנחנו רואים את הירח?",opts:["הירח מייצר אור צהוב","הירח קולט ומייצר אנרגיה","הירח מחזיר אור מהשמש","הירח קרוב מאוד לכדור הארץ"],ans:2,exp:"הירח אינו מקור אור — הוא מחזיר את אור השמש שפוגע בו."},
-  {q:"איזה מהבאים מפיק אור בעצמו?",opts:["ירח","מראה","ענן","כוכב"],ans:3,exp:"כוכבים, כמו השמש, מייצרים אנרגיית אור בעצמם."},
-  {q:"ספר לבן בחדר חשוך — אנחנו לא רואים אותו. מדוע?",opts:["הוא בלתי נראה","אין מקור אור שיאיר אותו","הוא שחור","הוא שקוף"],ans:1,exp:"אנחנו רואים עצמים כי הם מחזירים אור אל עינינו. בחושך — אין אור לחזור."},
-  {q:"מה קורה כשאור פוגע במראה?",opts:["האור נבלע פנימה","האור נמחק","האור מוחזר כמעט לגמרי","האור עובר דרך המראה"],ans:2,exp:"מראה מחזירה כמעט את כל האור שפוגע בה — זו הסיבה לשתקפות."},
-];
-let preIdx=0,preAnswered=false;
-
-function startPre(){
-  showScreen('s-pre');
-  targetHour=3.6;
-  renderPreQ(0);
-}
-
-function renderPreQ(idx){
-  preAnswered=false;preIdx=idx;
-  const q=PRE_Q[idx];
-  document.getElementById('pre-counter').textContent=`שאלה ${idx+1} מתוך ${PRE_Q.length}`;
-  document.getElementById('pre-prog').style.width=`${idx/PRE_Q.length*100}%`;
-  document.getElementById('pre-q').textContent=q.q;
-  document.getElementById('pre-exp').style.display='none';
-  document.getElementById('pre-next').style.display='none';
-  document.getElementById('pre-bubble').textContent=idx===0?'לפני שניגש לחדר — בואו נראה מה כבר ידוע לכם על אור!':'יפה! שאלה נוספת:';
-  const optsEl=document.getElementById('pre-opts');
-  optsEl.innerHTML='';
-  q.opts.forEach((o,i)=>{
-    const btn=document.createElement('button');
-    btn.className='opt-btn';btn.textContent=o;
-    btn.onclick=()=>answerPre(i,btn);
-    optsEl.appendChild(btn);
-  });
-}
-
-function answerPre(chosen,btn){
-  if(preAnswered)return;
-  preAnswered=true;
-  const q=PRE_Q[preIdx],ok=chosen===q.ans;
-  document.querySelectorAll('.opt-btn').forEach((b,i)=>{
-    b.disabled=true;
-    if(i===q.ans)b.classList.add('correct');
-    if(i===chosen&&!ok)b.classList.add('wrong');
-  });
-  document.getElementById('pre-exp').textContent=q.exp;
-  document.getElementById('pre-exp').style.display='block';
-  document.getElementById('pre-next').style.display='inline-flex';
-  pilotData.preAnswers.push({q:preIdx,correct:ok});
-  console.log('[Pilot] Pre Q'+(preIdx+1),ok?'✓':'✗');
-}
-
-function nextPreQ(){
-  const n=preIdx+1;
-  if(n>=PRE_Q.length){finishPre();}else{renderPreQ(n);}
-}
-
-function finishPre(){
-  targetHour=5.2;
-  showScreen('s-sort');
-  initSort();
-  console.log('[Pilot] Pre done:',pilotData.preAnswers.filter(a=>a.correct).length+'/'+PRE_Q.length);
-}
-
-// ── SORT ────────────────────────────────────────────────────────────────────
-const ITEMS=[
-  {id:'sun',   emoji:'☀️',name:'שמש',          cat:'emit'},
-  {id:'candle',emoji:'🕯️',name:'נר דולק',      cat:'emit'},
-  {id:'lamp',  emoji:'💡',name:'מנורה',         cat:'emit'},
-  {id:'star',  emoji:'⭐',name:'כוכב',          cat:'emit'},
-  {id:'phone', emoji:'📱',name:'מסך נדלק',     cat:'emit'},
-  {id:'moon',  emoji:'🌙',name:'ירח',           cat:'refl'},
-  {id:'mirror',emoji:'🪞',name:'מראה',          cat:'refl'},
-  {id:'paper', emoji:'📄',name:'דף לבן',        cat:'refl'},
-  {id:'spoon', emoji:'🥄',name:'כף מתכת',       cat:'refl'},
-  {id:'cat',   emoji:'🐱',name:'עיני חתול',     cat:'refl'},
-];
-
-let selId=null,sortOk=0,placed={},wrongStreak=0,hintShown=false,hintTimer=null;
-
-function initSort(){
-  selId=null;sortOk=0;placed={};wrongStreak=0;hintShown=false;
-  pilotData.sortStartTime=Date.now();
-  document.getElementById('sort-ok').textContent='0';
-  document.getElementById('sort-tries').textContent='0';
-  document.getElementById('chips-emit').innerHTML='';
-  document.getElementById('chips-refl').innerHTML='';
-  document.getElementById('hint-box').classList.remove('on');
-  const shuffled=[...ITEMS].sort(()=>Math.random()-.5);
-  const grid=document.getElementById('items-grid');
-  grid.innerHTML='';
-  shuffled.forEach(item=>{
-    const c=document.createElement('div');
-    c.className='item-card';c.id='c-'+item.id;
-    c.innerHTML=`<span class="item-emoji">${item.emoji}</span><span class="item-name">${item.name}</span>`;
-    c.onclick=()=>selectItem(item.id);
-    grid.appendChild(c);
-  });
-  hintTimer=setTimeout(()=>{if(sortOk<ITEMS.length)showHint();},30000);
-}
-
-function selectItem(id){
-  if(placed[id])return;
-  const all=document.querySelectorAll('.item-card');
-  all.forEach(c=>c.classList.remove('selected'));
-  if(selId===id){selId=null;setSortBubble('לחצו על פריט ואז על הקטגוריה המתאימה למטה.');return;}
-  selId=id;
-  document.getElementById('c-'+id).classList.add('selected');
-  const item=ITEMS.find(x=>x.id===id);
-  setSortBubble(`בחרתם: <strong>${item.emoji} ${item.name}</strong><br>עכשיו לחצו על הקטגוריה המתאימה למטה.`);
-}
-
-function place(zone){
-  if(!selId){setSortBubble('קודם בחרו פריט מהרשימה למעלה!');return;}
-  const item=ITEMS.find(x=>x.id===selId);
-  pilotData.sortAttempts++;
-  document.getElementById('sort-tries').textContent=pilotData.sortAttempts;
-  if(item.cat===zone){
-    sortOk++;placed[item.id]=true;
-    document.getElementById('sort-ok').textContent=sortOk;
-    const card=document.getElementById('c-'+item.id);
-    card.classList.remove('selected');card.classList.add('placed');
-    const chip=document.createElement('div');
-    chip.className=`zone-chip chip-${zone}`;
-    chip.textContent=item.emoji+' '+item.name;
-    document.getElementById('chips-'+zone).appendChild(chip);
-    wrongStreak=0;selId=null;
-    setSortBubble(`✅ נכון! <strong>${item.emoji} ${item.name}</strong> הוא ${zone==='emit'?'מקור אור':'מחזיר אור'}.`);
-    console.log('[Pilot] ✓',item.id);
-    if(sortOk===ITEMS.length){clearTimeout(hintTimer);pilotData.sortTime=(Date.now()-pilotData.sortStartTime)/1000;setTimeout(finishSort,800);}
-  }else{
-    pilotData.sortWrong++;wrongStreak++;
-    const card=document.getElementById('c-'+item.id);
-    card.classList.remove('selected');card.classList.add('shake');
-    setTimeout(()=>{card.classList.remove('shake');card.classList.add('selected');},460);
-    setSortBubble(`❌ לא בדיוק — האם <strong>${item.emoji} ${item.name}</strong> מייצר אור, או מחזיר?`);
-    console.log('[Pilot] ✗',item.id,'→',zone,'should be',item.cat);
-    if(wrongStreak>=2)showHint();
-  }
-}
-
-function showHint(){
-  if(hintShown)return;
-  hintShown=true;pilotData.hintsUsed++;
-  const box=document.getElementById('hint-box');
-  box.classList.add('on');
-  if(selId){
-    const item=ITEMS.find(x=>x.id===selId);
-    box.innerHTML=`💡 רמז: <strong>${item.emoji} ${item.name}</strong> — ${item.cat==='emit'?'מייצר אור בעצמו (מקור)':'רק מחזיר אור ממקור אחר'}.`;
-  }else{
-    const em=ITEMS.filter(x=>!placed[x.id]&&x.cat==='emit').map(x=>x.emoji+x.name).join('، ');
-    box.innerHTML=`💡 רמז: מקורות אור (מייצרים בעצמם): ${em||'כבר מיינתם אותם!'}`;
-  }
-}
-
-function setSortBubble(html){document.getElementById('sort-bubble').innerHTML=html;}
-
-function finishSort(){
-  targetHour=7.2;
-  showScreen('s-reward');
-  console.log('[Pilot] Sort done! t='+Math.round(pilotData.sortTime)+'s attempts='+pilotData.sortAttempts+' hints='+pilotData.hintsUsed);
-}
-
-function showMap(){
-  pilotData.totalTime=(Date.now()-pilotData.startTime)/1000;
-  showScreen('s-map');
-  console.log('[Pilot] Complete. Total='+Math.round(pilotData.totalTime)+'s',JSON.stringify(pilotData));
-}
+})();
 </script>
 </body>
 </html>
