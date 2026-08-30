@@ -13,7 +13,6 @@ canvas { display: block; }
   position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
   display: flex; align-items: center; gap: 24px; padding: 10px 28px;
   background: rgba(0,0,0,0.45); backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255,255,255,0.07); border-radius: 999px;
   color: rgba(255,255,255,0.55); font-size: 10px; letter-spacing: 0.08em;
   text-transform: uppercase; z-index: 10; user-select: none;
@@ -31,38 +30,31 @@ input[type=range]::-webkit-slider-thumb {
 }
 #hud {
   position: fixed; top: 16px; left: 18px;
-  color: rgba(255,255,255,0.25); font-size: 10px; letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.22); font-size: 10px; letter-spacing: 0.1em;
   pointer-events: none; text-transform: uppercase;
 }
 </style>
 </head>
 <body>
-<div id="hud">Three.js Realism — Solstice Ocean &nbsp;·&nbsp; drag to orbit &nbsp;·&nbsp; scroll to zoom</div>
+<div id="hud">Solstice Ocean &nbsp;·&nbsp; drag · scroll · sliders</div>
 <div id="ui">
   <div class="sg"><label>Time</label><input type="range" id="slTime"  min="4"   max="22"  step="0.05" value="7.2"></div>
   <div class="sg"><label>Swell</label><input type="range" id="slSwell" min="0.1" max="2.5" step="0.05" value="1.0"></div>
   <div class="sg"><label>Bloom</label><input type="range" id="slBloom" min="0"   max="2"   step="0.05" value="0.7"></div>
 </div>
 
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-  }
-}
-</script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.148.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/objects/Sky.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/shaders/CopyShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/shaders/GammaCorrectionShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/postprocessing/RenderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/postprocessing/ShaderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.148.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
 
-<script type="module">
-import * as THREE from 'three';
-import { OrbitControls }    from 'three/addons/controls/OrbitControls.js';
-import { Sky }              from 'three/addons/objects/Sky.js';
-import { EffectComposer }   from 'three/addons/postprocessing/EffectComposer.js';
-import { RenderPass }       from 'three/addons/postprocessing/RenderPass.js';
-import { UnrealBloomPass }  from 'three/addons/postprocessing/UnrealBloomPass.js';
-import { OutputPass }       from 'three/addons/postprocessing/OutputPass.js';
-import { ShaderPass }       from 'three/addons/postprocessing/ShaderPass.js';
-
+<script>
 // ── renderer ──────────────────────────────────────────────────────────────────
 const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
@@ -73,12 +65,12 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.body.appendChild(renderer.domElement);
 
-// ── scene / camera ─────────────────────────────────────────────────────────────
+// ── scene / camera ────────────────────────────────────────────────────────────
 const scene  = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 20000);
 camera.position.set(0, 7, 28);
 
-const controls = new OrbitControls(camera, renderer.domElement);
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.04;
 controls.target.set(0, 1, 0);
@@ -105,7 +97,7 @@ const hemiLight = new THREE.HemisphereLight(0x8899ff, 0x002233, 0.4);
 scene.add(hemiLight);
 
 // ── sky ───────────────────────────────────────────────────────────────────────
-const sky = new Sky();
+const sky = new THREE.Sky();
 sky.scale.setScalar(10000);
 scene.add(sky);
 
@@ -113,6 +105,8 @@ const sunPos  = new THREE.Vector3();
 const pmrem   = new THREE.PMREMGenerator(renderer);
 pmrem.compileEquirectangularShader();
 let envTex = null;
+
+let waterMat = null;
 
 function updateSky(hour) {
   const elevation = Math.sin((hour - 6) / 12 * Math.PI) * 85;
@@ -144,15 +138,15 @@ function updateSky(hour) {
   if (waterMat) {
     waterMat.uniforms.uSunDir.value.copy(sunPos);
     waterMat.uniforms.uSunColor.value.setRGB(sunLight.color.r, sunLight.color.g, sunLight.color.b);
-    waterMat.uniforms.uSkyZenith.value.setHSL(0.6, 0.7, h * 0.35 + 0.05);
-    waterMat.uniforms.uSkyHorizon.value.setHSL(0.08 + h * 0.5, 0.6, h * 0.4 + 0.15);
+    const hz = new THREE.Color().setHSL(0.08 + h * 0.5, 0.6, h * 0.4 + 0.15);
+    const zn = new THREE.Color().setHSL(0.6, 0.7, h * 0.35 + 0.05);
+    waterMat.uniforms.uSkyHorizon.value.copy(hz);
+    waterMat.uniforms.uSkyZenith.value.copy(zn);
   }
 }
 
 // ── water shader ──────────────────────────────────────────────────────────────
-const ORES = 256, OSIZ = 3000;
-
-const waterVert = /* glsl */`
+const waterVert = `
 precision highp float;
 #define PI 3.14159265359
 
@@ -164,8 +158,7 @@ varying vec3  vNorm;
 varying float vFoam;
 varying float vHeight;
 
-vec3 gerstner(vec2 pos, vec2 dir, float amp, float len, float Q, float t,
-              inout vec3 n) {
+vec3 gerstner(vec2 pos, vec2 dir, float amp, float len, float Q, float t, inout vec3 n) {
   float k  = 2.0 * PI / len;
   float c  = sqrt(9.81 / k);
   vec2  d  = normalize(dir);
@@ -203,7 +196,7 @@ void main() {
 }
 `;
 
-const waterFrag = /* glsl */`
+const waterFrag = `
 precision highp float;
 #define PI 3.14159265359
 
@@ -219,26 +212,21 @@ varying vec3  vNorm;
 varying float vFoam;
 varying float vHeight;
 
-// Analytical Beckmann NDF
 float beckmannD(float NdotH, float r) {
   float r2 = r * r;
   float n2 = NdotH * NdotH;
   return exp((n2 - 1.0) / max(r2 * n2, 1e-5)) / max(PI * r2 * n2 * n2, 1e-5);
 }
 
-// Approximate sky hemisphere from reflection direction
-vec3 skyColor(vec3 R) {
-  float up   = max(0.0, R.y);
-  float horiz = 1.0 - up;
-  vec3  col  = mix(uSkyHorizon, uSkyZenith, up * up);
-  // Sun disk
+vec3 skyApprox(vec3 R) {
+  float up  = max(0.0, R.y);
+  vec3  col = mix(uSkyHorizon, uSkyZenith, up * up);
   float sun  = pow(max(0.0, dot(R, uSunDir)), 800.0);
-  float halo = pow(max(0.0, dot(R, uSunDir)),  32.0) * 0.15;
+  float halo = pow(max(0.0, dot(R, uSunDir)),  28.0) * 0.12;
   col += uSunColor * (sun * 6.0 + halo);
   return col;
 }
 
-// Detail normal for micro-ripples (computed in fragment)
 vec3 detailNormal(vec3 N, float t) {
   vec2 uv1 = vWorld.xz * 0.06 + vec2(t * 0.022,  t * 0.018);
   vec2 uv2 = vWorld.xz * 0.11 - vec2(t * 0.019, -t * 0.027);
@@ -261,52 +249,39 @@ void main() {
   float NdotH = max(0.001, dot(N, H));
   float VdotH = max(0.001, dot(V, H));
 
-  // Schlick fresnel — water F0 ~0.02
   float F = 0.02 + 0.98 * pow(1.0 - NdotV, 5.0);
 
-  // Reflection: approximate sky
-  vec3 R  = reflect(-V, N);
-  vec3 refl = skyColor(R);
+  vec3 R    = reflect(-V, N);
+  vec3 refl = skyApprox(R);
 
-  // Water base color (depth-tinted)
   vec3 shallow = vec3(0.02, 0.20, 0.32);
   vec3 deep    = vec3(0.00, 0.05, 0.14);
-  float dt = smoothstep(-1.0, 3.0, vHeight);
-  vec3 waterCol = mix(deep, shallow, dt);
+  vec3 waterCol = mix(deep, shallow, smoothstep(-1.0, 3.0, vHeight));
 
-  // Sun specular on water (Beckmann, very tight for mirror-like sea)
   float D   = beckmannD(NdotH, 0.013);
-  float G   = min(1.0, min(2.0 * NdotH * NdotV / VdotH,
-                           2.0 * NdotH * NdotL / VdotH));
+  float G   = min(1.0, min(2.0 * NdotH * NdotV / VdotH, 2.0 * NdotH * NdotL / VdotH));
   float spec = (D * G * F) / (4.0 * NdotV * max(NdotL, 0.001));
   vec3 specCol = uSunColor * spec * NdotL * 4.0;
 
-  // Subsurface scatter (wave crests lit from behind)
   float sssF = pow(max(0.0, dot(L, -N0)), 3.0);
   float sssB = pow(max(0.0, dot(V, -L)), 3.5);
   vec3  sss  = vec3(0.02, 0.38, 0.30) * (sssF * 0.45 + sssB * 0.18) * NdotL;
 
-  // Compose: refracted water color + fresnel reflection
   vec3 col = mix(waterCol, refl, clamp(F * 0.9 + 0.08, 0.0, 1.0));
   col += specCol + sss;
-
-  // Foam at crests
   col = mix(col, vec3(0.88, 0.93, 1.0), vFoam * 0.65);
 
-  // Horizon atmospheric haze
   float dist = length(vWorld.xz - uCamPos.xz);
   float haze = smoothstep(250.0, 1400.0, dist);
-  col = mix(col, skyColor(vec3(normalize(vWorld.xz - uCamPos.xz), 0.0).xzy * 0.0 + vec3(0.0, 0.04, 0.0) + uSkyHorizon * 0.0) * 0.0 + uSkyHorizon, haze * 0.45);
+  col = mix(col, uSkyHorizon, haze * 0.45);
 
   float alpha = mix(0.72, 0.97, F + vFoam * 0.4);
   gl_FragColor = vec4(col, alpha);
 }
 `;
 
-let waterMat;
-
 function buildOcean() {
-  const geo = new THREE.PlaneGeometry(OSIZ, OSIZ, ORES, ORES);
+  const geo = new THREE.PlaneGeometry(3000, 3000, 256, 256);
   geo.rotateX(-Math.PI / 2);
 
   waterMat = new THREE.ShaderMaterial({
@@ -333,7 +308,7 @@ function buildOcean() {
 
 buildOcean();
 
-// ── JS-side wave height (matches vertex shader for bobbing) ────────────────────
+// ── JS wave height (mirrors vertex shader for bobbing) ────────────────────────
 function waveH(x, z, t) {
   const PI = Math.PI;
   const waves = [
@@ -354,7 +329,7 @@ function waveH(x, z, t) {
   return y;
 }
 
-// ── PBR objects ──────────────────────────────────────────────────────────────
+// ── PBR objects ───────────────────────────────────────────────────────────────
 const floaters = [];
 
 function addObj(geo, mat, px, pz, baseY) {
@@ -407,17 +382,16 @@ const torus = new THREE.Mesh(
 );
 torus.castShadow = true;
 torus.position.set(-4, 5, -8);
-torus.userData.spin = true;
 scene.add(torus);
 
-// rock cluster
+// rocks
 const rockMat = new THREE.MeshPhysicalMaterial({
   color: 0x252520, metalness: 0.05, roughness: 0.92, envMapIntensity: 0.4
 });
 [
   [[-18, -2, -24], [4, 5.5, 3.8]],
   [[-15, -1, -20], [2.5, 3, 2.4]],
-  [[-21, -1.5,-26], [2, 2.8, 2]],
+  [[-21,-1.5,-26], [2, 2.8, 2]],
   [[-14, -1, -26], [1.5, 2, 1.6]],
 ].forEach(([pos, scl]) => {
   const r = new THREE.Mesh(new THREE.IcosahedronGeometry(1, 1), rockMat);
@@ -428,7 +402,7 @@ const rockMat = new THREE.MeshPhysicalMaterial({
   scene.add(r);
 });
 
-// ── particles (sea spray) ─────────────────────────────────────────────────────
+// ── particles ─────────────────────────────────────────────────────────────────
 const PC = 4000;
 const pPos = new Float32Array(PC * 3);
 const pVel = [];
@@ -436,8 +410,8 @@ const pLt  = new Float32Array(PC);
 const pSd  = new Float32Array(PC);
 
 for (let i = 0; i < PC; i++) {
-  pSd[i]  = Math.random();
-  pLt[i]  = Math.random();
+  pSd[i] = Math.random();
+  pLt[i] = Math.random();
   const r = Math.sqrt(Math.random()) * 70, a = Math.random() * Math.PI * 2;
   pPos[i*3]   = Math.cos(a) * r;
   pPos[i*3+1] = 0;
@@ -448,7 +422,6 @@ for (let i = 0; i < PC; i++) {
 const sprayGeo = new THREE.BufferGeometry();
 const posAttr  = new THREE.BufferAttribute(pPos, 3);
 sprayGeo.setAttribute('position', posAttr);
-
 const sprayMat = new THREE.PointsMaterial({
   color: 0xbbd8ff, size: 0.15, transparent: true, opacity: 0.3,
   blending: THREE.AdditiveBlending, depthWrite: false
@@ -456,10 +429,10 @@ const sprayMat = new THREE.PointsMaterial({
 scene.add(new THREE.Points(sprayGeo, sprayMat));
 
 // ── post-processing ───────────────────────────────────────────────────────────
-const composer = new EffectComposer(renderer);
-composer.addPass(new RenderPass(scene, camera));
+const composer = new THREE.EffectComposer(renderer);
+composer.addPass(new THREE.RenderPass(scene, camera));
 
-const bloomPass = new UnrealBloomPass(
+const bloomPass = new THREE.UnrealBloomPass(
   new THREE.Vector2(innerWidth, innerHeight), 0.7, 0.55, 0.72
 );
 composer.addPass(bloomPass);
@@ -471,46 +444,36 @@ const finaleShader = {
     uGrain:    { value: 0.038 },
     uVignette: { value: 0.55 },
   },
-  vertexShader: /* glsl */`
+  vertexShader: `
     varying vec2 vUv;
     void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.); }
   `,
-  fragmentShader: /* glsl */`
+  fragmentShader: `
     uniform sampler2D tDiffuse;
     uniform float uTime, uGrain, uVignette;
     varying vec2 vUv;
     float hash(vec2 p) { return fract(sin(dot(p, vec2(12.9898,78.233))) * 43758.5453); }
     void main() {
-      vec2  uv  = vUv;
-      vec2  ctr = uv - 0.5;
-
-      // Chromatic aberration
+      vec2  ctr = vUv - 0.5;
       float ca  = 0.0006;
       vec2  off = ctr * ca;
-      float r   = texture2D(tDiffuse, uv + off).r;
-      float g   = texture2D(tDiffuse, uv      ).g;
-      float b   = texture2D(tDiffuse, uv - off).b;
+      float r   = texture2D(tDiffuse, vUv + off).r;
+      float g   = texture2D(tDiffuse, vUv      ).g;
+      float b   = texture2D(tDiffuse, vUv - off).b;
       vec3  col = vec3(r, g, b);
-
-      // Film grain
-      float noise = (hash(uv + fract(uTime * 0.013)) * 2.0 - 1.0) * uGrain;
+      float noise = (hash(vUv + fract(uTime * 0.013)) * 2.0 - 1.0) * uGrain;
       col += noise;
-
-      // Vignette
       float vig = 1.0 - smoothstep(0.28, 1.0, length(ctr) * 1.7) * uVignette;
       col *= vig;
-
-      // Subtle warm lift in shadows
       col = col + vec3(0.004, 0.002, 0.0) * (1.0 - col);
-
       gl_FragColor = vec4(max(col, vec3(0.0)), 1.0);
     }
   `
 };
 
-const finalePass = new ShaderPass(finaleShader);
+const finalePass = new THREE.ShaderPass(finaleShader);
+finalePass.renderToScreen = true;
 composer.addPass(finalePass);
-composer.addPass(new OutputPass());
 
 // ── resize ────────────────────────────────────────────────────────────────────
 window.addEventListener('resize', () => {
@@ -521,15 +484,11 @@ window.addEventListener('resize', () => {
 });
 
 // ── UI ────────────────────────────────────────────────────────────────────────
-const slTime  = document.getElementById('slTime');
-const slSwell = document.getElementById('slSwell');
-const slBloom = document.getElementById('slBloom');
+document.getElementById('slTime').addEventListener('input',  e => updateSky(+e.target.value));
+document.getElementById('slSwell').addEventListener('input', e => { if (waterMat) waterMat.uniforms.uScale.value = +e.target.value; });
+document.getElementById('slBloom').addEventListener('input', e => { bloomPass.strength = +e.target.value; });
 
-slTime.addEventListener('input',  () => updateSky(+slTime.value));
-slSwell.addEventListener('input', () => { if (waterMat) waterMat.uniforms.uScale.value = +slSwell.value; });
-slBloom.addEventListener('input', () => { bloomPass.strength = +slBloom.value; });
-
-// ── animation ─────────────────────────────────────────────────────────────────
+// ── animate ───────────────────────────────────────────────────────────────────
 const clock = new THREE.Clock();
 let t = 0;
 
@@ -537,7 +496,7 @@ updateSky(7.2);
 
 function animate() {
   requestAnimationFrame(animate);
-  const dt = clock.getDelta();
+  const dt = Math.min(clock.getDelta(), 0.05);
   t += dt;
 
   controls.update();
@@ -550,7 +509,7 @@ function animate() {
 
   finalePass.uniforms.uTime.value = t;
 
-  // Bob floaters on wave surface
+  // bob spheres on waves
   const sc = waterMat ? waterMat.uniforms.uScale.value : 1;
   floaters.forEach((m, i) => {
     const h = waveH(m.userData.px, m.userData.pz, wt) * sc;
@@ -559,18 +518,17 @@ function animate() {
     m.rotation.x += dt * 0.04 * (i % 3 ? 1 : -1);
   });
 
-  // Torus spin
   torus.rotation.x += dt * 0.22;
   torus.rotation.y += dt * 0.16;
   torus.position.y = 5 + Math.sin(t * 0.4) * 0.6;
 
-  // Spray particles
+  // spray
   for (let i = 0; i < PC; i++) {
     pLt[i] += dt * (0.45 + pSd[i] * 0.55);
     if (pLt[i] > 1) {
       pLt[i] = 0;
-      const r = Math.sqrt(Math.random()) * 55, a = Math.random() * Math.PI * 2;
-      posAttr.setXYZ(i, Math.cos(a) * r, 0, Math.sin(a) * r);
+      const r2 = Math.sqrt(Math.random()) * 55, a2 = Math.random() * Math.PI * 2;
+      posAttr.setXYZ(i, Math.cos(a2) * r2, 0, Math.sin(a2) * r2);
       pVel[i] = [(Math.random()-.5)*1.8, (Math.random()*3.5+0.5)*sc, (Math.random()-.5)*1.8];
     }
     const lt = pLt[i];
@@ -579,8 +537,6 @@ function animate() {
     posAttr.setZ(i, posAttr.getZ(i) + pVel[i][2] * dt);
   }
   posAttr.needsUpdate = true;
-
-  // Spray opacity scales with swell
   sprayMat.opacity = 0.15 + Math.min(sc * 0.1, 0.3);
 
   composer.render();
