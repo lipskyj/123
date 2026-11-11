@@ -1,0 +1,220 @@
+<!doctype html>
+<!-- README graphics. All content is illustrative and fake. Render: node docs/mockups/shoot.cjs -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face{font-family:Heebo;font-weight:400;src:url(heebo-latin-400-normal.woff2)}
+@font-face{font-family:Heebo;font-weight:500;src:url(heebo-latin-500-normal.woff2)}
+@font-face{font-family:Heebo;font-weight:700;src:url(heebo-latin-700-normal.woff2)}
+@font-face{font-family:Heebo;font-weight:800;src:url(heebo-latin-800-normal.woff2)}
+@font-face{font-family:HeeboHe;font-weight:400;src:url(heebo-hebrew-400-normal.woff2)}
+@font-face{font-family:HeeboHe;font-weight:500;src:url(heebo-hebrew-500-normal.woff2)}
+@font-face{font-family:HeeboHe;font-weight:700;src:url(heebo-hebrew-700-normal.woff2)}
+@font-face{font-family:HeeboHe;font-weight:800;src:url(heebo-hebrew-800-normal.woff2)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#888;font-family:Heebo,HeeboHe,sans-serif;display:flex;flex-direction:column;gap:20px;padding:20px}
+.g{position:relative;overflow:hidden;color:#eef5f0;border-radius:24px;
+  background:radial-gradient(800px 420px at 85% 0%,#1DB66040,transparent 60%),radial-gradient(700px 400px at 0% 110%,#d9775733,transparent 60%),#0b1410}
+.g::before{content:"";position:absolute;inset:0;background-image:linear-gradient(#ffffff0a 1px,transparent 1px),linear-gradient(90deg,#ffffff0a 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+[dir=rtl]{font-family:HeeboHe,Heebo,sans-serif}
+.title{font-size:38px;font-weight:800;letter-spacing:-.5px}
+.title em{font-style:normal;background:linear-gradient(90deg,#25d366,#d97757);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:#a9bab1;font-size:18px;margin-top:6px}
+.kick{display:inline-block;font-size:14px;font-weight:700;color:#9be7bd;background:#1DB66022;border:1px solid #1DB66055;border-radius:999px;padding:5px 14px;margin-bottom:14px}
+
+/* ---- how it works ---- */
+.how{width:1280px;height:600px;padding:46px 56px}
+.lanes{display:grid;grid-template-columns:1fr 70px 1fr 70px 1fr;margin-top:34px;align-items:stretch;height:380px}
+.lane{background:#ffffff0c;border:1px solid #ffffff1f;border-radius:22px;padding:22px;display:flex;flex-direction:column}
+.lane h3{font-size:21px;font-weight:800;display:flex;align-items:center;gap:10px}
+.lane h3 i{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-style:normal;font-size:18px;flex:none}
+.lane p{color:#a9bab1;font-size:14.5px;line-height:1.5;margin-top:6px}
+.arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#25d366;font-size:12px;font-weight:700;text-align:center}
+.arrow b{font-size:34px;line-height:1}
+[dir=rtl] .arrow b{transform:scaleX(-1)}
+.notif{margin-top:auto;background:#f4f6f5;color:#16201b;border-radius:16px;padding:12px 14px;box-shadow:0 10px 30px #0008}
+.notif .top{display:flex;align-items:center;gap:8px;font-size:12px;color:#5d6b64}
+.notif .top span{width:16px;height:16px;border-radius:5px;background:#25d366}
+.notif b{display:block;font-size:15px;margin-top:6px}
+.notif div.t{font-size:14px;color:#333;margin-top:2px}
+.tick{margin-top:10px;font-size:13px;color:#9be7bd;display:flex;gap:6px;align-items:center}
+.db{margin-top:auto;background:#0f1a15;border:1px solid #ffffff1f;border-radius:14px;padding:10px 12px;font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#c4d3cb}
+.db .r{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed #ffffff18}
+.db .r:last-child{border:0}
+.db .k{color:#9be7bd}
+.chat{margin-top:auto;display:flex;flex-direction:column;gap:8px}
+.q{align-self:flex-end;background:#f4efe6;color:#2b2a27;border-radius:16px 16px 4px 16px;padding:8px 12px;font-size:14px}
+[dir=rtl] .q{align-self:flex-start;border-radius:16px 16px 16px 4px}
+.a{background:#ffffff12;border:1px solid #ffffff22;border-radius:16px;padding:10px 12px;font-size:13.5px;line-height:1.5;color:#e8efe9}
+.tool{align-self:flex-start;font-size:11.5px;color:#d9b9a8;border:1px solid #d9775766;border-radius:8px;padding:3px 8px}
+[dir=rtl] .tool{align-self:flex-end}
+
+/* ---- steps ---- */
+.steps{width:1280px;height:556px;padding:46px 56px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:30px}
+.card{background:#ffffff0c;border:1px solid #ffffff1f;border-radius:22px;padding:24px;position:relative;min-height:220px}
+.card .n{position:absolute;top:18px;inset-inline-end:22px;font-size:64px;font-weight:800;color:#ffffff12;line-height:1}
+.card .ic{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:28px}
+.card h3{font-size:22px;font-weight:800;margin-top:16px}
+.card p{color:#a9bab1;font-size:15px;line-height:1.5;margin-top:6px}
+.card .who{display:inline-block;margin-top:14px;font-size:12.5px;font-weight:700;border-radius:999px;padding:4px 10px}
+.you{background:#ffb74d22;color:#ffcf8a;border:1px solid #ffb74d55}
+.cc{background:#d9775722;color:#f0b49c;border:1px solid #d9775766}
+.rail{margin-top:22px;display:flex;align-items:center;gap:14px;background:linear-gradient(90deg,#d9775726,#1DB66026);border:1px solid #ffffff1f;border-radius:16px;padding:14px 20px;font-size:16px}
+.rail b{font-weight:800}
+
+/* ---- features ---- */
+.feat{width:1280px;height:300px;padding:40px 56px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;align-content:center}
+.f{background:#ffffff0c;border:1px solid #ffffff1f;border-radius:20px;padding:22px}
+.f .e{font-size:34px}
+.f h3{font-size:19px;font-weight:800;margin-top:10px}
+.f p{color:#a9bab1;font-size:14px;line-height:1.45;margin-top:4px}
+
+/* ---- social preview ---- */
+.social{width:1280px;height:640px;padding:70px 76px;border-radius:0}
+.social h1{font-size:76px;font-weight:800;line-height:1;letter-spacing:-2px;margin-top:18px}
+.social h1 em{font-style:normal;background:linear-gradient(90deg,#25d366,#d97757);-webkit-background-clip:text;background-clip:text;color:transparent}
+.social p{font-size:24px;color:#c4d3cb;margin-top:22px;max-width:640px;line-height:1.4}
+.social .by{position:absolute;bottom:56px;left:76px;font-size:18px;color:#a9bab1}
+.social .by b{color:#eef5f0}
+.social .phone{position:absolute;right:90px;top:70px;width:300px;height:520px;border-radius:40px;background:#0d0f0f;padding:10px;box-shadow:0 30px 80px #000a,0 0 0 1px #ffffff22}
+.social .phone .s{width:100%;height:100%;border-radius:32px;background:#faf9f5;overflow:hidden;color:#2b2a27;padding:40px 14px 0}
+.social .phone .q{margin-inline-start:40px}
+.social .phone .a{background:#efece3;border:0;color:#2b2a27;margin-top:10px}
+.social .phone .tool{color:#5f5c55;border-color:#e6e2d8;background:#fff;margin-top:10px}
+.pills{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap}
+.pills span{font-size:15px;font-weight:700;border:1px solid #ffffff2a;background:#ffffff0d;border-radius:999px;padding:7px 14px}
+</style>
+</head>
+<body>
+
+<!-- ===================== HOW IT WORKS (EN) ===================== -->
+<div class="g how" id="how-it-works">
+  <span class="kick">How it works</span>
+  <div class="title">From notification to <em>Claude</em>, in seconds</div>
+  <div class="lanes">
+    <div class="lane">
+      <h3><i style="background:url(app_logo.png) center/cover"></i>Your Android phone</h3>
+      <p>WA Forwarder reads WhatsApp notifications as they arrive. It never opens WhatsApp or the chat.</p>
+      <div class="notif"><div class="top"><span></span>WhatsApp · now</div><b>Dana</b><div class="t">Running 10 min late 🙏</div></div>
+      <div class="tick">✓✓ <span style="color:#a9bab1">ticks stay grey: still unread</span></div>
+    </div>
+    <div class="arrow"><b>→</b>HTTPS<br>ingest key</div>
+    <div class="lane">
+      <h3><i style="background:#f38020">☁</i>Your Cloudflare</h3>
+      <p>A Worker stores each message in D1 under its owner. Free plan, your account, nobody else's.</p>
+      <div class="db">
+        <div class="r"><span>keys</span><span class="k">SHA-256 hashed</span></div>
+        <div class="r"><span>users</span><span class="k">isolated inboxes</span></div>
+        <div class="r"><span>retention</span><span class="k">auto-delete · 30 days</span></div>
+        <div class="r"><span>cron</span><span class="k">daily purge 03:17</span></div>
+      </div>
+    </div>
+    <div class="arrow"><b>→</b>MCP<br>connector key</div>
+    <div class="lane">
+      <h3><i style="background:#d97757">✳</i>Claude</h3>
+      <p>A custom connector gives Claude four read-only tools: recent, search, chats, conversation.</p>
+      <div class="chat">
+        <div class="q">Anything urgent on WhatsApp?</div>
+        <div class="tool">WhatsApp · recent_messages</div>
+        <div class="a">One thing: <b>Dana</b> is running 10 minutes late. The rest can wait.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== HOW IT WORKS (HE) ===================== -->
+<div class="g how" id="how-it-works-he" dir="rtl" lang="he">
+  <span class="kick">איך זה עובד</span>
+  <div class="title">מההתראה ל־<em>Claude</em>, תוך שניות</div>
+  <div class="lanes">
+    <div class="lane">
+      <h3><i style="background:url(app_logo.png) center/cover"></i>טלפון האנדרואיד שלכם</h3>
+      <p>WA Forwarder קורא את ההתראות של ווצאפ ברגע שהן מגיעות. הוא אף פעם לא פותח את ווצאפ או את הצ׳אט.</p>
+      <div class="notif"><div class="top"><span></span>WhatsApp · עכשיו</div><b>דנה</b><div class="t">מאחרת ב־10 דקות 🙏</div></div>
+      <div class="tick">✓✓ <span style="color:#a9bab1">הווי נשאר אפור: ההודעה לא נקראה</span></div>
+    </div>
+    <div class="arrow"><b>→</b>HTTPS<br>מפתח אפליקציה</div>
+    <div class="lane">
+      <h3><i style="background:#f38020">☁</i>ה־Cloudflare שלכם</h3>
+      <p>Worker שומר כל הודעה ב־D1 תחת הבעלים שלה. תוכנית חינמית, בחשבון שלכם בלבד.</p>
+      <div class="db" dir="ltr">
+        <div class="r"><span>keys</span><span class="k">SHA-256 hashed</span></div>
+        <div class="r"><span>users</span><span class="k">isolated inboxes</span></div>
+        <div class="r"><span>retention</span><span class="k">auto-delete · 30 days</span></div>
+        <div class="r"><span>cron</span><span class="k">daily purge 03:17</span></div>
+      </div>
+    </div>
+    <div class="arrow"><b>→</b>MCP<br>מפתח connector</div>
+    <div class="lane">
+      <h3><i style="background:#d97757">✳</i>Claude</h3>
+      <p>connector אישי נותן ל־Claude ארבעה כלי קריאה בלבד: אחרונות, חיפוש, צ׳אטים ושיחה.</p>
+      <div class="chat">
+        <div class="q">יש משהו דחוף בווצאפ?</div>
+        <div class="tool">WhatsApp · recent_messages</div>
+        <div class="a">רק דבר אחד: <b>דנה</b> מאחרת ב־10 דקות. כל השאר יכול לחכות.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== THREE STEPS (EN) ===================== -->
+<div class="g steps" id="three-steps">
+  <span class="kick">Setup in three steps</span>
+  <div class="title">You do <em>three things.</em> Claude Code does the rest.</div>
+  <div class="cards">
+    <div class="card"><span class="n">1</span><div class="ic" style="background:#f38020">☁</div><h3>Open a Cloudflare account</h3><p>Free plan. Verify your email, pick a workers.dev subdomain, click "Allow" for Wrangler.</p><span class="who you">🙋 You · 3 min</span></div>
+    <div class="card"><span class="n">2</span><div class="ic" style="background:url(app_logo.png) center/cover"></div><h3>Install the app</h3><p>Open your setup link on the phone, get past Play Protect, allow notification access and battery.</p><span class="who you">🙋 You · 5 min · guided</span></div>
+    <div class="card"><span class="n">3</span><div class="ic" style="background:#d97757">✳</div><h3>Connect Claude</h3><p>Add the connector URL in claude.ai → Settings → Connectors. Then just ask.</p><span class="who you">🙋 You · 1 min</span></div>
+  </div>
+  <div class="rail">🤖 <span><b>Claude Code handles everything in between:</b> dependencies, building and signing the APK, D1, deploy, admin password, your user, and a personalized install guide.</span></div>
+</div>
+
+<!-- ===================== THREE STEPS (HE) ===================== -->
+<div class="g steps" id="three-steps-he" dir="rtl" lang="he">
+  <span class="kick">התקנה בשלושה שלבים</span>
+  <div class="title">אתם עושים <em>שלושה דברים.</em> Claude Code עושה את השאר.</div>
+  <div class="cards">
+    <div class="card"><span class="n">1</span><div class="ic" style="background:#f38020">☁</div><h3>פותחים חשבון Cloudflare</h3><p>תוכנית חינמית. מאמתים מייל, בוחרים תת־דומיין של workers.dev ולוחצים "Allow" ל־Wrangler.</p><span class="who you">🙋 אתם · 3 דקות</span></div>
+    <div class="card"><span class="n">2</span><div class="ic" style="background:url(app_logo.png) center/cover"></div><h3>מתקינים את האפליקציה</h3><p>פותחים את קישור ההגדרה בטלפון, עוקפים את Play Protect, ומאשרים גישה להתראות וסוללה.</p><span class="who you">🙋 אתם · 5 דקות · עם מדריך</span></div>
+    <div class="card"><span class="n">3</span><div class="ic" style="background:#d97757">✳</div><h3>מחברים את Claude</h3><p>מוסיפים את כתובת ה־connector ב־<span dir="ltr">claude.ai → Settings → Connectors</span>, ואז פשוט שואלים.</p><span class="who you">🙋 אתם · דקה</span></div>
+  </div>
+  <div class="rail">🤖 <span><b>Claude Code עושה את כל מה שביניהם:</b> תלויות, בנייה וחתימה של ה־APK, מסד הנתונים, העלאה לשרת, סיסמת ניהול, המשתמש שלכם ומדריך התקנה אישי.</span></div>
+</div>
+
+<!-- ===================== FEATURES (EN) ===================== -->
+<div class="g feat" id="features">
+  <div class="f"><div class="e">👀</div><h3>No blue ticks</h3><p>Reads notifications only. Messages stay unread on your phone.</p></div>
+  <div class="f"><div class="e">🔒</div><h3>Your own server</h3><p>Your Cloudflare account. No WhatsApp API, no third parties.</p></div>
+  <div class="f"><div class="e">🔑</div><h3>Keys per person</h3><p>Hashed, isolated, rotatable in one click. Invite friends safely.</p></div>
+  <div class="f"><div class="e">🗓️</div><h3>Forgets on purpose</h3><p>Messages auto-delete after 30 days. Skip chats or groups.</p></div>
+</div>
+
+<!-- ===================== FEATURES (HE) ===================== -->
+<div class="g feat" id="features-he" dir="rtl" lang="he">
+  <div class="f"><div class="e">👀</div><h3>בלי וי כחול</h3><p>קורא רק התראות. ההודעות נשארות לא נקראות בטלפון.</p></div>
+  <div class="f"><div class="e">🔒</div><h3>שרת משלכם</h3><p>בחשבון Cloudflare שלכם. בלי WhatsApp API ובלי צד שלישי.</p></div>
+  <div class="f"><div class="e">🔑</div><h3>מפתח לכל אחד</h3><p>נשמר כ־hash, מבודד, מתחלף בלחיצה. אפשר לצרף חברים.</p></div>
+  <div class="f"><div class="e">🗓️</div><h3>נמחק בכוונה</h3><p>הודעות נמחקות אחרי 30 יום. אפשר להחריג צ׳אטים או קבוצות.</p></div>
+</div>
+
+<!-- ===================== SOCIAL PREVIEW ===================== -->
+<div class="g social" id="social-preview">
+  <span class="kick">● Open source · build it with Claude Code</span>
+  <h1>Your WhatsApp,<br><em>inside Claude.</em></h1>
+  <p>Android notifications → your own Cloudflare server → Claude as an MCP connector. No blue ticks.</p>
+  <div class="pills"><span>☁ Cloudflare Workers + D1</span><span>✳ MCP</span><span>🤖 Android 8+</span></div>
+  <div class="by">Created by <b>Ben Rotenberg</b> · github.com/Ben-Rotenberg/whatsapp-claude-inbox</div>
+  <div class="phone"><div class="s">
+    <div class="q">Anything urgent on WhatsApp?</div>
+    <div class="tool">WhatsApp · recent_messages</div>
+    <div class="a">23 messages from 6 chats. <b>Urgent:</b> Alex needs the slides before tomorrow's 10:00 meeting. Everything else can wait.</div>
+    <div class="q" style="margin-top:14px">Find the address Sam sent this week</div>
+    <div class="tool">WhatsApp · search_messages</div>
+    <div class="a">Sam sent it on Tuesday: <b>12 Oak Street, entrance B</b>. Want me to add it to your calendar?</div>
+  </div></div>
+</div>
+
+</body>
+</html>

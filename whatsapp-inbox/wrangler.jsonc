@@ -1,0 +1,15 @@
+// Cloudflare Worker config. Contains NO account-specific values: wrangler fills them in on first deploy.
+// - The D1 database is created automatically on the first `wrangler deploy` (Wrangler resource provisioning)
+//   and its id is written back here. That id is not a secret, but keep your filled-in copy out of public forks.
+// - TIMEZONE: an IANA name (e.g. "Europe/London", "America/New_York") used to show message times to Claude.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "whatsapp-inbox",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-01",
+  "observability": { "enabled": true },
+  "assets": { "directory": "./public", "run_worker_first": ["/admin*", "/setup*", "/ingest*", "/mcp/*", "/health", "/"] },
+  "d1_databases": [{ "binding": "DB", "database_name": "whatsapp-inbox" }],
+  "triggers": { "crons": ["17 3 * * *"] },
+  "vars": { "TIMEZONE": "Asia/Jerusalem" }
+}

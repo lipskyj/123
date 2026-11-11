@@ -1,0 +1,22 @@
+# dependencies & local state
+node_modules/
+.wrangler/
+
+# secrets: never commit any of these
+.dev.vars
+.env
+*.p12
+*.jks
+*.keystore
+android/signing/
+*secrets*/
+*SECRETS*
+*-secrets.txt
+
+# build outputs (rebuilt by android/build.sh, served from public/ at deploy time)
+android/.build-tools/
+android/build/
+public/wa-forwarder.apk
+
+# personalized guide output (may contain your server URL)
+guide/out/

@@ -1,0 +1,17 @@
+{
+  "name": "whatsapp-claude-inbox",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Forward incoming WhatsApp messages from Android notifications to Claude, via your own Cloudflare Worker + D1 MCP server.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "build:apk": "bash android/build.sh",
+    "guide": "node guide/make-guide.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^4.40.0"
+  }
+}

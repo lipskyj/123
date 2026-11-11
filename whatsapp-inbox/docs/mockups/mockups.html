@@ -1,0 +1,482 @@
+<!doctype html>
+<!--
+  Mockups for the README and the install guide. Every value here is FAKE.
+  Regenerate:  node docs/mockups/shoot.cjs   (needs Playwright)
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face{font-family:Heebo;font-weight:400;src:url(heebo-latin-400-normal.woff2)}
+@font-face{font-family:Heebo;font-weight:500;src:url(heebo-latin-500-normal.woff2)}
+@font-face{font-family:Heebo;font-weight:700;src:url(heebo-latin-700-normal.woff2)}
+@font-face{font-family:Heebo;font-weight:800;src:url(heebo-latin-800-normal.woff2)}
+:root{--teal:#0B7A45;--green:#1DB660;--ink:#1c1f23;--sub:#5f6670;--line:#e3e6ea;--hl:#ff5a1f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#ddd;font-family:Heebo,system-ui,sans-serif;color:var(--ink);display:flex;flex-wrap:wrap;gap:20px;padding:20px;align-items:flex-start}
+.mono{font-family:ui-monospace,"JetBrains Mono",Menlo,Consolas,monospace}
+
+/* ---------- phone frame ---------- */
+.scr{width:360px;height:760px;position:relative;overflow:hidden;background:#fff;font-size:14px}
+.sb{height:30px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font-size:12.5px;font-weight:500;color:#222}
+.sb .ic{display:flex;gap:5px;align-items:center}
+.sb .ic i{display:block;background:currentColor;border-radius:1px}
+.navbar{position:absolute;bottom:0;left:0;right:0;height:22px;display:flex;justify-content:center;align-items:center}
+.navbar::after{content:"";width:110px;height:4px;border-radius:4px;background:#1f1f1f}
+.dim{position:absolute;inset:0;background:rgba(0,0,0,.45)}
+.dialog{position:absolute;left:22px;right:22px;background:#f3f1f6;border-radius:26px;padding:24px 22px 16px;box-shadow:0 10px 40px rgba(0,0,0,.25)}
+.dialog h3{font-size:19px;font-weight:500;margin-bottom:12px;line-height:1.35;text-align:center}
+.dialog p{font-size:13.5px;color:#46464f;line-height:1.55}
+.dialog .acts{display:flex;justify-content:flex-end;gap:6px;margin-top:20px}
+.dialog .acts b{font-weight:500;color:#3a5fc4;padding:9px 12px;border-radius:20px;font-size:14px}
+.hl{position:relative}
+.hl::after{content:"";position:absolute;inset:-6px;border:3px solid var(--hl);border-radius:14px;box-shadow:0 0 0 4px rgba(255,90,31,.18);pointer-events:none}
+
+/* ---------- mobile chrome ---------- */
+.chrome{display:flex;align-items:center;gap:10px;padding:6px 12px 10px;border-bottom:1px solid #eee}
+.url{flex:1;min-width:0;white-space:nowrap;overflow:hidden;background:#eef0f3;border-radius:20px;height:38px;display:flex;align-items:center;gap:8px;padding:0 14px;font-size:13px;color:#333}
+.url .lock{flex:none;width:11px;height:13px;border:2px solid #555;border-radius:3px;position:relative;margin-top:3px}
+.url .lock::before{content:"";position:absolute;width:7px;height:6px;border:2px solid #555;border-bottom:0;border-radius:5px 5px 0 0;left:0;top:-8px}
+.tabs{width:22px;height:22px;border:2px solid #444;border-radius:5px;font-size:11px;display:grid;place-items:center;font-weight:700}
+.dots{width:4px;height:18px;background:radial-gradient(circle,#444 2px,transparent 2.5px) 0 0/4px 6px}
+
+/* ---------- server setup page ---------- */
+.web{background:#f6f7f9;height:100%;padding:16px 14px}
+.web h1{font-size:21px;font-weight:800;margin:4px 0 2px}
+.web .mut{color:var(--sub);font-size:13px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin:12px 0}
+.card h2{font-size:15px;font-weight:700;margin-bottom:8px}
+.btn{display:inline-block;background:#128c7e;color:#fff;font-weight:700;border-radius:10px;padding:9px 14px;font-size:13.5px}
+.card ol{padding-left:18px;font-size:13px;line-height:1.6;color:#333}
+
+/* ---------- android settings ---------- */
+.appbar{display:flex;align-items:center;gap:14px;padding:14px 18px;font-size:21px;font-weight:400}
+.back{width:20px;height:20px;position:relative;flex:none}
+.back::before{content:"";position:absolute;inset:4px 3px;border-top:2px solid #222;border-left:2px solid #222;transform:rotate(-45deg)}
+.row{display:flex;align-items:center;gap:14px;padding:14px 22px;min-height:64px}
+.row .t{flex:1}.row .t div:first-child{font-size:16px}.row .t div+div{font-size:13px;color:var(--sub);margin-top:2px}
+.sw{width:52px;height:32px;border-radius:16px;background:#e0e2ec;border:2px solid #74777f;position:relative;flex:none}
+.sw::after{content:"";position:absolute;width:16px;height:16px;border-radius:50%;background:#74777f;top:6px;left:6px}
+.sw.on{background:#3a5fc4;border-color:#3a5fc4}.sw.on::after{width:24px;height:24px;top:2px;left:auto;right:2px;background:#fff}
+.sw.grey{opacity:.38}
+.aic{width:40px;height:40px;border-radius:12px;flex:none;background:url(app_logo.png) center/cover}
+.ic-chrome{width:40px;height:40px;flex:none;background:conic-gradient(#db4437 0 33%,#f4b400 0 66%,#0f9d58 0);border-radius:50%;display:grid;place-items:center}
+.ic-chrome::before{content:"";width:16px;height:16px;border-radius:50%;background:#4285f4;border:3px solid #fff}
+.menu{position:absolute;top:44px;right:10px;background:#f3f1f6;border-radius:6px;box-shadow:0 6px 24px rgba(0,0,0,.22);min-width:230px;padding:6px 0;z-index:3}
+.menu div{padding:13px 18px;font-size:15px}
+
+/* ---------- WA Forwarder app (v3 design) ---------- */
+.app{--bg:#f3f5f4;--card:#fff;--ink:#16201b;--mut:#5d6b64;--line:#e4e9e6;--pri:#0B7A45;--prisoft:#d5efe1;--warn:#b86e00;--warnsoft:#fff3d9;
+  background:var(--bg);height:100%;color:var(--ink);position:relative}
+.app.dark{--bg:#0e1311;--card:#18201c;--ink:#e8efe9;--mut:#93a39a;--line:#26302b;--pri:#3ddc84;--prisoft:#1d3a2a;--warn:#ffb74d;--warnsoft:#3a2d14}
+.hero{background:linear-gradient(135deg,#0B7A45,#1DB660);color:#fff;padding:0 22px 64px;border-radius:0 0 26px 26px}
+.app.dark .hero{background:linear-gradient(135deg,#0a4f2f,#137a43)}
+.hero .sb{color:#fff;padding:0}
+.brand{display:flex;align-items:center;gap:14px;margin-top:14px}
+.brand .logo{width:52px;height:52px;border-radius:14px;background:url(app_logo.png) center/cover;box-shadow:0 0 0 3px rgba(255,255,255,.18)}
+.brand h1{font-size:23px;font-weight:800;line-height:1.1}
+.brand p{font-size:13px;opacity:.92;margin-top:3px}
+.pill{display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:8px 16px;border-radius:999px;font-size:14px;font-weight:500}
+.pill.ok{background:#fff;color:#0B7A45}.pill.warn{background:#fff4d6;color:#8a5300}
+.hero .detail{font-size:13.5px;margin-top:10px;opacity:.95}
+.stats{background:var(--card);border:1px solid var(--line);border-radius:20px;margin:-48px 14px 0;padding:14px 16px 10px;position:relative}
+.stats .nums{display:flex}
+.stats .nums div{flex:1;text-align:center}
+.stats .nums div+div{border-left:1px solid var(--line)}
+.stats b{display:block;font-size:30px;font-weight:800;line-height:1.2}
+.stats span{font-size:12.5px;color:var(--mut)}
+.stats .last{border-top:1px solid var(--line);margin-top:10px;padding-top:9px;font-size:12.5px;color:var(--mut)}
+.sec{font-size:13px;font-weight:700;color:var(--mut);margin:18px 22px 8px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:20px;margin:0 14px;padding:2px 16px}
+.step{display:flex;align-items:center;gap:12px;padding:12px 0}
+.step+.step,.step+.tip+.step{border-top:1px solid var(--line)}
+.num{width:32px;height:32px;border-radius:50%;flex:none;display:grid;place-items:center;font-weight:700;font-size:14px;border:2px solid var(--warn);color:var(--warn)}
+.num.done{background:var(--pri);border-color:var(--pri);color:#fff}
+.app.dark .num.done{color:#0e1311}
+.step .t{flex:1}.step .t div:first-child{font-size:15px;font-weight:500}.step .t div+div{font-size:12px;color:var(--mut);margin-top:1px}
+.go{background:var(--pri);color:#fff;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:500}
+.app.dark .go{color:#0e1311}
+.tip{background:var(--warnsoft);border-radius:12px;padding:9px 12px;font-size:12px;line-height:1.5;margin:0 0 10px}
+.pref{display:flex;align-items:center;gap:12px;padding:12px 0}
+.pref+.pref{border-top:1px solid var(--line)}
+.pref .t{flex:1}.pref .t div:first-child{font-size:15px;font-weight:500}.pref .t div+div{font-size:12px;color:var(--mut);margin-top:1px}
+.tg{width:40px;height:22px;border-radius:11px;background:var(--prisoft);position:relative;flex:none}
+.tg::after{content:"";position:absolute;width:20px;height:20px;border-radius:50%;background:var(--pri);top:1px;right:1px;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.toast{position:absolute;bottom:56px;left:50%;transform:translateX(-50%);background:#2b2b2b;color:#fff;border-radius:22px;padding:10px 18px;font-size:13.5px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+
+/* ---------- claude desktop ---------- */
+.desk{width:1200px;height:720px;background:#fff;position:relative;overflow:hidden;border-radius:10px}
+.dchrome{height:44px;background:#e8eaed;display:flex;align-items:center;gap:10px;padding:0 14px}
+.dchrome .lights{display:flex;gap:7px}.dchrome .lights i{width:12px;height:12px;border-radius:50%;background:#ff5f57}.dchrome .lights i:nth-child(2){background:#febc2e}.dchrome .lights i:nth-child(3){background:#28c840}
+.durl{flex:1;max-width:520px;margin-left:80px;background:#fff;border-radius:16px;height:30px;font-size:13px;color:#444;display:flex;align-items:center;padding:0 14px}
+.cl{display:flex;height:676px;background:#faf9f5}
+.cside{width:230px;padding:26px 18px;border-right:1px solid #ebe8df}
+.cside h2{font-family:Georgia,serif;font-weight:400;font-size:26px;margin-bottom:20px;color:#2b2a27}
+.cside div{padding:9px 12px;border-radius:8px;font-size:14.5px;color:#4a4842;margin:2px 0}
+.cside .on{background:#efece3;color:#1f1e1b;font-weight:500}
+.cmain{flex:1;padding:34px 44px;color:#2b2a27}
+.cmain h3{font-size:20px;font-weight:500;margin-bottom:6px}
+.cmain .sub{color:#77746b;font-size:14px;margin-bottom:22px}
+.conn{display:flex;align-items:center;gap:12px;border:1px solid #e6e2d8;background:#fff;border-radius:12px;padding:14px 16px;margin-bottom:10px;font-size:14.5px}
+.conn .lg{width:30px;height:30px;border-radius:8px;background:#ececec}
+.conn .st{margin-left:auto;font-size:13px;color:#77746b}
+.addbtn{display:inline-block;border:1px solid #d9d4c7;background:#fff;border-radius:10px;padding:9px 16px;font-size:14px;font-weight:500;margin-top:8px}
+.modal{position:absolute;left:50%;top:150px;transform:translateX(-50%);width:520px;background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);padding:26px 28px;color:#2b2a27}
+.modal h4{font-size:19px;font-weight:500;margin-bottom:4px}
+.modal .sub{font-size:13.5px;color:#77746b;margin-bottom:18px}
+.modal label{display:block;font-size:13px;font-weight:500;margin:12px 0 6px;color:#4a4842}
+.modal .in{border:1px solid #d9d4c7;border-radius:10px;padding:10px 12px;font-size:14px}
+.modal .adv{font-size:13px;color:#77746b;margin-top:14px}
+.modal .acts{display:flex;justify-content:flex-end;gap:10px;margin-top:22px}
+.modal .acts span{padding:9px 18px;border-radius:10px;font-size:14px;font-weight:500;border:1px solid #d9d4c7}
+.modal .acts .p{background:#2b2a27;color:#fff;border-color:#2b2a27}
+.mdim{position:absolute;inset:44px 0 0;background:rgba(30,28,24,.35)}
+
+/* ---------- claude mobile chat ---------- */
+.cm{background:#faf9f5;height:100%;color:#2b2a27}
+.cmtop{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;font-size:15px;font-weight:500}
+.bub{background:#efece3;border-radius:18px;padding:10px 14px;margin:10px 14px 10px 70px;font-size:14.5px}
+.tool{display:inline-flex;align-items:center;gap:8px;border:1px solid #e6e2d8;border-radius:10px;padding:6px 10px;font-size:12.5px;color:#5f5c55;margin:6px 16px;background:#fff}
+.tool i{width:14px;height:14px;border-radius:4px;background:url(app_logo.png) center/cover}
+.ans{padding:4px 18px;font-size:14px;line-height:1.65}
+.ans ul{padding-left:18px;margin:6px 0}.ans li{margin:5px 0}
+.cminput{position:absolute;bottom:30px;left:12px;right:12px;border:1px solid #e6e2d8;background:#fff;border-radius:22px;height:50px;padding:0 16px;display:flex;align-items:center;color:#9a968c;font-size:14.5px}
+
+/* ---------- README banner ---------- */
+#banner{width:1280px;height:440px;position:relative;overflow:hidden;color:#fff;
+  background:radial-gradient(900px 500px at 85% 20%,#1DB66055,transparent 60%),radial-gradient(700px 400px at 10% 110%,#d9775744,transparent 60%),#0b1410}
+#banner .grid{position:absolute;inset:0;background-image:linear-gradient(#ffffff0c 1px,transparent 1px),linear-gradient(90deg,#ffffff0c 1px,transparent 1px);background-size:40px 40px;mask-image:linear-gradient(90deg,#000 30%,transparent)}
+#banner .copy{position:absolute;left:72px;top:86px;width:600px}
+#banner .kicker{display:inline-flex;gap:8px;align-items:center;font-size:15px;font-weight:500;color:#9be7bd;background:#1DB66022;border:1px solid #1DB66055;border-radius:999px;padding:6px 14px}
+#banner h1{font-size:62px;font-weight:800;line-height:1.02;margin-top:22px;letter-spacing:-1.5px}
+#banner h1 em{font-style:normal;background:linear-gradient(90deg,#25d366,#d97757);-webkit-background-clip:text;background-clip:text;color:transparent}
+#banner p{font-size:20px;color:#c4d3cb;margin-top:18px;line-height:1.45}
+#banner .flow{position:absolute;right:60px;top:70px;width:520px;height:300px}
+.node{position:absolute;display:flex;align-items:center;gap:12px;background:#ffffff0f;border:1px solid #ffffff22;border-radius:18px;padding:14px 18px;backdrop-filter:blur(4px);font-size:16px;font-weight:700}
+.node small{display:block;font-size:12.5px;font-weight:400;color:#a9bab1;margin-top:2px}
+.node .ico{width:44px;height:44px;border-radius:12px;flex:none;display:grid;place-items:center;font-size:22px}
+.wire{position:absolute;height:2px;background:repeating-linear-gradient(90deg,#25d366 0 8px,transparent 8px 14px)}
+.wire.v{width:2px;height:auto;background:repeating-linear-gradient(180deg,#25d366 0 8px,transparent 8px 14px)}
+.msgchip{position:absolute;white-space:nowrap;background:#fff;color:#16201b;border-radius:14px 14px 14px 4px;padding:8px 12px;font-size:13px;box-shadow:0 8px 24px #0006}
+</style>
+</head>
+<body>
+
+<!-- ====================== README banner ====================== -->
+<div id="banner">
+  <div class="grid"></div>
+  <div class="copy">
+    <span class="kicker">● Open source · build it with Claude Code</span>
+    <h1>Your WhatsApp,<br><em>inside Claude.</em></h1>
+    <p>Incoming messages flow from your Android notifications to your own Cloudflare server and into Claude as an MCP connector. No blue ticks. No WhatsApp API. No third parties.</p>
+  </div>
+  <div class="flow">
+    <div class="node" style="left:0;top:0"><span class="ico" style="background:url(app_logo.png) center/cover"></span><span>WA Forwarder<small>Android notification listener</small></span></div>
+    <div class="wire v" style="left:40px;top:74px;height:66px"></div>
+    <div class="node" style="left:0;top:140px"><span class="ico" style="background:#f38020">☁</span><span>Cloudflare Worker + D1<small>your account · per-user keys · auto-delete</small></span></div>
+    <div class="wire v" style="left:40px;top:214px;height:40px"></div>
+    <div class="node" style="left:0;top:254px;padding:10px 18px"><span class="ico" style="background:#d97757;width:36px;height:36px;font-size:18px">✳</span><span>Claude<small>custom MCP connector</small></span></div>
+    <div class="msgchip" style="left:260px;top:86px">Dana: running 10 min late 🙏</div>
+    <div class="msgchip" style="left:250px;top:300px;border-radius:14px 14px 4px 14px;background:#f4efe6">“Anything urgent on WhatsApp?”</div>
+  </div>
+</div>
+
+<!-- ====================== App: setup needed ====================== -->
+<div class="scr" id="app-setup">
+  <div class="app">
+    <div class="hero">
+      <div class="sb"><span>09:47</span><span class="ic"><i style="width:14px;height:9px"></i><i style="width:20px;height:10px;border-radius:2px"></i></span></div>
+      <div class="brand"><span class="logo"></span><div><h1>WA Forwarder</h1><p>WhatsApp to Claude, no blue ticks</p></div></div>
+      <span class="pill warn">● Setup incomplete</span>
+      <div class="detail">2 quick steps left below.</div>
+    </div>
+    <div class="stats"><div class="nums"><div><b>0</b><span>Forwarded</span></div><div><b>0</b><span>Queued</span></div></div><div class="last">Last status: nothing sent yet</div></div>
+    <div class="sec">Setup</div>
+    <div class="box">
+      <div class="step"><span class="num done">✓</span><div class="t"><div>Connect to server</div><div class="mono" style="font-size:11.5px">whatsapp-inbox.your-name.workers.dev</div></div></div>
+      <div class="step"><span class="num">2</span><div class="t"><div>Notification access</div><div>Lets the app read messages from notifications</div></div><span class="go">Allow</span></div>
+      <div class="tip">Option greyed out ("Restricted setting")? Settings → Apps → WA Forwarder → ⋮ → "Allow restricted settings", then come back and tap step 2 again.</div>
+      <div class="step"><span class="num">3</span><div class="t"><div>Run in background</div><div>So Android doesn't stop it</div></div><span class="go">Allow</span></div>
+    </div>
+  </div>
+  <div class="toast">Setup saved ✓</div>
+</div>
+
+<!-- ====================== App: active (light) ====================== -->
+<div class="scr" id="app-active">
+  <div class="app">
+    <div class="hero">
+      <div class="sb"><span>09:52</span><span class="ic"><i style="width:14px;height:9px"></i><i style="width:20px;height:10px;border-radius:2px"></i></span></div>
+      <div class="brand"><span class="logo"></span><div><h1>WA Forwarder</h1><p>WhatsApp to Claude, no blue ticks</p></div></div>
+      <span class="pill ok">● Active · forwarding</span>
+      <div class="detail">Every new message reaches Claude within seconds.</div>
+    </div>
+    <div class="stats"><div class="nums"><div><b>128</b><span>Forwarded</span></div><div><b>0</b><span>Queued</span></div></div><div class="last">✓ Last status: Sent OK (09:52)</div></div>
+    <div class="sec">Setup</div>
+    <div class="box">
+      <div class="step"><span class="num done">✓</span><div class="t"><div>Connect to server</div><div class="mono" style="font-size:11.5px">whatsapp-inbox.your-name.workers.dev</div></div></div>
+      <div class="step"><span class="num done">✓</span><div class="t"><div>Notification access</div><div>The app sees new notifications</div></div></div>
+      <div class="step"><span class="num done">✓</span><div class="t"><div>Run in background</div><div>Battery optimization is off for this app</div></div></div>
+    </div>
+    <div class="sec">Preferences</div>
+    <div class="box">
+      <div class="pref"><div class="t"><div>Forwarding on</div><div>Turn off to pause forwarding</div></div><span class="tg"></span></div>
+      <div class="pref"><div class="t"><div>Group messages</div><div>Also forward messages sent in groups</div></div><span class="tg"></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====================== App: active (dark) ====================== -->
+<div class="scr" id="app-active-dark">
+  <div class="app dark">
+    <div class="hero">
+      <div class="sb"><span>22:10</span><span class="ic"><i style="width:14px;height:9px"></i><i style="width:20px;height:10px;border-radius:2px"></i></span></div>
+      <div class="brand"><span class="logo"></span><div><h1>WA Forwarder</h1><p>WhatsApp to Claude, no blue ticks</p></div></div>
+      <span class="pill ok">● Active · forwarding</span>
+      <div class="detail">Every new message reaches Claude within seconds.</div>
+    </div>
+    <div class="stats"><div class="nums"><div><b>342</b><span>Forwarded</span></div><div><b>0</b><span>Queued</span></div></div><div class="last">✓ Last status: Sent OK (22:09)</div></div>
+    <div class="sec">Preferences</div>
+    <div class="box">
+      <div class="pref"><div class="t"><div>Forwarding on</div><div>Turn off to pause forwarding</div></div><span class="tg"></span></div>
+      <div class="pref"><div class="t"><div>Group messages</div><div>Also forward messages sent in groups</div></div><span class="tg"></span></div>
+      <div class="pref" style="display:block"><div class="t"><div>Chats to skip</div><div>One chat or group name per line, exactly as shown in WhatsApp</div></div>
+        <div style="margin-top:8px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13px;color:var(--mut);line-height:1.6">My Bank<br>School parents</div></div>
+    </div>
+    <div class="sec">Test &amp; maintenance</div>
+    <div class="box" style="padding:12px 16px"><div style="text-align:center;background:var(--pri);color:#0e1311;border-radius:12px;padding:10px;font-weight:700;font-size:14px">Send test message</div></div>
+  </div>
+</div>
+
+<!-- ====================== Guide: 01 setup link ====================== -->
+<div class="scr" id="s01-setup-link">
+  <div class="sb"><span>09:41</span><span class="ic"><i style="width:14px;height:9px"></i><i style="width:3px;height:10px"></i><i style="width:20px;height:10px;border-radius:2px"></i></span></div>
+  <div class="chrome"><div class="tabs">2</div><div class="url"><span class="lock"></span><span>whatsapp-inbox.your-name.workers.dev/setup</span></div><div class="dots"></div></div>
+  <div class="web">
+    <h1>WhatsApp Inbox setup</h1>
+    <div class="mut">Hi Dana, setup takes about 5 minutes.</div>
+    <div class="card">
+      <h2>Step 1: the app on your phone (Android)</h2>
+      <span class="btn hl" style="margin:4px 0 10px">Download the app</span>
+      <ol><li>Install <b>WA Forwarder</b>.</li><li>Open this page on the phone and tap:</li></ol>
+      <span class="btn" style="margin-top:8px">Set up the app automatically</span>
+      <ol start="3" style="margin-top:10px"><li>In the app, tap "Notification access".</li><li>Tap "Run in background", then "Send test message".</li></ol>
+    </div>
+    <div class="card">
+      <h2>Step 2: connect Claude (on your computer)</h2>
+      <ol><li>Settings → Connectors → Add custom connector</li><li>Name: WhatsApp. Remote MCP server URL:</li></ol>
+      <div class="mono" style="font-size:11px;background:#f1f3f5;border-radius:8px;padding:8px;margin-top:6px;color:#444;word-break:break-all">https://whatsapp-inbox.your-name.workers.dev/mcp/mcp_••••••••••••</div>
+    </div>
+  </div>
+  <div class="navbar"></div>
+</div>
+
+<!-- 02 chrome download warning -->
+<div class="scr" id="s02-download-warning">
+  <div class="sb"><span>09:42</span><span class="ic"><i style="width:14px;height:9px"></i><i style="width:20px;height:10px;border-radius:2px"></i></span></div>
+  <div class="chrome"><div class="tabs">2</div><div class="url"><span class="lock"></span><span>whatsapp-inbox.your-name.workers.dev/setup</span></div><div class="dots"></div></div>
+  <div class="web"><h1>WhatsApp Inbox setup</h1><div class="mut">Hi Dana, setup takes about 5 minutes.</div><div class="card" style="height:300px"></div></div>
+  <div class="dim"></div>
+  <div class="dialog" style="top:250px">
+    <h3>Download file anyway?</h3>
+    <p>This type of file can harm your device. Do you want to download wa-forwarder.apk anyway?</p>
+    <div class="acts"><b>Cancel</b><b class="hl">Download anyway</b></div>
+  </div>
+  <div class="navbar"></div>
+</div>
+
+<!-- 03 install unknown apps -->
+<div class="scr" id="s03-unknown-sources">
+  <div class="sb"><span>09:42</span><span class="ic"><i style="width:14px;height:9px"></i><i style="width:20px;height:10px;border-radius:2px"></i></span></div>
+  <div class="appbar"><span class="back"></span>Install unknown apps</div>
+  <div class="row" style="padding-top:6px"><div class="ic-chrome"></div><div class="t"><div>Chrome</div><div>135.0.7049.79</div></div></div>
+  <div class="row hl" style="margin:6px 12px"><div class="t"><div>Allow from this source</div></div><div class="sw on"></div></div>
+  <div style="padding:16px 22px;color:var(--sub);font-size:13px;line-height:1.6">ⓘ Your phone and personal data are more vulnerable to attack by unknown apps. By installing apps from this source, you agree that you are responsible for any damage to your phone or loss of data that may result from their use.</div>
+  <div class="navbar"></div>
+</div>
+
+<!-- 04 play protect blocked -->
+<div class="scr" id="s04-play-protect-blocked">
+  <div class="sb"><span>09:43</span><span class="ic"><i style="width:14px;height:9px"></i><i style="width:20px;height:10px;border-radius:2px"></i></span></div>
+  <div style="height:100%;background:#fafafa"></div>
+  <div class="dim"></div>
+  <div class="dialog" style="top:190px">
+    <div style="display:flex;justify-content:center;margin-bottom:12px"><div style="width:40px;height:46px;background:linear-gradient(180deg,#4285f4,#3367d6);clip-path:polygon(50% 0,100% 18%,100% 55%,50% 100%,0 55%,0 18%);display:grid;place-items:center;color:#fff;font-weight:800;font-size:20px">!</div></div>
+    <h3>App blocked to protect your device</h3>
+    <p style="text-align:center">This app can request access to sensitive data. This can increase the risk of identity theft or financial fraud.</p>
+    <div style="text-align:center;font-size:12.5px;color:var(--sub);margin-top:12px">Google Play Protect</div>
+    <div class="acts" style="justify-content:space-between"><b class="hl">More details</b><b>OK</b></div>
+  </div>
+  <div class="navbar"></div>
+</div>
+
+<!-- 05 play protect settings -->
+<div class="scr" id="s05-play-protect-off">
+  <div class="sb"><span>09:44</span><span class="ic"><i style="width:14px;height:9px"></i><i style="width:20px;height:10px;border-radius:2px"></i></span></div>
+  <div class="appbar"><span class="back"></span>Play Protect settings</div>
+  <div class="row hl" style="margin:8px 12px"><div class="t"><div>Scan apps with Play Protect</div><div>Off for now: turn it back on after installing</div></div><div class="sw"></div></div>
+  <div class="row"><div class="t"><div>Improve harmful app detection</div><div>Send unknown apps to Google for better detection</div></div><div class="sw grey"></div></div>
+  <div class="dim" style="background:rgba(0,0,0,.4)"></div>
+  <div class="dialog" style="top:290px">
+    <h3>Turn off app scanning?</h3>
+    <p>Your device may be more vulnerable to harmful apps.</p>
+    <div class="acts"><b>Cancel</b><b class="hl">Turn off</b></div>
+  </div>
+  <div class="navbar"></div>
+</div>
+
+<!-- 06 package installer -->
+<div class="scr" id="s06-install">
+  <div class="sb"><span>09:45</span><span class="ic"><i style="width:14px;height:9px"></i><i style="width:20px;height:10px;border-radius:2px"></i></span></div>
+  <div style="height:100%;background:#fafafa"></div>
+  <div class="dim"></div>
+  <div class="dialog" style="top:auto;bottom:40px;left:12px;right:12px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div class="aic"></div><div style="font-size:16px;font-weight:500">WA Forwarder</div></div>
+    <p style="font-size:15px;color:#222">Do you want to install this app?</p>
+    <div class="acts"><b>Cancel</b><b class="hl">Install</b></div>
+  </div>
+  <div class="navbar"></div>
+</div>
+
+<!-- 07 app configured via link -->
+<div class="scr" id="s07-app-configured">
+  <div class="app">
+    <div class="hero">
+      <div class="sb"><span>09:47</span><span class="ic"><i style="width:14px;height:9px"></i><i style="width:20px;height:10px;border-radius:2px"></i></span></div>
+      <div class="brand"><span class="logo"></span><div><h1>WA Forwarder</h1><p>WhatsApp to Claude, no blue ticks</p></div></div>
+      <span class="pill warn">● Setup incomplete</span>
+      <div class="detail">2 quick steps left below.</div>
+    </div>
+    <div class="stats"><div class="nums"><div><b>0</b><span>Forwarded</span></div><div><b>0</b><span>Queued</span></div></div><div class="last">Last status: nothing sent yet</div></div>
+    <div class="sec">Setup</div>
+    <div class="box">
+      <div class="step"><span class="num done">✓</span><div class="t"><div>Connect to server</div><div class="mono" style="font-size:11.5px">whatsapp-inbox.your-name.workers.dev</div></div></div>
+      <div class="step"><span class="num">2</span><div class="t"><div>Notification access</div><div>Lets the app read messages from notifications</div></div><span class="go hl">Allow</span></div>
+      <div class="step"><span class="num">3</span><div class="t"><div>Run in background</div><div>So Android doesn't stop it</div></div><span class="go">Allow</span></div>
+    </div>
+  </div>
+  <div class="toast">Setup saved ✓</div>
+  <div class="navbar"></div>
+</div>
+
+<!-- 08 restricted setting -->
+<div class="scr" id="s08-restricted">
+  <div class="sb"><span>09:48</span><span class="ic"><i style="width:14px;height:9px"></i><i style="width:20px;height:10px;border-radius:2px"></i></span></div>
+  <div class="appbar"><span class="back"></span>Notification access</div>
+  <div class="row"><div class="aic"></div><div class="t"><div>WA Forwarder</div><div>Not allowed</div></div><div class="sw grey"></div></div>
+  <div class="row"><div class="aic" style="background:#4285f4"></div><div class="t"><div>Google</div><div>Allowed</div></div><div class="sw on"></div></div>
+  <div class="dim"></div>
+  <div class="dialog" style="top:250px">
+    <div style="text-align:center;font-size:26px;margin-bottom:6px">🔒</div>
+    <h3>Restricted setting</h3>
+    <p style="text-align:center">For your security, this setting is currently unavailable.</p>
+    <div class="acts"><b>OK</b></div>
+  </div>
+  <div class="navbar"></div>
+</div>
+
+<!-- 09 app info allow restricted -->
+<div class="scr" id="s09-allow-restricted">
+  <div class="sb"><span>09:49</span><span class="ic"><i style="width:14px;height:9px"></i><i style="width:20px;height:10px;border-radius:2px"></i></span></div>
+  <div class="appbar" style="justify-content:space-between"><span style="display:flex;gap:14px;align-items:center"><span class="back"></span>App info</span><span class="dots"></span></div>
+  <div style="text-align:center;padding:18px 0 10px"><div class="aic" style="width:64px;height:64px;margin:0 auto;border-radius:18px"></div><div style="font-size:20px;margin-top:10px">WA Forwarder</div></div>
+  <div style="display:flex;justify-content:center;gap:40px;padding:8px 0 14px;color:#3a5fc4;font-size:13px"><span>Open</span><span>Uninstall</span><span>Force stop</span></div>
+  <div class="row"><div class="t"><div>Notifications</div><div>On</div></div></div>
+  <div class="row"><div class="t"><div>Permissions</div><div>No permissions requested</div></div></div>
+  <div class="row"><div class="t"><div>Battery</div><div>Optimized</div></div></div>
+  <div class="menu"><div class="hl" style="margin:4px 8px">Allow restricted settings</div></div>
+  <div class="navbar"></div>
+</div>
+
+<!-- 10 notification access confirm -->
+<div class="scr" id="s10-notification-access">
+  <div class="sb"><span>09:50</span><span class="ic"><i style="width:14px;height:9px"></i><i style="width:20px;height:10px;border-radius:2px"></i></span></div>
+  <div class="appbar"><span class="back"></span>Notification access</div>
+  <div class="row"><div class="aic"></div><div class="t"><div>WA Forwarder</div><div>Not allowed</div></div><div class="sw"></div></div>
+  <div class="dim"></div>
+  <div class="dialog" style="top:200px">
+    <h3>Allow notification access for WA Forwarder?</h3>
+    <p>WA Forwarder will be able to read all notifications, including personal information such as contact names, photos, and the text of messages you receive. This app will also be able to dismiss notifications or take action on buttons in notifications.</p>
+    <div class="acts"><b>Don't allow</b><b class="hl">Allow</b></div>
+  </div>
+  <div class="navbar"></div>
+</div>
+
+<!-- 11 battery -->
+<div class="scr" id="s11-battery">
+  <div class="sb"><span>09:51</span><span class="ic"><i style="width:14px;height:9px"></i><i style="width:20px;height:10px;border-radius:2px"></i></span></div>
+  <div class="app"><div class="hero" style="padding-bottom:30px"><div class="brand" style="margin-top:0;padding-top:14px"><span class="logo"></span><div><h1>WA Forwarder</h1><p>WhatsApp to Claude, no blue ticks</p></div></div></div></div>
+  <div class="dim"></div>
+  <div class="dialog" style="top:240px">
+    <h3>Let app always run in background?</h3>
+    <p>Allowing WA Forwarder to always run in the background may reduce battery life. You can change this later from Settings → Apps.</p>
+    <div class="acts"><b>Don't allow</b><b class="hl">Allow</b></div>
+  </div>
+  <div class="navbar"></div>
+</div>
+
+<!-- 12 app ready -->
+<div class="scr" id="s12-app-ready">
+  <div class="app">
+    <div class="hero">
+      <div class="sb"><span>09:52</span><span class="ic"><i style="width:14px;height:9px"></i><i style="width:20px;height:10px;border-radius:2px"></i></span></div>
+      <div class="brand"><span class="logo"></span><div><h1>WA Forwarder</h1><p>WhatsApp to Claude, no blue ticks</p></div></div>
+      <span class="pill ok">● Active · forwarding</span>
+      <div class="detail">Every new message reaches Claude within seconds.</div>
+    </div>
+    <div class="stats"><div class="nums"><div><b>1</b><span>Forwarded</span></div><div><b>0</b><span>Queued</span></div></div><div class="last">✓ Last status: Sent OK (09:52)</div></div>
+    <div class="sec">Test &amp; maintenance</div>
+    <div class="box" style="padding:12px 16px">
+      <div class="hl" style="text-align:center;background:var(--pri);color:#fff;border-radius:12px;padding:10px;font-weight:700;font-size:14px">Send test message</div>
+      <div style="text-align:center;border:1.5px solid var(--pri);color:var(--pri);border-radius:12px;padding:9px;font-weight:700;font-size:14px;margin-top:10px">Retry stuck messages</div>
+    </div>
+    <div style="text-align:center;font-size:12px;color:var(--mut);margin:14px 22px">🔒 Messages are read from the notification only. They are never opened or marked as read.</div>
+  </div>
+  <div class="toast">Test message sent</div>
+  <div class="navbar"></div>
+</div>
+
+<!-- 13 claude desktop connector -->
+<div class="desk" id="d13-claude-connector">
+  <div class="dchrome"><span class="lights"><i></i><i></i><i></i></span><span class="durl">claude.ai/settings/connectors</span></div>
+  <div class="cl">
+    <div class="cside"><h2>Settings</h2><div>General</div><div>Account</div><div>Privacy</div><div>Billing</div><div>Capabilities</div><div class="on">Connectors</div></div>
+    <div class="cmain"><h3>Connectors</h3><div class="sub">Allow Claude to reference other apps and services for more context.</div>
+      <div class="conn"><span class="lg"></span>Google Drive<span class="st">Connected</span></div>
+      <div class="conn"><span class="lg"></span>Gmail<span class="st">Connected</span></div>
+      <span class="addbtn">+ Add custom connector</span></div>
+  </div>
+  <div class="mdim"></div>
+  <div class="modal">
+    <h4>Add custom connector</h4><div class="sub">Connect Claude to your data and tools.</div>
+    <label>Name</label><div class="in hl">WhatsApp</div>
+    <label>Remote MCP server URL</label><div class="in hl mono" style="font-size:13px">https://whatsapp-inbox.your-name.workers.dev/mcp/mcp_••••••••••••</div>
+    <div class="adv">› Advanced settings (leave empty)</div>
+    <div class="acts"><span>Cancel</span><span class="p hl">Add</span></div>
+  </div>
+</div>
+
+<!-- 14 claude chat -->
+<div class="scr" id="s14-claude-chat">
+  <div class="cm">
+    <div class="sb"><span>10:05</span><span class="ic"><i style="width:14px;height:9px"></i><i style="width:20px;height:10px;border-radius:2px"></i></span></div>
+    <div class="cmtop"><span>☰</span><span>WhatsApp today</span><span>✎</span></div>
+    <div class="bub">What came in on WhatsApp today? Anything urgent?</div>
+    <div class="tool"><i></i>WhatsApp · recent_messages</div>
+    <div class="ans">
+      23 messages from 6 chats today. In short:
+      <ul>
+        <li><b>Urgent:</b> Alex needs the slides before tomorrow's 10:00 meeting.</li>
+        <li><b>Family (14 messages):</b> Friday dinner at Grandma's, 19:30. Mom asks who's bringing dessert.</li>
+        <li><b>Building committee:</b> payment reminder, due on the 15th.</li>
+        <li><b>Sam:</b> sent the address of the new kindergarten.</li>
+      </ul>
+      Want me to draft a reply to Alex?
+    </div>
+  </div>
+  <div class="cminput">Reply to Claude…</div>
+  <div class="navbar"></div>
+</div>
+
+</body>
+</html>
