@@ -1,0 +1,168 @@
+<title>Helios Breach</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Share+Tech+Mono&display=swap">
+<style>
+/* Layout: full-bleed WebGL viewport; HUD pinned to the four corners like a helmet visor, overlays centred on top. */
+:root{
+  color-scheme:dark;
+  --void:#07060d; --panel:rgba(10,12,22,.72); --hull:#d5dcf0; --dim:#7d86a3;
+  --ion:#4de1ff; --forge:#ff9a3c; --breach:#ff3d6e; --vital:#5dffa0; --arc:#b36bff;
+  --display:"Chakra Petch","Segoe UI",system-ui,sans-serif;
+  --data:"Share Tech Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+html,body{height:100%;overflow:hidden}
+body{background:var(--void);color:var(--hull);font-family:var(--display);user-select:none;-webkit-user-select:none;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));box-sizing:border-box}
+#c{position:fixed;inset:0;width:100%;height:100%;display:block;outline:none}
+.layer{position:fixed;inset:0;pointer-events:none}
+#hud{font-family:var(--data);text-shadow:0 0 8px rgba(0,0,0,.9)}
+.corner{position:absolute;display:flex;flex-direction:column;gap:6px}
+#tl{left:max(18px,env(safe-area-inset-left,0px));top:18px}
+#tr{right:max(18px,env(safe-area-inset-right,0px));top:18px;align-items:flex-end;text-align:right}
+#bl{left:max(22px,env(safe-area-inset-left,0px));bottom:22px;width:min(300px,38vw)}
+#br{right:max(22px,env(safe-area-inset-right,0px));bottom:22px;align-items:flex-end;text-align:right}
+#radar{width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(20,40,60,.55),rgba(5,8,16,.75));box-shadow:0 0 0 1px rgba(77,225,255,.35),0 0 24px rgba(77,225,255,.15)}
+.lbl{font-size:11px;letter-spacing:.22em;color:var(--dim);text-transform:uppercase}
+#score{font-size:30px;color:var(--hull);font-variant-numeric:tabular-nums}
+#combo{font-size:16px;color:var(--forge);height:20px;font-family:var(--display);font-weight:700;letter-spacing:.08em}
+#topc{position:absolute;top:14px;left:50%;transform:translateX(-50%);text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px}
+#wave{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:.3em;color:var(--ion)}
+#left{font-size:12px;color:var(--dim);letter-spacing:.18em}
+#boss{width:min(520px,60vw);margin-top:8px}
+#boss .nm{font-family:var(--display);font-weight:700;letter-spacing:.35em;font-size:13px;color:var(--breach);margin-bottom:4px}
+.bar{height:10px;background:rgba(255,255,255,.08);position:relative;overflow:hidden;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%)}
+.bar>i{position:absolute;inset:0;transform-origin:left;display:block}
+#bossbar>i{background:linear-gradient(90deg,var(--breach),#ff9a6e)}
+#shieldbar{height:6px}#shieldbar>i{background:var(--ion)}
+#hpbar{height:14px}#hpbar>i{background:linear-gradient(90deg,#2fd27c,var(--vital))}
+#hpbar.low>i{background:linear-gradient(90deg,#ff2d55,var(--breach));animation:pulse .5s infinite alternate}
+@keyframes pulse{to{filter:brightness(1.7)}}
+#hpnum{font-size:34px;line-height:1;font-variant-numeric:tabular-nums}
+#hpnum small{font-size:14px;color:var(--ion);margin-left:8px}
+#dash{display:flex;gap:6px;align-items:center}
+#dashbar{width:90px;height:5px}#dashbar>i{background:var(--forge)}
+#wname{font-family:var(--display);font-weight:600;letter-spacing:.2em;font-size:13px;color:var(--dim)}
+#ammo{font-size:46px;line-height:1;font-variant-numeric:tabular-nums}
+#ammo small{font-size:18px;color:var(--dim);margin-left:6px}
+#slots{display:flex;gap:6px}
+#slots b{font-weight:400;font-size:11px;padding:3px 7px;border:1px solid rgba(255,255,255,.18);color:var(--dim);background:rgba(0,0,0,.3)}
+#slots b.on{color:var(--void);background:var(--ion);border-color:var(--ion)}
+#slots b.dry{opacity:.35}
+#od{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);width:min(260px,34vw);text-align:center}
+#odbar>i{background:linear-gradient(90deg,var(--arc),var(--ion))}
+#od.ready .lbl{color:var(--ion);animation:pulse .4s infinite alternate}
+#cross{position:absolute;left:50%;top:50%;width:0;height:0}
+#cross i{position:absolute;background:var(--hull);box-shadow:0 0 4px rgba(0,0,0,.9)}
+#cross .d{width:2px;height:2px;left:-1px;top:-1px;background:var(--ion)}
+#hit{position:absolute;left:50%;top:50%;width:26px;height:26px;margin:-13px 0 0 -13px;opacity:0;
+  background:linear-gradient(45deg,transparent 46%,#fff 46%,#fff 54%,transparent 54%),linear-gradient(-45deg,transparent 46%,#fff 46%,#fff 54%,transparent 54%);
+  -webkit-mask:radial-gradient(circle,transparent 5px,#000 6px);mask:radial-gradient(circle,transparent 5px,#000 6px)}
+#hit.crit{filter:drop-shadow(0 0 4px var(--forge)) sepia(1) saturate(8) hue-rotate(-20deg)}
+#announce{position:absolute;top:22%;left:0;right:0;text-align:center;font-family:var(--display);opacity:0;transition:opacity .35s}
+#announce h2{margin:0;font-size:clamp(30px,6vw,68px);font-weight:700;letter-spacing:.25em;color:var(--hull);text-shadow:0 0 30px var(--ion),0 0 4px #000;text-wrap:balance}
+#announce p{margin:8px 0 0;font-family:var(--data);letter-spacing:.3em;color:var(--ion);font-size:14px}
+#feed{position:absolute;top:62%;left:0;right:0;text-align:center;font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:.3em;color:var(--forge);opacity:0;text-shadow:0 0 16px var(--forge)}
+#tip{position:absolute;bottom:92px;left:0;right:0;text-align:center;font-size:12px;letter-spacing:.2em;color:var(--dim)}
+.num{position:absolute;font-family:var(--display);font-weight:700;font-size:17px;color:#fff;transform:translate(-50%,-50%);text-shadow:0 0 6px #000;will-change:transform,opacity}
+.num.crit{color:var(--forge);font-size:24px}
+.ind{position:absolute;left:50%;top:50%;width:0;height:0;animation:indf 1.1s forwards}
+.ind i{position:absolute;left:-46px;top:-150px;width:92px;height:22px;border-top:5px solid var(--breach);border-radius:50%;filter:drop-shadow(0 0 6px var(--breach))}
+@keyframes indf{to{opacity:0}}
+#lowhp{box-shadow:inset 0 0 160px 40px rgba(255,30,70,.55);opacity:0;transition:opacity .3s}
+.overlay{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;
+  background:radial-gradient(ellipse at center,rgba(7,6,13,.55),rgba(7,6,13,.9));padding:24px max(16px,env(safe-area-inset-left,0px));box-sizing:border-box;overflow:auto}
+.overlay h1{margin:0;font-size:clamp(40px,9vw,112px);font-weight:700;letter-spacing:.18em;line-height:.95;text-wrap:balance;
+  background:linear-gradient(180deg,#fff 20%,var(--forge) 70%,var(--breach));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 28px rgba(255,138,60,.45))}
+.overlay h3{margin:0;font-size:clamp(22px,4vw,44px);letter-spacing:.3em;font-weight:700;color:var(--hull)}
+.overlay .tag{font-family:var(--data);letter-spacing:.35em;color:var(--ion);font-size:13px;text-transform:uppercase}
+.overlay p{margin:0;max-width:60ch;color:var(--dim);line-height:1.6;font-size:15px}
+button.go{pointer-events:auto;font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:.3em;color:var(--void);background:var(--ion);border:0;padding:16px 38px;cursor:pointer;
+  clip-path:polygon(14px 0,100% 0,calc(100% - 14px) 100%,0 100%);transition:filter .15s,transform .15s}
+button.go:hover,button.go:focus-visible{filter:brightness(1.25) drop-shadow(0 0 14px var(--ion));transform:scale(1.04);outline:none}
+.keys{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px 22px;font-family:var(--data);font-size:13px;color:var(--dim);width:min(720px,100%)}
+.keys span{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid rgba(255,255,255,.08);padding:4px 0}
+.keys b{color:var(--hull);font-weight:400}
+#perks .cards{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;pointer-events:auto}
+.card{width:220px;padding:22px 18px;background:var(--panel);border:1px solid rgba(255,255,255,.14);cursor:pointer;transition:transform .15s,border-color .15s,box-shadow .15s;display:flex;flex-direction:column;gap:10px;align-items:center}
+.card .k{font-family:var(--data);font-size:12px;color:var(--dim)}
+.card .ic{font-size:34px;line-height:1;color:var(--ion);font-family:var(--data)}
+.card .n{font-weight:700;letter-spacing:.14em;font-size:17px;color:var(--hull)}
+.card .d{font-size:13px;color:var(--dim);line-height:1.45;font-family:var(--data)}
+.card.sel{transform:translateY(-8px) scale(1.05);border-color:var(--ion);box-shadow:0 0 30px rgba(77,225,255,.35)}
+.stats{display:grid;grid-template-columns:repeat(2,auto);gap:6px 28px;font-family:var(--data);font-size:16px;text-align:left}
+.stats b{color:var(--ion);font-weight:400;text-align:right;font-variant-numeric:tabular-nums}
+#best{font-family:var(--data);color:var(--forge);letter-spacing:.2em;font-size:13px}
+@media (max-width:700px){#radar{width:96px;height:96px}#ammo{font-size:32px}#hpnum{font-size:24px}#tip{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<canvas id="c" tabindex="0"></canvas>
+
+<div id="hud" class="layer" hidden>
+  <div id="tl" class="corner"><canvas id="radar" width="150" height="150"></canvas></div>
+  <div id="topc"><div id="wave">WAVE 1</div><div id="left"></div>
+    <div id="boss" hidden><div class="nm">THE OVERSEER</div><div id="bossbar" class="bar"><i></i></div></div></div>
+  <div id="tr" class="corner"><div class="lbl">Score</div><div id="score">0</div><div id="combo"></div></div>
+  <div id="bl" class="corner">
+    <div id="dash"><span class="lbl">Dash</span><div id="dashbar" class="bar"><i></i></div></div>
+    <div id="hpnum">100<small>50</small></div>
+    <div id="shieldbar" class="bar"><i></i></div>
+    <div id="hpbar" class="bar"><i></i></div>
+  </div>
+  <div id="br" class="corner">
+    <div id="wname">PULSE CARBINE</div>
+    <div id="ammo">32<small>∞</small></div>
+    <div id="slots"><b>1</b><b>2</b><b>3</b><b>4</b></div>
+  </div>
+  <div id="od"><div class="lbl" id="odlbl">Overdrive</div><div id="odbar" class="bar"><i></i></div></div>
+  <div id="cross"><i class="d"></i><i id="cu"></i><i id="cd"></i><i id="cl"></i><i id="cr"></i></div>
+  <div id="hit"></div>
+  <div id="inds"></div>
+  <div id="nums"></div>
+  <div id="announce"><h2></h2><p></p></div>
+  <div id="feed"></div>
+  <div id="tip"></div>
+</div>
+<div id="lowhp" class="layer"></div>
+
+<div id="menu" class="overlay">
+  <div class="tag">Orbital solar forge · Warden protocol</div>
+  <h1>HELIOS<br>BREACH</h1>
+  <p>The forge machines have turned. You are the last warden on the deck. Hold the reactor against every wave, take a field upgrade after each one, and survive the Overseer.</p>
+  <button class="go" id="play">Deploy</button>
+  <div class="keys">
+    <span><b>W A S D</b> move</span><span><b>Mouse</b> aim</span><span><b>Left click</b> fire</span><span><b>Right click</b> zoom</span>
+    <span><b>Space</b> jump ×2</span><span><b>Shift</b> dash</span><span><b>1–4 / wheel</b> weapons</span><span><b>R</b> reload</span>
+    <span><b>F</b> overdrive</span><span><b>M</b> mute</span><span><b>[ ]</b> sensitivity</span><span><b>Esc</b> pause</span>
+  </div>
+  <div id="best"></div>
+</div>
+
+<div id="pause" class="overlay" hidden>
+  <h3>PAUSED</h3>
+  <p id="pinfo">Sensitivity 1.0 · press [ or ] to adjust</p>
+  <button class="go" id="resume">Resume</button>
+</div>
+
+<div id="perks" class="overlay" hidden>
+  <div class="tag" id="ptag">Wave cleared</div>
+  <h3>FIELD UPGRADE</h3>
+  <div class="cards" id="cards"></div>
+  <p>Press 1, 2 or 3 — or move the mouse to choose and click.</p>
+</div>
+
+<div id="dead" class="overlay" hidden>
+  <div class="tag">Signal lost</div>
+  <h3>WARDEN DOWN</h3>
+  <div class="stats" id="stats"></div>
+  <button class="go" id="again">Redeploy</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/FXAAShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
