@@ -1,0 +1,26 @@
+{
+  "name": "123",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render HelloWorld out/video.mp4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lipskyj/123.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lipskyj/123/issues"
+  },
+  "homepage": "https://github.com/lipskyj/123#readme",
+  "dependencies": {
+    "@remotion/cli": "^4.0.543",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "remotion": "^4.0.543"
+  }
+}
