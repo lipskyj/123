@@ -45,7 +45,7 @@ document.addEventListener('pointerlockchange', () => {
 
 function onKey(code) {
   if (G.state === 'perk') { const i = ['Digit1', 'Digit2', 'Digit3'].indexOf(code); if (i >= 0 && G.perkGuard <= 0) pickPerk(i); return; }
-  if (code === 'KeyM') { muted = !muted; if (master) master.gain.value = muted ? 0 : 0.85; showTip(muted ? 'Sound off' : 'Sound on', 1.5); }
+  if (code === 'KeyM') { muted = !muted; if (master) master.gain.value = muted ? 0 : 0.9; showTip(muted ? 'Sound off' : 'Sound on', 1.5); }
   if (code === 'BracketLeft' || code === 'BracketRight') {
     G.sens = clamp(+(G.sens + (code === 'BracketLeft' ? -0.1 : 0.1)).toFixed(1), 0.2, 3);
     try { localStorage.setItem('helios-sens', G.sens); } catch (e) {}
@@ -88,7 +88,7 @@ function updatePlayer(dt) {
   const hs = Math.hypot(P.vel.x, P.vel.z), n = Math.max(1, Math.ceil(hs * dt / 0.35));
   let g = false; for (let i = 0; i < n; i++) g = collideMove(P.pos, P.vel, dt / n, PR, PH) || g;
   P.onGround = g;
-  if (g) { P.airJumps = mods.airJumps; if (!was && vy0 < -9) { P.dip = Math.min(0.35, -vy0 * 0.014); sfx.jump(); } }
+  if (g) { P.airJumps = mods.airJumps; if (!was && vy0 < -9) { P.dip = Math.min(0.35, -vy0 * 0.014); sfx.land(); } }
   if (g) for (const p of pads) if (Math.hypot(P.pos.x - p.x, P.pos.z - p.z) < p.r && P.pos.y < 0.5) {
     P.vel.y = 23; P.onGround = false; sfx.pad(); ring(P.pos, 0.5, 4, 0x5dffa0, 0.45); burst(tmpA.copy(P.pos), 16, 0x5dffa0, 6, 0.3, 0.5, 0, 6);
   }
@@ -97,7 +97,7 @@ function updatePlayer(dt) {
   if (G.time - P.lastHurt > 4 && P.shield < P.maxShield) P.shield = Math.min(P.maxShield, P.shield + 16 * mods.shieldRegen * dt);
 
   // camera
-  if (P.onGround && hs > 1) P.bob += hs * dt * 0.95;
+  if (P.onGround && hs > 1) { const b0 = Math.floor(P.bob / Math.PI); P.bob += hs * dt * 0.95; if (hs > 3 && Math.floor(P.bob / Math.PI) !== b0) sfx.step(); }
   P.dip = damp(P.dip, 0, 9, dt); P.kick = damp(P.kick, 0, 11, dt); P.trauma = Math.max(0, P.trauma - 1.6 * dt);
   P.roll = damp(P.roll, -clamp(s, -1, 1) * 0.035, 8, dt);
   const sh = P.trauma * P.trauma, bobY = P.onGround ? Math.sin(P.bob * 2) * 0.05 * Math.min(1, hs / 9) : 0;
@@ -114,7 +114,7 @@ function hurtPlayer(dmg, src) {
   dmg *= 1 + 0.05 * (G.wave - 1);
   P.lastHurt = G.time;
   if (P.shield > 0) { const a = Math.min(P.shield, dmg); P.shield -= a; dmg -= a; if (P.shield <= 0) sfx.shield(); }
-  if (dmg > 0) { P.hp -= dmg; sfx.hurt(); } else tone('sine', 900, 600, 0.06, 0.12);
+  if (dmg > 0) { P.hp -= dmg; sfx.hurt(); } else sfx.absorb();
   P.trauma = Math.min(1, P.trauma + 0.3); P.dmgFx = Math.min(1, P.dmgFx + 0.4 + dmg * 0.01);
   if (src) damageIndicator(src);
   if (P.hp <= 0) { P.hp = 0; gameOver(); }

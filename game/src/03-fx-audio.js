@@ -114,7 +114,7 @@ function updateFx(dt) {
     o.m.rotation.x += o.w.x * dt; o.m.rotation.y += o.w.y * dt; o.m.rotation.z += o.w.z * dt;
     const gy = o.keep ? groundAt(o.m.position.x, o.m.position.z, o.m.position.y + 0.3) + 0.02 : 0.08;
     if (o.m.position.y < gy) {
-      o.m.position.y = gy; if (o.keep && !o.hit && o.v.y < -2) { o.hit = true; tone('sine', rand(5200, 6800), 0, 0.05, 0.035); }
+      o.m.position.y = gy; if (o.keep && !o.hit && o.v.y < -2) { o.hit = true; sfx.casing(); }
       o.v.y *= -0.35; o.v.x *= 0.6; o.v.z *= 0.6; o.w.multiplyScalar(0.55);
     }
     if (o.t < 0.3) o.m.scale.multiplyScalar(Math.max(0, 1 - 6 * dt));
@@ -124,83 +124,88 @@ function updateFx(dt) {
   for (let i = fx.delayed.length - 1; i >= 0; i--) { const d = fx.delayed[i]; d.t -= dt; if (d.t <= 0) { fx.delayed.splice(i, 1); d.fn(); } }
 }
 
-// ---------------------------------------------------------------- audio (all synthesised)
-let AC = null, master, sfxBus, musicBus, noiseBuf, muted = false;
+// ---------------------------------------------------------------- audio (recorded samples; see game/audio/CREDITS.md)
+let AC = null, master, sfxBus, musicBus, musicFilter, musicSrc = null, noiseBuf, muted = false;
+const bufs = {};
+function b64buf(b) { const bin = atob(b), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u.buffer; }
 function initAudio() {
   if (AC) { if (AC.state === 'suspended') AC.resume(); return; }
   try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { AC = null; return; }
   const comp = AC.createDynamicsCompressor(); comp.threshold.value = -14; comp.ratio.value = 6;
-  master = AC.createGain(); master.gain.value = 0.85; master.connect(comp); comp.connect(AC.destination);
-  sfxBus = AC.createGain(); sfxBus.gain.value = 0.9; sfxBus.connect(master);
-  musicBus = AC.createGain(); musicBus.gain.value = 0.42; musicBus.connect(master);
+  master = AC.createGain(); master.gain.value = muted ? 0 : 0.9; master.connect(comp); comp.connect(AC.destination);
+  sfxBus = AC.createGain(); sfxBus.gain.value = 0.95; sfxBus.connect(master);
+  musicFilter = AC.createBiquadFilter(); musicFilter.type = 'lowpass'; musicFilter.frequency.value = 700; musicFilter.connect(master);
+  musicBus = AC.createGain(); musicBus.gain.value = 0.3; musicBus.connect(musicFilter);
   noiseBuf = AC.createBuffer(1, AC.sampleRate, AC.sampleRate);
   const d = noiseBuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
-  music.next = AC.currentTime + 0.1;
+  if (typeof SND !== 'undefined') for (const k in SND) {
+    try { AC.decodeAudioData(b64buf(SND[k]), b => { bufs[k] = b; if (k === 'music') startMusic(); }, () => {}); } catch (e) {}
+  }
 }
-function tone(type, f, f2, dur, vol, t0 = 0, bus) {
-  if (!AC) return; const t = AC.currentTime + t0, o = AC.createOscillator(), g = AC.createGain();
-  o.type = type; o.frequency.setValueAtTime(f, t); if (f2) o.frequency.exponentialRampToValueAtTime(Math.max(1, f2), t + dur);
-  g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.004); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-  o.connect(g); g.connect(bus || sfxBus); o.start(t); o.stop(t + dur + 0.02);
+function startMusic() {
+  if (musicSrc || !bufs.music) return;
+  musicSrc = AC.createBufferSource(); musicSrc.buffer = bufs.music; musicSrc.loop = true; musicSrc.connect(musicBus); musicSrc.start();
 }
-function noise(dur, vol, ftype, f, f2, q = 1, t0 = 0, bus) {
+// play a sample: volume, playback rate (pitch), delay in seconds
+function S(name, vol = 1, rate = 1, t0 = 0) {
+  const b = bufs[name]; if (!AC || !b || vol <= 0.004) return;
+  const t = AC.currentTime + t0, s = AC.createBufferSource(), g = AC.createGain();
+  s.buffer = b; s.playbackRate.value = rate; g.gain.value = vol; s.connect(g); g.connect(sfxBus); s.start(t);
+}
+function noise(dur, vol, ftype, f, f2, q = 1, t0 = 0) {
   if (!AC) return; const t = AC.currentTime + t0, s = AC.createBufferSource(), fl = AC.createBiquadFilter(), g = AC.createGain();
   s.buffer = noiseBuf; s.loop = true; fl.type = ftype; fl.Q.value = q; fl.frequency.setValueAtTime(f, t); if (f2) fl.frequency.exponentialRampToValueAtTime(Math.max(20, f2), t + dur);
   g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-  s.connect(fl); fl.connect(g); g.connect(bus || sfxBus); s.start(t, Math.random() * 0.5); s.stop(t + dur + 0.02);
+  s.connect(fl); fl.connect(g); g.connect(sfxBus); s.start(t, Math.random() * 0.5); s.stop(t + dur + 0.02);
 }
 const distVol = p => { const d = p ? p.distanceTo(P.pos) : 0; return clamp(1.15 - d / 55, 0.08, 1); };
 const sfx = {
   shoot(i) {
-    if (i === 0) { tone('sawtooth', 880, 180, 0.09, 0.16); noise(0.07, 0.22, 'highpass', 2500); }
-    else if (i === 1) { noise(0.28, 0.75, 'lowpass', 3200, 300); tone('square', 150, 40, 0.2, 0.3); }
-    else if (i === 2) { tone('sine', 300, 70, 0.3, 0.45); tone('sawtooth', 620, 1500, 0.18, 0.1); noise(0.2, 0.25, 'bandpass', 900, 200, 2); }
-    else { tone('sawtooth', 2400, 90, 0.5, 0.32); tone('square', 60, 30, 0.45, 0.45); noise(0.4, 0.5, 'highpass', 4000, 600); }
+    if (i === 0) { S('shoot', 0.75, rand(0.94, 1.08)); noise(0.05, 0.1, 'highpass', 3000); }
+    else if (i === 1) { S('shoot', 1.1, rand(0.56, 0.62)); S('impact', 0.7, rand(0.8, 0.9)); noise(0.22, 0.4, 'lowpass', 2600, 300); }
+    else if (i === 2) { S('shoot', 1.0, 0.42); S('dash', 0.5, 0.8); noise(0.25, 0.2, 'bandpass', 700, 200, 1.5); }
+    else { S('shoot', 1.0, 1.5); S('big_kill', 0.6, 1.7); S('impact', 0.8, 0.6); noise(0.35, 0.3, 'highpass', 5000, 800); }
   },
-  hit() { tone('square', 1500, 900, 0.035, 0.07); },
-  crit() { tone('square', 2300, 1500, 0.06, 0.11); tone('sine', 3100, 2200, 0.08, 0.07); },
-  kill() { tone('triangle', 520, 1040, 0.12, 0.16); noise(0.16, 0.2, 'bandpass', 1800, 500, 1.5); },
-  explode(p, big) { const v = distVol(p) * (big ? 1 : 0.7); noise(big ? 0.9 : 0.55, 0.9 * v, 'lowpass', big ? 1300 : 1800, 70); tone('sine', 120, 28, big ? 0.7 : 0.4, 0.75 * v); },
-  pickup(a) { tone('triangle', a ? 660 : 880, 0, 0.09, 0.2); tone('triangle', a ? 990 : 1320, 0, 0.14, 0.2, 0.08); },
-  jump() { noise(0.12, 0.12, 'bandpass', 500, 1300, 1); },
-  dash() { noise(0.3, 0.38, 'bandpass', 2600, 300, 0.8); tone('sawtooth', 240, 70, 0.22, 0.1); },
-  pad() { tone('sine', 220, 900, 0.35, 0.3); noise(0.3, 0.2, 'highpass', 1500, 5000); },
-  hurt() { tone('sawtooth', 190, 55, 0.22, 0.38); noise(0.14, 0.32, 'lowpass', 900, 200); },
-  shield() { tone('sine', 1300, 500, 0.14, 0.22); },
-  reload() { tone('square', 320, 0, 0.03, 0.1); tone('square', 480, 0, 0.04, 0.12, 0.16); },
-  empty() { tone('square', 200, 0, 0.03, 0.09); },
-  swap() { tone('triangle', 700, 420, 0.06, 0.1); },
-  wave() { tone('sawtooth', 110, 0, 0.7, 0.24); tone('sawtooth', 165, 0, 0.7, 0.2, 0.18); tone('sawtooth', 220, 0, 0.9, 0.2, 0.36); },
-  clear() { [523, 659, 784, 1046].forEach((f, i) => tone('triangle', f, 0, 0.3, 0.2, i * 0.09)); },
-  perk() { tone('triangle', 660, 1320, 0.25, 0.22); tone('sine', 1980, 0, 0.3, 0.1, 0.1); },
-  bolt(p) { tone('square', 640, 190, 0.14, 0.12 * distVol(p)); },
-  mortar(p) { tone('sine', 160, 60, 0.3, 0.4 * distVol(p)); noise(0.2, 0.25 * distVol(p), 'lowpass', 700, 150); },
-  beep(p) { tone('square', 1800, 0, 0.05, 0.14 * distVol(p)); },
-  spawn(p) { tone('sine', 90, 360, 0.3, 0.14 * distVol(p)); },
-  od() { tone('sawtooth', 110, 880, 0.6, 0.3); noise(0.6, 0.3, 'highpass', 600, 7000); },
-  boss() { tone('sawtooth', 55, 40, 2.2, 0.5); tone('sawtooth', 58, 43, 2.2, 0.4); noise(2, 0.28, 'lowpass', 300, 80); },
-  laser() { tone('sawtooth', 95, 105, 2.6, 0.3); tone('square', 1900, 2100, 2.6, 0.045); },
-  die() { tone('sawtooth', 330, 30, 1.6, 0.5); noise(1.4, 0.5, 'lowpass', 2000, 60); }
+  hit() { S('hit', 0.3, rand(1.1, 1.3)); },
+  crit() { S('hit', 0.45, rand(1.6, 1.8)); S('gem', 0.16, 1.5); },
+  kill() { S('kill', 0.8, rand(0.9, 1.1)); S('impact', 0.35, rand(1.1, 1.3)); },
+  explode(p, big) { const v = distVol(p); S('big_kill', (big ? 1.2 : 0.9) * v, big ? rand(0.75, 0.85) : rand(1.05, 1.25)); S('impact', 0.7 * v, 0.55); noise(big ? 0.8 : 0.5, 0.45 * v, 'lowpass', big ? 900 : 1300, 60); },
+  pickup(a) { a ? S('confirm', 0.4, 1.25) : S('gem', 0.5, 1); },
+  step() { S('step', rand(0.3, 0.42), rand(0.9, 1.12)); },
+  jump() { S('step', 0.5, 1.35); },
+  land() { S('land', 0.7, rand(0.95, 1.1)); },
+  dash() { S('dash', 0.8, rand(0.95, 1.05)); },
+  pad() { S('dash', 0.8, 1.5); S('revive', 0.18, 0.8); },
+  hurt() { S('hurt', 0.9, rand(0.92, 1.08)); },
+  absorb() { S('hit', 0.4, 0.8); },
+  shield() { S('gem', 0.5, 0.5); S('impact', 0.4, 1.4); },
+  reload() { S('ui', 0.7, 0.6); S('ui', 0.8, 0.8, 0.18); S('step', 0.3, 1.6, 0.3); },
+  empty() { S('ui', 0.5, 1.5); },
+  swap() { S('ui', 0.6, 1); S('step', 0.25, 1.5); },
+  casing() { S('ui', 0.07, rand(2.2, 2.8)); },
+  wave() { S('boss', 0.35, 1.3); },
+  clear() { S('level_up', 0.6, 1); },
+  perk() { S('confirm', 0.6, 1); S('revive', 0.25, 1, 0.08); },
+  multi() { S('coin', 0.35, 1); },
+  bolt(p) { S('shoot', 0.4 * distVol(p), rand(0.68, 0.76)); },
+  mortar(p) { S('impact', 0.8 * distVol(p), 0.5); S('dash', 0.4 * distVol(p), 0.6); },
+  windup(p) { S('dash', 0.6 * distVol(p), 0.45); },
+  slam(p) { S('land', 1.2 * distVol(p), 0.6); S('big_kill', 0.5 * distVol(p), 1.3); },
+  beep(p) { S('ui', 0.5 * distVol(p), 2); },
+  spawn(p) { S('dash', 0.3 * distVol(p), 0.5); },
+  od() { S('revive', 0.5, 0.7); S('dash', 0.7, 0.6); },
+  boss() { S('boss', 1.0, 0.8); S('big_kill', 0.5, 0.6); },
+  charge() { S('revive', 0.3, 0.5); },
+  laser() { noise(2.6, 0.22, 'bandpass', 240, 260, 6); noise(2.6, 0.1, 'bandpass', 2400, 2600, 9); S('boss', 0.4, 0.5); },
+  die() { S('downed', 0.9, 1); S('big_kill', 0.8, 0.7); }
 };
-// step-sequenced score: intensity 0 menu, 1 combat, 2 boss
-const music = { step: 0, next: 0, intensity: 0 };
-const ROOTS = [55, 55, 43.65, 49];
-const BASS = [1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0];
-const ARP = [2, 2.378, 3, 3.564, 4, 3.564, 3, 2.378];
+// the battle theme plays muffled in menus and opens up in combat; the boss pushes it faster and louder
+const music = { intensity: 0, cur: -1 };
 function musicTick() {
-  if (!AC || AC.state !== 'running') return;
-  if (music.next < AC.currentTime) music.next = AC.currentTime + 0.05;
-  while (music.next < AC.currentTime + 0.14) {
-    const t0 = music.next - AC.currentTime, s = music.step, i = s % 16, root = ROOTS[(s >> 4) & 3], it = music.intensity;
-    if (i === 0) for (const m of [2, 2.378, 2.997]) tone('triangle', root * m, 0, 1.85, 0.07, t0, musicBus);
-    if (it === 0) { if (i % 4 === 2) tone('sine', root * ARP[(s >> 2) % 8] * 2, 0, 0.5, 0.05, t0, musicBus); }
-    else {
-      if (i % 4 === 0) { tone('sine', 150, 38, 0.2, 0.75, t0, musicBus); }
-      if (i % 8 === 4) noise(0.14, 0.28, 'bandpass', 1900, 900, 0.8, t0, musicBus);
-      if (i % 2 === 1 || it > 1) noise(0.035, 0.09, 'highpass', 7500, 0, 1, t0, musicBus);
-      if (BASS[i]) tone('sawtooth', root * (i % 8 === 6 ? 2 : 1), 0, 0.13, 0.26, t0, musicBus);
-      if (it > 1 || G.wave >= 3) tone('square', root * ARP[s % 8] * (it > 1 ? 4 : 2), 0, 0.09, it > 1 ? 0.05 : 0.03, t0, musicBus);
-    }
-    music.next += 60 / (it > 1 ? 138 : 124) / 4; music.step = (s + 1) % 64;
-  }
+  if (!AC || AC.state !== 'running' || !musicSrc) return;
+  const it = G.state === 'paused' || G.state === 'perk' ? 0 : music.intensity; if (it === music.cur) return; music.cur = it;
+  const t = AC.currentTime;
+  musicFilter.frequency.setTargetAtTime(it === 0 ? 700 : 16000, t, 0.4);
+  musicBus.gain.setTargetAtTime(it === 0 ? 0.3 : it === 1 ? 0.42 : 0.55, t, 0.4);
+  musicSrc.playbackRate.setTargetAtTime(it === 2 ? 1.07 : 1, t, 0.6);
 }

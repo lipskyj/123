@@ -8,6 +8,10 @@ cd "$(dirname "$0")"
   cat src/head.html
   echo '<script>'
   echo '(() => {'
+  # recorded audio is inlined as base64 so the game stays a single self-contained file
+  printf 'const SND = {'
+  for f in audio/*.wav; do printf '"%s":"%s",' "$(basename "$f" .wav)" "$(base64 -w0 "$f")"; done
+  printf '"music":"%s"};\n' "$(base64 -w0 audio/battle_theme_a.mp3)"
   cat src/0*.js
   echo '})();'
   echo '</script>'

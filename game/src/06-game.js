@@ -237,4 +237,4 @@ function frame(now) {
   for (const k in pressed) delete pressed[k];
 }
 requestAnimationFrame(frame);
-window.HB = { touch, showPerks, vm, fx, get fps() { return ftN / Math.max(ftAcc, 1e-6); }, G, P, enemies, projs, pickups, ws, mods, startGame, spawnEnemy, startWave, pickPerk, WEAPONS };
+window.HB = { audio: () => ({ state: AC && AC.state, loaded: Object.keys(bufs).length, music: !!musicSrc, dur: bufs.music && Math.round(bufs.music.duration) }), touch, showPerks, vm, fx, get fps() { return ftN / Math.max(ftAcc, 1e-6); }, G, P, enemies, projs, pickups, ws, mods, startGame, spawnEnemy, startWave, pickPerk, WEAPONS };

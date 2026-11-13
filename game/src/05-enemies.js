@@ -147,7 +147,7 @@ const UPD = {
     if (e.state === 'slam') {
       walk(e, dt, 0, true); e.st -= dt; e.torso.position.y = 2.05 + Math.sin(Math.min(1, (0.7 - e.st) / 0.55) * Math.PI) * 0.7;
       if (e.st <= 0) {
-        ring(e.pos, 1, 6.6, 0xffb347, 0.4); burst(tmpA.copy(e.pos).setY(e.pos.y + 0.3), 30, 0xffb347, 12, 0.4, 0.5, 6, 2); sfx.explode(e.pos, false);
+        ring(e.pos, 1, 6.6, 0xffb347, 0.4); burst(tmpA.copy(e.pos).setY(e.pos.y + 0.3), 30, 0xffb347, 12, 0.4, 0.5, 6, 2); sfx.slam(e.pos);
         P.trauma = Math.min(1, P.trauma + clamp(1 - M.dh / 20, 0, 0.6));
         if (M.dh < 6.6 && P.pos.y - e.pos.y < 1.1) hurtPlayer(26, e.pos);
         e.state = 'chase'; e.cd = 2.6; e.torso.position.y = 2.05;
@@ -155,7 +155,7 @@ const UPD = {
     } else {
       const stop = M.dh < 3.2; walk(e, dt, sp, stop); e.cd -= dt; e.cd2 -= dt;
       if (stop) e.face = angLerp(e.face, Math.atan2(M.dx, M.dz), 4 * dt);
-      if (M.dh < 4.6 && e.cd <= 0 && Math.abs(P.pos.y - e.pos.y) < 3) { e.state = 'slam'; e.st = 0.7; tone('sawtooth', 70, 140, 0.6, 0.2 * distVol(e.pos)); }
+      if (M.dh < 4.6 && e.cd <= 0 && Math.abs(P.pos.y - e.pos.y) < 3) { e.state = 'slam'; e.st = 0.7; sfx.windup(e.pos); }
       else if (e.cd2 <= 0 && M.dh > 8 && M.dh < 60) {
         e.cd2 = rand(3.4, 5); const tf = 1.5, g = 20;
         const tx = clamp(P.pos.x + P.vel.x * 0.6, -ARENA + 2, ARENA - 2), tz = clamp(P.pos.z + P.vel.z * 0.6, -ARENA + 2, ARENA - 2), ty = groundAt(tx, tz, P.pos.y + 0.5);
@@ -184,7 +184,7 @@ const UPD = {
       if (e.st <= 0) {
         e.atk = ['burst', 'laser', 'summon'][e.atkI++ % 3];
         if (e.atk === 'burst') { e.vol = enr ? 5 : 3; e.st = 0.3; }
-        if (e.atk === 'laser') { e.lt = 0; e.aim.copy(P.pos).setY(P.pos.y + 0.9); e.tick = 0; tone('sawtooth', 200, 1600, 1.0, 0.2); later(1.1, () => { if (!e.dead) sfx.laser(); }); }
+        if (e.atk === 'laser') { e.lt = 0; e.aim.copy(P.pos).setY(P.pos.y + 0.9); e.tick = 0; sfx.charge(); later(1.1, () => { if (!e.dead) sfx.laser(); }); }
         if (e.atk === 'summon') {
           const n = Math.min(6, 3 + Math.floor(G.wave / 5)); sfx.boss();
           for (let i = 0; i < n; i++) later(0.3 + i * 0.25, () => { if (e.dead || G.state === 'dead') return; const gi = (Math.random() * 4) | 0, g = GATES[gi]; world.gates[gi].pulse = 1; spawnEnemy(Math.random() < 0.6 ? 'skitter' : 'bomber', g[0] + rand(-2, 2), 0, g[1] + rand(-2, 2)); });
@@ -294,6 +294,7 @@ function killEnemy(e, byPlayer) {
     G.kills++; G.combo++; G.comboT = 3.5; const mult = 1 + Math.min(G.combo - 1, 20) * 0.1;
     G.score += Math.round(d.score * mult); G.od = Math.min(100, G.od + (G.odT > 0 ? 0 : d.od));
     G.multiN = G.multiT > 0 ? G.multiN + 1 : 1; G.multiT = 1.3;
+    if (G.multiN >= 2) sfx.multi();
     if (G.multiN >= 2) feed(['', '', 'DOUBLE KILL', 'TRIPLE KILL', 'OVERKILL', 'ANNIHILATION'][Math.min(5, G.multiN)]);
     if (mods.lifesteal) P.hp = Math.min(P.maxHp, P.hp + mods.lifesteal);
     if (mods.volatile && e.type !== 'bomber') later(0.08, () => explode(c, 3.2 + mods.volatile * 0.6, 38 * mods.volatile, 0, 0xffb347));
