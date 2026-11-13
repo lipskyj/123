@@ -1,0 +1,21 @@
+{
+  "name": "primer",
+  "version": "1.0.0",
+  "description": "Primer: an instructor-centered system for authoring and running educational simulations (Preparation, Practice, Feedback).",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "start:test-mode": "PRIMER_TEST_MODE=1 node src/server.js",
+    "test": "node scripts/run-tests.js",
+    "test:unit": "node --test tests/unit/*.test.js",
+    "test:e2e": "node --test tests/e2e/*.test.js",
+    "status": "node scripts/build-status.js"
+  },
+  "devDependencies": {
+    "axe-core": "^4.10.2"
+  }
+}

@@ -1,0 +1,261 @@
+{
+  "generatedAt": "2026-11-13T08:34:27.148Z",
+  "node": "v22.23.4",
+  "total": 36,
+  "passed": 36,
+  "failed": 0,
+  "tests": [
+    {
+      "name": "accessibility + full educator-to-learner flow in the browser (axe, keyboard, labels)",
+      "file": "tests/e2e/ui.test.js",
+      "status": "pass",
+      "durationMs": 6800,
+      "error": null
+    },
+    {
+      "name": "startup: the documented command `npm start` serves the app",
+      "file": "tests/unit/api.test.js",
+      "status": "pass",
+      "durationMs": 272,
+      "error": null
+    },
+    {
+      "name": "approval is enforced by the server, not just the UI",
+      "file": "tests/unit/api.test.js",
+      "status": "pass",
+      "durationMs": 110,
+      "error": null
+    },
+    {
+      "name": "test mode records synthetic approvals as TEST approvals and labels the build",
+      "file": "tests/unit/api.test.js",
+      "status": "pass",
+      "durationMs": 49,
+      "error": null
+    },
+    {
+      "name": "return-for-work applies the educator note as a revision and keeps history",
+      "file": "tests/unit/api.test.js",
+      "status": "pass",
+      "durationMs": 47,
+      "error": null
+    },
+    {
+      "name": "teacher revision changes the generated experience end-to-end (prompts, criteria, runtime, feedback)",
+      "file": "tests/unit/api.test.js",
+      "status": "pass",
+      "durationMs": 92,
+      "error": null
+    },
+    {
+      "name": "learner API never exposes prompts, engine internals or look-fors before feedback",
+      "file": "tests/unit/api.test.js",
+      "status": "pass",
+      "durationMs": 48,
+      "error": null
+    },
+    {
+      "name": "persistence and interrupted-session recovery: a server restart resumes the exact session",
+      "file": "tests/unit/api.test.js",
+      "status": "pass",
+      "durationMs": 58,
+      "error": null
+    },
+    {
+      "name": "concurrent learner messages are serialized without losing turns",
+      "file": "tests/unit/api.test.js",
+      "status": "pass",
+      "durationMs": 73,
+      "error": null
+    },
+    {
+      "name": "errors are clear and do not corrupt state",
+      "file": "tests/unit/api.test.js",
+      "status": "pass",
+      "durationMs": 10,
+      "error": null
+    },
+    {
+      "name": "trace links teacher input -> design -> evidence -> feedback, and replay verifies it",
+      "file": "tests/unit/api.test.js",
+      "status": "pass",
+      "durationMs": 68,
+      "error": null
+    },
+    {
+      "name": "text: list splitting handles newlines, semicolons, commas and prose",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 3,
+      "error": null
+    },
+    {
+      "name": "text: look-for matching uses stems and requires all words of a phrase",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 1,
+      "error": null
+    },
+    {
+      "name": "intake: asks one question at a time, in order, and records verbatim answers",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 1,
+      "error": null
+    },
+    {
+      "name": "intake: too-short required answers get exactly one follow-up; required skips are challenged once",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 1,
+      "error": null
+    },
+    {
+      "name": "intake: template recommendation follows the described student work, and the educator can override it",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 2,
+      "error": null
+    },
+    {
+      "name": "intake: materials yield suggested key ideas",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 1,
+      "error": null
+    },
+    {
+      "name": "design: every educator answer appears in the design with educator provenance",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 6,
+      "error": null
+    },
+    {
+      "name": "design: missing educator input becomes visible AI assumptions, never silent",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 2,
+      "error": null
+    },
+    {
+      "name": "design: materials influence the design (briefing excerpts and grounding)",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 6,
+      "error": null
+    },
+    {
+      "name": "design: natural-language revision changes decisions and propagates to prompts, challenges and adaptation",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 13,
+      "error": null
+    },
+    {
+      "name": "design: unrecognized revision requests are reported, not silently ignored",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 4,
+      "error": null
+    },
+    {
+      "name": "design: direct edits are validated; invalid edits are refused",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 6,
+      "error": null
+    },
+    {
+      "name": "approval state machine: only open designs can be approved; approval needs a name; test mode yields test approval",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 6,
+      "error": null
+    },
+    {
+      "name": "compile: refuses an unapproved draft (approval gate)",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 3,
+      "error": null
+    },
+    {
+      "name": "compile: superseded cannot be approved, rejected cannot be built, approved builds a valid package",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 7,
+      "error": null
+    },
+    {
+      "name": "schema: validatePackage catches broken packages",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 0,
+      "error": null
+    },
+    {
+      "name": "runtime: phases are gated; preparation cannot be skipped and practice needs real attempts",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 6,
+      "error": null
+    },
+    {
+      "name": "runtime: help requests are refused with escalating cues that never reveal look-fors",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 5,
+      "error": null
+    },
+    {
+      "name": "runtime: adaptation events cite an approved rule and the learner turn that triggered them",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 5,
+      "error": null
+    },
+    {
+      "name": "runtime: feedback quotes only real learner turns, separates inference, and does not assess unseen criteria",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 6,
+      "error": null
+    },
+    {
+      "name": "runtime regression: refuting a misconception is not recorded as endorsing it (invented-evidence fix)",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 4,
+      "error": null
+    },
+    {
+      "name": "runtime: character stays consistent (same speaker; only scripted challenge lines in deterministic mode)",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 5,
+      "error": null
+    },
+    {
+      "name": "runtime: deterministic replay reproduces transcript, evidence and feedback",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 6,
+      "error": null
+    },
+    {
+      "name": "provider replacement: a model provider voices lines; leaks and errors fall back to deterministic lines",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 3,
+      "error": null
+    },
+    {
+      "name": "generality: two briefs from different domains produce materially different experiences with no code change",
+      "file": "tests/unit/core.test.js",
+      "status": "pass",
+      "durationMs": 5,
+      "error": null
+    }
+  ]
+}

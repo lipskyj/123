@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Primer — Educator studio</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="top"><a class="brand" href="/">Primer<span>.</span></a> <span class="muted">Educator studio</span>
+    <nav aria-label="Main"><a href="/educator">Experiences</a></nav>
+  </header>
+  <div id="sr-status" class="visually-hidden" role="status" aria-live="polite"></div>
+  <main>
+    <div id="modebanner"></div>
+    <div class="layout">
+      <aside class="panel" aria-labelledby="projhead">
+        <h2 id="projhead">Your experiences</h2>
+        <form id="newproj" class="row" style="margin-bottom:.75rem">
+          <label for="newname" class="visually-hidden">Name for new experience</label>
+          <input id="newname" type="text" placeholder="Name (optional)">
+          <button class="primary" type="submit">New experience</button>
+        </form>
+        <div id="projects" class="projlist"></div>
+      </aside>
+      <section id="workspace" aria-live="off">
+        <div class="panel"><h1>Welcome</h1><p>Start a new experience, or pick one from the list. Primer will interview you one question at a time.</p></div>
+      </section>
+    </div>
+  </main>
+  <script src="/common.js"></script>
+  <script src="/educator.js"></script>
+</body>
+</html>

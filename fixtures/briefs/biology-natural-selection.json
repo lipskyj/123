@@ -1,0 +1,27 @@
+{
+  "name": "Biology: natural selection",
+  "domain": "High-school biology",
+  "expectedTemplate": "teachback",
+  "materials": [
+    {
+      "name": "Evolution unit reading.txt",
+      "text": "Natural selection acts on variation that already exists in a population. Individuals do not change their traits because they need to; mutation and recombination produce variation randomly. In a given environment, some heritable traits increase survival and reproduction. Those individuals leave more offspring, so the frequency of the trait increases over generations. Fitness means reproductive success, not strength or size. Populations evolve; individual organisms do not evolve during their lifetime. For example, when antibiotics are used, bacteria that already carry resistance mutations survive and reproduce, so the resistant population grows."
+    }
+  ],
+  "answers": {
+    "topic": "10th-grade Biology: how natural selection works",
+    "learners": "10th-grade students in an introductory biology class; many are new to evolution",
+    "objective": "Explain how natural selection changes trait frequency in a population over generations",
+    "materials": "done",
+    "concepts": "existing variation; heritable traits; reproductive success (fitness); populations evolve over generations",
+    "prior": "Students know what DNA and mutations are, and what an environment is.",
+    "misconceptions": "Organisms change their traits because they need to survive -> variation already exists before selection\nFitness means being the strongest -> fitness means reproductive success\nIndividual animals evolve during their lifetime -> populations evolve over generations",
+    "work": "Explain natural selection to a confused younger student using the antibiotic resistance example",
+    "template": "yes",
+    "counterpart": "Leo, an eighth grader who heard that bacteria 'learn' to resist antibiotics and needs to understand it for a science fair project",
+    "evidence": "Says variation exists before selection; Connects heritable traits to survival and reproduction; Describes change in frequency across generations in the population",
+    "constraints": "Avoid religious debate; 20 minutes"
+  },
+  "revision": "Make it easier. Rename the character to Maya",
+  "directEdit": { "criteria": null }
+}

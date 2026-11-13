@@ -1,0 +1,27 @@
+{
+  "name": "MBA Negotiations: the first offer",
+  "domain": "MBA / negotiation",
+  "expectedTemplate": "roleplay",
+  "materials": [
+    {
+      "name": "Negotiation lecture notes (week 3).md",
+      "text": "Before any negotiation, know your BATNA: your best alternative to a negotiated agreement. Your BATNA determines how much power you have at the table. Your reservation price is the worst deal you would accept; it follows from your BATNA. Anchoring matters: the first offer pulls the final outcome toward it, so a well-justified ambitious anchor usually helps the side that makes it. Justify an anchor with objective criteria such as market data or comparable deals. Splitting the difference feels fair, but the midpoint depends entirely on where the anchors were set. Concessions should be small, reciprocal, and labeled, never unilateral."
+    }
+  ],
+  "answers": {
+    "topic": "MBA Negotiations: making and defending the first offer in a supplier contract",
+    "learners": "First-year MBA students, most with 3 to 5 years of work experience but little formal negotiation training",
+    "objective": "Make and defend a well-justified first offer while protecting their walk-away point",
+    "materials": "done",
+    "concepts": "BATNA\nreservation price\nanchoring\nobjective criteria",
+    "prior": "They have read the chapter on distributive bargaining and know the terms, but have not used them live.",
+    "misconceptions": "Splitting the difference is always fair — the midpoint depends on where the anchors were set\nYou should never make the first offer — a justified ambitious anchor usually helps the side that makes it\nRevealing your reservation price builds trust — it hands away your bargaining power",
+    "work": "Negotiate with a tough supplier representative and persuade them to accept a justified first offer without conceding below their reservation price",
+    "template": "roleplay",
+    "counterpart": "Dana, a seasoned supplier sales director who wants a 15% price increase, is impatient, and will test whether the student caves under pressure",
+    "evidence": "Names or uses their BATNA; Anchors with a justified first offer using objective criteria such as market data; Does not reveal or go below their reservation price",
+    "constraints": "15 minutes, professional tone"
+  },
+  "revision": "Make it harder. Add criterion: labels concessions and asks for something in return",
+  "directEdit": { "character": { "name": "Morgan" } }
+}

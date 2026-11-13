@@ -1,0 +1,101 @@
+[
+  {
+    "id": "F1",
+    "severity": "major",
+    "area": "invented evidence",
+    "found": "UI walkthrough: a learner who refuted 'splitting the difference is always fair' (\"...is only fair if the anchors were fair...\") was recorded as endorsing the misconception and listed as a growth area.",
+    "fix": "Endorsement now requires no negation, no qualifier ('only if', 'depends', 'but'...) and no use of the correcting idea's look-fors.",
+    "before": "1 misconception evidence record for a correct refutation",
+    "after": "0 records; a genuine endorsement still records 1",
+    "test": "runtime regression: refuting a misconception is not recorded as endorsing it",
+    "status": "fixed"
+  },
+  {
+    "id": "F2",
+    "severity": "minor",
+    "area": "evidence trace",
+    "found": "Educator trace listed the same learner turn twice per criterion (challenge record + observation record).",
+    "fix": "Trace shows observation records only.",
+    "before": "duplicate rows",
+    "after": "one row per observation",
+    "test": "trace links teacher input -> design -> evidence -> feedback",
+    "status": "fixed"
+  },
+  {
+    "id": "F3",
+    "severity": "minor",
+    "area": "look-fors",
+    "found": "Filler words ('something') became look-fors.",
+    "fix": "Added to the stop list.",
+    "before": "look-for: something",
+    "after": "removed",
+    "test": "manual + fixtures",
+    "status": "fixed"
+  },
+  {
+    "id": "F4",
+    "severity": "blocking",
+    "area": "error recovery",
+    "found": "API test: any error thrown inside a locked handler (e.g. approval without a name) produced an unhandled rejection in the lock chain, which crashes the Node process.",
+    "fix": "Lock tail never rejects.",
+    "before": "server process exited on first validation error",
+    "after": "400 returned, server keeps serving",
+    "test": "approval is enforced by the server, not just the UI",
+    "status": "fixed"
+  },
+  {
+    "id": "F5",
+    "severity": "major",
+    "area": "revision",
+    "found": "An invalid direct edit (removing all key ideas) crashed the derive step before validation.",
+    "fix": "Validate decisions before building derived content.",
+    "before": "TypeError 500",
+    "after": "400 with explanation",
+    "test": "design: direct edits are validated",
+    "status": "fixed"
+  },
+  {
+    "id": "F6",
+    "severity": "minor",
+    "area": "revision",
+    "found": "'Rename the character to Morgan' (sentence-initial capital) was not recognized.",
+    "fix": "Case-insensitive verb match.",
+    "before": "unrecognized",
+    "after": "applied",
+    "test": "design: natural-language revision changes decisions",
+    "status": "fixed"
+  },
+  {
+    "id": "F7",
+    "severity": "minor",
+    "area": "design quality",
+    "found": "First-year MBA students were classified as 'supportive' difficulty; the character goal captured an over-long clause; the name was repeated in the description.",
+    "fix": "Graduate/professional signals override; goal trimmed at clause boundary; leading name stripped.",
+    "before": "supportive / long goal",
+    "after": "standard / '15% price increase'",
+    "test": "design: every educator answer appears",
+    "status": "fixed"
+  },
+  {
+    "id": "F8",
+    "severity": "major",
+    "area": "educator UX",
+    "found": "E2E test: when an action failed (e.g. approving without the confirmation box ticked), the error re-render erased everything the educator had typed (name, revision request, edits).",
+    "fix": "Error handling captures and restores all form values (and the open editor) around the re-render.",
+    "before": "approver name lost; second attempt failed",
+    "after": "inputs preserved; second attempt succeeds",
+    "test": "accessibility + full educator-to-learner flow in the browser",
+    "status": "fixed"
+  },
+  {
+    "id": "F9",
+    "severity": "major",
+    "area": "accessibility",
+    "found": "axe (WCAG 2 A/AA): low-contrast phase stepper and 'not assessed' badges; scrollable chat logs not keyboard-focusable.",
+    "fix": "Raised text contrast; chat logs get tabindex=0 and role=log.",
+    "before": "3 serious axe violations",
+    "after": "0 serious/critical violations on home, interview, design, learner (all phases), and evidence views",
+    "test": "accessibility + full educator-to-learner flow in the browser",
+    "status": "fixed"
+  }
+]

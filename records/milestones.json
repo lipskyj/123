@@ -1,0 +1,34 @@
+{
+  "buildMode": "B",
+  "buildModeReason": "Full coding environment (shell, Node 22, npm, Playwright/Chromium, persistent files, fresh sub-agents), but no model-provider credentials. The core runs on a deterministic pedagogy engine. The optional Anthropic provider is implemented and contract-tested with a fake, but it has not been exercised against the live API.",
+  "current": "M6: Clean-context validation",
+  "next": "M7: Repair findings from clean-context validation, rerun, and finalize the records",
+  "milestones": [
+    { "id": "M0", "name": "Environment inspection and Primer Contract", "status": "done" },
+    { "id": "M1", "name": "Core engine: intake, design, approval, compile, runtime", "status": "done" },
+    { "id": "M2", "name": "Educator studio and learner UI (HTML)", "status": "done" },
+    { "id": "M3", "name": "Automated tests: unit, API, e2e, a11y", "status": "done" },
+    { "id": "M4", "name": "Two cross-domain fixtures pass without code changes", "status": "done" },
+    { "id": "M5", "name": "Dashboard and evidence records", "status": "done" },
+    { "id": "M6", "name": "Clean-context validation (cold auditor, fresh teacher, fresh students, evaluator)", "status": "in-progress" },
+    { "id": "M7", "name": "Repair and re-validate", "status": "pending" }
+  ],
+  "works": [
+    "Educator interview, one question at a time, with a rationale for each question, follow-ups, materials upload and suggested key ideas",
+    "Teacher-readable design with provenance tags and visible AI assumptions",
+    "Revision by direct edit or plain-language request; version history with diffs",
+    "Approval gate enforced server-side; test mode records synthetic approvals as TEST",
+    "Build into an immutable experience package; withdrawing a design blocks new sessions",
+    "Learner runtime: gated Preparation, Practice and Feedback phases, adaptive hints and stretch, refusal to give answers",
+    "Evidence-grounded feedback with self-assessment, observation versus inference, not-assessed criteria and transfer",
+    "Educator trace from teacher input to design, evidence and feedback; deterministic replay",
+    "Crash-safe persistence with session resume across a server restart"
+  ],
+  "remains": [
+    "Live LLM provider run (needs ANTHROPIC_API_KEY)",
+    "PDF and DOCX material parsing (text formats only today)",
+    "Real accounts, rosters and LMS integration (single-tenant, optional shared educator key)",
+    "Voice and scene images from the reference repository (out of scope for this text-first build)",
+    "Real-classroom efficacy evidence (none claimed)"
+  ]
+}
