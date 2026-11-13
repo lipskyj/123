@@ -1,0 +1,191 @@
+PRIMER · BUILD STATUS · generated 2026-11-13T08:35:01.105Z
+Primer: an instructor-centered simulation authoring system
+
+Build mode B. Full coding environment (shell, Node 22, npm, Playwright/Chromium, persistent files, fresh sub-agents), but no model-provider credentials. The core runs on a deterministic pedagogy engine. The optional Anthropic provider is implemented and contract-tested with a fake, but it has not been exercised against the live API.
+
+NOT YET FULLY VALIDATED Current: M6: Clean-context validation
+
+Next: M7: Repair findings from clean-context validation, rerun, and finalize the records
+
+36/36
+automated tests passing
+9/9
+findings repaired
+0/–
+clean-context validations passed
+
+Test run: 2026-11-13T08:34:27.148Z · Node v22.23.4
+
+Milestones
+M0 done
+Environment inspection and Primer Contract
+M1 done
+Core engine: intake, design, approval, compile, runtime
+M2 done
+Educator studio and learner UI (HTML)
+M3 done
+Automated tests: unit, API, e2e, a11y
+M4 done
+Two cross-domain fixtures pass without code changes
+M5 done
+Dashboard and evidence records
+M6 in-progress
+Clean-context validation (cold auditor, fresh teacher, fresh students, evaluator)
+M7 pending
+Repair and re-validate
+System map
+Educator interview
+intake.js · materials
+Design (versioned)
+decisions → build() · design.js
+Approval gate
+server-enforced
+Experience package
+immutable JSON · compile.js
+Preparation
+activate · retrieve
+Practice
+adapts
+Feedback
+evidence-based
+revise (edit / plain language) → new version, old superseded
+Evidence + events store (runtime.js, store.js)
+observations · adaptations · help requests · transcript
+Educator trace + deterministic replay
+input → design → evidence
+Providers (voice only, guarded)
+deterministic (default) · anthropic (optional)
+What works now
+Educator interview, one question at a time, with a rationale for each question, follow-ups, materials upload and suggested key ideas
+Teacher-readable design with provenance tags and visible AI assumptions
+Revision by direct edit or plain-language request; version history with diffs
+Approval gate enforced server-side; test mode records synthetic approvals as TEST
+Build into an immutable experience package; withdrawing a design blocks new sessions
+Learner runtime: gated Preparation, Practice and Feedback phases, adaptive hints and stretch, refusal to give answers
+Evidence-grounded feedback with self-assessment, observation versus inference, not-assessed criteria and transfer
+Educator trace from teacher input to design, evidence and feedback; deterministic replay
+Crash-safe persistence with session resume across a server restart
+What remains
+Live LLM provider run (needs ANTHROPIC_API_KEY)
+PDF and DOCX material parsing (text formats only today)
+Real accounts, rosters and LMS integration (single-tenant, optional shared educator key)
+Voice and scene images from the reference repository (out of scope for this text-first build)
+Real-classroom efficacy evidence (none claimed)
+Paper-derived commitments (Primer Contract) and where they live
+Commitment	Implemented in	Verified by
+C1 Educator authority
+Educator goals, materials, misconceptions, criteria and constraints stay visible and editable; AI recommendations are reviewable; nothing becomes classroom-approved without explicit educator approval; synthetic approvals are labeled TEST.
+	src/design.js (decisions + provenance + assumptions, transition)
+src/compile.js (approval gate)
+public/educator.js (provenance tags, assumptions, editor, approval form)	● pass approval is enforced by the server, not just the UI
+● pass test mode records synthetic approvals as TEST approvals and labels the build
+● pass design: missing educator input becomes visible AI assumptions, never silent
+● pass design: every educator answer appears in the design with educator provenance
+C2 Meaningful student work
+The learner must perform the cognitive work; Primer never solves the task or removes productive effort.
+	src/runtime.js (HELP detection, refuse_to_answer, graduated hints, provider leak guard, min words)	● pass runtime: help requests are refused with escalating cues that never reveal look-fors
+● pass provider replacement: a model provider voices lines; leaks and errors fall back to deterministic lines
+C3 Preparation, Practice, Feedback
+Every experience connects preparation (context + prior-knowledge activation), practice (meaningful application), and feedback/reflection grounded in what the learner did.
+	src/runtime.js (gated phases)
+src/design.js build() (briefing from materials, retrieval, challenges, criteria)	● pass runtime: phases are gated; preparation cannot be skipped and practice needs real attempts
+● pass runtime: feedback quotes only real learner turns, separates inference, and does not assess unseen criteria
+C4 Productive friction
+Character goals, misconceptions-as-challenges, stakes and calibrated difficulty make the content necessary; narrative serves the goal.
+	src/design.js build() (misconception challenges, stakes, character goal)
+src/runtime.js (push_back, stretch)	● pass teacher revision changes the generated experience end-to-end (prompts, criteria, runtime, feedback)
+C5 Goal-bound adaptation
+Support, challenge and pacing adapt to learner evidence, only through educator-approved rules within the approved objective.
+	src/runtime.js (adaptation events with rule ids from design.adaptation)
+src/design.js DIFFICULTY	● pass runtime: adaptation events cite an approved rule and the learner turn that triggered them
+C6 Evidence-grounded feedback
+Transcripts, decisions, events and evidence persist across phases; observation is distinguished from inference; no assessment without a fair opportunity; teacher input is traceable into runtime behavior, evidence and feedback.
+	src/runtime.js buildFeedback
+src/server.js /trace and /replay
+src/store.js atomic persistence	● pass trace links teacher input -> design -> evidence -> feedback, and replay verifies it
+● pass runtime regression: refuting a misconception is not recorded as endorsing it (invented-evidence fix)
+● pass persistence and interrupted-session recovery: a server restart resumes the exact session
+C7 Reusable, not hard-coded
+No course, discipline, scenario, character or rubric is hard-coded; educators create materially different experiences in natural language without code changes.
+	src/intake.js
+src/design.js interpret()
+fixtures/briefs/*.json	● pass generality: two briefs from different domains produce materially different experiences with no code change
+Working interfaces and artifacts
+Educator studio	http://localhost:3000/educator
+Learner experience	http://localhost:3000/learn/<experience-id> (link shown after build)
+This dashboard	http://localhost:3000/status or open BUILD_STATUS.html
+HTML previews (screenshots)	docs/previews/*.png
+Fixtures (educator briefs)	fixtures/briefs/*.json
+Validation artifacts	validation/ (prompts, transcripts, designs, packages, evidence, feedback)
+Records behind this page	records/*.json
+Automated test results 36 passed · 0 failed
+tests/e2e/ui.test.js: 1/1
+tests/unit/api.test.js: 10/10
+tests/unit/core.test.js: 25/25
+Clean-context validation
+
+Fresh agents that did not inherit the builder's conversation or expected answers. Synthetic participants are not real teachers or students, and no classroom efficacy is claimed.
+
+Pending: not yet run.
+
+Known failures and repaired findings
+ID	Severity	Finding	Before → After	Status
+F1	major	UI walkthrough: a learner who refuted 'splitting the difference is always fair' ("...is only fair if the anchors were fair...") was recorded as endorsing the misconception and listed as a growth area.
+Fix: Endorsement now requires no negation, no qualifier ('only if', 'depends', 'but'...) and no use of the correcting idea's look-fors.
+	1 misconception evidence record for a correct refutation → 0 records; a genuine endorsement still records 1	fixed
+F2	minor	Educator trace listed the same learner turn twice per criterion (challenge record + observation record).
+Fix: Trace shows observation records only.
+	duplicate rows → one row per observation	fixed
+F3	minor	Filler words ('something') became look-fors.
+Fix: Added to the stop list.
+	look-for: something → removed	fixed
+F4	blocking	API test: any error thrown inside a locked handler (e.g. approval without a name) produced an unhandled rejection in the lock chain, which crashes the Node process.
+Fix: Lock tail never rejects.
+	server process exited on first validation error → 400 returned, server keeps serving	fixed
+F5	major	An invalid direct edit (removing all key ideas) crashed the derive step before validation.
+Fix: Validate decisions before building derived content.
+	TypeError 500 → 400 with explanation	fixed
+F6	minor	'Rename the character to Morgan' (sentence-initial capital) was not recognized.
+Fix: Case-insensitive verb match.
+	unrecognized → applied	fixed
+F7	minor	First-year MBA students were classified as 'supportive' difficulty; the character goal captured an over-long clause; the name was repeated in the description.
+Fix: Graduate/professional signals override; goal trimmed at clause boundary; leading name stripped.
+	supportive / long goal → standard / '15% price increase'	fixed
+F8	major	E2E test: when an action failed (e.g. approving without the confirmation box ticked), the error re-render erased everything the educator had typed (name, revision request, edits).
+Fix: Error handling captures and restores all form values (and the open editor) around the re-render.
+	approver name lost; second attempt failed → inputs preserved; second attempt succeeds	fixed
+F9	major	axe (WCAG 2 A/AA): low-contrast phase stepper and 'not assessed' badges; scrollable chat logs not keyboard-focusable.
+Fix: Raised text contrast; chat logs get tabindex=0 and role=log.
+	3 serious axe violations → 0 serious/critical violations on home, interview, design, learner (all phases), and evidence views	fixed
+Decisions and departures from the paper
+D1 departure	Clean, dependency-free Node implementation instead of extending the reference Next.js repository
+The reference runtime depends on the OpenAI Realtime voice API, Google OAuth and a large surface (560 source files) that cannot run or be tested here without credentials. A small text-first system can be fully tested end to end while preserving the paper's commitments. The reference repository was audited and its concepts reused (intake agent, design document, template prompts, mentor/practice/feedback, journal/evidence).
+
+D2 departure	Pedagogy decisions (evidence, adaptation, phase gating, feedback) are deterministic and rule-based; a model provider only voices character moves
+Makes approval meaningful (an approved design fully determines runtime behavior), allows deterministic replay, and prevents goal drift, over-helping and invented evidence by construction. It also lets the system run without credentials.
+
+D3 departure	Text chat instead of real-time voice
+There are no voice credentials, and text is accessible and testable. Voice is the reference repository's modality, not a Primer Contract commitment.
+
+D4	Design = editable educator-level decisions + derived content rebuilt by a pure function
+Guarantees that teacher revisions propagate to prompts, challenges, criteria and runtime rules.
+
+D5 departure	Look-for keyword evidence with minimum-length, reasoning-under-stretch and refutation checks
+A deterministic, explainable substitute for model judgment. Look-fors are shown to and editable by the educator. Known limitation: paraphrases without look-for words are missed, and keyword stuffing is only partly mitigated.
+
+D6	Test mode (PRIMER_TEST_MODE=1) forces every approval to be recorded as a synthetic TEST approval
+Synthetic testers can exercise the approval gate without ever producing a classroom approval.
+
+D7	File-based JSON storage with atomic writes and per-record locks
+Zero dependencies and crash-safe; enough for single-instance classroom pilots.
+
+D8 departure	The paper's full text was not supplied; the Contract is derived from the build prompt plus the reference repository's whitepaper diagrams and architecture docs
+Only the build prompt PDF was available; the paper URL is blocked by the network policy.
+Exact startup instructions
+git clone <this repository> && cd <repository>
+node --version          # requires Node 20 or newer; no npm install needed to run
+npm start               # → http://localhost:3000  (educator studio at /educator)
+PORT=8080 npm start     # different port
+PRIMER_TEST_MODE=1 npm start               # synthetic testers: approvals recorded as TEST
+PRIMER_PROVIDER=anthropic ANTHROPIC_API_KEY=… npm start   # optional model-voiced characters
+npm install && npm test  # all tests (e2e uses Playwright + Chromium if installed)

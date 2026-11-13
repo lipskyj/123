@@ -1,0 +1,8 @@
+
+> primer@1.0.0 start
+> node src/server.js
+
+Primer running at http://localhost:4200
+  Educator authoring: http://localhost:4200/educator
+  Build status:       http://localhost:4200/status
+  Provider: deterministic

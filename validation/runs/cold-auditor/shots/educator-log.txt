@@ -1,0 +1,893 @@
+
+===== 01-studio =====
+Your experiences
+Name for new experience
+New experience
+
+No experiences yet.
+
+Welcome
+
+Start a new experience, or pick one from the list. Primer will interview you one question at a time.
+
+===== 02-first-q =====
+Your experiences
+Name for new experience
+New experience
+Pharmacology: explaining warfarin
+Interview in progress
+Pharmacology: explaining warfarin
+1. Interview
+2. Design review
+3. Experience & evidence
+Interview
+Primer
+Hi! I'll ask you one question at a time to design a practice experience for your learners. What course and topic is this experience for?
+What course and topic is this experience for?
+Why I'm asking: Names the experience and anchors everything else in your course.
+e.g. "MBA Negotiations — making and responding to the first offer"
+Your answer
+Send answer
+Ctrl+Enter sends
+Materials
+
+Readings, notes or cases. Primer quotes these in the learner's preparation and uses them to suggest key ideas. Text formats only: .txt, .md, .html, or paste.
+
+No materials yet.
+Upload a text file
+Or paste text
+ Add pasted text
+
+===== 03-concepts-q =====
+Your experiences
+Name for new experience
+New experience
+Pharmacology: explaining warfarin
+Interview in progress
+Pharmacology: explaining warfarin
+1. Interview
+2. Design review
+3. Experience & evidence
+Interview
+Primer
+Hi! I'll ask you one question at a time to design a practice experience for your learners. What course and topic is this experience for?
+You
+Second-year nursing: patient education on oral anticoagulants (warfarin)
+Primer
+Who are your learners? Tell me their level and background.
+You
+Second-year undergraduate nursing students who have done basic pharmacology but little patient teaching
+Primer
+What is the one main thing learners should be able to do by the end?
+You
+Explain warfarin safety to a newly prescribed patient in plain language and check their understanding
+Primer
+Do you have materials to ground this, such as readings, notes or a case? Paste or upload them in the Materials panel, then reply "done". You can also reply "none".
+You
+done
+Primer
+Thanks. I have 1 material(s) to ground the design. Which key ideas or skills must learners actually use? List them, one per line. From your materials, I'd suggest: blood's; vitamin; warfarin; patients; dose. Keep, edit, or replace these.
+Which key ideas or skills must learners actually use? List them, one per line. From your materials, I'd suggest: blood's; vitamin; warfarin; patients; dose. Keep, edit, or replace these.
+Why I'm asking: These become the ideas the practice requires and the "look-fors" in the evidence.
+e.g. "BATNA; reservation price; anchoring"
+Suggestions from your materials (select to add):
+blood's
+vitamin
+warfarin
+patients
+dose
+Your answer
+Send answer
+Ctrl+Enter sends
+Materials
+
+Readings, notes or cases. Primer quotes these in the learner's preparation and uses them to suggest key ideas. Text formats only: .txt, .md, .html, or paste.
+
+Pasted text 1 (556 chars)
+Remove
+Upload a text file
+Or paste text
+ Add pasted text
+
+===== 04-template-q =====
+Your experiences
+Name for new experience
+New experience
+Pharmacology: explaining warfarin
+Interview in progress
+Pharmacology: explaining warfarin
+1. Interview
+2. Design review
+3. Experience & evidence
+Interview
+Primer
+Hi! I'll ask you one question at a time to design a practice experience for your learners. What course and topic is this experience for?
+You
+Second-year nursing: patient education on oral anticoagulants (warfarin)
+Primer
+Who are your learners? Tell me their level and background.
+You
+Second-year undergraduate nursing students who have done basic pharmacology but little patient teaching
+Primer
+What is the one main thing learners should be able to do by the end?
+You
+Explain warfarin safety to a newly prescribed patient in plain language and check their understanding
+Primer
+Do you have materials to ground this, such as readings, notes or a case? Paste or upload them in the Materials panel, then reply "done". You can also reply "none".
+You
+done
+Primer
+Thanks. I have 1 material(s) to ground the design. Which key ideas or skills must learners actually use? List them, one per line. From your materials, I'd suggest: blood's; vitamin; warfarin; patients; dose. Keep, edit, or replace these.
+You
+INR monitoring
+consistent vitamin K intake
+bleeding warning signs
+never double a missed dose
+Primer
+What do learners already know coming in, and what should the preparation refresh?
+You
+They know what anticoagulants are and basic clotting physiology.
+Primer
+What mistakes or misconceptions do you usually see? List them. You can add the correct idea after a dash, like "misconception — correct idea".
+You
+Patients must stop eating green vegetables — keep vitamin K intake consistent instead
+If you miss a dose take two next time — never double a missed dose
+Once the dose is stable you no longer need blood tests — INR still needs regular monitoring
+Primer
+What should learners actually do during practice? For example: persuade a skeptical client, explain an idea to a confused peer, or diagnose a problem.
+You
+Explain warfarin safety to a worried patient and check they understood using teach-back
+Primer
+Which format fits best? I recommend TEACHBACK. You described learners explaining or teaching. A teachback has them teach a character who needs to understand. Reply "roleplay" or "teachback".
+Which format fits best? I recommend TEACHBACK. You described learners explaining or teaching. A teachback has them teach a character who needs to understand. Reply "roleplay" or "teachback".
+Why I'm asking: Roleplay means the learner faces a counterpart. Teachback means the learner teaches a character who does not yet understand.
+Roleplay
+Teachback (recommended)
+Your answer
+Send answer
+Ctrl+Enter sends
+Materials
+
+Readings, notes or cases. Primer quotes these in the learner's preparation and uses them to suggest key ideas. Text formats only: .txt, .md, .html, or paste.
+
+Pasted text 1 (556 chars)
+Remove
+Upload a text file
+Or paste text
+ Add pasted text
+
+===== 05-counterpart-q =====
+Your experiences
+Name for new experience
+New experience
+Pharmacology: explaining warfarin
+Interview in progress
+Pharmacology: explaining warfarin
+1. Interview
+2. Design review
+3. Experience & evidence
+Interview
+Primer
+Hi! I'll ask you one question at a time to design a practice experience for your learners. What course and topic is this experience for?
+You
+Second-year nursing: patient education on oral anticoagulants (warfarin)
+Primer
+Who are your learners? Tell me their level and background.
+You
+Second-year undergraduate nursing students who have done basic pharmacology but little patient teaching
+Primer
+What is the one main thing learners should be able to do by the end?
+You
+Explain warfarin safety to a newly prescribed patient in plain language and check their understanding
+Primer
+Do you have materials to ground this, such as readings, notes or a case? Paste or upload them in the Materials panel, then reply "done". You can also reply "none".
+You
+done
+Primer
+Thanks. I have 1 material(s) to ground the design. Which key ideas or skills must learners actually use? List them, one per line. From your materials, I'd suggest: blood's; vitamin; warfarin; patients; dose. Keep, edit, or replace these.
+You
+INR monitoring
+consistent vitamin K intake
+bleeding warning signs
+never double a missed dose
+Primer
+What do learners already know coming in, and what should the preparation refresh?
+You
+They know what anticoagulants are and basic clotting physiology.
+Primer
+What mistakes or misconceptions do you usually see? List them. You can add the correct idea after a dash, like "misconception — correct idea".
+You
+Patients must stop eating green vegetables — keep vitamin K intake consistent instead
+If you miss a dose take two next time — never double a missed dose
+Once the dose is stable you no longer need blood tests — INR still needs regular monitoring
+Primer
+What should learners actually do during practice? For example: persuade a skeptical client, explain an idea to a confused peer, or diagnose a problem.
+You
+Explain warfarin safety to a worried patient and check they understood using teach-back
+Primer
+Which format fits best? I recommend TEACHBACK. You described learners explaining or teaching. A teachback has them teach a character who needs to understand. Reply "roleplay" or "teachback".
+You
+yes
+Primer
+Who will the learner teach? Describe the character: who they are and why they need to understand this.
+Who will the learner teach? Describe the character: who they are and why they need to understand this.
+Why I'm asking: The character's goals create the reason the learner needs the content.
+e.g. "Dana, a procurement manager who wants a 20% discount and is impatient"
+Your answer
+Send answer
+Ctrl+Enter sends
+Materials
+
+Readings, notes or cases. Primer quotes these in the learner's preparation and uses them to suggest key ideas. Text formats only: .txt, .md, .html, or paste.
+
+Pasted text 1 (556 chars)
+Remove
+Upload a text file
+Or paste text
+ Add pasted text
+
+===== 06-interview-done =====
+Your experiences
+Name for new experience
+New experience
+Pharmacology: explaining warfarin
+Interview complete
+Pharmacology: explaining warfarin
+1. Interview
+2. Design review
+3. Experience & evidence
+Interview
+Primer
+Hi! I'll ask you one question at a time to design a practice experience for your learners. What course and topic is this experience for?
+You
+Second-year nursing: patient education on oral anticoagulants (warfarin)
+Primer
+Who are your learners? Tell me their level and background.
+You
+Second-year undergraduate nursing students who have done basic pharmacology but little patient teaching
+Primer
+What is the one main thing learners should be able to do by the end?
+You
+Explain warfarin safety to a newly prescribed patient in plain language and check their understanding
+Primer
+Do you have materials to ground this, such as readings, notes or a case? Paste or upload them in the Materials panel, then reply "done". You can also reply "none".
+You
+done
+Primer
+Thanks. I have 1 material(s) to ground the design. Which key ideas or skills must learners actually use? List them, one per line. From your materials, I'd suggest: blood's; vitamin; warfarin; patients; dose. Keep, edit, or replace these.
+You
+INR monitoring
+consistent vitamin K intake
+bleeding warning signs
+never double a missed dose
+Primer
+What do learners already know coming in, and what should the preparation refresh?
+You
+They know what anticoagulants are and basic clotting physiology.
+Primer
+What mistakes or misconceptions do you usually see? List them. You can add the correct idea after a dash, like "misconception — correct idea".
+You
+Patients must stop eating green vegetables — keep vitamin K intake consistent instead
+If you miss a dose take two next time — never double a missed dose
+Once the dose is stable you no longer need blood tests — INR still needs regular monitoring
+Primer
+What should learners actually do during practice? For example: persuade a skeptical client, explain an idea to a confused peer, or diagnose a problem.
+You
+Explain warfarin safety to a worried patient and check they understood using teach-back
+Primer
+Which format fits best? I recommend TEACHBACK. You described learners explaining or teaching. A teachback has them teach a character who needs to understand. Reply "roleplay" or "teachback".
+You
+yes
+Primer
+Who will the learner teach? Describe the character: who they are and why they need to understand this.
+You
+Mr. Okafor, a 68-year-old retired bus driver just started on warfarin after atrial fibrillation; anxious, loves his garden vegetables
+Primer
+What would show you that a learner is making progress? List the things you would look for.
+You
+Mentions INR blood tests; explains keeping vitamin K consistent; lists bleeding signs to report; says not to double a missed dose; checks understanding by asking the patient to repeat back
+Primer
+Any classroom constraints, such as time, tone, or topics to avoid?
+You
+15 minutes, respectful tone
+Primer
+That's everything I need. Select "Generate design" to see the proposed learning and simulation design.
+The interview is complete.
+Generate design
+Materials
+
+Readings, notes or cases. Primer quotes these in the learner's preparation and uses them to suggest key ideas. Text formats only: .txt, .md, .html, or paste.
+
+Pasted text 1 (556 chars)
+Remove
+Upload a text file
+Or paste text
+ Add pasted text
+
+===== 07-design =====
+Your experiences
+Name for new experience
+New experience
+Pharmacology: explaining warfarin
+Design v1: draft
+Pharmacology: explaining warfarin
+1. Interview
+2. Design review
+3. Experience & evidence
+Design generated. Please review it carefully.
+Second-year nursing: patient education on oral anticoagulants (warfar… — Teachback v1 · draft
+Version
+v1 (draft)
+
+Draft: not yet approved
+
+What changed: Initial design generated from intake
+
+Assumptions Primer made. Please check these:
+The criterion "checks understanding by asking the patient to repeat back" doesn't name a key idea, so its look-fors (checks, asking, patient, repeat) come from its own wording. Please check them.
+The character was given the placeholder name "Jesse".
+The character's goal was inferred: "understand Second-year nursing: patient education on oral anticoagulants (warfarin) well enough to use it".
+Learning goal
+
+Objective: Explain warfarin safety to a newly prescribed patient in plain language and check their understanding from you
+
+Learners: Second-year undergraduate nursing students who have done basic pharmacology but little patient teaching from you
+
+Prior knowledge to activate: They know what anticoagulants are and basic clotting physiology. from you
+
+Format: Teachback (the learner teaches a character) from you
+
+Difficulty: standard AI suggestion: check this
+The coach offers a hint after 2 unsuccessful attempt(s) and moves on after 4. After 2 success(es) the bar rises and reasoning becomes required. An answer must be at least 8 words to count. Practice length: up to 9 learner turns.
+
+Constraints: 15 minutes, respectful tone from you
+
+Scenario
+
+Character: Jesse, mr. Okafor, a 68-year-old retired bus driver just started on warfarin after atrial fibrillation; anxious, loves his garden vegetables from you
+
+Character's goal: understand Second-year nursing: patient education on oral anticoagulants (warfarin) well enough to use it
+
+Learner's task: Explain warfarin safety to a worried patient and check they understood using teach-back from you
+
+Stakes: Jesse is relying on your explanation and will use it right away. AI suggestion: check this
+
+Phase 1: Preparation
+
+The learner first says what they already know (not graded). They then read these notes and answer retrieval questions in their own words. Primer gives cues, never answers.
+
+INR monitoring from you look-fors:
+inr monitoring
+"Patients need regular INR blood tests because the dose that is safe varies between people and changes with diet and other medicines." Pasted text 1
+Correct idea: INR still needs regular monitoring from you
+consistent vitamin K intake from you look-fors:
+consistent
+vitamin
+intake
+(needs 2)
+"Foods rich in vitamin K, such as leafy green vegetables, can lower the effect of warfarin; patients should keep vitamin K intake consistent rather than avoid it entirely." Pasted text 1
+"It reduces the blood's ability to clot by blocking vitamin K dependent clotting factors." Pasted text 1
+Correct idea: keep vitamin K intake consistent instead from you
+bleeding warning signs from you look-fors:
+bleeding
+warning
+signs
+(needs 2)
+"Signs of bleeding such as black stools, unusual bruising or blood in urine need urgent attention." Pasted text 1
+never double a missed dose from you look-fors:
+never
+double
+missed
+(needs 2)
+"Missed doses should not be doubled." Pasted text 1
+Correct idea: never double a missed dose from you
+
+Retrieval questions: In your own words, what is "INR monitoring", and why does it matter for this task? · In your own words, what is "consistent vitamin K intake", and why does it matter for this task? · In your own words, what is "bleeding warning signs", and why does it matter for this task? · In your own words, what is "never double a missed dose", and why does it matter for this task?
+
+Phase 2: Practice challenges
+
+Jesse raises these in order. Misconceptions you listed become challenges, which creates productive friction.
+
+"Wait, let me check I've got this. So patients must stop eating green vegetables? That's what I always assumed."
+Learner succeeds by: Correct the misconception using "consistent vitamin K intake" · from your misconception list
+"Wait, let me check I've got this. So if you miss a dose take two next time? That's what I always assumed."
+Learner succeeds by: Correct the misconception using "never double a missed dose" · from your misconception list
+"Wait, let me check I've got this. So once the dose is stable you no longer need blood tests? That's what I always assumed."
+Learner succeeds by: Correct the misconception using "INR monitoring" · from your misconception list
+"Okay, next thing I don't get: "bleeding warning signs". Can you explain it so I could actually use it?"
+Learner succeeds by: Apply "bleeding warning signs"
+Phase 3: Feedback criteria
+from you
+Criterion	Look-fors in the learner's words
+Mentions INR blood tests	
+inr monitoring
+
+explains keeping vitamin K consistent	
+consistent
+vitamin
+intake
+(needs 2)
+lists bleeding signs to report	
+bleeding
+warning
+signs
+(needs 2)
+says not to double a missed dose	
+never
+double
+missed
+(needs 2)
+checks understanding by asking the patient to repeat back	
+checks
+asking
+patient
+repeat
+(needs 2)
+
+Feedback first asks for the learner's self-assessment. It then quotes their actual words for each criterion, labels inferences separately, marks criteria they had no chance to show as "not assessed", and ends with a transfer question.
+
+Inspect the generated prompts (used when an AI model voices the characters)
+mentor
+You are the preparation guide for "Second-year nursing: patient education on oral anticoagulants (warfar… — Teachback". Learners: Second-year undergraduate nursing students who have done basic pharmacology but little patient teaching. Prior knowledge to activate: They know what anticoagulants are and basic clotting physiology..
+Brief the learner on these key ideas using the educator's materials: INR monitoring; consistent vitamin K intake; bleeding warning signs; never double a missed dose.
+Ask retrieval questions and let the learner answer before confirming anything.
+RULES: Stay within the educator-approved objective: "Explain warfarin safety to a newly prescribed patient in plain language and check their understanding". Never state the correct answer or the key idea for the learner. The learner must do the thinking. Do not invent facts about what the learner said. Keep replies under 70 words.
+practice
+You are Jesse: mr. Okafor, a 68-year-old retired bus driver just started on warfarin after atrial fibrillation; anxious, loves his garden vegetables. Your goal: understand Second-year nursing: patient education on oral anticoagulants (warfarin) well enough to use it.
+You are a learner who does not yet understand and needs the user to teach you.
+The learner's role: Explain warfarin safety to a worried patient and check they understood using teach-back. Stakes: Jesse is relying on your explanation and will use it right away.
+You raise these challenges in order (the engine tells you which one is active):
+- ch1: Wait, let me check I've got this. So patients must stop eating green vegetables? That's what I always assumed. [the learner succeeds by: Correct the misconception using "consistent vitamin K intake"]
+- ch2: Wait, let me check I've got this. So if you miss a dose take two next time? That's what I always assumed. [the learner succeeds by: Correct the misconception using "never double a missed dose"]
+- ch3: Wait, let me check I've got this. So once the dose is stable you no longer need blood tests? That's what I always assumed. [the learner succeeds by: Correct the misconception using "INR monitoring"]
+- ch4: Okay, next thing I don't get: "bleeding warning signs". Can you explain it so I could actually use it? [the learner succeeds by: Apply "bleeding warning signs"]
+You will receive a MOVE from the engine (open, push_back, concede_and_advance, stretch, refuse_to_answer, close) and must voice exactly that move in character.
+Constraints from the educator: 15 minutes, respectful tone.
+RULES: Stay within the educator-approved objective: "Explain warfarin safety to a newly prescribed patient in plain language and check their understanding". Never state the correct answer or the key idea for the learner. The learner must do the thinking. Do not invent facts about what the learner said. Keep replies under 70 words.
+feedback
+You write feedback for the learner on "Explain warfarin safety to a newly prescribed patient in plain language and check their understanding". Use ONLY the evidence records provided. Every claim must cite a quoted learner turn. Label observations ("You said...") separately from inferences ("This suggests..."). Never assess a criterion the learner had no opportunity to show. Criteria:
+- k1: Mentions INR blood tests (look-fors: inr monitoring)
+- k2: explains keeping vitamin K consistent (look-fors: consistent, vitamin, intake)
+- k3: lists bleeding signs to report (look-fors: bleeding, warning, signs)
+- k4: says not to double a missed dose (look-fors: never, double, missed)
+- k5: checks understanding by asking the patient to repeat back (look-fors: checks, asking, patient, repeat)
+Start from the learner's self-assessment, then give strengths, growth areas, and concrete next actions, and finish with a transfer question.
+Your decision
+Edit this design
+Ask for a revision in plain language
+ Request revision
+Approve for your classroom
+Your name
+ I have reviewed this design, including its assumptions, and approve it for learners.
+Approve design
+What needs more work
+Return for more work
+Reason for rejecting
+Reject design
+
+===== 08-revised =====
+Your experiences
+Name for new experience
+New experience
+Pharmacology: explaining warfarin
+Design v2: revised
+Pharmacology: explaining warfarin
+1. Interview
+2. Design review
+3. Experience & evidence
+Created version 2.
+Second-year nursing: patient education on oral anticoagulants (warfar… — Teachback v2 · revised
+Version
+v1 (superseded)
+v2 (revised)
+
+Revised: not yet approved
+
+What changed: Requested: "Make it harder. Rename the character to Sam.". Difficulty set to challenging; Character renamed to Sam
+
+6 change(s) from the previous version
+character.name: Jesse → Sam
+difficulty: standard → challenging
+adaptation.supportAfterMisses: 2 → 3
+adaptation.maxMissesPerChallenge: 4 → 5
+adaptation.stretchAfterSuccesses: 2 → 1
+adaptation.minWordsForCredit: 8 → 12
+Assumptions Primer made. Please check these:
+The criterion "checks understanding by asking the patient to repeat back" doesn't name a key idea, so its look-fors (checks, asking, patient, repeat) come from its own wording. Please check them.
+Learning goal
+
+Objective: Explain warfarin safety to a newly prescribed patient in plain language and check their understanding from you
+
+Learners: Second-year undergraduate nursing students who have done basic pharmacology but little patient teaching from you
+
+Prior knowledge to activate: They know what anticoagulants are and basic clotting physiology. from you
+
+Format: Teachback (the learner teaches a character) from you
+
+Difficulty: challenging from you
+The coach offers a hint after 3 unsuccessful attempt(s) and moves on after 5. After 1 success(es) the bar rises and reasoning becomes required. An answer must be at least 12 words to count. Practice length: up to 9 learner turns.
+
+Constraints: 15 minutes, respectful tone from you
+
+Scenario
+
+Character: Sam, mr. Okafor, a 68-year-old retired bus driver just started on warfarin after atrial fibrillation; anxious, loves his garden vegetables from you
+
+Character's goal: understand Second-year nursing: patient education on oral anticoagulants (warfarin) well enough to use it
+
+Learner's task: Explain warfarin safety to a worried patient and check they understood using teach-back from you
+
+Stakes: Jesse is relying on your explanation and will use it right away. AI suggestion: check this
+
+Phase 1: Preparation
+
+The learner first says what they already know (not graded). They then read these notes and answer retrieval questions in their own words. Primer gives cues, never answers.
+
+INR monitoring from you look-fors:
+inr monitoring
+"Patients need regular INR blood tests because the dose that is safe varies between people and changes with diet and other medicines." Pasted text 1
+Correct idea: INR still needs regular monitoring from you
+consistent vitamin K intake from you look-fors:
+consistent
+vitamin
+intake
+(needs 2)
+"Foods rich in vitamin K, such as leafy green vegetables, can lower the effect of warfarin; patients should keep vitamin K intake consistent rather than avoid it entirely." Pasted text 1
+"It reduces the blood's ability to clot by blocking vitamin K dependent clotting factors." Pasted text 1
+Correct idea: keep vitamin K intake consistent instead from you
+bleeding warning signs from you look-fors:
+bleeding
+warning
+signs
+(needs 2)
+"Signs of bleeding such as black stools, unusual bruising or blood in urine need urgent attention." Pasted text 1
+never double a missed dose from you look-fors:
+never
+double
+missed
+(needs 2)
+"Missed doses should not be doubled." Pasted text 1
+Correct idea: never double a missed dose from you
+
+Retrieval questions: In your own words, what is "INR monitoring", and why does it matter for this task? · In your own words, what is "consistent vitamin K intake", and why does it matter for this task? · In your own words, what is "bleeding warning signs", and why does it matter for this task? · In your own words, what is "never double a missed dose", and why does it matter for this task?
+
+Phase 2: Practice challenges
+
+Sam raises these in order. Misconceptions you listed become challenges, which creates productive friction.
+
+"Wait, let me check I've got this. So patients must stop eating green vegetables? That's what I always assumed."
+Learner succeeds by: Correct the misconception using "consistent vitamin K intake" · from your misconception list
+"Wait, let me check I've got this. So if you miss a dose take two next time? That's what I always assumed."
+Learner succeeds by: Correct the misconception using "never double a missed dose" · from your misconception list
+"Wait, let me check I've got this. So once the dose is stable you no longer need blood tests? That's what I always assumed."
+Learner succeeds by: Correct the misconception using "INR monitoring" · from your misconception list
+"Okay, next thing I don't get: "bleeding warning signs". Can you explain it so I could actually use it?"
+Learner succeeds by: Apply "bleeding warning signs"
+Phase 3: Feedback criteria
+from you
+Criterion	Look-fors in the learner's words
+Mentions INR blood tests	
+inr monitoring
+
+explains keeping vitamin K consistent	
+consistent
+vitamin
+intake
+(needs 2)
+lists bleeding signs to report	
+bleeding
+warning
+signs
+(needs 2)
+says not to double a missed dose	
+never
+double
+missed
+(needs 2)
+checks understanding by asking the patient to repeat back	
+checks
+asking
+patient
+repeat
+(needs 2)
+
+Feedback first asks for the learner's self-assessment. It then quotes their actual words for each criterion, labels inferences separately, marks criteria they had no chance to show as "not assessed", and ends with a transfer question.
+
+Inspect the generated prompts (used when an AI model voices the characters)
+Your decision
+Edit this design
+Ask for a revision in plain language
+ Request revision
+Approve for your classroom
+Your name
+ I have reviewed this design, including its assumptions, and approve it for learners.
+Approve design
+What needs more work
+Return for more work
+Reason for rejecting
+Reject design
+CONSOLE ERR: Failed to load resource: the server responded with a status of 400 (Bad Request)
+
+===== 09-approve-noconfirm =====
+Your experiences
+Name for new experience
+New experience
+Pharmacology: explaining warfarin
+Design v2: revised
+Pharmacology: explaining warfarin
+1. Interview
+2. Design review
+3. Experience & evidence
+Approval must be explicit: confirm that you reviewed the design.
+Second-year nursing: patient education on oral anticoagulants (warfar… — Teachback v2 · revised
+Version
+v1 (superseded)
+v2 (revised)
+
+Revised: not yet approved
+
+What changed: Requested: "Make it harder. Rename the character to Sam.". Difficulty set to challenging; Character renamed to Sam
+
+6 change(s) from the previous version
+Assumptions Primer made. Please check these:
+The criterion "checks understanding by asking the patient to repeat back" doesn't name a key idea, so its look-fors (checks, asking, patient, repeat) come from its own wording. Please check them.
+Learning goal
+
+Objective: Explain warfarin safety to a newly prescribed patient in plain language and check their understanding from you
+
+Learners: Second-year undergraduate nursing students who have done basic pharmacology but little patient teaching from you
+
+Prior knowledge to activate: They know what anticoagulants are and basic clotting physiology. from you
+
+Format: Teachback (the learner teaches a character) from you
+
+Difficulty: challenging from you
+The coach offers a hint after 3 unsuccessful attempt(s) and moves on after 5. After 1 success(es) the bar rises and reasoning becomes required. An answer must be at least 12 words to count. Practice length: up to 9 learner turns.
+
+Constraints: 15 minutes, respectful tone from you
+
+Scenario
+
+Character: Sam, mr. Okafor, a 68-year-old retired bus driver just started on warfarin after atrial fibrillation; anxious, loves his garden vegetables from you
+
+Character's goal: understand Second-year nursing: patient education on oral anticoagulants (warfarin) well enough to use it
+
+Learner's task: Explain warfarin safety to a worried patient and check they understood using teach-back from you
+
+Stakes: Jesse is relying on your explanation and will use it right away. AI suggestion: check this
+
+Phase 1: Preparation
+
+The learner first says what they already know (not graded). They then read these notes and answer retrieval questions in their own words. Primer gives cues, never answers.
+
+INR monitoring from you look-fors:
+inr monitoring
+"Patients need regular INR blood tests because the dose that is safe varies between people and changes with diet and other medicines." Pasted text 1
+Correct idea: INR still needs regular monitoring from you
+consistent vitamin K intake from you look-fors:
+consistent
+vitamin
+intake
+(needs 2)
+"Foods rich in vitamin K, such as leafy green vegetables, can lower the effect of warfarin; patients should keep vitamin K intake consistent rather than avoid it entirely." Pasted text 1
+"It reduces the blood's ability to clot by blocking vitamin K dependent clotting factors." Pasted text 1
+Correct idea: keep vitamin K intake consistent instead from you
+bleeding warning signs from you look-fors:
+bleeding
+warning
+signs
+(needs 2)
+"Signs of bleeding such as black stools, unusual bruising or blood in urine need urgent attention." Pasted text 1
+never double a missed dose from you look-fors:
+never
+double
+missed
+(needs 2)
+"Missed doses should not be doubled." Pasted text 1
+Correct idea: never double a missed dose from you
+
+Retrieval questions: In your own words, what is "INR monitoring", and why does it matter for this task? · In your own words, what is "consistent vitamin K intake", and why does it matter for this task? · In your own words, what is "bleeding warning signs", and why does it matter for this task? · In your own words, what is "never double a missed dose", and why does it matter for this task?
+
+Phase 2: Practice challenges
+
+Sam raises these in order. Misconceptions you listed become challenges, which creates productive friction.
+
+"Wait, let me check I've got this. So patients must stop eating green vegetables? That's what I always assumed."
+Learner succeeds by: Correct the misconception using "consistent vitamin K intake" · from your misconception list
+"Wait, let me check I've got this. So if you miss a dose take two next time? That's what I always assumed."
+Learner succeeds by: Correct the misconception using "never double a missed dose" · from your misconception list
+"Wait, let me check I've got this. So once the dose is stable you no longer need blood tests? That's what I always assumed."
+Learner succeeds by: Correct the misconception using "INR monitoring" · from your misconception list
+"Okay, next thing I don't get: "bleeding warning signs". Can you explain it so I could actually use it?"
+Learner succeeds by: Apply "bleeding warning signs"
+Phase 3: Feedback criteria
+from you
+Criterion	Look-fors in the learner's words
+Mentions INR blood tests	
+inr monitoring
+
+explains keeping vitamin K consistent	
+consistent
+vitamin
+intake
+(needs 2)
+lists bleeding signs to report	
+bleeding
+warning
+signs
+(needs 2)
+says not to double a missed dose	
+never
+double
+missed
+(needs 2)
+checks understanding by asking the patient to repeat back	
+checks
+asking
+patient
+repeat
+(needs 2)
+
+Feedback first asks for the learner's self-assessment. It then quotes their actual words for each criterion, labels inferences separately, marks criteria they had no chance to show as "not assessed", and ends with a transfer question.
+
+Inspect the generated prompts (used when an AI model voices the characters)
+Your decision
+Edit this design
+Ask for a revision in plain language
+ Request revision
+Approve for your classroom
+Your name
+ I have reviewed this design, including its assumptions, and approve it for learners.
+Approve design
+What needs more work
+Return for more work
+Reason for rejecting
+Reject design
+
+===== 10-approved =====
+Your experiences
+Name for new experience
+New experience
+Pharmacology: explaining warfarin
+Design v2: educator-approved
+Pharmacology: explaining warfarin
+1. Interview
+2. Design review
+3. Experience & evidence
+Approved. You can now build the learner experience.
+Second-year nursing: patient education on oral anticoagulants (warfar… — Teachback v2 · educator-approved
+Version
+v1 (superseded)
+v2 (educator-approved)
+
+Approved by an educator · Educator approval by Auditor Educator on 11/13/2026, 8:39:09 AM
+
+What changed: Requested: "Make it harder. Rename the character to Sam.". Difficulty set to challenging; Character renamed to Sam
+
+6 change(s) from the previous version
+Assumptions Primer made. Please check these:
+The criterion "checks understanding by asking the patient to repeat back" doesn't name a key idea, so its look-fors (checks, asking, patient, repeat) come from its own wording. Please check them.
+Learning goal
+
+Objective: Explain warfarin safety to a newly prescribed patient in plain language and check their understanding from you
+
+Learners: Second-year undergraduate nursing students who have done basic pharmacology but little patient teaching from you
+
+Prior knowledge to activate: They know what anticoagulants are and basic clotting physiology. from you
+
+Format: Teachback (the learner teaches a character) from you
+
+Difficulty: challenging from you
+The coach offers a hint after 3 unsuccessful attempt(s) and moves on after 5. After 1 success(es) the bar rises and reasoning becomes required. An answer must be at least 12 words to count. Practice length: up to 9 learner turns.
+
+Constraints: 15 minutes, respectful tone from you
+
+Scenario
+
+Character: Sam, mr. Okafor, a 68-year-old retired bus driver just started on warfarin after atrial fibrillation; anxious, loves his garden vegetables from you
+
+Character's goal: understand Second-year nursing: patient education on oral anticoagulants (warfarin) well enough to use it
+
+Learner's task: Explain warfarin safety to a worried patient and check they understood using teach-back from you
+
+Stakes: Jesse is relying on your explanation and will use it right away. AI suggestion: check this
+
+Phase 1: Preparation
+
+The learner first says what they already know (not graded). They then read these notes and answer retrieval questions in their own words. Primer gives cues, never answers.
+
+INR monitoring from you look-fors:
+inr monitoring
+"Patients need regular INR blood tests because the dose that is safe varies between people and changes with diet and other medicines." Pasted text 1
+Correct idea: INR still needs regular monitoring from you
+consistent vitamin K intake from you look-fors:
+consistent
+vitamin
+intake
+(needs 2)
+"Foods rich in vitamin K, such as leafy green vegetables, can lower the effect of warfarin; patients should keep vitamin K intake consistent rather than avoid it entirely." Pasted text 1
+"It reduces the blood's ability to clot by blocking vitamin K dependent clotting factors." Pasted text 1
+Correct idea: keep vitamin K intake consistent instead from you
+bleeding warning signs from you look-fors:
+bleeding
+warning
+signs
+(needs 2)
+"Signs of bleeding such as black stools, unusual bruising or blood in urine need urgent attention." Pasted text 1
+never double a missed dose from you look-fors:
+never
+double
+missed
+(needs 2)
+"Missed doses should not be doubled." Pasted text 1
+Correct idea: never double a missed dose from you
+
+Retrieval questions: In your own words, what is "INR monitoring", and why does it matter for this task? · In your own words, what is "consistent vitamin K intake", and why does it matter for this task? · In your own words, what is "bleeding warning signs", and why does it matter for this task? · In your own words, what is "never double a missed dose", and why does it matter for this task?
+
+Phase 2: Practice challenges
+
+Sam raises these in order. Misconceptions you listed become challenges, which creates productive friction.
+
+"Wait, let me check I've got this. So patients must stop eating green vegetables? That's what I always assumed."
+Learner succeeds by: Correct the misconception using "consistent vitamin K intake" · from your misconception list
+"Wait, let me check I've got this. So if you miss a dose take two next time? That's what I always assumed."
+Learner succeeds by: Correct the misconception using "never double a missed dose" · from your misconception list
+"Wait, let me check I've got this. So once the dose is stable you no longer need blood tests? That's what I always assumed."
+Learner succeeds by: Correct the misconception using "INR monitoring" · from your misconception list
+"Okay, next thing I don't get: "bleeding warning signs". Can you explain it so I could actually use it?"
+Learner succeeds by: Apply "bleeding warning signs"
+Phase 3: Feedback criteria
+from you
+Criterion	Look-fors in the learner's words
+Mentions INR blood tests	
+inr monitoring
+
+explains keeping vitamin K consistent	
+consistent
+vitamin
+intake
+(needs 2)
+lists bleeding signs to report	
+bleeding
+warning
+signs
+(needs 2)
+says not to double a missed dose	
+never
+double
+missed
+(needs 2)
+checks understanding by asking the patient to repeat back	
+checks
+asking
+patient
+repeat
+(needs 2)
+
+Feedback first asks for the learner's self-assessment. It then quotes their actual words for each criterion, labels inferences separately, marks criteria they had no chance to show as "not assessed", and ends with a transfer question.
+
+Inspect the generated prompts (used when an AI model voices the characters)
+Your decision
+Educator approval.
+Build learner experience
+Revise (creates a new version)
+Withdraw (reject)
+
+===== 11-built =====
+Your experiences
+Name for new experience
+New experience
+Pharmacology: explaining warfarin
+Design v2: educator-approved · 1 build(s)
+Pharmacology: explaining warfarin
+1. Interview
+2. Design review
+3. Experience & evidence
+Experience built. Share the learner link from the Experience tab.
+Learner experiences
+Second-year nursing: patient education on oral anticoagulants (warfar… — Teachback
+from design v2
+Learner link:
+http://localhost:4200/learn/exp-5305518fb8
+Learner	Status	Turns	Evidence	Adaptations	
+No sessions yet.

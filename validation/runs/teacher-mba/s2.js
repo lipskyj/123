@@ -1,0 +1,10 @@
+const { chromium } = require('playwright');
+(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1280,height:900}});
+await p.goto('http://localhost:4100/educator');await p.waitForTimeout(800);
+await p.fill('#newname','Relevant Cash Flows in Capital Budgeting (MGMT 6210, Session 7)');
+await p.click('button:has-text("New experience")');await p.waitForTimeout(1500);
+console.log('URL',p.url());
+await p.screenshot({path:'02-new.png',fullPage:true});
+console.log(await p.innerText('body'));
+console.log((await p.$$eval('button,a,input,textarea,select',els=>els.map(e=>e.tagName+'|'+(e.id||'')+'|'+(e.name||'')+'|'+(e.type||'')+'|'+(e.innerText||e.placeholder||e.href||'').slice(0,60)))).join('\n'));
+await b.close();})();

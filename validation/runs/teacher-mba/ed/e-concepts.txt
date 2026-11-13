@@ -1,0 +1,7 @@
+with-versus-without (incremental) test | accept, reject, with and without, incremental, changes
+sunk costs are excluded | sunk, already spent, regardless, either way, can't get back
+opportunity cost of assets the firm already owns | opportunity cost, lease, forgone, alternative use, $95
+allocated overhead is excluded unless total overhead changes | overhead, allocation, doesn't change, does not change, total
+net working capital investment and recovery | working capital, inventory, receivables, recovered, outflow
+cannibalization (erosion) of existing sales | cannibalization, almond, erosion, lost margin, existing product
+financing costs belong in the discount rate, not the cash flows | interest, discount rate, financing, double count

@@ -1,0 +1,8 @@
+Those suggestions aren't the ideas — "Halvorsen", "Priya" and "year" are just names from the case. Replace them with:
+with-versus-without (incremental) test
+sunk costs are excluded
+opportunity cost of assets the firm already owns
+allocated overhead is excluded unless total overhead changes
+net working capital investment and recovery
+cannibalization (erosion) of existing sales
+financing costs belong in the discount rate, not the cash flows

@@ -1,0 +1,6 @@
+The $180k market test we already paid for should be recovered by the project — it is sunk: spent whether we accept or reject, so it is irrelevant to the decision
+The warehouse wing is free because we already own it — it has an alternative use, so the forgone $95k/year lease is an opportunity cost of the project
+The head-office overhead allocation is a real cost of the project — only include overhead if total company overhead actually changes because of the project
+Interest on the equipment loan should be subtracted from the cash flows — financing is reflected in the discount rate, so subtracting interest double-counts it
+Working capital is just an expense that disappears — it is an investment at launch that is recovered when the line ends, so it is a timing cost
+Sales taken from our own almond-milk product don't matter because revenue is revenue — the lost almond-milk margin is an incremental cost of the project

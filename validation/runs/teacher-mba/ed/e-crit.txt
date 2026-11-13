@@ -1,0 +1,7 @@
+Excludes the $180k market test and explains it is sunk (spent whether we accept or reject) | sunk, already spent, regardless, either way
+Charges the $95k/year forgone lease as an opportunity cost of the warehouse wing | opportunity cost, lease, forgone, $95
+Excludes the overhead allocation because total corporate overhead does not change | overhead, doesn't change, does not change, total
+Removes loan interest from the cash flows and says financing is in the discount rate | interest, discount rate, double count
+Treats working capital as an outflow at launch and an inflow when the line ends | working capital, recovered, outflow, inflow
+Includes lost almond-milk margin from cannibalization | cannibalization, almond, lost margin
+Uses the "accept versus reject" question explicitly rather than just citing a rule | accept, reject, with and without, incremental

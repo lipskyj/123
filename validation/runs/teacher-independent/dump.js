@@ -1,0 +1,1 @@
+module.exports=async p=>{console.log(p.url());console.log(await p.innerText('body'));console.log(JSON.stringify(await p.$$eval('input,textarea,select,button',e=>e.filter(x=>x.offsetParent).map(x=>x.tagName+'|'+(x.name||x.id)+'|'+(x.type||'')+'|'+x.textContent.trim().slice(0,40)))));};

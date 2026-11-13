@@ -1,0 +1,4 @@
+Primer running at http://localhost:4100
+  Educator authoring: http://localhost:4100/educator
+  Build status:       http://localhost:4100/status
+  Provider: deterministic  |  TEST MODE: approvals are recorded as synthetic test approvals

@@ -1,0 +1,1 @@
+Remove misconception: it only gets to equilibrium faster. Remove misconception: K only changes with temperature. Add misconception: Heating always gives more product — for an exothermic reaction like Haber, heating lowers K and shifts left. Rename the title to Le Chatelier: Explain It to Jordan.

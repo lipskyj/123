@@ -1,0 +1,254 @@
+> I know warfarin thins the blood and that people have to be careful with it.
+   Guide | Thanks. Read the preparation notes, then answer: In your own words, what is "INR monitoring", and why does it matter for this task?
+> Regular INR blood tests check that the warfarin dose is still safe, because diet, illness and other medicines change its effect, so INR monitoring continues even when stable.
+   Guide | Good. You connected this to "INR monitoring" in your own words. Next: In your own words, what is "consistent vitamin K intake", and why does it matter for this task?
+> Keep your vitamin K intake consistent from week to week rather than cutting out greens, because the dose is set around your normal diet.
+   Guide | Good. You connected this to "consistent vitamin K intake" in your own words. Next: In your own words, what is "bleeding warning signs", and why does it matter for this task?
+> Bleeding warning signs such as black stools, unusual bruising or blood in urine mean you must call for help at once because warfarin can cause serious bleeding.
+   Guide | Good. You connected this to "bleeding warning signs" in your own words. Next: In your own words, what is "never double a missed dose", and why does it matter for this task?
+> Never double a missed dose; if you missed it, take it when you remember the same day or skip it, because a double dose raises bleeding risk.
+   Guide | Good. You connected this to "never double a missed dose" in your own words. Preparation is complete. In practice you'll meet Sam: mr. Okafor, a 68-year-old retired bus driver just started on warfarin after atrial fibrillation; anxious, loves his garden vegetables. Jesse is relying on your explanation and will use it right away. Select "Start practice" when you're ready.
+[advance visible: Start practice →]
+--- PRACTICE ---
+   Sam | Hi, I'm Sam. I really need to understand this, and I'm counting on you. Can you help me? Wait, let me check I've got this. So patients must stop eating green vegetables? That's what I always assumed.
+> Keep your vitamin K intake consistent from week to week rather than cutting out greens, because the dose is set around your normal diet.
+   Sam | Oh! So when you say "Keep your vitamin K intake consistent from week to week rather than cutting out greens, b…", that's what makes it work. That helps. Wait, let me check I've got this. So if you miss a dose take two next time? That's what I always assumed. And this time, walk me through your reasoning.
+> Keep your vitamin K intake consistent from week to week rather than cutting out greens, because the dose is set around your normal diet. The reason is that warfarin has a narrow safe range.
+   Sam | Hmm, I'm still confused. Wait, let me check I've got this. So if you miss a dose take two next time? That's what I always assumed.
+> Never double a missed dose; if you missed it, take it when you remember the same day or skip it, because a double dose raises bleeding risk.
+   Sam | Oh! So when you say "Never double a missed dose; if you missed it, take it when you remember the same day or s…", that's what makes it work. That helps. Wait, let me check I've got this. So once the dose is stable you no longer need blood tests? That's what I always assumed. And this time, walk me through your reasoning.
+> Regular INR blood tests check that the warfarin dose is still safe, because diet, illness and other medicines change its effect, so INR monitoring continues even when stable. The reason is that warfarin has a narrow safe range.
+   Sam | Oh! So when you say "Regular INR blood tests check that the warfarin dose is still safe, because diet, illness…", that's what makes it work. That helps. Okay, next thing I don't get: "bleeding warning signs". Can you explain it so I could actually use it? And this time, walk me through your reasoning.
+> Regular INR blood tests check that the warfarin dose is still safe, because diet, illness and other medicines change its effect, so INR monitoring continues even when stable. The reason is that warfarin has a narrow safe range.
+   Sam | Hmm, I'm still confused. Okay, next thing I don't get: "bleeding warning signs". Can you explain it so I could actually use it?
+> Bleeding warning signs such as black stools, unusual bruising or blood in urine mean you must call for help at once because warfarin can cause serious bleeding.
+   Guide | Practice is over. Select "Continue to feedback".
+--- PRACTICE END ---
+Guide
+By the end of this experience you should be able to: Explain warfarin safety to a newly prescribed patient in plain language and check their understanding
+You are the teacher. Explain warfarin safety to a worried patient and check they understood using teach-back
+Guide
+Before we start: what do you already know about Second-year nursing: patient education on oral anticoagulants (warfarin)? Any experience with INR monitoring, consistent vitamin K intake, bleeding warning signs, never double a missed dose? (This isn't graded.)
+You
+I know warfarin thins the blood and that people have to be careful with it.
+Guide
+Thanks. Read the preparation notes, then answer: In your own words, what is "INR monitoring", and why does it matter for this task?
+You
+Regular INR blood tests check that the warfarin dose is still safe, because diet, illness and other medicines change its effect, so INR monitoring continues even when stable.
+Guide
+Good. You connected this to "INR monitoring" in your own words. Next: In your own words, what is "consistent vitamin K intake", and why does it matter for this task?
+You
+Keep your vitamin K intake consistent from week to week rather than cutting out greens, because the dose is set around your normal diet.
+Guide
+Good. You connected this to "consistent vitamin K intake" in your own words. Next: In your own words, what is "bleeding warning signs", and why does it matter for this task?
+You
+Bleeding warning signs such as black stools, unusual bruising or blood in urine mean you must call for help at once because warfarin can cause serious bleeding.
+Guide
+Good. You connected this to "bleeding warning signs" in your own words. Next: In your own words, what is "never double a missed dose", and why does it matter for this task?
+You
+Never double a missed dose; if you missed it, take it when you remember the same day or skip it, because a double dose raises bleeding risk.
+Guide
+Good. You connected this to "never double a missed dose" in your own words. Preparation is complete. In practice you'll meet Sam: mr. Okafor, a 68-year-old retired bus driver just started on warfarin after atrial fibrillation; anxious, loves his garden vegetables. Jesse is relying on your explanation and will use it right away. Select "Start practice" when you're ready.
+Sam
+Hi, I'm Sam. I really need to understand this, and I'm counting on you. Can you help me? Wait, let me check I've got this. So patients must stop eating green vegetables? That's what I always assumed.
+You
+Keep your vitamin K intake consistent from week to week rather than cutting out greens, because the dose is set around your normal diet.
+Sam
+Oh! So when you say "Keep your vitamin K intake consistent from week to week rather than cutting out greens, b…", that's what makes it work. That helps. Wait, let me check I've got this. So if you miss a dose take two next time? That's what I always assumed. And this time, walk me through your reasoning.
+You
+Keep your vitamin K intake consistent from week to week rather than cutting out greens, because the dose is set around your normal diet. The reason is that warfarin has a narrow safe range.
+Sam
+Hmm, I'm still confused. Wait, let me check I've got this. So if you miss a dose take two next time? That's what I always assumed.
+You
+Never double a missed dose; if you missed it, take it when you remember the same day or skip it, because a double dose raises bleeding risk.
+Sam
+Oh! So when you say "Never double a missed dose; if you missed it, take it when you remember the same day or s…", that's what makes it work. That helps. Wait, let me check I've got this. So once the dose is stable you no longer need blood tests? That's what I always assumed. And this time, walk me through your reasoning.
+You
+Regular INR blood tests check that the warfarin dose is still safe, because diet, illness and other medicines change its effect, so INR monitoring continues even when stable. The reason is that warfarin has a narrow safe range.
+Sam
+Oh! So when you say "Regular INR blood tests check that the warfarin dose is still safe, because diet, illness…", that's what makes it work. That helps. Okay, next thing I don't get: "bleeding warning signs". Can you explain it so I could actually use it? And this time, walk me through your reasoning.
+You
+Regular INR blood tests check that the warfarin dose is still safe, because diet, illness and other medicines change its effect, so INR monitoring continues even when stable. The reason is that warfarin has a narrow safe range.
+Sam
+Hmm, I'm still confused. Okay, next thing I don't get: "bleeding warning signs". Can you explain it so I could actually use it?
+You
+Bleeding warning signs such as black stools, unusual bruising or blood in urine mean you must call for help at once because warfarin can cause serious bleeding.
+Sam
+Oh! So when you say "Bleeding warning signs such as black stools, unusual bruising or blood in urine mean you…", that's what makes it work. That helps. I think I understand it much better now. Thanks for explaining!
+Guide
+Practice is over. Select "Continue to feedback".
+[advance: Continue to feedback →]
+--- FEEDBACK START ---
+   Guide | Before I share what I observed: how do you think it went? What felt strongest, and where did you struggle?
+> I think I explained INR and vitamin K well but I was less sure about checking understanding.
+   Guide | Where else, outside this scenario, could you use "INR monitoring"? Describe one specific situation.
+--- FEEDBACK PANEL ---
+Your feedback
+
+Observations quote what you actually wrote. Inferences are labeled "This suggests". Criteria you had no opportunity to show are marked "not assessed".
+
+You said about yourself: "I think I explained INR and vitamin K well but I was less sure about checking understanding."
+You mentioned "consistent"; the evidence shows it as demonstrated. You mentioned "checks"; the evidence shows it as not yet.
+
+Criteria
+Demonstrated Mentions INR blood tests
+Observation: you said "Regular INR blood tests check that the warfarin dose is still safe, because diet, illness and other medicines change its effect, so INR mon…" (preparation)
+Observation: you said "Regular INR blood tests check that the warfarin dose is still safe, because diet, illness and other medicines change its effect, so INR mon…" (practice)
+Observation: you said "Regular INR blood tests check that the warfarin dose is still safe, because diet, illness and other medicines change its effect, so INR mon…" (practice)
+Inference: This suggests you can use this when Sam pushes back.
+Demonstrated explains keeping vitamin K consistent
+Observation: you said "Keep your vitamin K intake consistent from week to week rather than cutting out greens, because the dose is set around your normal diet." (preparation)
+Observation: you said "Keep your vitamin K intake consistent from week to week rather than cutting out greens, because the dose is set around your normal diet." (practice)
+Observation: you said "Keep your vitamin K intake consistent from week to week rather than cutting out greens, because the dose is set around your normal diet. Th…" (practice)
+Inference: This suggests you can use this when Sam pushes back.
+Demonstrated lists bleeding signs to report
+Observation: you said "Bleeding warning signs such as black stools, unusual bruising or blood in urine mean you must call for help at once because warfarin can ca…" (preparation)
+Observation: you said "Bleeding warning signs such as black stools, unusual bruising or blood in urine mean you must call for help at once because warfarin can ca…" (practice)
+Inference: This suggests you can use this when Sam pushes back.
+Demonstrated says not to double a missed dose
+Observation: you said "Never double a missed dose; if you missed it, take it when you remember the same day or skip it, because a double dose raises bleeding risk." (preparation)
+Observation: you said "Never double a missed dose; if you missed it, take it when you remember the same day or skip it, because a double dose raises bleeding risk." (practice)
+Inference: This suggests you can use this when Sam pushes back.
+Not yet checks understanding by asking the patient to repeat back
+Inference: This suggests the idea isn't yet coming to mind when you need it.
+Strengths
+Mentions INR blood tests (you said "Regular INR blood tests check that the warfarin dose is still safe, because diet, illness and other medicines change its effect, so INR mon…")
+explains keeping vitamin K consistent (you said "Keep your vitamin K intake consistent from week to week rather than cutting out greens, because the dose is set around your normal diet.")
+lists bleeding signs to report (you said "Bleeding warning signs such as black stools, unusual bruising or blood in urine mean you must call for help at once because warfarin can ca…")
+says not to double a missed dose (you said "Never double a missed dose; if you missed it, take it when you remember the same day or skip it, because a double dose raises bleeding risk.")
+Growth areas
+checks understanding by asking the patient to repeat back
+Observation: you said "Keep your vitamin K intake consistent from week to week rather than cutting out greens, because the dose is set around your normal diet."
+Next steps
+Next time, when Sam raises this, make the idea explicit (look for: checks, asking, patient, repeat) and explain why it applies, using "because".
+> With a new patient on a different blood thinner I would still teach the bleeding warning signs and ask them to repeat back the plan.
+   Guide | Thanks. Next time, try naming the idea explicitly when you apply it somewhere new. This experience has now ended. You can close this page.
+--- END ---
+✓ Preparation
+✓ Practice
+✓ Feedback & reflection
+Your mission
+
+By the end of this experience you should be able to: Explain warfarin safety to a newly prescribed patient in plain language and check their understanding
+
+You are the teacher. Explain warfarin safety to a worried patient and check they understood using teach-back
+
+Sam
+
+mr. Okafor, a 68-year-old retired bus driver just started on warfarin after atrial fibrillation; anxious, loves his garden vegetables
+
+Jesse is relying on your explanation and will use it right away.
+
+Preparation notes
+Experience complete
+Guide
+By the end of this experience you should be able to: Explain warfarin safety to a newly prescribed patient in plain language and check their understanding
+You are the teacher. Explain warfarin safety to a worried patient and check they understood using teach-back
+Guide
+Before we start: what do you already know about Second-year nursing: patient education on oral anticoagulants (warfarin)? Any experience with INR monitoring, consistent vitamin K intake, bleeding warning signs, never double a missed dose? (This isn't graded.)
+You
+I know warfarin thins the blood and that people have to be careful with it.
+Guide
+Thanks. Read the preparation notes, then answer: In your own words, what is "INR monitoring", and why does it matter for this task?
+You
+Regular INR blood tests check that the warfarin dose is still safe, because diet, illness and other medicines change its effect, so INR monitoring continues even when stable.
+Guide
+Good. You connected this to "INR monitoring" in your own words. Next: In your own words, what is "consistent vitamin K intake", and why does it matter for this task?
+You
+Keep your vitamin K intake consistent from week to week rather than cutting out greens, because the dose is set around your normal diet.
+Guide
+Good. You connected this to "consistent vitamin K intake" in your own words. Next: In your own words, what is "bleeding warning signs", and why does it matter for this task?
+You
+Bleeding warning signs such as black stools, unusual bruising or blood in urine mean you must call for help at once because warfarin can cause serious bleeding.
+Guide
+Good. You connected this to "bleeding warning signs" in your own words. Next: In your own words, what is "never double a missed dose", and why does it matter for this task?
+You
+Never double a missed dose; if you missed it, take it when you remember the same day or skip it, because a double dose raises bleeding risk.
+Guide
+Good. You connected this to "never double a missed dose" in your own words. Preparation is complete. In practice you'll meet Sam: mr. Okafor, a 68-year-old retired bus driver just started on warfarin after atrial fibrillation; anxious, loves his garden vegetables. Jesse is relying on your explanation and will use it right away. Select "Start practice" when you're ready.
+Sam
+Hi, I'm Sam. I really need to understand this, and I'm counting on you. Can you help me? Wait, let me check I've got this. So patients must stop eating green vegetables? That's what I always assumed.
+You
+Keep your vitamin K intake consistent from week to week rather than cutting out greens, because the dose is set around your normal diet.
+Sam
+Oh! So when you say "Keep your vitamin K intake consistent from week to week rather than cutting out greens, b…", that's what makes it work. That helps. Wait, let me check I've got this. So if you miss a dose take two next time? That's what I always assumed. And this time, walk me through your reasoning.
+You
+Keep your vitamin K intake consistent from week to week rather than cutting out greens, because the dose is set around your normal diet. The reason is that warfarin has a narrow safe range.
+Sam
+Hmm, I'm still confused. Wait, let me check I've got this. So if you miss a dose take two next time? That's what I always assumed.
+You
+Never double a missed dose; if you missed it, take it when you remember the same day or skip it, because a double dose raises bleeding risk.
+Sam
+Oh! So when you say "Never double a missed dose; if you missed it, take it when you remember the same day or s…", that's what makes it work. That helps. Wait, let me check I've got this. So once the dose is stable you no longer need blood tests? That's what I always assumed. And this time, walk me through your reasoning.
+You
+Regular INR blood tests check that the warfarin dose is still safe, because diet, illness and other medicines change its effect, so INR monitoring continues even when stable. The reason is that warfarin has a narrow safe range.
+Sam
+Oh! So when you say "Regular INR blood tests check that the warfarin dose is still safe, because diet, illness…", that's what makes it work. That helps. Okay, next thing I don't get: "bleeding warning signs". Can you explain it so I could actually use it? And this time, walk me through your reasoning.
+You
+Regular INR blood tests check that the warfarin dose is still safe, because diet, illness and other medicines change its effect, so INR monitoring continues even when stable. The reason is that warfarin has a narrow safe range.
+Sam
+Hmm, I'm still confused. Okay, next thing I don't get: "bleeding warning signs". Can you explain it so I could actually use it?
+You
+Bleeding warning signs such as black stools, unusual bruising or blood in urine mean you must call for help at once because warfarin can cause serious bleeding.
+Sam
+Oh! So when you say "Bleeding warning signs such as black stools, unusual bruising or blood in urine mean you…", that's what makes it work. That helps. I think I understand it much better now. Thanks for explaining!
+Guide
+Practice is over. Select "Continue to feedback".
+Guide
+Before I share what I observed: how do you think it went? What felt strongest, and where did you struggle?
+You
+I think I explained INR and vitamin K well but I was less sure about checking understanding.
+Guide
+Here is what I observed.
+Your self-assessment: "I think I explained INR and vitamin K well but I was less sure about checking understanding.". You mentioned "consistent"; the evidence shows it as demonstrated. You mentioned "checks"; the evidence shows it as not yet.
+Strength: Mentions INR blood tests. Observation: you said "Regular INR blood tests check that the warfarin dose is still safe, because diet, illness and other medicines change its effect, so INR mon…".
+Strength: explains keeping vitamin K consistent. Observation: you said "Keep your vitamin K intake consistent from week to week rather than cutting out greens, because the dose is set around your normal diet.".
+Strength: lists bleeding signs to report. Observation: you said "Bleeding warning signs such as black stools, unusual bruising or blood in urine mean you must call for help at once because warfarin can ca…".
+Strength: says not to double a missed dose. Observation: you said "Never double a missed dose; if you missed it, take it when you remember the same day or skip it, because a double dose raises bleeding risk.".
+Growth area: checks understanding by asking the patient to repeat back. Observation: you said "Keep your vitamin K intake consistent from week to week rather than cutting out greens, because the dose is set around your normal diet.".
+See the full feedback panel for details and next steps.
+Guide
+Where else, outside this scenario, could you use "INR monitoring"? Describe one specific situation.
+You
+With a new patient on a different blood thinner I would still teach the bleeding warning signs and ask them to repeat back the plan.
+Guide
+Thanks. Next time, try naming the idea explicitly when you apply it somewhere new. This experience has now ended. You can close this page.
+Your feedback
+
+Observations quote what you actually wrote. Inferences are labeled "This suggests". Criteria you had no opportunity to show are marked "not assessed".
+
+You said about yourself: "I think I explained INR and vitamin K well but I was less sure about checking understanding."
+You mentioned "consistent"; the evidence shows it as demonstrated. You mentioned "checks"; the evidence shows it as not yet.
+
+Criteria
+Demonstrated Mentions INR blood tests
+Observation: you said "Regular INR blood tests check that the warfarin dose is still safe, because diet, illness and other medicines change its effect, so INR mon…" (preparation)
+Observation: you said "Regular INR blood tests check that the warfarin dose is still safe, because diet, illness and other medicines change its effect, so INR mon…" (practice)
+Observation: you said "Regular INR blood tests check that the warfarin dose is still safe, because diet, illness and other medicines change its effect, so INR mon…" (practice)
+Inference: This suggests you can use this when Sam pushes back.
+Demonstrated explains keeping vitamin K consistent
+Observation: you said "Keep your vitamin K intake consistent from week to week rather than cutting out greens, because the dose is set around your normal diet." (preparation)
+Observation: you said "Keep your vitamin K intake consistent from week to week rather than cutting out greens, because the dose is set around your normal diet." (practice)
+Observation: you said "Keep your vitamin K intake consistent from week to week rather than cutting out greens, because the dose is set around your normal diet. Th…" (practice)
+Inference: This suggests you can use this when Sam pushes back.
+Demonstrated lists bleeding signs to report
+Observation: you said "Bleeding warning signs such as black stools, unusual bruising or blood in urine mean you must call for help at once because warfarin can ca…" (preparation)
+Observation: you said "Bleeding warning signs such as black stools, unusual bruising or blood in urine mean you must call for help at once because warfarin can ca…" (practice)
+Inference: This suggests you can use this when Sam pushes back.
+Demonstrated says not to double a missed dose
+Observation: you said "Never double a missed dose; if you missed it, take it when you remember the same day or skip it, because a double dose raises bleeding risk." (preparation)
+Observation: you said "Never double a missed dose; if you missed it, take it when you remember the same day or skip it, because a double dose raises bleeding risk." (practice)
+Inference: This suggests you can use this when Sam pushes back.
+Not yet checks understanding by asking the patient to repeat back
+Inference: This suggests the idea isn't yet coming to mind when you need it.
+Strengths
+Mentions INR blood tests (you said "Regular INR blood tests check that the warfarin dose is still safe, because diet, illness and other medicines change its effect, so INR mon…")
+explains keeping vitamin K consistent (you said "Keep your vitamin K intake consistent from week to week rather than cutting out greens, because the dose is set around your normal diet.")
+lists bleeding signs to report (you said "Bleeding warning signs such as black stools, unusual bruising or blood in urine mean you must call for help at once because warfarin can ca…")
+says not to double a missed dose (you said "Never double a missed dose; if you missed it, take it when you remember the same day or skip it, because a double dose raises bleeding risk.")
+Growth areas
+checks understanding by asking the patient to repeat back
+Observation: you said "Keep your vitamin K intake consistent from week to week rather than cutting out greens, because the dose is set around your normal diet."
+Next steps
+Next time, when Sam raises this, make the idea explicit (look for: checks, asking, patient, repeat) and explain why it applies, using "because".
+This experience has ended. Thank you! You can close this page.

@@ -1,0 +1,6 @@
+Money already spent (the market test) should be "recovered" by the project — it's sunk; it's gone whether we accept or reject, so it's irrelevant
+A building or asset we already own is free to the project — it's not free if it has an alternative use; the forgone lease income is an opportunity cost
+The overhead allocation is a real cost of the project — only include overhead if total company overhead actually changes because of the project
+Interest on the loan should be subtracted from the project's cash flows — financing is reflected in the discount rate; subtracting interest double-counts it
+Working capital is an expense that disappears — it's an investment at launch that is recovered at the end, so it's a timing cost
+Sales stolen from our own existing product don't matter because revenue is revenue — lost margin on cannibalized sales is an incremental cost

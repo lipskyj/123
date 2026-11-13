@@ -1,0 +1,1 @@
+Given a proposed project and a pile of numbers from the business, decide which cash flows are incremental to the accept/reject decision and defend each inclusion or exclusion with the "with vs. without the project" test — especially sunk costs, opportunity costs of assets the firm already owns, allocated overhead, and working capital.

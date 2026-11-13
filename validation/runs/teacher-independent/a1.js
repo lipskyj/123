@@ -1,0 +1,1 @@
+module.exports=async p=>{await p.fill('#newname','Le Chatelier - Explain It to a Classmate');await p.click('#newproj button');await p.waitForTimeout(1500);await p.screenshot({path:'03-new.png',fullPage:true});await require('./dump')(p);};

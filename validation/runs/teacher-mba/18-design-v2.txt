@@ -1,0 +1,196 @@
+Primer.
+Educator studio
+Experiences
+TEST MODE: approvals made here are recorded as synthetic test approvals, not real educator approvals.
+Your experiences
+Name for new experience
+New experience
+Le Chatelier - Explain It to a Classmate
+Design v2: revisedRelevant Cash Flows in Capital Budgeting (MGMT 6210, Session 7)
+Design v2: revised
+Relevant Cash Flows in Capital Budgeting (MGMT 6210, Session 7)
+1. Interview
+2. Design review
+3. Experience & evidence
+Created version 2. (Not understood: "Remove the key idea "Those suggestions aren't the ideas" — that was my comment, not a concept.", "Two of the challenges are wrong: "it's gone whether we accept or reject, so it's irrelevant" and "the forgone lease income is an opportunity cost" are the CORRECT ideas, not misconceptions — Priya should never argue them.", "Add challenges for working capital ("working capital is an expense that disappears") and cannibalization ("sales stolen from our own almond-milk product don't matter").". Edit those parts directly.)
+MBA Managerial Finance (MGMT 6210, part-time evening MBA) — Session 7… — Roleplay v2 · revised
+Version
+v1 (superseded)
+v2 (revised)
+
+Revised: not yet approved
+
+What changed: Requested: "Rename the character to Priya Nair. Remove the key idea "Those suggestions aren't the ideas" — that was my comment, not a concept. Two of the challenges are wrong: "it's gone whether we accept or reject, so it's irrelevant" and "the forgone lease income is an opportunity cost" are the CORRECT ideas, not misconceptions — Priya should never argue them. Add challenges for working capital ("working capital is an expense that disappears") and cannibalization ("sales stolen from our own almond-milk product don't matter").". Character renamed to Priya
+
+1 change(s) from the previous version
+Assumptions Primer made. Please check these:
+Misconception "it's gone whether we accept or reject, so it's irrelevant" was linked to the idea "with-versus-without (incremental) test" by position because the wording does not overlap. Please check.
+The criterion "Excludes the $180k market test and explains it is sunk (spe…" doesn't name a key idea, so its look-fors (excludes 180k market test sunk, spent accept reject) come from its own wording. Please check them.
+Learning goal
+
+Objective: Given a proposed project and a pile of numbers from the business, decide which cash flows are incremental to the accept/reject decision and defend each inclusion or exclusion with the "with vs. without the project" test — especially sunk costs, opportunity costs of assets the firm already owns, allocated overhead, and working capital. from you
+
+Learners: Part-time evening MBA students in their second term, average about 7 years of work experience. Many are engineers, operations managers and product people; a few come from accounting. They've done the time-value-of-money and NPV mechanics sessions, so they can discount a cash flow. What they lack is judgment about WHICH numbers belong in the analysis — they tend to trust whatever the spreadsheet from the business unit gives them. from you
+
+Prior knowledge to activate: They can compute NPV and IRR and know that cash flows, not accounting profit, are what get discounted. The prep should refresh: cash flow vs. net income (depreciation is non-cash but creates a tax shield), and the idea that a decision only cares about what differs between the alternatives. from you
+
+Format: Roleplay (the learner faces a counterpart) from you
+
+Difficulty: standard AI suggestion: check this
+The coach offers a hint after 2 unsuccessful attempt(s) and moves on after 4. After 2 success(es) the bar rises and reasoning becomes required. An answer must be at least 8 words to count. Practice length: up to 15 learner turns.
+
+Constraints: About 20–25 minutes, done before class as preparation for our live discussion. Professional, collegial tone — Priya is a colleague, not a villain. Don't make them build a full NPV spreadsheet or compute taxes in detail; the point is the include/exclude judgment, not arithmetic. from you
+
+Scenario
+
+Character: Priya, priya Nair, the Dayton plant controller. She's experienced, numbers-savvy and proud of her cost list; she wants the line approved but also wants the market test "paid back" and the overhead charge included because head office insists. She's not hostile, but she's confident and will push back with accounting logic ("depreciation is a cost", "the warehouse is free, we own it"). She concedes when the learner gives a clear with-vs-without reason, not when they just cite a rule. from you
+
+Character's goal: the line approved but also wants the market test "paid back" and the overhead charge included because head office insists
+
+Learner's task: Act as the analyst advising the capital committee. Priya, the plant controller, pushes her cost list as-is; the learner has to go item by item, say include or exclude, give the with-vs-without reason, and hold their ground politely when she pushes back ("but we spent $180k on that test — it has to be recovered!"). from you
+
+Stakes: Quinn will only move if your reasoning holds up. AI suggestion: check this
+
+Phase 1: Preparation
+
+The learner first says what they already know (not graded). They then read these notes and answer retrieval questions in their own words. Primer gives cues, never answers.
+
+Those suggestions aren't the ideas — "Halvorsen", "Priya" and "year" are just names from the case. Replace them with: from you look-fors:
+suggestions
+ideas
+halvorsen
+priya
+(needs 2)
+"Priya wants it "recovered" by the project. - **Unused warehouse wing.** The line would occupy a wing Halvorsen already owns." halvorsen-case.md
+"# Halvorsen Foods: The Dayton Line Extension (mini case, MGMT 6210 Session 7) Halvorsen Foods is deciding whether to add a refrigerated oat-milk line at its Dayton plant." halvorsen-case.md
+with-versus-without (incremental) test from you look-fors:
+versus
+incremental
+(needs 2)
+"Your task as the analyst: for each item, decide whether it belongs in the project's incremental cash flows, and say why using the question "What changes for Halvorsen if we accept versus reject this project?" Note that depreciation is not itself a cash flow, but its tax shield is." halvorsen-case.md
+Correct idea: it's sunk from you
+sunk costs are excluded from you look-fors:
+costs
+excluded
+(needs 2)
+"Priya Nair, the plant controller, has sent the capital committee the following "project costs": - **Market test, completed last spring: $180,000.** Already paid." halvorsen-case.md
+"Priya lists its cost as $0." halvorsen-case.md
+opportunity cost of assets the firm already owns from you look-fors:
+opportunity
+assets
+already
+(needs 2)
+"Priya Nair, the plant controller, has sent the capital committee the following "project costs": - **Market test, completed last spring: $180,000.** Already paid." halvorsen-case.md
+"Priya wants it "recovered" by the project. - **Unused warehouse wing.** The line would occupy a wing Halvorsen already owns." halvorsen-case.md
+Correct idea: it's not free if it has an alternative use from you
+allocated overhead is excluded unless total overhead changes from you look-fors:
+allocated
+overhead
+excluded
+unless
+(needs 2)
+"A logistics firm has offered to lease that wing for $95,000 per year. - **Corporate overhead allocation: $120,000 per year.** Head office charges every new line 8% of revenue." halvorsen-case.md
+Correct idea: only include overhead if total company overhead actually changes because of the project from you
+net working capital investment and recovery from you look-fors:
+working
+capital
+investment
+recovery
+(needs 2)
+"Priya Nair, the plant controller, has sent the capital committee the following "project costs": - **Market test, completed last spring: $180,000.** Already paid." halvorsen-case.md
+cannibalization (erosion) of existing sales from you look-fors:
+cannibalization
+erosion
+existing
+sales
+(needs 2)
+No material excerpt found for this idea. Consider adding a reading.
+financing costs belong in the discount rate, not the cash flows from you look-fors:
+financing
+costs
+belong
+discount
+(needs 2)
+"Financing costs are captured in the discount rate, not in the cash flows." halvorsen-case.md
+"Your task as the analyst: for each item, decide whether it belongs in the project's incremental cash flows, and say why using the question "What changes for Halvorsen if we accept versus reject this project?" Note that depreciation is not itself a cash flow, but its tax shield is." halvorsen-case.md
+Correct idea: financing is reflected in the discount rate from you
+
+Retrieval questions: In your own words, what is "Those suggestions aren't the ideas — "Halvorsen", "Priya" and "year" are just names from the case. Replace them with:", and why does it matter for this task? · In your own words, what is "with-versus-without (incremental) test", and why does it matter for this task? · In your own words, what is "sunk costs are excluded", and why does it matter for this task? · In your own words, what is "opportunity cost of assets the firm already owns", and why does it matter for this task?
+
+Phase 2: Practice challenges
+
+Priya raises these in order. Misconceptions you listed become challenges, which creates productive friction.
+
+"Look, the way I see it, money already spent (the market test) should be "recovered" by the project. Why should I see it any differently?"
+Learner succeeds by: Correct the misconception using "with-versus-without (incremental) test" · from your misconception list
+"Look, the way I see it, it's gone whether we accept or reject, so it's irrelevant. Why should I see it any differently?"
+Learner succeeds by: Correct the misconception using "with-versus-without (incremental) test" · from your misconception list
+"Look, the way I see it, A building or asset we already own is free to the project. Why should I see it any differently?"
+Learner succeeds by: Correct the misconception using "opportunity cost of assets the firm already owns" · from your misconception list
+"Look, the way I see it, the forgone lease income is an opportunity cost. Why should I see it any differently?"
+Learner succeeds by: Correct the misconception using "sunk costs are excluded" · from your misconception list
+"Look, the way I see it, the overhead allocation is a real cost of the project. Why should I see it any differently?"
+Learner succeeds by: Correct the misconception using "allocated overhead is excluded unless total overhead changes" · from your misconception list
+"Look, the way I see it, interest on the loan should be subtracted from the project's cash flows. Why should I see it any differently?"
+Learner succeeds by: Correct the misconception using "financing costs belong in the discount rate, not the cash flows" · from your misconception list
+Phase 3: Feedback criteria
+from you
+Criterion	Look-fors in the learner's words
+Excludes the $180k market test and explains it is sunk (spent whether we accept or reject)	
+excludes 180k market test sunk
+spent accept reject
+
+Charges the $95k/year forgone lease as an opportunity cost of the warehouse wing	
+costs
+excluded
+opportunity
+assets
+already
+financing
+belong
+discount
+(needs 2)
+Excludes the overhead allocation because total corporate overhead does not change	
+allocated
+overhead
+excluded
+unless
+(needs 2)
+Removes loan interest from the cash flows and says financing is in the discount rate	
+financing
+costs
+belong
+discount
+(needs 2)
+Treats working capital as an outflow at launch and an inflow when the line ends	
+working
+capital
+investment
+recovery
+(needs 2)
+Includes lost almond-milk margin from cannibalization	
+cannibalization
+erosion
+existing
+sales
+(needs 2)
+Uses the "accept versus reject" question explicitly rather than just citing a rule	
+versus
+incremental
+(needs 2)
+
+Feedback first asks for the learner's self-assessment. It then quotes their actual words for each criterion, labels inferences separately, marks criteria they had no chance to show as "not assessed", and ends with a transfer question.
+
+Inspect the generated prompts (used when an AI model voices the characters)
+Your decision
+Edit this design
+Ask for a revision in plain language
+ Request revision
+Test approval (synthetic)
+Your name
+ I have reviewed this design, including its assumptions, and approve it for learners.
+Record test approval
+What needs more work
+Return for more work
+Reason for rejecting
+Reject design

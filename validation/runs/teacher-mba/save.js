@@ -1,0 +1,10 @@
+const { chromium } = require('playwright');const fs=require('fs');
+(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1280,height:900}});
+await p.goto('http://localhost:4100/educator?p=prj-354eaf914b');await p.waitForTimeout(1000);
+await p.click('button:has-text("Edit this design")');await p.waitForTimeout(1000);
+for (const f of fs.readdirSync('ed')) await p.fill('#'+f.replace('.txt',''),fs.readFileSync('ed/'+f,'utf8').trim());
+await p.screenshot({path:'19-editor-filled.png',fullPage:true});
+await p.click('button:has-text("Save as new version")');await p.waitForTimeout(4000);
+await p.screenshot({path:'20-design-v3.png',fullPage:true});
+const t=await p.innerText('body');fs.writeFileSync('design-v3.txt',t);console.log(t);
+await b.close();})();

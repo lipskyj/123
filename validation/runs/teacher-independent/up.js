@@ -1,0 +1,1 @@
+module.exports=async p=>{await p.setInputFiles('#matfile','le-chatelier-notes.md');await p.waitForTimeout(2500);await p.screenshot({path:'04-material.png',fullPage:true});const t=await p.innerText('body');console.log(t.slice(t.indexOf('Materials')));};

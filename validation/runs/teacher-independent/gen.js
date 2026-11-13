@@ -1,0 +1,1 @@
+module.exports=async p=>{await p.screenshot({path:'05-interview-complete.png',fullPage:true});await p.click('button:has-text("Generate design")');await p.waitForTimeout(4000);await p.screenshot({path:'06-design-v1.png',fullPage:true});const t=await p.innerText('body');require('fs').writeFileSync('design-v1.txt',t);console.log(t);};

@@ -1,0 +1,1 @@
+They can compute NPV and IRR and know that cash flows, not accounting profit, are what get discounted. The prep should refresh: cash flow vs. net income (depreciation is non-cash but creates a tax shield), and the idea that a decision only cares about what differs between the alternatives.

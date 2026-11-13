@@ -1,0 +1,185 @@
+Primer.
+Educator studio
+Experiences
+Interview complete
+TEST MODE: approvals made here are recorded as synthetic test approvals, not real educator approvals.
+Your experiences
+Name for new experience
+New experience
+Le Chatelier - Explain It to a Classmate
+Design v3: revisedRelevant Cash Flows in Capital Budgeting (MGMT 6210, Session 7)
+Design v2: revised
+Le Chatelier - Explain It to a Classmate
+1. Interview
+2. Design review
+3. Experience & evidence
+Created version 3.
+Le Chatelier: Explain It to Jordan v3 · revised
+Version
+v1 (superseded)
+v2 (superseded)
+v3 (revised)
+
+Revised: not yet approved
+
+What changed: Direct edits: title, template, objective, character, learnerRole, stakes, concepts, misconceptions, criteria, practiceTurns, constraints
+
+6 change(s) from the previous version
+Learning goal
+
+Objective: Explain, in their own words, why an equilibrium system shifts after a disturbance by comparing the reaction quotient Q to the equilibrium constant K - and correctly say when K itself changes (only temperature) versus when only Q changes (concentration, pressure/volume), and that a catalyst changes neither. from you
+
+Learners: First-year undergrads, about 120 per section, second semester of gen chem. Most can recite "the system shifts to relieve the stress" and get the direction right on multiple choice, but they cannot explain WHY in terms of Q vs K or reaction rates. Many are shaky on what "equilibrium" actually means. Mixed math confidence; roughly a third are English learners, so plain language helps. from you
+
+Prior knowledge to activate: They can write an equilibrium expression and calculate K from equilibrium concentrations, and they know the "stress" version of Le Chatelier. They know exothermic vs endothermic and that catalysts lower activation energy. The preparation should refresh how to write Q from current concentrations and the idea that Q moves toward K. from you
+
+Format: Teachback (the learner teaches a character) from you
+
+Difficulty: supportive AI suggestion: check this
+The coach offers a hint after 1 unsuccessful attempt(s) and moves on after 4. After 3 success(es) the bar rises and reasoning becomes required. An answer must be at least 6 words to count. Practice length: up to 12 learner turns.
+
+Constraints: About 15-20 minutes, done as homework before recitation. Plain, friendly language - many students are English learners. Keep it qualitative: no ICE-table calculations, they get enough of those on the problem sets. Use the Haber process as the main example. from you
+
+Scenario
+
+Character: Jordan, a classmate in the same gen chem section who is cramming for tomorrow's exam with the learner. Jordan memorized "the system relieves the stress" and is confident but wrong about catalysts and about K changing when you add reactant. Jordan is friendly but skeptical: they will not accept a rule without a reason and keep asking "but why does it shift?" Jordan needs this for the exam and for the Haber process lab report. from you
+
+Character's goal: Understand WHY equilibria shift (not just the rule) before tomorrow's exam and the Haber process lab report
+
+Learner's task: Explain the idea to a confused classmate. The classmate is studying for the exam and keeps confidently saying the wrong things (like "the catalyst makes more ammonia" or "if you add N2, K gets bigger"). The learner has to correct them by explaining with Q vs K and rates, not just restating "it shifts to relieve the stress". The classmate should push back and ask "but why?" until the explanation actually holds up. from you
+
+Stakes: Jordan has the exam tomorrow and will repeat your explanation in the Haber lab report, so it has to hold up when they ask "but why?" from you
+
+Phase 1: Preparation
+
+The learner first says what they already know (not graded). They then read these notes and answer retrieval questions in their own words. Primer gives cues, never answers.
+
+Equilibrium is dynamic: forward and reverse rates are equal, concentrations constant but not equal from you look-fors:
+rate
+rates
+forward
+reverse
+still
+constant
+not equal
+both directions
+"At equilibrium the forward and reverse reactions are still happening, at equal rates, so concentrations stay constant." le-chatelier-notes.md
+"The reason behind it is Q vs K: - If Q < K, there is "too little product": the forward rate is temporarily faster, and the system shifts right until Q = K. - If Q > K, the reverse rate wins and the system shifts left." le-chatelier-notes.md
+Correct idea: both directions are still running, at equal rates from you
+Correct idea: they are constant, not equal from you
+Reaction quotient Q vs equilibrium constant K decides the direction of the shift from you look-fors:
+Q
+K
+quotient
+smaller than K
+bigger than K
+less than K
+greater than K
+"For aA + bB <=> cC + dD, the reaction quotient is Q = [C]^c[D]^d / [A]^a[B]^b, using whatever concentrations exist right now." le-chatelier-notes.md
+"Heating lowers K, so less NH3 at equilibrium, even though the reaction gets there faster." le-chatelier-notes.md
+Concentration and pressure/volume changes change Q, not K from you look-fors:
+Q changes
+K stays
+K doesn't change
+K does not change
+same K
+fewer moles
+"Compressing a gas mixture (smaller volume) raises all partial pressures; Q changes if the moles of gas differ on each side, and the system shifts toward fewer moles of gas." le-chatelier-notes.md
+"Adding an inert gas at constant volume changes nothing." le-chatelier-notes.md
+Only temperature changes K (exothermic: heating lowers K) from you look-fors:
+temperature
+heating
+exothermic
+K decreases
+lowers K
+K gets smaller
+"For an exothermic reaction, heating lowers K, so the system shifts left." le-chatelier-notes.md
+"Heating lowers K, so less NH3 at equilibrium, even though the reaction gets there faster." le-chatelier-notes.md
+Correct idea: adding reactant lowers Q below K; K only changes with temperature from you
+Correct idea: for an exothermic reaction like Haber, heating lowers K and shifts left, even though it gets there faster from you
+A catalyst speeds up both directions equally and does not shift equilibrium from you look-fors:
+catalyst
+both directions
+faster
+equally
+same amount
+doesn't shift
+does not shift
+"The reason behind it is Q vs K: - If Q < K, there is "too little product": the forward rate is temporarily faster, and the system shifts right until Q = K. - If Q > K, the reverse rate wins and the system shifts left." le-chatelier-notes.md
+"A catalyst speeds up the forward and reverse reactions equally." le-chatelier-notes.md
+Correct idea: a catalyst speeds up forward and reverse equally; it only gets to equilibrium faster from you
+
+Retrieval questions: In your own words, what is "Equilibrium is dynamic: forward and reverse rates are equal, concentrations constant but not equal", and why does it matter for this task? · In your own words, what is "Reaction quotient Q vs equilibrium constant K decides the direction of the shift", and why does it matter for this task? · In your own words, what is "Concentration and pressure/volume changes change Q, not K", and why does it matter for this task? · In your own words, what is "Only temperature changes K (exothermic: heating lowers K)", and why does it matter for this task?
+
+Phase 2: Practice challenges
+
+Jordan raises these in order. Misconceptions you listed become challenges, which creates productive friction.
+
+"Wait, let me check I've got this. So adding a catalyst shifts the equilibrium toward products and gives more ammonia? That's what I always assumed."
+Learner succeeds by: Correct the misconception using "A catalyst speeds up both directions equally and does not shift equilibrium" · from your misconception list
+"Wait, let me check I've got this. So at equilibrium the reaction has stopped? That's what I always assumed."
+Learner succeeds by: Correct the misconception using "Equilibrium is dynamic: forward and reverse rates are equal, concentrations constant but not equal" · from your misconception list
+"Wait, let me check I've got this. So at equilibrium the concentrations of reactants and products are equal? That's what I always assumed."
+Learner succeeds by: Correct the misconception using "Equilibrium is dynamic: forward and reverse rates are equal, concentrations constant but not equal" · from your misconception list
+"Wait, let me check I've got this. So adding more N2 increases K? That's what I always assumed."
+Learner succeeds by: Correct the misconception using "Only temperature changes K (exothermic: heating lowers K)" · from your misconception list
+"Wait, let me check I've got this. So heating always gives more product? That's what I always assumed."
+Learner succeeds by: Correct the misconception using "Only temperature changes K (exothermic: heating lowers K)" · from your misconception list
+"Okay, next thing I don't get: "Reaction quotient Q vs equilibrium constant K decides the direction of the shift". Can you explain it so I could actually use it?"
+Learner succeeds by: Apply "Reaction quotient Q vs equilibrium constant K decides the direction of the shift"
+Phase 3: Feedback criteria
+from you
+Criterion	Look-fors in the learner's words
+Compares Q to K to explain the direction of the shift (e.g. "adding N2 makes Q smaller than K, so it shifts right")	
+Q
+K
+smaller than K
+bigger than K
+less than K
+greater than K
+
+Says explicitly that K stays the same for concentration and pressure changes and only changes with temperature	
+K stays
+K doesn't change
+K does not change
+same K
+temperature
+
+Explains that a catalyst speeds up forward and reverse equally, so it gets to equilibrium faster but doesn't change how much product	
+catalyst
+both directions
+faster
+equally
+same amount
+
+Describes equilibrium as dynamic (both reactions still going, equal rates), not stopped and not equal amounts	
+rate
+rates
+forward
+reverse
+still
+not equal
+both directions
+
+Corrects Jordan's specific wrong statement instead of just repeating the rule	
+no
+actually
+not quite
+wrong
+because
+
+Feedback first asks for the learner's self-assessment. It then quotes their actual words for each criterion, labels inferences separately, marks criteria they had no chance to show as "not assessed", and ends with a transfer question.
+
+Inspect the generated prompts (used when an AI model voices the characters)
+Your decision
+Edit this design
+Ask for a revision in plain language
+ Request revision
+Test approval (synthetic)
+Your name
+ I have reviewed this design, including its assumptions, and approve it for learners.
+Record test approval
+What needs more work
+Return for more work
+Reason for rejecting
+Reject design
