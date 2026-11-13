@@ -316,7 +316,7 @@ cave.initialized.then(() => {
   $("start").disabled = false; window.caveReady = true;
 }).catch((e) => ($("load").textContent = "Could not load the cave: " + e.message));
 $("start").onclick = () => closeSheet("intro");
-window.cave = { camera, POIS, setView: (x, z, y, p) => { camera.position.x = x; camera.position.z = z; yaw = y; pitch = p; }, select: selectTool, use: useTool, found };
+window.cave = { camera, POIS, renderer, scene, setView: (x, z, y, p) => { camera.position.x = x; camera.position.z = z; yaw = y; pitch = p; }, select: selectTool, use: useTool, found };
 </script>
 </body>
 </html>
