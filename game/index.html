@@ -93,6 +93,45 @@ button.go:hover,button.go:focus-visible{filter:brightness(1.25) drop-shadow(0 0 
 .stats{display:grid;grid-template-columns:repeat(2,auto);gap:6px 28px;font-family:var(--data);font-size:16px;text-align:left}
 .stats b{color:var(--ion);font-weight:400;text-align:right;font-variant-numeric:tabular-nums}
 #best{font-family:var(--data);color:var(--forge);letter-spacing:.2em;font-size:13px}
+/* touch layout: thumbs own the bottom corners, so vitals and ammo move to the top */
+#touch,#c,#hud{touch-action:none}
+body.touch{-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+body.touch #radar{width:84px;height:84px}
+body.touch #bl{top:14px;bottom:auto;left:calc(max(18px,env(safe-area-inset-left,0px)) + 96px);width:min(150px,34vw);gap:4px}
+body.touch #hpnum{font-size:22px}body.touch #hpnum small{font-size:12px}
+body.touch #hpbar{height:9px}body.touch #dash .lbl{display:none}
+body.touch #score{font-size:20px}body.touch #combo{font-size:12px;height:14px}
+body.touch #br{top:74px;bottom:auto;gap:4px}
+body.touch #ammo{font-size:26px}body.touch #ammo small{font-size:13px}body.touch #wname{font-size:10px}
+body.touch #slots{pointer-events:auto;gap:8px}body.touch #slots b{font-size:14px;padding:8px 12px}
+body.touch #topc{top:12px}body.touch #wave{font-size:14px}body.touch #boss{width:min(420px,52vw)}
+body.touch #od{pointer-events:auto;bottom:calc(14px + env(safe-area-inset-bottom,0px));width:min(200px,30vw);padding:8px 0}
+body.touch #tip{bottom:calc(66px + env(safe-area-inset-bottom,0px));left:27%;right:27%;font-size:11px;letter-spacing:.1em;line-height:1.5}
+body.touch #announce h2{font-size:clamp(22px,6vw,48px)}body.touch #announce p{font-size:11px;letter-spacing:.14em;padding:0 16px}
+#stick{position:absolute;left:0;top:0;width:0;height:0}
+#stick i{position:absolute;left:-58px;top:-58px;width:116px;height:116px;border-radius:50%;border:2px solid rgba(77,225,255,.45);background:rgba(10,14,26,.3)}
+#knob{position:absolute;left:0;top:0;width:52px;height:52px;border-radius:50%;background:rgba(77,225,255,.5);box-shadow:0 0 16px rgba(77,225,255,.5);transform:translate(-50%,-50%)}
+.tb{position:absolute;pointer-events:auto;border-radius:50%;border:2px solid rgba(213,220,240,.45);background:rgba(10,14,26,.38);color:var(--hull);
+  font-family:var(--display);font-weight:700;font-size:11px;letter-spacing:.1em;display:flex;align-items:center;justify-content:center;padding:0;touch-action:none}
+.tb.held{background:rgba(77,225,255,.4);border-color:var(--ion)}
+#tfire{right:calc(22px + env(safe-area-inset-right,0px));bottom:calc(34px + env(safe-area-inset-bottom,0px));width:84px;height:84px;font-size:14px;border-color:rgba(255,61,110,.8);background:rgba(255,61,110,.2)}
+#tfire.held{background:rgba(255,61,110,.55)}
+#tjump{right:calc(122px + env(safe-area-inset-right,0px));bottom:calc(22px + env(safe-area-inset-bottom,0px));width:64px;height:64px}
+#tdash{right:calc(118px + env(safe-area-inset-right,0px));bottom:calc(100px + env(safe-area-inset-bottom,0px));width:56px;height:56px;border-color:rgba(255,154,60,.7)}
+#tzoom{right:calc(34px + env(safe-area-inset-right,0px));bottom:calc(134px + env(safe-area-inset-bottom,0px));width:52px;height:52px}
+#treload{right:calc(200px + env(safe-area-inset-right,0px));bottom:calc(26px + env(safe-area-inset-bottom,0px));width:52px;height:52px;font-size:9px}
+#tpause{right:calc(max(18px,env(safe-area-inset-right,0px)) + 104px);top:14px;width:40px;height:40px;border-radius:8px;font-size:13px}
+#tauto{right:calc(max(18px,env(safe-area-inset-right,0px)) + 152px);top:14px;width:auto;height:40px;border-radius:8px;padding:0 10px;font-size:9px;color:var(--ion);border-color:rgba(77,225,255,.5)}
+#tauto.off{color:var(--dim);border-color:rgba(125,134,163,.5)}
+@media (max-width:520px){
+  #tauto{right:auto;left:max(18px,env(safe-area-inset-left,0px));top:108px;height:32px}
+  #tpause{right:auto;left:calc(max(18px,env(safe-area-inset-left,0px)) + 124px);top:108px;height:32px;width:36px}
+  body.touch #topc{top:190px}
+  body.touch #br{top:92px}
+  body.touch #tip{bottom:auto;top:240px;left:16px;right:16px}
+  body.touch #announce{top:34%}
+  body.touch #od{left:max(16px,env(safe-area-inset-left,0px));transform:none;width:130px;text-align:left}
+}
 @media (max-width:700px){#radar{width:96px;height:96px}#ammo{font-size:32px}#hpnum{font-size:24px}#tip{display:none}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -125,13 +164,28 @@ button.go:hover,button.go:focus-visible{filter:brightness(1.25) drop-shadow(0 0 
   <div id="tip"></div>
 </div>
 <div id="lowhp" class="layer"></div>
+<div id="touch" class="layer" hidden>
+  <div id="stick" hidden><i></i><div id="knob"></div></div>
+  <button class="tb" id="tfire" aria-label="Fire">FIRE</button>
+  <button class="tb" id="tjump" aria-label="Jump">JUMP</button>
+  <button class="tb" id="tdash" aria-label="Dash">DASH</button>
+  <button class="tb" id="tzoom" aria-label="Zoom">ZOOM</button>
+  <button class="tb" id="treload" aria-label="Reload">RELOAD</button>
+  <button class="tb" id="tpause" aria-label="Pause">II</button>
+  <button class="tb" id="tauto" aria-label="Toggle auto-fire">AUTO-FIRE ON</button>
+</div>
 
 <div id="menu" class="overlay">
   <div class="tag">Orbital solar forge · Warden protocol</div>
   <h1>HELIOS<br>BREACH</h1>
   <p>The forge machines have turned. You are the last warden on the deck. Hold the reactor against every wave, take a field upgrade after each one, and survive the Overseer.</p>
   <button class="go" id="play">Deploy</button>
-  <div class="keys">
+  <div class="keys" id="keys-touch" hidden>
+    <span><b>Left thumb</b> move</span><span><b>Right thumb</b> drag to aim</span><span><b>Auto-fire</b> shoots on target</span><span><b>FIRE</b> hold, drag to aim</span>
+    <span><b>JUMP</b> tap twice</span><span><b>DASH</b> burst of speed</span><span><b>1–4</b> tap a weapon</span><span><b>Overdrive</b> tap the bar</span>
+    <span><b>Tip</b> landscape shows more</span>
+  </div>
+  <div class="keys" id="keys-desktop">
     <span><b>W A S D</b> move</span><span><b>Mouse</b> aim</span><span><b>Left click</b> fire</span><span><b>Right click</b> zoom</span>
     <span><b>Space</b> jump ×2</span><span><b>Shift</b> dash</span><span><b>1–4 / wheel</b> weapons</span><span><b>R</b> reload</span>
     <span><b>F</b> overdrive</span><span><b>M</b> mute</span><span><b>[ ]</b> sensitivity</span><span><b>Esc</b> pause</span>
@@ -149,7 +203,7 @@ button.go:hover,button.go:focus-visible{filter:brightness(1.25) drop-shadow(0 0 
   <div class="tag" id="ptag">Wave cleared</div>
   <h3>FIELD UPGRADE</h3>
   <div class="cards" id="cards"></div>
-  <p>Press 1, 2 or 3 — or move the mouse to choose and click.</p>
+  <p id="perkhint">Press 1, 2 or 3, or move the mouse to choose and click.</p>
 </div>
 
 <div id="dead" class="overlay" hidden>
@@ -237,10 +291,15 @@ if (T.EffectComposer && T.UnrealBloomPass && T.ShaderPass) {
   composer.addPass(finalPass);
   if (T.FXAAShader) { fxaaPass = new T.ShaderPass(T.FXAAShader); composer.addPass(fxaaPass); }
 } else { renderer.toneMapping = T.ACESFilmicToneMapping; renderer.outputEncoding = T.sRGBEncoding; }
+const touch = { on: false, move: null, looks: new Map(), mx: 0, my: 0, fire: 0, auto: true, autoFire: false };
+let BASEFOV = 78, VMX = 1;
 function resize() {
   const w = window.innerWidth, h = window.innerHeight;
   renderer.setPixelRatio(pixelRatio);
   renderer.setSize(w, h, false);
+  // portrait screens get a taller field of view so the horizontal view stays usable
+  BASEFOV = w < h ? Math.min(100, 2 * Math.atan(Math.tan(33 * Math.PI / 180) / (w / h)) * 180 / Math.PI) : 78; VMX = clamp(w / h, 0.45, 1);
+  if (G.state !== 'playing') camera.fov = BASEFOV;
   camera.aspect = w / h; camera.updateProjectionMatrix();
   if (finalPass) finalPass.material.uniforms.uAspect.value = w / h;
   if (typeof particles !== 'undefined' && particles) particles.material.uniforms.uScale.value = h * 0.9;
@@ -988,14 +1047,14 @@ function updatePlayer(dt) {
   const turn = ((keys.KeyQ || keys.ArrowLeft) ? 1 : 0) - ((keys.KeyE || keys.ArrowRight) ? 1 : 0);
   if (turn) P.yaw += turn * 2.4 * dt;
   if (keys.ArrowUp) P.pitch = clamp(P.pitch + 1.6 * dt, -1.5, 1.5); if (keys.ArrowDown) P.pitch = clamp(P.pitch - 1.6 * dt, -1.5, 1.5);
-  const f = (keys.KeyW ? 1 : 0) - (keys.KeyS ? 1 : 0), s = (keys.KeyD ? 1 : 0) - (keys.KeyA ? 1 : 0);
+  const f = (keys.KeyW ? 1 : 0) - (keys.KeyS ? 1 : 0) - touch.my, s = (keys.KeyD ? 1 : 0) - (keys.KeyA ? 1 : 0) + touch.mx;
   const sy = Math.sin(P.yaw), cy = Math.cos(P.yaw);
-  let wx = -sy * f + cy * s, wz = -cy * f - sy * s; const wl = Math.hypot(wx, wz); if (wl > 0) { wx /= wl; wz /= wl; }
+  let wx = -sy * f + cy * s, wz = -cy * f - sy * s; const wl = Math.hypot(wx, wz); if (wl > 1) { wx /= wl; wz /= wl; }
   const speed = 9.6 * mods.speed * (1 - 0.35 * P.ads);
 
   P.dashCd -= dt; P.invuln -= dt;
   if ((pressed.ShiftLeft || pressed.ShiftRight) && P.dashCd <= 0) {
-    if (wl > 0) P.dashDir.set(wx, 0, wz); else P.dashDir.set(-sy, 0, -cy);
+    if (wl > 0.15) P.dashDir.set(wx, 0, wz).normalize(); else P.dashDir.set(-sy, 0, -cy);
     P.dashT = 0.17; P.dashCd = 1.7 * mods.dashCd; P.invuln = 0.25; sfx.dash();
     for (let i = 0; i < 14; i++) emit(P.pos.x + rand(-.4, .4), P.pos.y + rand(.3, 1.5), P.pos.z + rand(-.4, .4), -P.dashDir.x * 6, 0, -P.dashDir.z * 6, 0x4de1ff, 0.25, 0.35);
   }
@@ -1024,12 +1083,12 @@ function updatePlayer(dt) {
   // camera
   if (P.onGround && hs > 1) P.bob += hs * dt * 0.95;
   P.dip = damp(P.dip, 0, 9, dt); P.kick = damp(P.kick, 0, 11, dt); P.trauma = Math.max(0, P.trauma - 1.6 * dt);
-  P.roll = damp(P.roll, -s * 0.035, 8, dt);
+  P.roll = damp(P.roll, -clamp(s, -1, 1) * 0.035, 8, dt);
   const sh = P.trauma * P.trauma, bobY = P.onGround ? Math.sin(P.bob * 2) * 0.05 * Math.min(1, hs / 9) : 0;
   P.eye.set(P.pos.x, P.pos.y + EYE - P.dip + bobY, P.pos.z);
   camera.position.copy(P.eye);
   camera.rotation.set(P.pitch + P.kick + rand(-1, 1) * sh * 0.05, P.yaw + rand(-1, 1) * sh * 0.05, P.roll + rand(-1, 1) * sh * 0.04);
-  P.fov = damp(P.fov, 78 - 30 * P.ads + (P.dashT > 0 ? 12 : 0) + (G.odT > 0 ? 5 : 0), 10, dt);
+  P.fov = damp(P.fov, BASEFOV * (1 - 0.385 * P.ads) + (P.dashT > 0 ? 12 : 0) + (G.odT > 0 ? 5 : 0), 10, dt);
   if (Math.abs(camera.fov - P.fov) > 0.01) { camera.fov = P.fov; camera.updateProjectionMatrix(); }
   camera.updateMatrixWorld(true);
 }
@@ -1143,7 +1202,7 @@ function updateWeapons(dt) {
     reloadT -= dt;
     if (reloadT <= 0) { const need = magSize(cur) - s.mag, take = Math.min(need, s.res); s.mag += take; s.res -= take; }
   }
-  if (mouse.l && fireCd <= 0 && reloadT <= 0 && switchT <= 0) {
+  if ((mouse.l || touch.fire > 0 || touch.autoFire) && fireCd <= 0 && reloadT <= 0 && switchT <= 0) {
     if (s.mag > 0) fire();
     else if (s.res > 0) startReload();
     else { sfx.empty(); fireCd = 0.3; switchWeapon(0); }
@@ -1159,7 +1218,7 @@ function updateWeapons(dt) {
   const sw = switchT > 0 ? Math.sin(Math.PI * (1 - switchT / 0.26)) : 0;
   const rl = reloadT > 0 ? Math.sin(Math.PI * (1 - reloadT / WEAPONS[cur].reload)) : 0;
   const hs = Math.hypot(P.vel.x, P.vel.z) / 9.6, bob = P.onGround ? hs * (1 - a * 0.85) : 0;
-  g.position.set(0.27 * (1 - a) + vm.swayX + Math.cos(P.bob) * 0.012 * bob, -0.25 + 0.085 * a + vm.swayY - sw * 0.35 - rl * 0.13 + Math.sin(P.bob * 2) * 0.01 * bob - P.vel.y * 0.002, -0.46 + 0.08 * a + vm.recoil * 0.07);
+  g.position.set(0.27 * VMX * (1 - a) + vm.swayX + Math.cos(P.bob) * 0.012 * bob, -0.25 + 0.085 * a + vm.swayY - sw * 0.35 - rl * 0.13 + Math.sin(P.bob * 2) * 0.01 * bob - P.vel.y * 0.002, -0.46 + 0.08 * a + vm.recoil * 0.07);
   g.rotation.set(vm.recoil * 0.1 - sw * 0.9 + rl * 0.5, vm.swayX * 1.6 + 0.03 * (1 - a), rl * 0.7 + vm.swayX * -1.2);
   vm.flashT -= dt; vm.flash.visible = vm.flashT > 0;
 }
@@ -1427,6 +1486,10 @@ function updateEnemies(dt) {
     if (e.type !== 'bomber' || e.state !== 'fuse') e.mesh.scale.setScalar(Math.min(1, 0.1 + e.born / 0.35));
     UPD[e.type](e, dt);
     if (e.dead) continue;
+    if (!e.d.fly && e.state !== 'leap' && Math.abs(P.pos.y - e.pos.y) < 1.6) {      // machines crowd the player but never stand inside them
+      const ox = e.pos.x - P.pos.x, oz = e.pos.z - P.pos.z, od = Math.hypot(ox, oz), min = e.r + 0.55;
+      if (od < min && od > 1e-4) { e.pos.x = P.pos.x + ox / od * min; e.pos.z = P.pos.z + oz / od * min; }
+    }
     if (e.flash > 0 || e.wasFlash) { const f = e.flash; for (const m of e.mats) m.emissive.setRGB(m.userData.e.r + f * 2.5, m.userData.e.g + f * 2.5, m.userData.e.b + f * 2.5); e.wasFlash = f > 0; e.flash = Math.max(0, f - 7 * dt); }
     e.mesh.position.copy(e.pos); if (e.type !== 'boss') e.mesh.rotation.y = e.face;
   }
@@ -1527,7 +1590,7 @@ function updateProjs(dt) {
     }
   }
 }
-const matHealth = new T.MeshBasicMaterial({ color: lin(0x5dffa0, GLOW) }), matAmmo = new T.MeshBasicMaterial({ color: lin(0xffc247, GLOW) });
+const matHealth = new T.MeshBasicMaterial({ color: lin(0x5dffa0, GLOW * 0.45) }), matAmmo = new T.MeshBasicMaterial({ color: lin(0xffc247, GLOW * 0.4) });
 function spawnPickup(kind, x, z) {
   x = clamp(x, -ARENA + 2, ARENA - 2); z = clamp(z, -ARENA + 2, ARENA - 2);
   const m = new T.Mesh(kind === 'health' ? GEO.octa : GEO.box, kind === 'health' ? matHealth : matAmmo);
@@ -1550,6 +1613,89 @@ function updatePickups(dt) {
     }
     if (p.life <= 0) { scene.remove(p.m); pickups.splice(i, 1); }
   }
+}
+// ---------------------------------------------------------------- touch controls
+// Left thumb: floating move stick. Right thumb: drag anywhere to aim (the FIRE button also aims while held).
+const stick = $('stick'), knob = $('knob');
+const STICK_R = 54;
+function enableTouch() {
+  if (touch.on) return;
+  touch.on = true; G.freeLook = true; document.body.classList.add('touch');
+  $('keys-desktop').hidden = true; $('keys-touch').hidden = false; $('perkhint').textContent = 'Tap an upgrade to install it.';
+  pixelRatio = Math.min(window.devicePixelRatio || 1, 1.1);
+  if (world.sun) { world.sun.shadow.mapSize.set(2048, 2048); if (world.sun.shadow.map) { world.sun.shadow.map.dispose(); world.sun.shadow.map = null; } }
+  resize();
+}
+function setAuto(v) { touch.auto = v; $('tauto').textContent = v ? 'AUTO-FIRE ON' : 'AUTO-FIRE OFF'; $('tauto').classList.toggle('off', !v); }
+function endTouch(id) {
+  if (touch.move && touch.move.id === id) { touch.move = null; touch.mx = touch.my = 0; stick.hidden = true; }
+  const l = touch.looks.get(id); if (l) { if (l.fire) { touch.fire = Math.max(0, touch.fire - 1); $('tfire').classList.remove('held'); } touch.looks.delete(id); }
+}
+function resetTouch() { touch.move = null; touch.mx = touch.my = 0; touch.fire = 0; touch.looks.clear(); stick.hidden = true; $('tfire').classList.remove('held'); mouse.r = false; $('tzoom').classList.remove('held'); }
+
+document.addEventListener('touchstart', e => {
+  enableTouch();
+  if (G.state !== 'playing') return;                       // menus and upgrade cards take ordinary taps
+  const tg = e.target;
+  if (tg.closest && tg.closest('.tb:not(#tfire), #slots, #od, #tauto')) return;
+  e.preventDefault(); initAudio();
+  for (const t of e.changedTouches) {
+    if (tg.id === 'tfire') { touch.looks.set(t.identifier, { x: t.clientX, y: t.clientY, fire: true }); touch.fire++; tg.classList.add('held'); }
+    else if (!touch.move && t.clientX < window.innerWidth * 0.45 && t.clientY > window.innerHeight * 0.28) {
+      touch.move = { id: t.identifier, ox: t.clientX, oy: t.clientY };
+      stick.hidden = false; stick.style.transform = `translate(${t.clientX}px,${t.clientY}px)`; knob.style.transform = 'translate(-50%,-50%)';
+    } else touch.looks.set(t.identifier, { x: t.clientX, y: t.clientY });
+  }
+}, { passive: false });
+document.addEventListener('touchmove', e => {
+  if (G.state !== 'playing') return;
+  e.preventDefault();
+  for (const t of e.changedTouches) {
+    if (touch.move && touch.move.id === t.identifier) {
+      let dx = t.clientX - touch.move.ox, dy = t.clientY - touch.move.oy; const l = Math.hypot(dx, dy);
+      if (l > STICK_R) { dx *= STICK_R / l; dy *= STICK_R / l; }
+      touch.mx = dx / STICK_R; touch.my = dy / STICK_R; knob.style.transform = `translate(calc(-50% + ${dx}px),calc(-50% + ${dy}px))`;
+      continue;
+    }
+    const l = touch.looks.get(t.identifier); if (!l) continue;
+    const dx = t.clientX - l.x, dy = t.clientY - l.y; l.x = t.clientX; l.y = t.clientY;
+    const s = 0.0052 * G.sens * (1 - 0.5 * P.ads);
+    P.yaw -= dx * s; P.pitch = clamp(P.pitch - dy * s, -1.5, 1.5); mouse.dx += dx; mouse.dy += dy;
+  }
+}, { passive: false });
+for (const ev of ['touchend', 'touchcancel']) document.addEventListener(ev, e => { for (const t of e.changedTouches) endTouch(t.identifier); });
+
+function tapButton(id, fn) {
+  const el = $(id);
+  el.addEventListener('touchstart', e => { e.preventDefault(); e.stopPropagation(); if (G.state === 'playing' || id === 'tauto') fn(el); }, { passive: false });
+  el.addEventListener('click', e => { if (!touch.on) fn(el); });
+}
+tapButton('tjump', () => { pressed.Space = true; });
+tapButton('tdash', () => { pressed.ShiftLeft = true; });
+tapButton('treload', () => startReload());
+tapButton('tzoom', el => { mouse.r = !mouse.r; el.classList.toggle('held', mouse.r); });
+tapButton('tpause', () => pauseGame());
+tapButton('tauto', () => setAuto(!touch.auto));
+tapButton('od', () => onKey('KeyF'));
+[...$('slots').children].forEach((b, i) => b.addEventListener('touchstart', e => { e.preventDefault(); e.stopPropagation(); if (G.state === 'playing') switchWeapon(i); }, { passive: false }));
+
+// aim assist + auto-fire: pulls the crosshair gently onto the nearest visible machine and fires the two bullet weapons when on target
+function touchAssist(dt) {
+  touch.autoFire = false; if (!touch.on) return;
+  const cp = Math.cos(P.pitch), fx0 = -Math.sin(P.yaw) * cp, fy0 = Math.sin(P.pitch), fz0 = -Math.cos(P.yaw) * cp;
+  let best = null, bs = 1, ba = 0, bl = 1, bx = 0, by = 0, bz = 0;
+  for (const e of enemies) {
+    if (e.dead || e.born < 0.3) continue;
+    const dx = (e.hr > 0 ? e.hx : e.pos.x) - P.eye.x, dy = (e.hr > 0 ? e.hy : e.pos.y + (e.d.fly ? 0 : e.h * 0.5)) - P.eye.y, dz = (e.hr > 0 ? e.hz : e.pos.z) - P.eye.z, l = Math.hypot(dx, dy, dz);
+    if (l > 75 || l < 0.6) continue;
+    const a = Math.acos(clamp((dx * fx0 + dy * fy0 + dz * fz0) / l, -1, 1));
+    const cone = l < 7 ? 0.2 + (7 - l) * 0.09 : 0.2;        // wider up close, where machines cross the view fast
+    if (a / cone < bs) { bs = a / cone; ba = a; bl = l; best = e; bx = dx; by = dy; bz = dz; }
+  }
+  if (!best || !losClear(P.eye, tmpB.set(P.eye.x + bx, P.eye.y + by, P.eye.z + bz))) return;
+  const k = Math.min(1, (bl < 7 ? 7 : 3.4) * dt) * (touch.looks.size ? 0.45 : 1);
+  P.yaw = angLerp(P.yaw, Math.atan2(-bx, -bz), k); P.pitch += (Math.atan2(by, Math.hypot(bx, bz)) - P.pitch) * k;
+  if (touch.auto && cur < 2 && ba < Math.max(0.03, best.r * 0.75 / Math.hypot(bx, by, bz))) touch.autoFire = true;
 }
 // ---------------------------------------------------------------- HUD
 const setText = (el, s) => { if (el._t !== s) { el._t = s; el.textContent = s; } };
@@ -1664,7 +1810,7 @@ const PERKS = [
 let perkChoices = [], perkSel = 1;
 function setPerkSel(i) { perkSel = i; [...$('cards').children].forEach((c, k) => c.classList.toggle('sel', k === i)); }
 function showPerks() {
-  G.state = 'perk'; G.perkGuard = 0.6; hud.ann.style.opacity = 0; annT = 0; perkAcc = 0; mouse.l = mouse.r = false;
+  resetTouch(); G.state = 'perk'; G.perkGuard = 0.6; hud.ann.style.opacity = 0; annT = 0; perkAcc = 0; mouse.l = mouse.r = false;
   const pool = PERKS.slice(); perkChoices = [];
   for (let i = 0; i < 3; i++) perkChoices.push(pool.splice((Math.random() * pool.length) | 0, 1)[0]);
   $('ptag').textContent = `Wave ${G.wave} cleared`;
@@ -1699,19 +1845,20 @@ function startGame() {
   Object.assign(G, { state: 'playing', phase: 'countdown', phaseT: 2.4, wave: 0, score: 0, kills: 0, combo: 0, comboT: 0, queue: [], time: 0, slowT: 0, od: 0, odT: 0, shots: 0, hits: 0, multiT: 0, multiN: 0 });
   for (const id of ['menu', 'pause', 'perks', 'dead']) $(id).hidden = true;
   $('hud').hidden = false; $('boss').hidden = true; music.intensity = 1; mouse.l = mouse.r = false;
-  announce('HOLD THE DECK', 'first wave inbound', 2.2); last = performance.now();
+  announce('HOLD THE DECK', 'first wave inbound', 2.2); last = performance.now(); resetTouch();
+  if (touch.on) showTip('Left thumb moves · right thumb aims · auto-fire is on', 7);
   lockPointer(); canvas.focus();
 }
 function pauseGame() {
   if (G.state !== 'playing') return;
-  G.state = 'paused'; $('pause').hidden = false; mouse.l = mouse.r = false; for (const k in keys) keys[k] = false;
+  G.state = 'paused'; $('pause').hidden = false; mouse.l = mouse.r = false; resetTouch(); for (const k in keys) keys[k] = false;
 }
 function resumeGame() {
   if (G.state !== 'paused') return;
   G.state = 'playing'; $('pause').hidden = true; last = performance.now(); initAudio(); lockPointer(); canvas.focus();
 }
 function gameOver() {
-  G.state = 'dead'; sfx.die(); music.intensity = 0; mouse.l = mouse.r = false;
+  resetTouch(); G.state = 'dead'; sfx.die(); music.intensity = 0; mouse.l = mouse.r = false;
   const newBest = G.score > G.best; if (newBest) { G.best = G.score; try { localStorage.setItem('helios-best', G.best); } catch (e) {} }
   explode(P.eye.clone(), 6, 0, 0, 0xff3d6e, true);
   if (document.pointerLockElement === canvas) document.exitPointerLock();
@@ -1728,6 +1875,8 @@ $('pinfo').textContent = `Sensitivity ${G.sens.toFixed(1)} · press [ or ] to ad
 
 // ---------------------------------------------------------------- main loop
 buildWorld(); buildFlowGrid(); buildParticles(); buildFx(); buildViewmodel(); vm.group.visible = false; resize();
+const touchLayer = $('touch');
+if (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) enableTouch();
 let last = performance.now(), ftAcc = 0, ftN = 0, wt = 0, sunVis = 0;
 const coreHot = lin(0xffb060, GLOW * 1.6), coreCold = lin(0x7fe8ff, GLOW * 1.6);
 function frame(now) {
@@ -1738,7 +1887,7 @@ function frame(now) {
   if (G.state === 'playing') {
     dt = real; if (G.slowT > 0) { G.slowT -= real; dt *= 0.3; }
     G.time += dt;
-    updatePlayer(dt); updateWeapons(dt);
+    touchAssist(dt); updatePlayer(dt); updateWeapons(dt);
     const edt = dt * (G.odT > 0 ? 0.6 : 1);
     updateEnemies(edt); updateProjs(edt); updatePickups(dt); updateWaves(dt, real);
     if (G.comboT > 0) { G.comboT -= dt; if (G.comboT <= 0) G.combo = 0; }
@@ -1747,7 +1896,8 @@ function frame(now) {
     // adaptive quality: drop resolution first, then shadow detail, if the frame rate stays under ~40
     ftAcc += Math.min(raw, 0.5); if (++ftN >= 90) {
       if (ftAcc / ftN > 1 / 40) {
-        if (pixelRatio > 0.75) { pixelRatio = Math.max(0.75, pixelRatio * 0.85); resize(); }
+        const floor = touch.on ? 0.6 : 0.75;
+        if (pixelRatio > floor) { pixelRatio = Math.max(floor, pixelRatio * 0.85); resize(); }
         else if (world.sun.shadow.mapSize.x > 2048) { world.sun.shadow.mapSize.set(2048, 2048); if (world.sun.shadow.map) { world.sun.shadow.map.dispose(); world.sun.shadow.map = null; } }
       }
       ftAcc = ftN = 0;
@@ -1771,6 +1921,7 @@ function frame(now) {
   for (const p of pads) { p.arrow.position.y = 1.1 + ((wt * 1.4) % 1) * 1.2; p.arrow.scale.setScalar(0.5 * (1 - ((wt * 1.4) % 1) * 0.6)); }
 
   if (G.state !== 'menu') updateHUD(real);
+  const showT = touch.on && G.state === 'playing'; if (touchLayer._s !== showT) { touchLayer._s = showT; touchLayer.hidden = !showT; }
   // keep the high-resolution shadow frustum centred on the action
   const sc = G.state === 'menu' ? tmpB.set(0, 0, 0) : tmpB.set(Math.round(P.pos.x), 0, Math.round(P.pos.z));
   world.sun.position.copy(sc).addScaledVector(sunDir, 120); world.sun.target.position.copy(sc);
@@ -1785,7 +1936,7 @@ function frame(now) {
   for (const k in pressed) delete pressed[k];
 }
 requestAnimationFrame(frame);
-window.HB = { showPerks, vm, fx, get fps() { return ftN / Math.max(ftAcc, 1e-6); }, G, P, enemies, projs, pickups, ws, mods, startGame, spawnEnemy, startWave, pickPerk, WEAPONS };
+window.HB = { touch, showPerks, vm, fx, get fps() { return ftN / Math.max(ftAcc, 1e-6); }, G, P, enemies, projs, pickups, ws, mods, startGame, spawnEnemy, startWave, pickPerk, WEAPONS };
 })();
 </script>
 </body></html>

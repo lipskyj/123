@@ -111,7 +111,7 @@ const PERKS = [
 let perkChoices = [], perkSel = 1;
 function setPerkSel(i) { perkSel = i; [...$('cards').children].forEach((c, k) => c.classList.toggle('sel', k === i)); }
 function showPerks() {
-  G.state = 'perk'; G.perkGuard = 0.6; hud.ann.style.opacity = 0; annT = 0; perkAcc = 0; mouse.l = mouse.r = false;
+  resetTouch(); G.state = 'perk'; G.perkGuard = 0.6; hud.ann.style.opacity = 0; annT = 0; perkAcc = 0; mouse.l = mouse.r = false;
   const pool = PERKS.slice(); perkChoices = [];
   for (let i = 0; i < 3; i++) perkChoices.push(pool.splice((Math.random() * pool.length) | 0, 1)[0]);
   $('ptag').textContent = `Wave ${G.wave} cleared`;
@@ -146,19 +146,20 @@ function startGame() {
   Object.assign(G, { state: 'playing', phase: 'countdown', phaseT: 2.4, wave: 0, score: 0, kills: 0, combo: 0, comboT: 0, queue: [], time: 0, slowT: 0, od: 0, odT: 0, shots: 0, hits: 0, multiT: 0, multiN: 0 });
   for (const id of ['menu', 'pause', 'perks', 'dead']) $(id).hidden = true;
   $('hud').hidden = false; $('boss').hidden = true; music.intensity = 1; mouse.l = mouse.r = false;
-  announce('HOLD THE DECK', 'first wave inbound', 2.2); last = performance.now();
+  announce('HOLD THE DECK', 'first wave inbound', 2.2); last = performance.now(); resetTouch();
+  if (touch.on) showTip('Left thumb moves · right thumb aims · auto-fire is on', 7);
   lockPointer(); canvas.focus();
 }
 function pauseGame() {
   if (G.state !== 'playing') return;
-  G.state = 'paused'; $('pause').hidden = false; mouse.l = mouse.r = false; for (const k in keys) keys[k] = false;
+  G.state = 'paused'; $('pause').hidden = false; mouse.l = mouse.r = false; resetTouch(); for (const k in keys) keys[k] = false;
 }
 function resumeGame() {
   if (G.state !== 'paused') return;
   G.state = 'playing'; $('pause').hidden = true; last = performance.now(); initAudio(); lockPointer(); canvas.focus();
 }
 function gameOver() {
-  G.state = 'dead'; sfx.die(); music.intensity = 0; mouse.l = mouse.r = false;
+  resetTouch(); G.state = 'dead'; sfx.die(); music.intensity = 0; mouse.l = mouse.r = false;
   const newBest = G.score > G.best; if (newBest) { G.best = G.score; try { localStorage.setItem('helios-best', G.best); } catch (e) {} }
   explode(P.eye.clone(), 6, 0, 0, 0xff3d6e, true);
   if (document.pointerLockElement === canvas) document.exitPointerLock();
@@ -175,6 +176,8 @@ $('pinfo').textContent = `Sensitivity ${G.sens.toFixed(1)} · press [ or ] to ad
 
 // ---------------------------------------------------------------- main loop
 buildWorld(); buildFlowGrid(); buildParticles(); buildFx(); buildViewmodel(); vm.group.visible = false; resize();
+const touchLayer = $('touch');
+if (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) enableTouch();
 let last = performance.now(), ftAcc = 0, ftN = 0, wt = 0, sunVis = 0;
 const coreHot = lin(0xffb060, GLOW * 1.6), coreCold = lin(0x7fe8ff, GLOW * 1.6);
 function frame(now) {
@@ -185,7 +188,7 @@ function frame(now) {
   if (G.state === 'playing') {
     dt = real; if (G.slowT > 0) { G.slowT -= real; dt *= 0.3; }
     G.time += dt;
-    updatePlayer(dt); updateWeapons(dt);
+    touchAssist(dt); updatePlayer(dt); updateWeapons(dt);
     const edt = dt * (G.odT > 0 ? 0.6 : 1);
     updateEnemies(edt); updateProjs(edt); updatePickups(dt); updateWaves(dt, real);
     if (G.comboT > 0) { G.comboT -= dt; if (G.comboT <= 0) G.combo = 0; }
@@ -194,7 +197,8 @@ function frame(now) {
     // adaptive quality: drop resolution first, then shadow detail, if the frame rate stays under ~40
     ftAcc += Math.min(raw, 0.5); if (++ftN >= 90) {
       if (ftAcc / ftN > 1 / 40) {
-        if (pixelRatio > 0.75) { pixelRatio = Math.max(0.75, pixelRatio * 0.85); resize(); }
+        const floor = touch.on ? 0.6 : 0.75;
+        if (pixelRatio > floor) { pixelRatio = Math.max(floor, pixelRatio * 0.85); resize(); }
         else if (world.sun.shadow.mapSize.x > 2048) { world.sun.shadow.mapSize.set(2048, 2048); if (world.sun.shadow.map) { world.sun.shadow.map.dispose(); world.sun.shadow.map = null; } }
       }
       ftAcc = ftN = 0;
@@ -218,6 +222,7 @@ function frame(now) {
   for (const p of pads) { p.arrow.position.y = 1.1 + ((wt * 1.4) % 1) * 1.2; p.arrow.scale.setScalar(0.5 * (1 - ((wt * 1.4) % 1) * 0.6)); }
 
   if (G.state !== 'menu') updateHUD(real);
+  const showT = touch.on && G.state === 'playing'; if (touchLayer._s !== showT) { touchLayer._s = showT; touchLayer.hidden = !showT; }
   // keep the high-resolution shadow frustum centred on the action
   const sc = G.state === 'menu' ? tmpB.set(0, 0, 0) : tmpB.set(Math.round(P.pos.x), 0, Math.round(P.pos.z));
   world.sun.position.copy(sc).addScaledVector(sunDir, 120); world.sun.target.position.copy(sc);
@@ -232,4 +237,4 @@ function frame(now) {
   for (const k in pressed) delete pressed[k];
 }
 requestAnimationFrame(frame);
-window.HB = { showPerks, vm, fx, get fps() { return ftN / Math.max(ftAcc, 1e-6); }, G, P, enemies, projs, pickups, ws, mods, startGame, spawnEnemy, startWave, pickPerk, WEAPONS };
+window.HB = { touch, showPerks, vm, fx, get fps() { return ftN / Math.max(ftAcc, 1e-6); }, G, P, enemies, projs, pickups, ws, mods, startGame, spawnEnemy, startWave, pickPerk, WEAPONS };

@@ -63,14 +63,14 @@ function updatePlayer(dt) {
   const turn = ((keys.KeyQ || keys.ArrowLeft) ? 1 : 0) - ((keys.KeyE || keys.ArrowRight) ? 1 : 0);
   if (turn) P.yaw += turn * 2.4 * dt;
   if (keys.ArrowUp) P.pitch = clamp(P.pitch + 1.6 * dt, -1.5, 1.5); if (keys.ArrowDown) P.pitch = clamp(P.pitch - 1.6 * dt, -1.5, 1.5);
-  const f = (keys.KeyW ? 1 : 0) - (keys.KeyS ? 1 : 0), s = (keys.KeyD ? 1 : 0) - (keys.KeyA ? 1 : 0);
+  const f = (keys.KeyW ? 1 : 0) - (keys.KeyS ? 1 : 0) - touch.my, s = (keys.KeyD ? 1 : 0) - (keys.KeyA ? 1 : 0) + touch.mx;
   const sy = Math.sin(P.yaw), cy = Math.cos(P.yaw);
-  let wx = -sy * f + cy * s, wz = -cy * f - sy * s; const wl = Math.hypot(wx, wz); if (wl > 0) { wx /= wl; wz /= wl; }
+  let wx = -sy * f + cy * s, wz = -cy * f - sy * s; const wl = Math.hypot(wx, wz); if (wl > 1) { wx /= wl; wz /= wl; }
   const speed = 9.6 * mods.speed * (1 - 0.35 * P.ads);
 
   P.dashCd -= dt; P.invuln -= dt;
   if ((pressed.ShiftLeft || pressed.ShiftRight) && P.dashCd <= 0) {
-    if (wl > 0) P.dashDir.set(wx, 0, wz); else P.dashDir.set(-sy, 0, -cy);
+    if (wl > 0.15) P.dashDir.set(wx, 0, wz).normalize(); else P.dashDir.set(-sy, 0, -cy);
     P.dashT = 0.17; P.dashCd = 1.7 * mods.dashCd; P.invuln = 0.25; sfx.dash();
     for (let i = 0; i < 14; i++) emit(P.pos.x + rand(-.4, .4), P.pos.y + rand(.3, 1.5), P.pos.z + rand(-.4, .4), -P.dashDir.x * 6, 0, -P.dashDir.z * 6, 0x4de1ff, 0.25, 0.35);
   }
@@ -99,12 +99,12 @@ function updatePlayer(dt) {
   // camera
   if (P.onGround && hs > 1) P.bob += hs * dt * 0.95;
   P.dip = damp(P.dip, 0, 9, dt); P.kick = damp(P.kick, 0, 11, dt); P.trauma = Math.max(0, P.trauma - 1.6 * dt);
-  P.roll = damp(P.roll, -s * 0.035, 8, dt);
+  P.roll = damp(P.roll, -clamp(s, -1, 1) * 0.035, 8, dt);
   const sh = P.trauma * P.trauma, bobY = P.onGround ? Math.sin(P.bob * 2) * 0.05 * Math.min(1, hs / 9) : 0;
   P.eye.set(P.pos.x, P.pos.y + EYE - P.dip + bobY, P.pos.z);
   camera.position.copy(P.eye);
   camera.rotation.set(P.pitch + P.kick + rand(-1, 1) * sh * 0.05, P.yaw + rand(-1, 1) * sh * 0.05, P.roll + rand(-1, 1) * sh * 0.04);
-  P.fov = damp(P.fov, 78 - 30 * P.ads + (P.dashT > 0 ? 12 : 0) + (G.odT > 0 ? 5 : 0), 10, dt);
+  P.fov = damp(P.fov, BASEFOV * (1 - 0.385 * P.ads) + (P.dashT > 0 ? 12 : 0) + (G.odT > 0 ? 5 : 0), 10, dt);
   if (Math.abs(camera.fov - P.fov) > 0.01) { camera.fov = P.fov; camera.updateProjectionMatrix(); }
   camera.updateMatrixWorld(true);
 }
@@ -218,7 +218,7 @@ function updateWeapons(dt) {
     reloadT -= dt;
     if (reloadT <= 0) { const need = magSize(cur) - s.mag, take = Math.min(need, s.res); s.mag += take; s.res -= take; }
   }
-  if (mouse.l && fireCd <= 0 && reloadT <= 0 && switchT <= 0) {
+  if ((mouse.l || touch.fire > 0 || touch.autoFire) && fireCd <= 0 && reloadT <= 0 && switchT <= 0) {
     if (s.mag > 0) fire();
     else if (s.res > 0) startReload();
     else { sfx.empty(); fireCd = 0.3; switchWeapon(0); }
@@ -234,7 +234,7 @@ function updateWeapons(dt) {
   const sw = switchT > 0 ? Math.sin(Math.PI * (1 - switchT / 0.26)) : 0;
   const rl = reloadT > 0 ? Math.sin(Math.PI * (1 - reloadT / WEAPONS[cur].reload)) : 0;
   const hs = Math.hypot(P.vel.x, P.vel.z) / 9.6, bob = P.onGround ? hs * (1 - a * 0.85) : 0;
-  g.position.set(0.27 * (1 - a) + vm.swayX + Math.cos(P.bob) * 0.012 * bob, -0.25 + 0.085 * a + vm.swayY - sw * 0.35 - rl * 0.13 + Math.sin(P.bob * 2) * 0.01 * bob - P.vel.y * 0.002, -0.46 + 0.08 * a + vm.recoil * 0.07);
+  g.position.set(0.27 * VMX * (1 - a) + vm.swayX + Math.cos(P.bob) * 0.012 * bob, -0.25 + 0.085 * a + vm.swayY - sw * 0.35 - rl * 0.13 + Math.sin(P.bob * 2) * 0.01 * bob - P.vel.y * 0.002, -0.46 + 0.08 * a + vm.recoil * 0.07);
   g.rotation.set(vm.recoil * 0.1 - sw * 0.9 + rl * 0.5, vm.swayX * 1.6 + 0.03 * (1 - a), rl * 0.7 + vm.swayX * -1.2);
   vm.flashT -= dt; vm.flash.visible = vm.flashT > 0;
 }

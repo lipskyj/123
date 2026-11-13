@@ -232,6 +232,10 @@ function updateEnemies(dt) {
     if (e.type !== 'bomber' || e.state !== 'fuse') e.mesh.scale.setScalar(Math.min(1, 0.1 + e.born / 0.35));
     UPD[e.type](e, dt);
     if (e.dead) continue;
+    if (!e.d.fly && e.state !== 'leap' && Math.abs(P.pos.y - e.pos.y) < 1.6) {      // machines crowd the player but never stand inside them
+      const ox = e.pos.x - P.pos.x, oz = e.pos.z - P.pos.z, od = Math.hypot(ox, oz), min = e.r + 0.55;
+      if (od < min && od > 1e-4) { e.pos.x = P.pos.x + ox / od * min; e.pos.z = P.pos.z + oz / od * min; }
+    }
     if (e.flash > 0 || e.wasFlash) { const f = e.flash; for (const m of e.mats) m.emissive.setRGB(m.userData.e.r + f * 2.5, m.userData.e.g + f * 2.5, m.userData.e.b + f * 2.5); e.wasFlash = f > 0; e.flash = Math.max(0, f - 7 * dt); }
     e.mesh.position.copy(e.pos); if (e.type !== 'boss') e.mesh.rotation.y = e.face;
   }
@@ -332,7 +336,7 @@ function updateProjs(dt) {
     }
   }
 }
-const matHealth = new T.MeshBasicMaterial({ color: lin(0x5dffa0, GLOW) }), matAmmo = new T.MeshBasicMaterial({ color: lin(0xffc247, GLOW) });
+const matHealth = new T.MeshBasicMaterial({ color: lin(0x5dffa0, GLOW * 0.45) }), matAmmo = new T.MeshBasicMaterial({ color: lin(0xffc247, GLOW * 0.4) });
 function spawnPickup(kind, x, z) {
   x = clamp(x, -ARENA + 2, ARENA - 2); z = clamp(z, -ARENA + 2, ARENA - 2);
   const m = new T.Mesh(kind === 'health' ? GEO.octa : GEO.box, kind === 'health' ? matHealth : matAmmo);

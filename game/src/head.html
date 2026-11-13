@@ -92,6 +92,45 @@ button.go:hover,button.go:focus-visible{filter:brightness(1.25) drop-shadow(0 0 
 .stats{display:grid;grid-template-columns:repeat(2,auto);gap:6px 28px;font-family:var(--data);font-size:16px;text-align:left}
 .stats b{color:var(--ion);font-weight:400;text-align:right;font-variant-numeric:tabular-nums}
 #best{font-family:var(--data);color:var(--forge);letter-spacing:.2em;font-size:13px}
+/* touch layout: thumbs own the bottom corners, so vitals and ammo move to the top */
+#touch,#c,#hud{touch-action:none}
+body.touch{-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+body.touch #radar{width:84px;height:84px}
+body.touch #bl{top:14px;bottom:auto;left:calc(max(18px,env(safe-area-inset-left,0px)) + 96px);width:min(150px,34vw);gap:4px}
+body.touch #hpnum{font-size:22px}body.touch #hpnum small{font-size:12px}
+body.touch #hpbar{height:9px}body.touch #dash .lbl{display:none}
+body.touch #score{font-size:20px}body.touch #combo{font-size:12px;height:14px}
+body.touch #br{top:74px;bottom:auto;gap:4px}
+body.touch #ammo{font-size:26px}body.touch #ammo small{font-size:13px}body.touch #wname{font-size:10px}
+body.touch #slots{pointer-events:auto;gap:8px}body.touch #slots b{font-size:14px;padding:8px 12px}
+body.touch #topc{top:12px}body.touch #wave{font-size:14px}body.touch #boss{width:min(420px,52vw)}
+body.touch #od{pointer-events:auto;bottom:calc(14px + env(safe-area-inset-bottom,0px));width:min(200px,30vw);padding:8px 0}
+body.touch #tip{bottom:calc(66px + env(safe-area-inset-bottom,0px));left:27%;right:27%;font-size:11px;letter-spacing:.1em;line-height:1.5}
+body.touch #announce h2{font-size:clamp(22px,6vw,48px)}body.touch #announce p{font-size:11px;letter-spacing:.14em;padding:0 16px}
+#stick{position:absolute;left:0;top:0;width:0;height:0}
+#stick i{position:absolute;left:-58px;top:-58px;width:116px;height:116px;border-radius:50%;border:2px solid rgba(77,225,255,.45);background:rgba(10,14,26,.3)}
+#knob{position:absolute;left:0;top:0;width:52px;height:52px;border-radius:50%;background:rgba(77,225,255,.5);box-shadow:0 0 16px rgba(77,225,255,.5);transform:translate(-50%,-50%)}
+.tb{position:absolute;pointer-events:auto;border-radius:50%;border:2px solid rgba(213,220,240,.45);background:rgba(10,14,26,.38);color:var(--hull);
+  font-family:var(--display);font-weight:700;font-size:11px;letter-spacing:.1em;display:flex;align-items:center;justify-content:center;padding:0;touch-action:none}
+.tb.held{background:rgba(77,225,255,.4);border-color:var(--ion)}
+#tfire{right:calc(22px + env(safe-area-inset-right,0px));bottom:calc(34px + env(safe-area-inset-bottom,0px));width:84px;height:84px;font-size:14px;border-color:rgba(255,61,110,.8);background:rgba(255,61,110,.2)}
+#tfire.held{background:rgba(255,61,110,.55)}
+#tjump{right:calc(122px + env(safe-area-inset-right,0px));bottom:calc(22px + env(safe-area-inset-bottom,0px));width:64px;height:64px}
+#tdash{right:calc(118px + env(safe-area-inset-right,0px));bottom:calc(100px + env(safe-area-inset-bottom,0px));width:56px;height:56px;border-color:rgba(255,154,60,.7)}
+#tzoom{right:calc(34px + env(safe-area-inset-right,0px));bottom:calc(134px + env(safe-area-inset-bottom,0px));width:52px;height:52px}
+#treload{right:calc(200px + env(safe-area-inset-right,0px));bottom:calc(26px + env(safe-area-inset-bottom,0px));width:52px;height:52px;font-size:9px}
+#tpause{right:calc(max(18px,env(safe-area-inset-right,0px)) + 104px);top:14px;width:40px;height:40px;border-radius:8px;font-size:13px}
+#tauto{right:calc(max(18px,env(safe-area-inset-right,0px)) + 152px);top:14px;width:auto;height:40px;border-radius:8px;padding:0 10px;font-size:9px;color:var(--ion);border-color:rgba(77,225,255,.5)}
+#tauto.off{color:var(--dim);border-color:rgba(125,134,163,.5)}
+@media (max-width:520px){
+  #tauto{right:auto;left:max(18px,env(safe-area-inset-left,0px));top:108px;height:32px}
+  #tpause{right:auto;left:calc(max(18px,env(safe-area-inset-left,0px)) + 124px);top:108px;height:32px;width:36px}
+  body.touch #topc{top:190px}
+  body.touch #br{top:92px}
+  body.touch #tip{bottom:auto;top:240px;left:16px;right:16px}
+  body.touch #announce{top:34%}
+  body.touch #od{left:max(16px,env(safe-area-inset-left,0px));transform:none;width:130px;text-align:left}
+}
 @media (max-width:700px){#radar{width:96px;height:96px}#ammo{font-size:32px}#hpnum{font-size:24px}#tip{display:none}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -124,13 +163,28 @@ button.go:hover,button.go:focus-visible{filter:brightness(1.25) drop-shadow(0 0 
   <div id="tip"></div>
 </div>
 <div id="lowhp" class="layer"></div>
+<div id="touch" class="layer" hidden>
+  <div id="stick" hidden><i></i><div id="knob"></div></div>
+  <button class="tb" id="tfire" aria-label="Fire">FIRE</button>
+  <button class="tb" id="tjump" aria-label="Jump">JUMP</button>
+  <button class="tb" id="tdash" aria-label="Dash">DASH</button>
+  <button class="tb" id="tzoom" aria-label="Zoom">ZOOM</button>
+  <button class="tb" id="treload" aria-label="Reload">RELOAD</button>
+  <button class="tb" id="tpause" aria-label="Pause">II</button>
+  <button class="tb" id="tauto" aria-label="Toggle auto-fire">AUTO-FIRE ON</button>
+</div>
 
 <div id="menu" class="overlay">
   <div class="tag">Orbital solar forge · Warden protocol</div>
   <h1>HELIOS<br>BREACH</h1>
   <p>The forge machines have turned. You are the last warden on the deck. Hold the reactor against every wave, take a field upgrade after each one, and survive the Overseer.</p>
   <button class="go" id="play">Deploy</button>
-  <div class="keys">
+  <div class="keys" id="keys-touch" hidden>
+    <span><b>Left thumb</b> move</span><span><b>Right thumb</b> drag to aim</span><span><b>Auto-fire</b> shoots on target</span><span><b>FIRE</b> hold, drag to aim</span>
+    <span><b>JUMP</b> tap twice</span><span><b>DASH</b> burst of speed</span><span><b>1–4</b> tap a weapon</span><span><b>Overdrive</b> tap the bar</span>
+    <span><b>Tip</b> landscape shows more</span>
+  </div>
+  <div class="keys" id="keys-desktop">
     <span><b>W A S D</b> move</span><span><b>Mouse</b> aim</span><span><b>Left click</b> fire</span><span><b>Right click</b> zoom</span>
     <span><b>Space</b> jump ×2</span><span><b>Shift</b> dash</span><span><b>1–4 / wheel</b> weapons</span><span><b>R</b> reload</span>
     <span><b>F</b> overdrive</span><span><b>M</b> mute</span><span><b>[ ]</b> sensitivity</span><span><b>Esc</b> pause</span>
@@ -148,7 +202,7 @@ button.go:hover,button.go:focus-visible{filter:brightness(1.25) drop-shadow(0 0 
   <div class="tag" id="ptag">Wave cleared</div>
   <h3>FIELD UPGRADE</h3>
   <div class="cards" id="cards"></div>
-  <p>Press 1, 2 or 3 — or move the mouse to choose and click.</p>
+  <p id="perkhint">Press 1, 2 or 3, or move the mouse to choose and click.</p>
 </div>
 
 <div id="dead" class="overlay" hidden>

@@ -66,10 +66,15 @@ if (T.EffectComposer && T.UnrealBloomPass && T.ShaderPass) {
   composer.addPass(finalPass);
   if (T.FXAAShader) { fxaaPass = new T.ShaderPass(T.FXAAShader); composer.addPass(fxaaPass); }
 } else { renderer.toneMapping = T.ACESFilmicToneMapping; renderer.outputEncoding = T.sRGBEncoding; }
+const touch = { on: false, move: null, looks: new Map(), mx: 0, my: 0, fire: 0, auto: true, autoFire: false };
+let BASEFOV = 78, VMX = 1;
 function resize() {
   const w = window.innerWidth, h = window.innerHeight;
   renderer.setPixelRatio(pixelRatio);
   renderer.setSize(w, h, false);
+  // portrait screens get a taller field of view so the horizontal view stays usable
+  BASEFOV = w < h ? Math.min(100, 2 * Math.atan(Math.tan(33 * Math.PI / 180) / (w / h)) * 180 / Math.PI) : 78; VMX = clamp(w / h, 0.45, 1);
+  if (G.state !== 'playing') camera.fov = BASEFOV;
   camera.aspect = w / h; camera.updateProjectionMatrix();
   if (finalPass) finalPass.material.uniforms.uAspect.value = w / h;
   if (typeof particles !== 'undefined' && particles) particles.material.uniforms.uScale.value = h * 0.9;
