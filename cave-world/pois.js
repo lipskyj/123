@@ -1,12 +1,12 @@
 // Points of interest. Positions are in the cave's own coordinates (metres-ish, Y up).
 // The science is real; the specific finds are invented for this generated cave.
 export const TOOLS = [
-  { id: "lens",   icon: "🔍", name: "Hand lens",      verb: "Examine closely" },
-  { id: "hammer", icon: "⛏️", name: "Rock hammer",    verb: "Break a fresh surface" },
-  { id: "acid",   icon: "🧪", name: "Acid bottle",    verb: "Drop dilute HCl" },
-  { id: "uv",     icon: "🔦", name: "UV lamp",        verb: "Shine UV light" },
-  { id: "brush",  icon: "🖌️", name: "Trowel & brush", verb: "Excavate carefully" },
-  { id: "survey", icon: "📏", name: "Survey kit",     verb: "Measure" },
+  { id: "lens",   icon: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="20" r="12" fill="rgba(140,220,255,.22)"/><path d="M13 18a8 8 0 0 1 6-6" stroke-width="2"/><path d="M29 29l12 12" stroke-width="5" stroke="#c9a46a"/></svg>', name: "Hand lens",      verb: "Examine closely" },
+  { id: "hammer", icon: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 40L27 19" stroke-width="5" stroke="#c9a46a"/><path d="M19 13l12-7 8 10-6 4-4-4-6 4z" fill="rgba(200,210,220,.35)"/><path d="M39 16l4 8"/></svg>', name: "Rock hammer",    verb: "Break a fresh surface" },
+  { id: "acid",   icon: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6h10M21 6v9l-8 20a5 5 0 0 0 5 7h12a5 5 0 0 0 5-7l-8-20V6"/><path d="M15.5 30h17l2.2 5.5a3 3 0 0 1-3 4.5H16.300a3 3 0 0 1-3-4.5z" fill="rgba(140,255,170,.45)" stroke="none"/><circle cx="22" cy="33" r="1.4" fill="currentColor" stroke="none"/><circle cx="27" cy="36" r="1" fill="currentColor" stroke="none"/></svg>', name: "Acid bottle",    verb: "Drop dilute HCl" },
+  { id: "uv",     icon: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 30l16-16 10 10-16 16z" fill="rgba(170,140,255,.3)"/><path d="M22 14l6-6 12 12-6 6"/><path d="M36 6l3-3M42 12l4-2M40 9l5-5" stroke="#b79cff"/></svg>', name: "UV lamp",        verb: "Shine UV light" },
+  { id: "brush",  icon: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 40l10-10" stroke-width="5" stroke="#c9a46a"/><path d="M16 26l6 6 8-3-11-11z" fill="rgba(200,210,220,.35)"/><path d="M30 8l10 10-8 12-14-14z" fill="rgba(230,200,140,.3)"/><path d="M26 14l8 8"/></svg>', name: "Trowel & brush", verb: "Excavate carefully" },
+  { id: "survey", icon: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="14" width="26" height="26" rx="6" fill="rgba(255,205,90,.28)"/><circle cx="18" cy="27" r="5"/><path d="M31 34h12v6H24"/><path d="M36 34v3M40 34v3"/><path d="M34 6l3 6M40 4l-3 8M37 12v4" stroke="#ffcd5a"/></svg>', name: "Survey kit",     verb: "Measure" },
 ];
 
 export const WRONG = {
