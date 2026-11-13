@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cave World</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; font-family: system-ui, sans-serif; }
+  canvas { display: block; width: 100vw; height: 100vh; touch-action: none; }
+  #hint { position: fixed; left: 12px; bottom: 12px; color: #dfe; background: rgba(0,0,0,.5); padding: 8px 12px; border-radius: 8px; font-size: 13px; line-height: 1.4; }
+  #load { position: fixed; inset: 0; display: grid; place-items: center; color: #dfe; font-size: 16px; }
+</style>
+<script type="importmap">
+{ "imports": { "three": "./vendor/three.module.js", "three/addons/": "./vendor/addons/", "@sparkjsdev/spark": "./vendor/spark.module.js" } }
+</script>
+</head>
+<body>
+<div id="load">Loading cave…</div>
+<div id="hint">Drag to look · WASD / arrow keys to move · R/F up and down · Shift to go faster</div>
+<script type="module">
+import * as THREE from "three";
+import { SparkRenderer, SplatMesh, SparkControls } from "@sparkjsdev/spark";
+
+const renderer = new THREE.WebGLRenderer({ antialias: false });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.05, 500);
+// Start where the original image was taken: eye height, looking down the chamber.
+camera.position.set(0, 1.64, 0);
+camera.lookAt(0, 1.5, -12);
+
+scene.add(new SparkRenderer({ renderer }));
+const cave = new SplatMesh({ url: "./cave.spz" });
+scene.add(cave);
+cave.initialized.then(() => { document.getElementById("load").remove(); window.caveReady = true; });
+
+const controls = new SparkControls({ canvas: renderer.domElement });
+addEventListener("resize", () => {
+  camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+window.caveCamera = camera;
+renderer.setAnimationLoop(() => { controls.update(camera); renderer.render(scene, camera); });
+</script>
+</body>
+</html>
