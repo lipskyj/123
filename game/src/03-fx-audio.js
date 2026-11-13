@@ -20,7 +20,7 @@ const _c = new T.Color();
 function emit(x, y, z, vx, vy, vz, color, size, life, grav = 0) {
   const i = pNext; pNext = (pNext + 1) % PN; const j = i * 3;
   pPos[j] = x; pPos[j + 1] = y; pPos[j + 2] = z; pVel[j] = vx; pVel[j + 1] = vy; pVel[j + 2] = vz;
-  _c.set(color); pBase[i * 4] = _c.r; pBase[i * 4 + 1] = _c.g; pBase[i * 4 + 2] = _c.b; pBase[i * 4 + 3] = size;
+  _c.set(color).convertSRGBToLinear().multiplyScalar(HDR ? 2.4 : 1); pBase[i * 4] = _c.r; pBase[i * 4 + 1] = _c.g; pBase[i * 4 + 2] = _c.b; pBase[i * 4 + 3] = size;
   pLife[i] = pMax[i] = life; pGrav[i] = grav;
 }
 function burst(p, n, color, speed, size, life, grav = 0, up = 0) {
@@ -47,7 +47,7 @@ function updateParticles(dt) {
 }
 
 // ---------------------------------------------------------------- pooled effects
-const fx = { tracers: [], shells: [], rings: [], lights: [], debris: [], delayed: [] };
+const fx = { tracers: [], shells: [], rings: [], lights: [], debris: [], delayed: [], decals: [], casings: [] };
 function buildFx() {
   for (let i = 0; i < 70; i++) {
     const m = new T.Mesh(GEO.box, new T.MeshBasicMaterial({ color: 0xffffff, transparent: true, blending: T.AdditiveBlending, depthWrite: false }));
@@ -62,18 +62,29 @@ function buildFx() {
     m.rotation.x = -Math.PI / 2; m.visible = false; scene.add(m); fx.rings.push({ m, t: 0, d: 1, r0: 0, r1: 1 });
   }
   for (let i = 0; i < 5; i++) { const l = new T.PointLight(0xffffff, 0, 22, 2); scene.add(l); fx.lights.push({ l, t: 0, d: 1, i: 0 }); }
-  const dm = new T.MeshStandardMaterial({ color: 0x3a3f4d, roughness: .5, metalness: .5 });
+  const dm = new T.MeshStandardMaterial({ ...PBR.metal, color: lin(0x6a7080) });
+  const scorch = canvasTex(64, (g, s) => {
+    const R = mulberry(91), gr = g.createRadialGradient(s / 2, s / 2, 0, s / 2, s / 2, s / 2);
+    gr.addColorStop(0, 'rgba(0,0,0,.95)'); gr.addColorStop(0.35, 'rgba(8,6,5,.8)'); gr.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = gr; g.fillRect(0, 0, s, s);
+    for (let i = 0; i < 26; i++) { const a = R() * 6.28, r = 8 + R() * 20; g.fillStyle = `rgba(0,0,0,${0.25 + R() * 0.4})`; g.beginPath(); g.arc(s / 2 + Math.cos(a) * r, s / 2 + Math.sin(a) * r, 1 + R() * 3.5, 0, 7); g.fill(); }
+  }, 1, 1, false);
+  for (let i = 0; i < 90; i++) {
+    const m = new T.Mesh(new T.PlaneGeometry(1, 1), new T.MeshBasicMaterial({ map: scorch, transparent: true, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -4, polygonOffsetUnits: -4 }));
+    m.visible = false; m.renderOrder = 2; scene.add(m); fx.decals.push({ m, t: 0 });
+  }
+  const brass = new T.MeshStandardMaterial({ color: lin(0xd9a441), metalness: 1, roughness: 0.28 });
+  for (let i = 0; i < 24; i++) { const m = new T.Mesh(GEO.cyl, brass); m.visible = false; m.castShadow = true; scene.add(m); fx.casings.push({ m, t: 0, v: V(), w: V(), keep: true }); }
   for (let i = 0; i < 70; i++) { const m = new T.Mesh(GEO.box, dm); m.visible = false; m.castShadow = true; scene.add(m); fx.debris.push({ m, t: 0, v: V(), w: V() }); }
 }
 const freeOf = arr => { let b = arr[0]; for (const o of arr) { if (o.t <= 0) return o; if (o.t < b.t) b = o; } return b; };
 function tracer(a, b, color, width = 0.04, dur = 0.09) {
   const o = freeOf(fx.tracers), len = a.distanceTo(b); if (len < 0.01) return;
   o.m.position.copy(a).add(b).multiplyScalar(0.5); o.m.lookAt(b); o.m.scale.set(width, width, len);
-  o.m.material.color.set(color); o.m.material.opacity = 1; o.m.visible = true; o.t = o.d = dur; o.w = width;
+  o.m.material.color.copy(lin(color, GLOW)); o.m.material.opacity = 1; o.m.visible = true; o.t = o.d = dur; o.w = width;
 }
-function shell(p, r, color, dur = 0.35) { const o = freeOf(fx.shells); o.m.position.copy(p); o.m.material.color.set(color); o.r = r; o.t = o.d = dur; o.m.visible = true; o.m.scale.setScalar(0.1); }
+function shell(p, r, color, dur = 0.35) { const o = freeOf(fx.shells); o.m.position.copy(p); o.m.material.color.copy(lin(color, GLOW * 0.8)); o.r = r; o.t = o.d = dur; o.m.visible = true; o.m.scale.setScalar(0.1); }
 function ring(p, r0, r1, color, dur = 0.5, hold = false) {
-  const o = freeOf(fx.rings); o.m.position.set(p.x, p.y + 0.08, p.z); o.m.material.color.set(color); o.r0 = r0; o.r1 = r1; o.t = o.d = dur; o.hold = hold; o.m.visible = true; o.m.scale.setScalar(r0 || 0.01); return o;
+  const o = freeOf(fx.rings); o.m.position.set(p.x, p.y + 0.08, p.z); o.m.material.color.copy(lin(color, GLOW)); o.r0 = r0; o.r1 = r1; o.t = o.d = dur; o.hold = hold; o.m.visible = true; o.m.scale.setScalar(r0 || 0.01); return o;
 }
 function flash(p, color, intensity, dur = 0.18) { const o = freeOf(fx.lights); o.l.position.copy(p); o.l.color.set(color); o.i = intensity; o.t = o.d = dur; }
 function debris(p, n, size) {
@@ -82,19 +93,34 @@ function debris(p, n, size) {
     o.v.set(rand(-7, 7), rand(3, 11), rand(-7, 7)); o.w.set(rand(-9, 9), rand(-9, 9), rand(-9, 9)); o.t = rand(1.2, 2.2); o.m.visible = true;
   }
 }
+function decal(p, n, size) {
+  if (n.lengthSq() < 0.5) return;
+  const o = freeOf(fx.decals); o.m.position.copy(p).addScaledVector(n, 0.015);
+  if (Math.abs(n.y) > 0.9) o.m.rotation.set(-Math.PI / 2 * Math.sign(n.y), 0, rand(6.28)); else { o.m.rotation.set(0, 0, 0); o.m.lookAt(tmpC.copy(o.m.position).add(n)); o.m.rotateZ(rand(6.28)); }
+  o.m.scale.setScalar(size); o.m.material.opacity = 0.9; o.m.visible = true; o.t = 22;
+}
+function casing(p, v, big) {
+  const o = freeOf(fx.casings); o.m.position.copy(p); o.m.scale.set(big ? 0.011 : 0.006, big ? 0.055 : 0.03, big ? 0.011 : 0.006);
+  o.v.copy(v); o.w.set(rand(-20, 20), rand(-20, 20), rand(-20, 20)); o.t = 5; o.m.visible = true; o.hit = false;
+}
 function later(t, fn) { fx.delayed.push({ t, fn }); }
 function updateFx(dt) {
   for (const o of fx.tracers) if (o.t > 0) { o.t -= dt; const f = Math.max(0, o.t / o.d); o.m.material.opacity = f; o.m.scale.x = o.m.scale.y = o.w * (0.3 + 0.7 * f); if (o.t <= 0) o.m.visible = false; }
   for (const o of fx.shells) if (o.t > 0) { o.t -= dt; const f = 1 - Math.max(0, o.t / o.d); o.m.scale.setScalar(o.r * (0.15 + 0.85 * Math.sqrt(f))); o.m.material.opacity = (1 - f) * 0.9; if (o.t <= 0) o.m.visible = false; }
   for (const o of fx.rings) if (o.t > 0) { o.t -= dt; const f = 1 - Math.max(0, o.t / o.d); o.m.scale.setScalar(o.r0 + (o.r1 - o.r0) * (o.hold ? 1 : Math.sqrt(f))); o.m.material.opacity = o.hold ? 0.35 + 0.65 * f : 1 - f; if (o.t <= 0) o.m.visible = false; }
   for (const o of fx.lights) { if (o.t > 0) { o.t -= dt; o.l.intensity = o.i * Math.max(0, o.t / o.d); } else o.l.intensity = 0; }
-  for (const o of fx.debris) if (o.t > 0) {
+  for (const arr of [fx.debris, fx.casings]) for (const o of arr) if (o.t > 0) {
     o.t -= dt; o.v.y -= 24 * dt; o.m.position.addScaledVector(o.v, dt);
     o.m.rotation.x += o.w.x * dt; o.m.rotation.y += o.w.y * dt; o.m.rotation.z += o.w.z * dt;
-    if (o.m.position.y < 0.08) { o.m.position.y = 0.08; o.v.y *= -0.35; o.v.x *= 0.6; o.v.z *= 0.6; o.w.multiplyScalar(0.6); }
+    const gy = o.keep ? groundAt(o.m.position.x, o.m.position.z, o.m.position.y + 0.3) + 0.02 : 0.08;
+    if (o.m.position.y < gy) {
+      o.m.position.y = gy; if (o.keep && !o.hit && o.v.y < -2) { o.hit = true; tone('sine', rand(5200, 6800), 0, 0.05, 0.035); }
+      o.v.y *= -0.35; o.v.x *= 0.6; o.v.z *= 0.6; o.w.multiplyScalar(0.55);
+    }
     if (o.t < 0.3) o.m.scale.multiplyScalar(Math.max(0, 1 - 6 * dt));
     if (o.t <= 0) o.m.visible = false;
   }
+  for (const o of fx.decals) if (o.t > 0) { o.t -= dt; if (o.t < 3) o.m.material.opacity = 0.9 * Math.max(0, o.t / 3); if (o.t <= 0) o.m.visible = false; }
   for (let i = fx.delayed.length - 1; i >= 0; i--) { const d = fx.delayed[i]; d.t -= dt; if (d.t <= 0) { fx.delayed.splice(i, 1); d.fn(); } }
 }
 

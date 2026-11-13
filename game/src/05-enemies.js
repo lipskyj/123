@@ -8,7 +8,7 @@ const ET = {
   boss: { hp: 2400, r: 3.2, h: 6, speed: 0, score: 5000, parts: [[0, 3.2]], color: 0xff3d6e, fly: true, od: 40, deb: 30, size: 0.9 }
 };
 const angLerp = (a, b, k) => { let d = (b - a + Math.PI) % (Math.PI * 2); if (d < 0) d += Math.PI * 2; return a + (d - Math.PI) * Math.min(1, k); };
-function bm(e, color, em = 0) { const m = new T.MeshStandardMaterial({ color, roughness: .5, metalness: .4, emissive: em }); m.userData.e = new T.Color(em); e.mats.push(m); return m; }
+function bm(e, color, em = 0) { const m = new T.MeshStandardMaterial({ ...PBR.metal, color: lin(color, 2.6), emissive: em, envMapIntensity: 0.8 }); m.userData.e = new T.Color(em); e.mats.push(m); return m; }
 function mp(parent, geo, mat, x, y, z, sx, sy, sz) { const m = new T.Mesh(geo, mat); m.position.set(x, y, z); m.scale.set(sx, sy === undefined ? sx : sy, sz === undefined ? sx : sz); m.castShadow = true; parent.add(m); return m; }
 
 const BUILD = {
@@ -54,7 +54,7 @@ const BUILD = {
     mp(g, GEO.sphere, b, 0, 0, 0, 3); mp(g, GEO.sphere, glowMat(0xff3d6e), 0, 0, 2.3, 1.25, 1.25, .9); mp(g, GEO.sphere, glowMat(0x1a0008), 0, 0, 3.05, .5, .5, .3);
     e.rings = []; for (let i = 0; i < 3; i++) e.rings.push(mp(g, GEO.torusThin, glowMat(0xb36bff), 0, 0, 0, 4.2 + i * .65));
     for (let i = 0; i < 8; i++) { const a = i / 8 * 6.283, c = mp(g, GEO.cone, b, Math.cos(a) * 3.3, Math.sin(a) * 3.3, -.4, .5, 1.9, .5); c.rotation.z = a - Math.PI / 2; }
-    e.beam = new T.Mesh(GEO.cyl, new T.MeshBasicMaterial({ color: 0xff3d6e, transparent: true, blending: T.AdditiveBlending, depthWrite: false }));
+    e.beam = new T.Mesh(GEO.cyl, new T.MeshBasicMaterial({ color: lin(0xff3d6e, GLOW * 1.5), transparent: true, blending: T.AdditiveBlending, depthWrite: false }));
     e.beam.visible = false; e.beam.frustumCulled = false; scene.add(e.beam);
     e.atk = 'idle'; e.st = 2.5; e.atkI = 0; e.aim = V(); e.orb = rand(6.28); e.tick = 0;
   }
@@ -232,7 +232,7 @@ function updateEnemies(dt) {
     if (e.type !== 'bomber' || e.state !== 'fuse') e.mesh.scale.setScalar(Math.min(1, 0.1 + e.born / 0.35));
     UPD[e.type](e, dt);
     if (e.dead) continue;
-    if (e.flash > 0 || e.wasFlash) { const f = e.flash; for (const m of e.mats) m.emissive.setRGB(m.userData.e.r + f, m.userData.e.g + f, m.userData.e.b + f); e.wasFlash = f > 0; e.flash = Math.max(0, f - 7 * dt); }
+    if (e.flash > 0 || e.wasFlash) { const f = e.flash; for (const m of e.mats) m.emissive.setRGB(m.userData.e.r + f * 2.5, m.userData.e.g + f * 2.5, m.userData.e.b + f * 2.5); e.wasFlash = f > 0; e.flash = Math.max(0, f - 7 * dt); }
     e.mesh.position.copy(e.pos); if (e.type !== 'boss') e.mesh.rotation.y = e.face;
   }
   for (let i = 0; i < enemies.length; i++) {
@@ -332,7 +332,7 @@ function updateProjs(dt) {
     }
   }
 }
-const matHealth = new T.MeshBasicMaterial({ color: 0x5dffa0 }), matAmmo = new T.MeshBasicMaterial({ color: 0xffc247 });
+const matHealth = new T.MeshBasicMaterial({ color: lin(0x5dffa0, GLOW) }), matAmmo = new T.MeshBasicMaterial({ color: lin(0xffc247, GLOW) });
 function spawnPickup(kind, x, z) {
   x = clamp(x, -ARENA + 2, ARENA - 2); z = clamp(z, -ARENA + 2, ARENA - 2);
   const m = new T.Mesh(kind === 'health' ? GEO.octa : GEO.box, kind === 'health' ? matHealth : matAmmo);

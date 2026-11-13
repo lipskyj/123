@@ -133,8 +133,8 @@ const vm = { group: new T.Group(), models: [], recoil: 0, swayX: 0, swayY: 0, fl
 const magSize = i => Math.round(WEAPONS[i].mag * mods.mag);
 
 function buildViewmodel() {
-  const dark = new T.MeshStandardMaterial({ color: 0x596178, roughness: .5, metalness: .3 });
-  const mid = new T.MeshStandardMaterial({ color: 0x9aa3bd, roughness: .5, metalness: .3 });
+  const dark = new T.MeshStandardMaterial({ ...PBR.metal, color: lin(0x565c68), envMapIntensity: 0.8 });
+  const mid = new T.MeshStandardMaterial({ ...PBR.metal, color: lin(0xb4bac8), envMapIntensity: 0.9 });
   const part = (g, geo, mat, x, y, z, sx, sy, sz, rx = 0) => { const m = new T.Mesh(geo, mat); m.position.set(x, y, z); m.scale.set(sx, sy, sz); m.rotation.x = rx; g.add(m); return m; };
   const H = Math.PI / 2;
   const mk = (build, mz) => { const g = new T.Group(); build(g); const mu = new T.Object3D(); mu.position.set(0, 0.02, mz); g.add(mu); g.userData.muzzle = mu; g.visible = false; vm.group.add(g); vm.models.push(g); };
@@ -168,7 +168,7 @@ function buildViewmodel() {
   });
   vm.flash = new T.Mesh(new T.PlaneGeometry(1, 1), new T.MeshBasicMaterial({ map: ft, transparent: true, blending: T.AdditiveBlending, depthWrite: false, depthTest: false }));
   vm.flash.visible = false; vm.group.add(vm.flash);
-  const suit = new T.PointLight(0xbfd4ff, 0.9, 10, 2); camera.add(suit);
+  const suit = new T.PointLight(lin(0xbfd4ff), 1.1, 9, 2); camera.add(suit);
   camera.add(vm.group); vm.models[0].visible = true;
 }
 function switchWeapon(i) {
@@ -201,8 +201,10 @@ function fire() {
   if (any) G.hits++;
   vm.recoil = Math.min(2.5, vm.recoil + w.rec); P.kick += w.kick * (1 - 0.4 * P.ads); P.trauma = Math.min(1, P.trauma + w.rec * 0.06);
   vm.flashT = 0.05; vm.flash.position.copy(vm.models[cur].userData.muzzle.position); vm.flash.rotation.z = rand(6.28);
-  vm.flash.scale.setScalar(rand(.18, .3) * (cur === 0 ? 1 : 1.7)); vm.flash.material.color.set(w.color);
+  vm.flash.scale.setScalar(rand(.18, .3) * (cur === 0 ? 1 : 1.7)); vm.flash.material.color.copy(lin(w.color, GLOW));
   flash(muz.addScaledVector(fwd, 1.6), w.color, cur === 0 ? 1.1 : 2.2, 0.07);
+  if (cur < 2) casing(V().copy(P.eye).addScaledVector(fwd, 0.45).addScaledVector(right, 0.3).addScaledVector(up, -0.16), V().copy(P.vel).addScaledVector(right, rand(2.2, 3.6)).addScaledVector(up, rand(1.8, 3.2)).addScaledVector(fwd, rand(-0.6, 0.6)), cur === 1);
+  for (let i = 0; i < 3; i++) emit(muz.x, muz.y, muz.z, fwd.x * rand(1, 3) + rand(-.4, .4), rand(.3, 1.2), fwd.z * rand(1, 3) + rand(-.4, .4), 0x2c2c30, rand(.25, .5), rand(.5, 1));
   sfx.shoot(cur);
 }
 function updateWeapons(dt) {
@@ -238,7 +240,7 @@ function updateWeapons(dt) {
 }
 
 function hitscan(o, d, w, muz) {
-  const maxT = rayWorld(o, d, 300), end = V();
+  const maxT = rayWorld(o, d, 300), end = V(), wn = rayN.clone();
   let hitAny = false;
   if (w.pierce) {
     for (const e of enemies.slice()) {
@@ -255,7 +257,7 @@ function hitscan(o, d, w, muz) {
     if (best) { hitAny = true; let dm = w.dmg; if (w.falloff) dm *= clamp(1 - (bt - w.falloff) / (w.falloff * 1.5), 0.25, 1); damageEnemy(best, dm, bc, end.clone()); }
     tracer(muz, end, w.color, 0.035, 0.08);
   }
-  if (maxT < 299 && (w.pierce || !hitAny)) { burst(end, w.pierce ? 22 : 4, w.color, w.pierce ? 9 : 4, 0.22, 0.3, 8); if (w.pierce) flash(end, w.color, 3, 0.2); }
+  if (maxT < 299 && (w.pierce || !hitAny)) { decal(end, wn, w.pierce ? rand(.9, 1.3) : rand(.22, .4)); burst(end, w.pierce ? 22 : 4, w.color, w.pierce ? 9 : 4, 0.22, 0.3, 8); if (w.pierce) flash(end, w.color, 3, 0.2); }
   return hitAny;
 }
 const hres = { t: -1, crit: false };

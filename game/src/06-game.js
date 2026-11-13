@@ -175,10 +175,11 @@ $('pinfo').textContent = `Sensitivity ${G.sens.toFixed(1)} · press [ or ] to ad
 
 // ---------------------------------------------------------------- main loop
 buildWorld(); buildFlowGrid(); buildParticles(); buildFx(); buildViewmodel(); vm.group.visible = false; resize();
-let last = performance.now(), ftAcc = 0, ftN = 0, wt = 0;
+let last = performance.now(), ftAcc = 0, ftN = 0, wt = 0, sunVis = 0;
+const coreHot = lin(0xffb060, GLOW * 1.6), coreCold = lin(0x7fe8ff, GLOW * 1.6);
 function frame(now) {
   requestAnimationFrame(frame);
-  const real = Math.min(0.05, Math.max(0.0001, (now - last) / 1000)); last = now; wt += real;
+  const raw = (now - last) / 1000, real = Math.min(0.05, Math.max(0.0001, raw)); last = now; wt += real;
   musicTick();
   let dt = 0;
   if (G.state === 'playing') {
@@ -190,7 +191,14 @@ function frame(now) {
     if (G.comboT > 0) { G.comboT -= dt; if (G.comboT <= 0) G.combo = 0; }
     G.multiT -= dt; if (G.odT > 0) G.odT -= dt;
     P.dmgFx = Math.max(0, P.dmgFx - 2.2 * dt);
-    ftAcc += real; if (++ftN >= 120) { if (ftAcc / ftN > 1 / 40 && pixelRatio > 0.7) { pixelRatio = Math.max(0.7, pixelRatio * 0.85); resize(); } ftAcc = ftN = 0; }
+    // adaptive quality: drop resolution first, then shadow detail, if the frame rate stays under ~40
+    ftAcc += Math.min(raw, 0.5); if (++ftN >= 90) {
+      if (ftAcc / ftN > 1 / 40) {
+        if (pixelRatio > 0.75) { pixelRatio = Math.max(0.75, pixelRatio * 0.85); resize(); }
+        else if (world.sun.shadow.mapSize.x > 2048) { world.sun.shadow.mapSize.set(2048, 2048); if (world.sun.shadow.map) { world.sun.shadow.map.dispose(); world.sun.shadow.map = null; } }
+      }
+      ftAcc = ftN = 0;
+    }
   } else if (G.state === 'menu') {
     dt = real; const a = wt * 0.07; camera.position.set(Math.cos(a) * 47, 12 + Math.sin(a * 2) * 3, Math.sin(a) * 47); camera.lookAt(0, 5, 0);
   } else if (G.state === 'dead') {
@@ -201,8 +209,8 @@ function frame(now) {
 
   // ambient world motion
   const pulse = 1 + Math.sin(wt * 3) * 0.06;
-  world.core.scale.setScalar(1.9 * pulse); world.coreLight.intensity = 2.2 * pulse + (G.odT > 0 ? 1.5 : 0);
-  world.core.material.color.setHex(G.odT > 0 ? 0x7fe8ff : 0xffb060); world.beam.material.opacity = 0.28 + 0.1 * Math.sin(wt * 5);
+  world.core.scale.setScalar(1.9 * pulse); world.coreLight.intensity = 6 * pulse + (G.odT > 0 ? 4 : 0);
+  world.core.material.color.copy(G.odT > 0 ? coreCold : coreHot); world.beam.material.opacity = 0.28 + 0.1 * Math.sin(wt * 5);
   world.coreRings.forEach((r, i) => { r.rotation.x = wt * (0.5 + i * 0.23); r.rotation.y = wt * (0.35 - i * 0.2); });
   world.rings.forEach((r, i) => { r.rotation.z += real * (i ? -0.02 : 0.03); });
   world.sky.material.uniforms.uTime.value = wt;
@@ -210,6 +218,15 @@ function frame(now) {
   for (const p of pads) { p.arrow.position.y = 1.1 + ((wt * 1.4) % 1) * 1.2; p.arrow.scale.setScalar(0.5 * (1 - ((wt * 1.4) % 1) * 0.6)); }
 
   if (G.state !== 'menu') updateHUD(real);
+  // keep the high-resolution shadow frustum centred on the action
+  const sc = G.state === 'menu' ? tmpB.set(0, 0, 0) : tmpB.set(Math.round(P.pos.x), 0, Math.round(P.pos.z));
+  world.sun.position.copy(sc).addScaledVector(sunDir, 120); world.sun.target.position.copy(sc);
+  if (G.state === 'playing' && dt > 0) emit(P.pos.x + rand(-13, 13), P.pos.y + rand(0.2, 6), P.pos.z + rand(-13, 13), rand(-.25, .25), rand(-.05, .2), rand(-.25, .25), 0x5a4c3c, rand(.05, .09), rand(2.5, 4.5));
+  if (finalPass) {
+    tmpA.copy(camera.position).addScaledVector(sunDir, 500).project(camera);
+    const seen = tmpA.z < 1 && Math.abs(tmpA.x) < 1.25 && Math.abs(tmpA.y) < 1.25 && rayWorld(camera.position, sunDir, 400) >= 400;
+    sunVis = damp(sunVis, seen ? 1 : 0, 12, real); finalPass.material.uniforms.uSun.value.set(tmpA.x * .5 + .5, tmpA.y * .5 + .5); finalPass.material.uniforms.uSunVis.value = sunVis;
+  }
   if (finalPass) { const u = finalPass.material.uniforms; u.uDamage.value = P.dmgFx; u.uOD.value = G.odT > 0 ? Math.min(1, G.odT * 2) : 0; u.uTime.value = wt % 100; }
   if (composer) composer.render(); else renderer.render(scene, camera);
   for (const k in pressed) delete pressed[k];
