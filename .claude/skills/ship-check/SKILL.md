@@ -9,11 +9,13 @@ description: Pre-push checklist - run the game for real, check console errors an
 2. Serve the repo (`python3 -m http.server 8000`) and open
    `/cave-world/` in headless Chromium (Playwright). Collect console errors and
    failed requests.
-3. Screenshot at desktop (1280x800) and a phone (iPhone emulation). Look at them:
+   Log errors *before* attempting screenshots, and give screenshots a short
+   timeout (see CLAUDE.md Lessons: they hang in the cloud container).
+3. If possible, screenshot at desktop (1280x800) and a phone (iPhone emulation). Look at them:
    UI overlapping, text cut off, touch controls visible on phone.
 4. Exercise the changed feature if possible (keys/clicks), not just page load.
 5. Review the diff for bugs: edge cases, things that break on touch devices,
    performance in the render loop, leftover debug code.
 6. Report: ✅ verified, ⚠️ problems found (with fixes or proposed fixes),
-   ❓ not verified and why. Only call it "ready" if nothing is ⚠️.
+   ❓ not verified and why (e.g. "visuals not verified — no GPU here"). Only call it "ready" if nothing is ⚠️.
 7. If a gotcha came up, propose a one-line addition to `CLAUDE.md` → Lessons.
