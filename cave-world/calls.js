@@ -2,8 +2,8 @@
 // Places use the cave's own coordinates: the entrance is near z = 0, the tunnel near z = -37, the skylight near (-4, -20).
 
 export const CALLERS = {
-  reyes: { name: "Dr. Ama Reyes", initials: "AR", voice: { pitch: 1.05, rate: 1.02 } },
-  hale: { name: "Victor Hale, Hale Cave Tours", initials: "VH", voice: { pitch: 0.75, rate: 1.1 } },
+  reyes: { name: "Dr. Ama Reyes", initials: "AR", photo: null /* "portraits/reyes.jpg" once a portrait is added */, sub: "Field lead · cave radio link", voice: { pitch: 1.05, rate: 1.02 } },
+  hale: { name: "Victor Hale, Hale Cave Tours", initials: "VH", photo: null /* "portraits/hale.jpg" once a portrait is added */, sub: "Hale Cave Tours", voice: { pitch: 0.75, rate: 1.1 } },
 };
 
 export const PLACES = { skylight: [-4, -20.3], safeZ: -10, deepZ: -16 };
