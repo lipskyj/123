@@ -53,9 +53,49 @@ test("authoring: a natural-language revision changes the design and propagates d
   const r2 = env.authoring.revise(r.design.id, "The character should be a senior engineer changing careers", TEACHER);
   assert.match(r2.design.practice.opening, /senior engineer/); assert.match(r2.design.preparation.briefing, /senior engineer/);
 });
-test("authoring: a request Primer cannot interpret is recorded honestly as a constraint", () => {
+test("authoring: a request Primer cannot interpret becomes a teacher-only note, never student-facing text", () => {
   const env = setup(), { design } = author(env, "cave-geology"); const r = env.authoring.revise(design.id, "Please keep sentences short because several students are new to English", TEACHER);
-  assert.equal(r.understood, false); assert.ok(r.design.constraints.some((c) => /new to English/.test(c))); assert.match(r.design.prompts.character, /new to English/); assert.match(r.design.preparation.briefing, /new to English/);
+  assert.equal(r.understood, false); assert.match(r.changes[0], /note for you only/); assert.ok(r.design.notes.some((c) => /new to English/.test(c)));
+  const studentFacing = JSON.stringify([r.design.preparation, r.design.practice, r.design.feedback]); assert.ok(!/new to English/.test(studentFacing));
+  const r2 = env.authoring.revise(r.design.id, "Remove the last note", TEACHER); assert.equal(r2.design.notes.length, 0); assert.equal(r2.understood, true);
+});
+// ---------- regressions from the independent teacher review (records/validation/fresh-teacher-report.md) ----------
+test("review F1: the character's questions do not recite the success criteria", () => {
+  for (const name of ["mba-negotiation", "cave-geology"]) { const d = author(setup(), name).design;
+    for (const ch of d.practice.challenges) { const c = d.criteria.find((x) => x.id === ch.criterionId); assert.ok(!ch.prompt.toLowerCase().includes(c.text.toLowerCase().split(" ").slice(1, 6).join(" ")), ch.prompt); assert.match(ch.prompt, /\?$/); assert.equal(ch.written, "primer"); }
+    assert.ok(d.assumptions.some((a) => a.field === "questions")); }
+  const env = setup(), { design } = author(env, "mba-negotiation"); const e = env.authoring.edit(design.id, "criteria.0.question", "What do you think the hiring manager actually cares about?", TEACHER);
+  assert.equal(e.practice.challenges[0].prompt, "What do you think the hiring manager actually cares about?"); assert.equal(e.practice.challenges[0].written, "teacher");
+});
+test("review F2/F6/F16: classroom constraints are never spoken by the character or shown in the briefing", () => {
+  const d = author(setup(), "mba-negotiation").design; assert.ok(d.constraints.length >= 1); const studentFacing = JSON.stringify([d.preparation, d.practice, d.feedback]);
+  for (const c of d.constraints) assert.ok(!studentFacing.includes(c.slice(0, 25)), c); assert.match(d.prompts.character, /only one other offer/);
+});
+test("review F4/F5: a character named by the teacher keeps that name; renaming changes only the name", () => {
+  const env = setup(), { answers, ...fields } = fixture("mba-negotiation"); const intake = env.authoring.saveIntake(fields);
+  for (let q; (q = env.authoring.nextQuestion(intake.id)); ) env.authoring.answer(intake.id, q.id, q.id === "character" ? "A classmate called Jordan who missed the lecture" : answers[q.id] || "");
+  const d = env.authoring.propose(intake.id); assert.equal(d.character.name, "Jordan"); assert.equal(d.character.nameSource.kind, "teacher"); assert.match(d.practice.opening, /^I'm Jordan, a classmate who missed the lecture/);
+  const r = env.authoring.revise(d.id, "The character should be called Sam, not Jordan", TEACHER); assert.equal(r.design.character.name, "Sam"); assert.equal(r.design.character.role, d.character.role); assert.match(r.design.practice.opening, /^I'm Sam, a classmate/);
+  const plain = author(setup(), "mba-negotiation").design; assert.equal(plain.character.nameSource.kind, "ai"); assert.ok(plain.assumptions.some((a) => a.field === "character.name"));
+});
+test("review F3: a rejected design can be reopened by editing; the new version needs approval", () => {
+  const env = setup(), { design } = author(env, "mba-negotiation"); env.authoring.rejectDesign(design.id, TEACHER, "not yet");
+  const r = env.authoring.revise(design.id, "make it easier", TEACHER); assert.equal(r.design.state, "revised"); assert.equal(env.store.get("designs", design.id).state, "superseded"); assert.throws(() => env.authoring.build(r.design.id), /Only an approved/);
+});
+test("review F8/F9: students get the full material, distinct key points and clean preparation questions", () => {
+  const d = author(setup(), "cave-geology").design; assert.ok(d.materials[0].text.length > 500); const kp = d.preparation.keyPoints.map((k) => k.text); assert.equal(new Set(kp).size, kp.length); assert.ok(kp.length >= 3);
+  for (const q of d.preparation.activation) { assert.match(q, /\?$/); assert.ok(!q.includes(d.learnerProfile.priorKnowledge)); }
+});
+test("review F10: a misconception the learner already rejected is not voiced; a plain 'no' counts as a correction", () => {
+  const env = setup(), pkg = built(env, "cave-geology"); let s = env.runtime.start(pkg.id, {}); s = env.runtime.submitPreparation(s.id, PREP); s = env.runtime.leaveWorld(s.id);
+  s = env.runtime.say(s.id, "It is a myth that caves are carved by fast flowing rivers cutting the rock; that is not how it works."); let n = 0;
+  while (s.phase === "practice" && n++ < 30) { const last = s.turns.at(-1); if (last.kind === "probe-voice") assert.equal(last.misconceptionId, "m2"); s = env.runtime.say(s.id, last.kind === "probe-voice" ? "No, that isn't right." : "I am not sure."); }
+  s = env.runtime.submitSelfAssessment(s.id, SELF); const st = Object.fromEntries(s.feedback.misconceptions.map((m) => [m.misconceptionId, m.status])); assert.equal(st.m1, "corrected"); assert.equal(st.m2, "corrected");
+});
+test("review F17: a learner can end practice early; unasked criteria are not assessed", () => {
+  const env = setup(), pkg = built(env, "mba-negotiation"); let s = env.runtime.start(pkg.id, {}); s = env.runtime.submitPreparation(s.id, PREP); s = env.runtime.say(s.id, "I am not sure.");
+  s = env.runtime.endPractice(s.id); assert.equal(s.phase, "feedback"); s = env.runtime.submitSelfAssessment(s.id, SELF); assert.ok(s.feedback.notAssessed.length >= 2);
+  const env2 = setup(), { design } = author(env2, "mba-negotiation"); assert.equal(env2.authoring.edit(design.id, "practice.maxTurns", "5", TEACHER).practice.maxTurns, 5); assert.throws(() => env2.authoring.edit(design.id, "difficulty", "x", TEACHER));
 });
 test("authoring: direct edits create a new version; edits to derived text survive later revisions", () => {
   const env = setup(), { design } = author(env, "cave-geology");

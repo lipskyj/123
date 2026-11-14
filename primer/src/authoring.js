@@ -50,10 +50,16 @@ export function createAuthoring(store, provider) {
     return { design: newVersion(prev, design, actor, "revise", request), changes, understood };
   }
   // Direct edit of one field. Core fields re-derive everything downstream; derived text is kept as an override.
-  const CORE = /^(title|goal\.text|learnerRole\.text|learnerProfile\.(text|priorKnowledge)|character\.(name|role)|stakes\.text|transfer\.text|difficulty|helpPolicy|template|criteria\.\d+\.(text|lookFors)|misconceptions\.\d+\.text|constraints)$/;
+  const CORE = /^(title|goal\.text|learnerRole\.text|learnerProfile\.(text|priorKnowledge)|character\.(name|role)|stakes\.text|transfer\.text|difficulty|helpPolicy|template|criteria\.\d+\.(text|lookFors|question)|misconceptions\.\d+\.text|constraints|notes)$/;
+  const ENUM = { difficulty: ["gentle", "moderate", "demanding"], helpPolicy: ["none", "questions", "questions-then-materials"], template: ["roleplay", "teachback"] };
   function edit(designId, path, value, actor) {
     const prev = current(designId); const d = structuredClone(prev);
-    if (CORE.test(path)) { if (!setPath(d, path, value)) throw new Error("Unknown field " + path); delete d.overrides[path];
+    if (ENUM[path]) { value = String(value).trim().toLowerCase(); if (!ENUM[path].includes(value)) throw new Error(`Choose one of: ${ENUM[path].join(", ")}.`); }
+    if (path === "practice.maxTurns") { value = parseInt(value, 10); if (!(value >= 2 && value <= 40)) throw new Error("Enter a number of replies between 2 and 40."); }
+    if (CORE.test(path)) { const mq = path.match(/^criteria\.(\d+)\.question$/); if (mq) d.criteria[+mq[1]].question = String(value).trim(); else if (!setPath(d, path, value)) throw new Error("Unknown field " + path); delete d.overrides[path];
+      // An edited field now comes from the educator: update its source and drop the matching "Primer decided" note.
+      const top = path.split(".")[0], owner = d[top]; if (owner && typeof owner === "object" && !Array.isArray(owner)) { const k = path === "character.name" ? "nameSource" : "source"; if (owner[k]) owner[k] = { kind: "teacher", field: "edit" }; }
+      d.assumptions = d.assumptions.filter((a) => !(a.field === path || a.field === top || (mq && a.field === "questions" && d.criteria.every((c) => c.question))));
       const mm = path.match(/^misconceptions\.(\d+)\.text$/); if (mm) d.misconceptions[+mm[1]].cues = [];
     } else { if (!setPath(d, path, value)) throw new Error("Unknown field " + path); d.overrides[path] = value; }
     d.revisions.push({ id: "rev" + (d.revisions.length + 1), at: now(), request: `Direct edit of ${path}`, changes: [`${path} edited by ${actor.name}`], understood: true });

@@ -4,6 +4,17 @@
 import { sentences, content, stems, stem, keyTerms, overlap, NEGATION, ANSWER_SEEKING, quote, hash, rng, pick } from "./text.js";
 
 const NAMES = ["Dana Okafor", "Marek Lindqvist", "Priya Raman", "Tomás Herrera", "Aiko Tanaka", "Samira Haddad", "Jonas Weber", "Lucia Ferrante"];
+const GENERIC = new Set("explicitly correctly clearly accurately properly reading refers mentions mention least really rejects reject gives give shows show states state says say names name makes make takes take includes include using based rather instead without within least most more less well thing things way ways part parts kind kinds something anything someone anyone means mean meaning non etc example examples".split(" "));
+const useful = (words) => words.filter((w) => w.length > 3 && !GENERIC.has(w));
+// A short neutral phrase naming what a criterion is about, without stating the claim it makes.
+export function topicOf(criterion) { const t = useful(content(criterion.text.replace(/^\s*\S+\s+/, " "))); const u = [...new Set(t)].slice(0, 3); return u.length > 1 ? u.slice(0, -1).join(", ") + " and " + u.at(-1) : u[0] || "this"; }
+// "Jordan, a classmate" / "a classmate called Jordan who ..." -> { name, role }
+export function splitCharacter(text) {
+  let t = (text || "").trim().replace(/[.?!]+$/, ""), m;
+  if ((m = t.match(/\b(?:called|named)\s+([A-Z][\w'-]+)/))) return { name: m[1], role: t.replace(/,?\s*\b(?:called|named)\s+[A-Z][\w'-]+,?/, "").replace(/\s{2,}/g, " ").trim() };
+  if ((m = t.match(/^([A-Z][a-z'-]+(?: [A-Z][a-z'-]+)?)\s*(?:,|—|–| - | is | who is )\s*(.+)$/))) return { name: m[1], role: m[2].trim() };
+  return { name: "", role: t };
+}
 const lc = (s) => (s ? s.charAt(0).toLowerCase() + s.slice(1) : s);
 const strip = (s) => (s || "").trim().replace(/[.?!]+$/, "");
 // "Explains why limestone fizzes" -> "explain why limestone fizzes"
@@ -40,10 +51,10 @@ export class DeterministicProvider {
 
     // Concepts: characteristic terms of the educator's materials, each anchored to a sentence from those materials.
     const terms = keyTerms(allText + " " + intake.objective, 10);
-    const concepts = [];
+    const concepts = [], usedFacts = new Set();
     for (const term of terms) {
-      for (const m of mats) { const s = sentences(m.text).find((x) => content(x).map(stem).includes(stem(term)) && x.split(" ").length >= 6);
-        if (s) { concepts.push({ term, fact: quote(s, 260), source: { material: m.name, excerpt: quote(s, 120) } }); break; } }
+      for (const m of mats) { const s = sentences(m.text).find((x) => !usedFacts.has(x) && content(x).map(stem).includes(stem(term)) && x.split(" ").length >= 8);
+        if (s) { usedFacts.add(s); concepts.push({ term, fact: quote(s, 260), source: { material: m.name, excerpt: quote(s, 120) } }); break; } }
     }
 
     let template = intake.template || (ans.template ? ans.template.toLowerCase() : "");
@@ -57,8 +68,10 @@ export class DeterministicProvider {
     const helpPolicy = /no hints/i.test(ans.help || "") ? "none" : /point back|materials/i.test(ans.help || "") ? "questions-then-materials" : "questions";
     if (!ans.help) assumptions.push({ text: "Help limited to guiding questions because no help policy was specified.", source: "ai", field: "helpPolicy" });
 
-    const name = pick(NAMES, r);
-    let role = strip(ans.character);
+    const given = splitCharacter(ans.character); let role = given.role;
+    const name = given.name || pick(NAMES, r);
+    if (ans.character && !given.name) assumptions.push({ text: `You did not name the character, so Primer chose "${name}". Use Edit to change it.`, source: "ai", field: "character.name" });
+    assumptions.push({ text: "Primer wrote the character's questions from your success criteria using fixed sentence patterns. Read them under \"Practice\" and edit any that sound wrong or give too much away.", source: "ai", field: "questions" });
     if (!role) { role = template === "teachback" ? "a curious newcomer who has never studied this topic" : `someone who depends on the outcome of this work: ${lc(strip(intake.studentWork))}`;
       assumptions.push({ text: `Practice character invented by Primer: ${name}, ${role}.`, source: "ai", field: "character" }); }
     const stakes = strip(ans.stakes) || (assumptions.push({ text: "No stakes were given, so the scenario uses a generic consequence. Consider adding a specific one.", source: "ai", field: "stakes" }), `${name} will act on what the student says, so a wrong or vague answer leads to a bad decision`);
@@ -67,7 +80,7 @@ export class DeterministicProvider {
       const own = content(text.replace(/^\s*\S+\s+/, " ")); const ownStems = new Set(own.map(stem));   // drop the leading task verb ("Explains", "Uses", ...)
       const rel = concepts.filter((c) => ownStems.has(stem(c.term)) || overlap(c.fact, [...ownStems]).hits.length >= 2);
       const extra = rel.flatMap((c) => content(c.fact)).filter((w) => !ownStems.has(stem(w)));
-      const lookFors = [...new Set([...own, ...keyTerms(extra.join(" "), 6)])].slice(0, 12);
+      const lookFors = [...new Set(useful([...own, ...keyTerms(extra.join(" "), 6)]))].slice(0, 12);
       return { id: "c" + (i + 1), text: strip(text), lookFors, source: { kind: "teacher", field: `evidenceOfProgress[${i}]`, materials: rel.map((c) => c.source) } };
     });
     const misconceptions = (intake.misconceptions || []).map((text, i) => ({ id: "m" + (i + 1), text: strip(text), cues: content(text).slice(0, 10), source: { kind: "teacher", field: `misconceptions[${i}]` } }));
@@ -83,10 +96,11 @@ export class DeterministicProvider {
       goal: { text: strip(intake.objective), source: { kind: "teacher", field: "objective" } },
       learnerProfile: { text: strip(intake.learners), priorKnowledge: strip(intake.priorKnowledge), source: { kind: "teacher", field: "learners" } },
       learnerRole: { text: strip(intake.studentWork), source: { kind: "teacher", field: "studentWork" } },
-      character: { name, role, source: { kind: ans.character ? "teacher" : "ai", field: "answers.character" } },
+      character: { name, role, source: { kind: ans.character ? "teacher" : "ai", field: "answers.character" }, nameSource: { kind: given.name ? "teacher" : "ai", field: "answers.character" } },
+      materials: mats.map((m) => ({ name: m.name, text: m.text })), notes: [],
       stakes: { text: stakes, source: { kind: ans.stakes ? "teacher" : "ai", field: "answers.stakes" } },
       difficulty, helpPolicy, criteria, misconceptions, concepts,
-      constraints: (intake.constraints || "").split(/\n|;/).map((s) => strip(s)).filter(Boolean),
+      constraints: (intake.constraints || "").split(/\n/).map((s) => strip(s)).filter(Boolean),
       transfer: { text: strip(ans.transfer), source: { kind: ans.transfer ? "teacher" : "ai", field: "answers.transfer" } },
       assumptions, recommendations: recs, overrides: {}, revisions: [],
       history: [{ at: new Date().toISOString(), actor: { type: "system", name: "Primer (" + this.name + " provider)" }, action: "propose", from: null, to: "draft", note: "Proposed from educator intake." }],
@@ -101,39 +115,40 @@ export class DeterministicProvider {
     // Words that belong to a misconception but not to the correct account; a learner must use at least one before a statement counts as that misconception.
     const corpus = new Set([...d.concepts.flatMap((c) => content(c.fact)), ...d.criteria.flatMap((c) => [...content(c.text), ...c.lookFors])].map(stem));
     for (const m of d.misconceptions) { if (!m.cues || !m.cues.length) m.cues = content(m.text).slice(0, 10); m.distinct = m.cues.filter((w) => !corpus.has(stem(w))); }
+    const roleText = lc(ch.role.replace(/^(a|an|the)\s+/i, (m) => m.toLowerCase()));
     d.preparation = {
-      briefing: `Purpose: ${d.goal.text}.\nYour role: ${d.learnerRole.text}.\nYou will ${tb ? "teach" : "work with"} ${ch.name}, ${ch.role}.` + (d.constraints.length ? `\nKeep in mind: ${d.constraints.join("; ")}.` : ""),
-      keyPoints: top.map((c) => ({ text: c.fact, source: c.source })),
+      briefing: `Purpose: ${d.goal.text}.\nYour role: ${d.learnerRole.text}.\nYou will ${tb ? "teach" : "work with"} ${ch.name}, ${roleText}.`,
+      keyPoints: d.concepts.slice(0, 5).map((c) => ({ text: c.fact, source: c.source })),
       activation: [
-        `Before you begin: in your own words, what do you already know about ${d.concepts[0] ? d.concepts[0].term : "this topic"}?`,
-        d.learnerProfile.priorKnowledge ? `Your teacher expects you to bring this with you: ${d.learnerProfile.priorKnowledge}. Where might it matter in what you are about to do?` : `What do you expect to be the hardest part of this task, and why?`,
+        `Before you begin: in your own words, what do you already know about "${d.title}"?`,
+        `Which idea from earlier lessons do you expect to need most here, and why?`,
       ],
     };
-    const hard = d.constraints[0] || d.stakes.text;
     d.practice = {
-      opening: tb ? `Hi, I'm ${first}. I'm ${ch.role}. I was told you can help me understand this. I really am starting from zero, so go slowly.`
-                  : `I'm ${ch.name}, ${ch.role}. Let me be direct about why I need you: ${lc(d.stakes.text)}.`,
-      challenges: d.criteria.map((c) => ({ criterionId: c.id,
-        prompt: tb ? `Here's what I don't get yet. Can you ${toTask(c.text)}, in a way a beginner would follow?` : `Here is what I need from you. Can you ${toTask(c.text)}?`,
-        harder: tb ? `Okay, I think I follow. But what if someone said the opposite? How would you convince them, thinking about this: ${lc(hard)}?` : `That helps. Now make it harder for yourself: ${lc(hard)}. Does what you said still hold, and why?`,
-        support: [tb ? `I'm lost. Could you try again with one concrete example?` : `I'm not sure that answers it. What exactly are you basing that on?`,
-          `Go back to what you were given before we started. Which part of it deals with ${c.lookFors.slice(0, 2).join(" and ")}? What does it imply here?`] })),
+      opening: tb ? `Hi, I'm ${first}. I'm ${roleText}. I was told you can help me understand this. I really am starting from zero, so go slowly.`
+                  : `I'm ${ch.name}, ${roleText}. Let me be direct about why I need you: ${lc(strip(d.stakes.text))}.`,
+      challenges: d.criteria.map((c) => { const topic = topicOf(c); return { criterionId: c.id, written: c.question ? "teacher" : "primer",
+        prompt: c.question || (tb ? `Here's something I don't understand yet: ${topic}. How would you explain it to me?` : `Let's take the next part: ${topic}. What is your thinking, and what is it based on?`),
+        harder: tb ? `Okay, I think I follow. But suppose someone disagreed with you. What would you say to convince them?` : `That helps. Now think about what is at stake here: ${lc(strip(d.stakes.text))}. Does what you said still hold, and why?`,
+        support: [tb ? `I'm lost. Could you try again with one concrete example?` : `I'm not sure that settles it. What exactly are you basing that on?`,
+          `Go back to the course material you read before we started. Which part deals with ${topic}? What does it imply here?`] }; }),
       probes: d.misconceptions.map((m) => ({ misconceptionId: m.id,
-        voice: tb ? `Oh! So that means ${lc(m.text)}, right?` : `I've always heard that ${lc(m.text)}. I'm planning on that basis. Any reason I shouldn't?`,
-        challenge: `Hold on. A moment ago you said something that sounded like "${lc(m.text)}". If that were true, what would we expect to see? Does that match what you know?` })),
+        voice: tb ? `Oh! So does that mean ${lc(strip(m.text))}?` : `I've always heard that ${lc(strip(m.text))}. I'm planning on that basis. Any reason I shouldn't?`,
+        challenge: `Hold on. A moment ago you said something that sounded like "${lc(strip(m.text))}". If that were true, what would we expect to see? Does that match what you know?` })),
       closing: tb ? `Thank you. I think I could explain some of this to someone else now.` : `All right. I have what I need to decide. Thank you for your time.`,
       refusal: tb ? `I can't tell you the answer; I'm the one who doesn't know it! Try explaining the part you're surest of.` : `I can't answer that for you. Your judgement is exactly what I came for. Start with what you're surest of.`,
       maxTurns: Math.max(6, d.criteria.length * 3 + 2), ...difficultyRules(d.difficulty),
     };
+    const tr = strip(d.transfer.text);
     d.feedback = {
       selfAssessment: ["Before you see any feedback: how do you think that went? Which moment are you most satisfied with?", "What would you do differently if you did it again?"],
-      transfer: d.transfer.text ? `A different situation: ${d.transfer.text}. What from this session would you use there, and what would you change?`
+      transfer: tr ? `A different situation: ${tr}. What from this session would you use there, and what would you change?`
         : `Imagine the same ideas coming up somewhere quite different from ${ch.name}'s situation. Describe one such situation and how you would handle it.`,
     };
     const crit = d.criteria.map((c) => `- ${c.id}: ${c.text} (look for: ${c.lookFors.join(", ")})`).join("\n");
     const mis = d.misconceptions.map((m) => `- ${m.id}: ${m.text}`).join("\n") || "- none listed";
     d.prompts = {
-      character: `You play ${ch.name}, ${ch.role}, in a ${tb ? "teachback" : "roleplay"} for these learners: ${d.learnerProfile.text}.\nLearning goal (do not drift from it): ${d.goal.text}\nThe learner's job: ${d.learnerRole.text}\nStakes: ${d.stakes.text}\nDifficulty: ${d.difficulty}. Help policy: ${d.helpPolicy}.\nStay in character. Never give the answer or do the learner's work. Raise the challenge only after the learner shows evidence; give support only as the help policy allows.\nConstraints: ${d.constraints.join("; ") || "none"}`,
+      character: `You play ${ch.name}, ${ch.role}, in a ${tb ? "teachback" : "roleplay"} for these learners: ${d.learnerProfile.text}.\nLearning goal (do not drift from it): ${d.goal.text}\nThe learner's job: ${d.learnerRole.text}\nStakes: ${d.stakes.text}\nDifficulty: ${d.difficulty}. Help policy: ${d.helpPolicy}.\nStay in character. Never give the answer or do the learner's work. Raise the challenge only after the learner shows evidence; give support only as the help policy allows.\nClassroom constraints (for you, never say them aloud): ${d.constraints.join("; ") || "none"}\nTeacher notes: ${(d.notes || []).join("; ") || "none"}`,
       assessor: `Record evidence only for these educator-approved criteria, quoting the learner's own words:\n${crit}\nWatch for these misconceptions:\n${mis}\nDo not assess anything the learner was not asked to do. Mark observation separately from inference.`,
       feedback: `Write feedback for the learning goal "${d.goal.text}". Ask for self-assessment first. For each criterion cite the learner's actual words and the turn they came from. Say "not assessed" where the learner had no fair opportunity. Offer concrete next actions and finish with the transfer question.`,
     };
@@ -152,8 +167,10 @@ export class DeterministicProvider {
     if ((m = req.match(/(?:remove|drop|delete) (?:the )?criteri(?:on|a) (?:number |#)?(\d+)/i))) { const c = d.criteria[+m[1] - 1]; if (c && d.criteria.length > 1) { d.criteria = d.criteria.filter((x) => x !== c); changes.push(`Removed criterion ${c.id}: ${c.text}`); } }
     if ((m = req.match(/add (?:a |another |the )?misconception\s*[:\-–]?\s*(.+)/i))) { const text = strip(m[1]); const id = "m" + (Math.max(0, ...d.misconceptions.map((c) => +c.id.slice(1))) + 1);
       d.misconceptions.push({ id, text, cues: content(text).slice(0, 10), source: { kind: "teacher", field: "revision" } }); changes.push(`Added misconception ${id}: ${text}`); }
-    if ((m = req.match(/(?:rename|call) the character (?:to |as )?([A-Z][\w'-]+(?: [A-Z][\w'-]+)?)/))) { changes.push(`Character name: ${d.character.name} → ${m[1]}`); d.character.name = m[1]; d.character.source = { kind: "teacher", field: "revision" }; }
-    if ((m = req.match(/(?:the )?character should be\s+(.+)/i))) { changes.push(`Character role: ${d.character.role} → ${strip(m[1])}`); d.character.role = strip(m[1]); d.character.source = { kind: "teacher", field: "revision" }; }
+    let named = false;
+    if (/character|name/i.test(req) && (m = req.match(/\b(?:called|named|rename(?:d)?(?: the character)?(?: to| as)?|call the character|name(?: is| should be| to))\s+([A-Z][\w'-]+(?: [A-Z][\w'-]+)?)/))) { named = true; if (m[1] !== d.character.name) { changes.push(`Character name: ${d.character.name} → ${m[1]}`); d.character.name = m[1]; d.character.nameSource = { kind: "teacher", field: "revision" }; } }
+    if (/\b(?:remove|delete|drop)\b.*\b(?:last |latest )?(?:note|constraint)s?\b/i.test(req)) { const list = (d.notes || []).length ? d.notes : d.constraints; if (list.length) { const gone = list.pop(); changes.push(`Removed: "${gone}"`); } else changes.push("There was no note or constraint to remove"); named = true; }
+    if (!named && (m = req.match(/(?:the )?character should be\s+(?!called|named)(.+)/i))) { changes.push(`Character role: ${d.character.role} → ${strip(m[1])}`); d.character.role = strip(m[1]); d.character.source = { kind: "teacher", field: "revision" }; }
     if ((m = req.match(/\b(?:switch to|use|make it a?)\s*(teachback|roleplay)\b/i))) { const t = m[1].toLowerCase(); if (t !== d.template) { changes.push(`Template: ${d.template} → ${t}`); d.template = t; } }
     if ((m = req.match(/stakes?\s*(?:should be|[:\-–])\s*(.+)/i))) { changes.push(`Stakes changed to: ${strip(m[1])}`); d.stakes = { text: strip(m[1]), source: { kind: "teacher", field: "revision" } }; }
     if ((m = req.match(/transfer (?:question|scenario|situation)\s*(?:should be|[:\-–])\s*(.+)/i))) { changes.push(`Transfer situation changed to: ${strip(m[1])}`); d.transfer = { text: strip(m[1]), source: { kind: "teacher", field: "revision" } }; }
@@ -162,7 +179,7 @@ export class DeterministicProvider {
       d.criteria.sort((a, b) => overlap(b.text, t).score - overlap(a.text, t).score); d.criteria.forEach((c) => { if (overlap(c.text, t).score > 0) c.lookFors = [...new Set([...c.lookFors, ...content(m[1])])].slice(0, 14); });
       d.goal.emphasis = strip(m[1]); changes.push(`Emphasis added: ${strip(m[1])}` + (before !== d.criteria.map((c) => c.id).join() ? " (criteria reordered so it comes first)" : "")); }
     const understood = changes.length > 0;
-    if (!understood) { d.constraints.push(strip(req)); changes.push(`Recorded as a constraint the character and briefing must respect: "${strip(req)}"`); }
+    if (!understood) { d.notes = [...(d.notes || []), strip(req)]; changes.push(`saved as a note for you only (students never see it): "${strip(req)}". Nothing in the experience changed. Use the Edit buttons to make this change yourself.`); }
     // A revision invalidates direct text overrides on parts that are regenerated from the changed fields.
     d.revisions.push({ id: "rev" + (d.revisions.length + 1), at: new Date().toISOString(), request: req, changes, understood });
     return { design: this.derive(d), changes, understood };

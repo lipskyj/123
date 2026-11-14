@@ -48,7 +48,7 @@ export function createRuntime(store, provider) {
     const p = s.practice; p.index++;
     if (p.index >= d.practice.challenges.length) return finishPractice(s, d);
     // Teachback / roleplay: the character voices one educator-listed misconception part-way through, so the learner gets a fair chance to address it.
-    if (!p.voiced && d.practice.probes.length && p.index >= 1) { p.voiced = true; const pr = d.practice.probes.find((x) => !p.probed[x.misconceptionId]);
+    if (!p.voiced && d.practice.probes.length && p.index >= 1) { p.voiced = true; const settled = new Set(s.evidence.filter((e) => e.kind.startsWith("misconception")).map((e) => e.ref)); const pr = d.practice.probes.find((x) => !p.probed[x.misconceptionId] && !settled.has(x.misconceptionId));
       if (pr) { p.probed[pr.misconceptionId] = "voiced"; p.pending = { type: "voice", misconceptionId: pr.misconceptionId }; addTurn(s, "character", provider.line("probe-voice", d, { misconceptionId: pr.misconceptionId }), { kind: "probe-voice", misconceptionId: pr.misconceptionId }); return; } }
     promptCurrent(s, d);
   }
@@ -77,7 +77,9 @@ export function createRuntime(store, provider) {
     if (provider.isAnswerSeeking(text)) { adapt(s, "redirect", turn, "Learner asked to be given the answer; the character declined and restated the task.", [], ch.criterionId); reply("redirect", { criterionId: ch.criterionId }, { criterionId: ch.criterionId }); return save(s); }
     // 2. Reply to a misconception the character voiced.
     if (p.pending && p.pending.type === "voice") { const mid = p.pending.misconceptionId; p.pending = null;
-      const corrected = ev.some((e) => e.ref === mid && e.kind === "misconception-corrected");
+      let corrected = ev.some((e) => e.ref === mid && e.kind === "misconception-corrected");
+      // The character has just said the misconception aloud, so a plain disagreement is a correction even without repeating its words.
+      if (!corrected && /\b(no|nope|not|never|wrong|incorrect|false|disagree|myth|misconception|mistake|mistaken)\b|n't/i.test(turn.text)) { corrected = true; s.evidence.push({ id: "ev" + (s.evidence.length + 1), kind: "misconception-corrected", ref: mid, turnId: turn.id, phase: "practice", quote: quote(turn.text, 200), strength: "partial", matched: [], basis: "observed", promptedFor: null }); }
       if (!corrected) s.evidence.push({ id: "ev" + (s.evidence.length + 1), kind: "misconception-unaddressed", ref: mid, turnId: turn.id, phase: "practice", quote: quote(turn.text, 200), strength: "clear", matched: [], basis: "observed", promptedFor: null });
       promptCurrent(s, d); return save(s); }
     // 3. The learner states an educator-listed misconception: probe it once, tied to that misconception.
@@ -141,7 +143,10 @@ export function createRuntime(store, provider) {
     s.transfer = { turnId: t.id, answer: t.text, criteriaEchoed: used, note: used.length ? `Observation: your answer reuses ideas from ${used.length} of the criteria.` : "Observation: your answer does not yet connect back to the ideas from this session." };
     s.phase = "ended"; s.endedAt = now(); event(s, "session-ended", {}); journal(s, "Session ended."); return save(s);
   }
+  // The learner may stop practising early. Criteria not yet asked about are then reported as not assessed.
+  function endPractice(sessionId) { const s = store.get("sessions", sessionId), d = pkgOf(s).design; if (s.phase !== "practice") throw new Error("Practice is not in progress."); if (d.world && !s.practice.worldLeft) throw new Error("Finish your field work first.");
+    event(s, "practice-ended-by-learner", { learnerTurns: s.practice.learnerTurns }); finishPractice(s, d); return save(s); }
   const get = (id) => store.get("sessions", id);
   const check = (id) => validateSession(get(id));
-  return { start, submitPreparation, worldEvent, leaveWorld, say, submitSelfAssessment, submitTransfer, get, check };
+  return { start, submitPreparation, worldEvent, leaveWorld, say, endPractice, submitSelfAssessment, submitTransfer, get, check };
 }
