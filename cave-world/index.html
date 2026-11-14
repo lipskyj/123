@@ -161,6 +161,26 @@
   #phOpts button { display:block; width:100%; text-align:left; padding:9px 12px; margin:6px 0; font-size:14px; }
   #phOpts .row { display:flex; gap:8px; } #phOpts .row button { text-align:center; }
   #phOpts .answer { border-color:var(--acc); color:var(--acc); font-weight:700; } #phOpts .decline { color:#ff8b8b; }
+  #callScreen { position:fixed; inset:0; z-index:6; display:none; color:#fff; }
+  #callScreen.on { display:block; }
+  .cs-bg { position:absolute; inset:0; background:#0b1310 center/cover no-repeat; filter:blur(28px) brightness(.45); transform:scale(1.15); }
+  .cs-in { position:relative; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px; background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.6)); }
+  .cs-sub { margin:0 0 18px; font-size:13px; letter-spacing:.08em; text-transform:uppercase; opacity:.75; }
+  .cs-pic { width:min(42vw,190px); height:min(42vw,190px); border-radius:50%; background:linear-gradient(135deg,#5fe0b5,#c9a46a) center/cover; display:grid; place-items:center; font-size:54px; font-weight:700; color:#06241b;
+    box-shadow:0 0 0 0 rgba(95,224,181,.6); animation:halo 1.6s infinite; }
+  #callScreen.urgent .cs-pic { animation:haloR 1s infinite; }
+  @keyframes halo { 0% { box-shadow:0 0 0 0 rgba(95,224,181,.55); } 100% { box-shadow:0 0 0 34px rgba(95,224,181,0); } }
+  @keyframes haloR { 0% { box-shadow:0 0 0 0 rgba(255,90,90,.7); } 100% { box-shadow:0 0 0 40px rgba(255,90,90,0); } }
+  #callScreen h2 { font-family:"Cinzel",Georgia,serif; font-size:26px; margin:22px 0 4px; } .cs-status { margin:0; opacity:.8; font-size:15px; }
+  .cs-btns { display:flex; gap:min(18vw,90px); margin-top:min(14vh,90px); } .cs-btns > div { display:flex; flex-direction:column; align-items:center; gap:8px; font-size:13px; opacity:.9; }
+  .cs-round { width:68px; height:68px; border-radius:50%; border:0; display:grid; place-items:center; color:#fff; padding:16px; } .cs-round svg { width:100%; height:100%; }
+  .cs-round.accept { background:#1fbf5a; animation:bounce 1s infinite; } .cs-round.decline { background:#e5484d; }
+  @keyframes bounce { 50% { transform:translateY(-5px); } }
+  .avatar.pic { background-size:cover; background-position:center; color:transparent; }
+  .wave { display:flex; gap:3px; align-items:center; height:22px; } .wave i { width:3px; height:4px; border-radius:2px; background:var(--acc); opacity:.5; }
+  #phone.speaking .wave i { animation:wv .5s infinite alternate; opacity:1; } .wave i:nth-child(2) { animation-delay:.1s !important; } .wave i:nth-child(3) { animation-delay:.2s !important; } .wave i:nth-child(4) { animation-delay:.05s !important; } .wave i:nth-child(5) { animation-delay:.15s !important; }
+  @keyframes wv { to { height:20px; } }
+  .ph-ctl { display:flex; gap:8px; margin-top:8px; } .ph-ctl button { flex:1; padding:8px; font-size:13px; } .ph-ctl .end { background:#e5484d; color:#fff; border-color:#e5484d; } .ph-ctl .on { border-color:var(--acc); color:var(--acc); }
   #flood { position:fixed; left:0; right:0; bottom:0; height:0; pointer-events:none; z-index:1; background:linear-gradient(180deg,rgba(40,120,160,.0),rgba(30,110,150,.55)); transition:height .3s linear; }
   body.danger::before { content:""; position:fixed; inset:0; pointer-events:none; z-index:2; box-shadow:inset 0 0 120px rgba(255,60,60,.55); animation:pulse 1s infinite; }
   .mark::after { content:""; position:absolute; inset:3px; background:var(--warn); opacity:.7; }
@@ -212,8 +232,13 @@
     <div id="load">Loading cave…</div>
   </div>
 </div>
-<div id="phone" role="dialog" aria-label="Phone call" aria-live="polite"><div class="ph-head"><div class="avatar" id="phAv">AR</div><div><b id="phName"></b><br><span class="dim" id="phStatus"></span></div></div>
-  <div id="phLines"></div><div id="phTimer"><i></i><span></span></div><div id="phOpts"></div></div>
+<div id="callScreen" role="dialog" aria-label="Incoming call"><div class="cs-bg" id="csBg"></div><div class="cs-in">
+  <p class="cs-sub" id="csSub">Voice call</p><div class="cs-pic" id="csPic"></div><h2 id="csName"></h2><p class="cs-status" id="csStatus"></p>
+  <div class="cs-btns" id="csBtns"><div><button class="cs-round decline" id="csDecline" aria-label="Decline"><svg viewBox="0 0 24 24"><path d="M3 15c5-5 13-5 18 0l-2.500 2.500-3.500-1.500V13a12 12 0 0 0-6 0v3l-3.500 1.500z" fill="currentColor"/></svg></button><span>Decline</span></div>
+  <div><button class="cs-round accept" id="csAccept" aria-label="Accept"><svg viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.500 1.500a11 11 0 0 0 5 5L15 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2" fill="currentColor"/></svg></button><span>Accept</span></div></div></div></div>
+<div id="phone" role="dialog" aria-label="Phone call" aria-live="polite"><div class="ph-head"><div class="avatar" id="phAv">AR</div><div style="flex:1"><b id="phName"></b><br><span class="dim" id="phStatus"></span> <span class="dim" id="phClock"></span></div><div class="wave" id="phWave"><i></i><i></i><i></i><i></i><i></i></div></div>
+  <div id="phLines"></div><div id="phTimer"><i></i><span></span></div><div id="phOpts"></div>
+  <div class="ph-ctl"><button id="phMute" aria-label="Mute voice">Mute</button><button id="phEnd" class="end" aria-label="Hang up">End call</button></div></div>
 <div id="flood"></div>
 <div id="radio" role="status" aria-live="polite"><div class="avatar" aria-hidden="true">AR</div><p id="radioText"></p></div>
 <div class="sheet" id="report"><div class="card" id="reportCard"></div></div>
@@ -592,19 +617,31 @@ async function startProcedure(p, t) {
   $("rOk").onclick = () => { closeSheet("result"); if (found.size === POIS.length) showNotebook(true); };
 }
 // ---------- phone ----------
-const phone = { state: "idle", who: "reyes" }; const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-function speak(text, who) { try { if (audio.muted || !window.speechSynthesis) return; const u = new SpeechSynthesisUtterance(text); Object.assign(u, CALLERS[who].voice); speechSynthesis.speak(u); } catch {} }
-function phShow(who, status, urgent = false) { $("radio").classList.remove("on"); phone.who = who; $("phAv").textContent = CALLERS[who].initials; $("phName").textContent = CALLERS[who].name; $("phStatus").textContent = status; $("phone").classList.add("on"); $("phone").classList.toggle("urgent", urgent); }
-function phHide() { $("phone").classList.remove("on", "urgent"); $("phLines").innerHTML = ""; $("phOpts").innerHTML = ""; $("phTimer").classList.remove("on"); $("phoneBtn").classList.remove("ring"); document.body.classList.remove("danger"); $("flood").style.height = "0"; try { speechSynthesis.cancel(); } catch {} phone.state = "idle"; }
-async function say(who, text, hold = true) { if (who !== phone.who) phShow(who, "On the line", $("phone").classList.contains("urgent"));
+const phone = { state: "idle", who: "reyes", muted: false, aborted: false, pending: null, clock: 0 }; const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+// Portraits are optional: if an image file is present it is used, otherwise the initials avatar.
+const photoOk = {}; for (const [k, c] of Object.entries(CALLERS)) if (c.photo) { const im = new Image(); im.onload = () => (photoOk[k] = true); im.src = c.photo; }
+function face(el, who) { el.textContent = CALLERS[who].initials; el.classList.toggle("pic", !!photoOk[who]); el.style.backgroundImage = photoOk[who] ? `url("${CALLERS[who].photo}")` : ""; }
+function callScreen(who, status, { urgent = false, accept = true, declineLabel = "Decline" } = {}) {
+  face($("csPic"), who); $("csBg").style.backgroundImage = photoOk[who] ? `url("${CALLERS[who].photo}")` : ""; $("csName").textContent = CALLERS[who].name.split(",")[0];
+  $("csSub").textContent = urgent ? "Emergency call" : CALLERS[who].sub; $("csStatus").textContent = status; $("callScreen").classList.add("on"); $("callScreen").classList.toggle("urgent", urgent);
+  $("csAccept").parentElement.hidden = !accept; $("csDecline").parentElement.querySelector("span").textContent = declineLabel; $("csDecline").parentElement.hidden = urgent; }
+const callScreenOff = () => $("callScreen").classList.remove("on");
+function startClock() { const t0 = performance.now(); clearInterval(phone.clock); phone.clock = setInterval(() => { const s = Math.floor((performance.now() - t0) / 1000); $("phClock").textContent = `· ${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`; }, 500); }
+$("phMute").onclick = () => { phone.muted = !phone.muted; $("phMute").classList.toggle("on", phone.muted); $("phMute").textContent = phone.muted ? "Unmute" : "Mute"; if (phone.muted) try { speechSynthesis.cancel(); } catch {} };
+$("phEnd").onclick = () => { if (phone.state !== "active") return; phone.aborted = true; logEv("hung-up"); try { speechSynthesis.cancel(); } catch {} if (phone.pending) phone.pending(-1); $("phone").classList.remove("on"); };
+function speak(text, who) { try { if (audio.muted || phone.muted || phone.aborted || !window.speechSynthesis) return; const u = new SpeechSynthesisUtterance(text); Object.assign(u, CALLERS[who].voice); speechSynthesis.speak(u); } catch {} }
+function phShow(who, status, urgent = false) { $("radio").classList.remove("on"); phone.who = who; face($("phAv"), who); $("phName").textContent = CALLERS[who].name; $("phStatus").textContent = status; $("phone").classList.add("on"); $("phone").classList.toggle("urgent", urgent); }
+function phHide() { callScreenOff(); clearInterval(phone.clock); $("phClock").textContent = ""; phone.aborted = false; phone.pending = null; $("phone").classList.remove("on", "urgent", "speaking"); $("phLines").innerHTML = ""; $("phOpts").innerHTML = ""; $("phTimer").classList.remove("on"); $("phoneBtn").classList.remove("ring"); document.body.classList.remove("danger"); $("flood").style.height = "0"; try { speechSynthesis.cancel(); } catch {} phone.state = "idle"; }
+async function say(who, text, hold = true) { if (phone.aborted) return; if (who !== phone.who) phShow(who, "On the line", $("phone").classList.contains("urgent"));
   const el = document.createElement("p"); el.innerHTML = `<span class="who">${esc(CALLERS[who].name.split(",")[0])}</span>${esc(text)}`; $("phLines").appendChild(el);
-  while ($("phLines").children.length > 3) $("phLines").firstChild.remove(); speak(text, who); logEv("call-line", { who, text }); if (hold) await sleep(Math.min(5200, 900 + text.length * 38)); }
+  while ($("phLines").children.length > 3) $("phLines").firstChild.remove(); speak(text, who); logEv("call-line", { who, text });
+  const dur = Math.min(5200, 900 + text.length * 38); $("phone").classList.add("speaking"); clearTimeout(phone.spk); phone.spk = setTimeout(() => $("phone").classList.remove("speaking"), dur); if (hold) await sleep(dur); }
 function me(text) { const el = document.createElement("p"); el.className = "me"; el.textContent = text; $("phLines").appendChild(el); while ($("phLines").children.length > 3) $("phLines").firstChild.remove(); logEv("call-reply", { text }); }
 function timerBar(left, total) { $("phTimer").classList.add("on"); $("phTimer").querySelector("i").style.width = (100 * left) / total + "%"; $("phTimer").querySelector("span").textContent = Math.ceil(left) + " s"; }
 // Choice with an optional time limit. Resolves to the index chosen, or -1 on timeout.
-function ask(options, seconds = 0) { return new Promise((resolve) => { const box = $("phOpts"); box.innerHTML = options.map((o, i) => `<button data-i="${i}">${esc(o)}</button>`).join(""); let done = false, t0 = performance.now(), iv = 0;
+function ask(options, seconds = 0) { return new Promise((resolve) => { if (phone.aborted) return resolve(-1); const box = $("phOpts"); box.innerHTML = options.map((o, i) => `<button data-i="${i}">${esc(o)}</button>`).join(""); let done = false, t0 = performance.now(), iv = 0;
   const end = (i) => { if (done) return; done = true; clearInterval(iv); box.innerHTML = ""; $("phTimer").classList.remove("on"); if (i >= 0) me(options[i]); resolve(i); };
-  box.querySelectorAll("button").forEach((b) => (b.onclick = () => end(+b.dataset.i)));
+  box.querySelectorAll("button").forEach((b) => (b.onclick = () => end(+b.dataset.i))); phone.pending = end;
   if (seconds) iv = setInterval(() => { const left = seconds - (performance.now() - t0) / 1000; timerBar(Math.max(0, left), seconds); if (left <= 0) end(-1); }, 100); }); }
 // Real-time movement challenge: resolves { ok, secs } as soon as test(position) passes, or when time runs out.
 function race(seconds, test, onTick) { return new Promise((resolve) => { const t0 = performance.now(); document.body.classList.add("danger");
@@ -613,12 +650,11 @@ function race(seconds, test, onTick) { return new Promise((resolve) => { const t
     else if (left <= 0) { clearInterval(iv); document.body.classList.remove("danger"); $("phTimer").classList.remove("on"); resolve({ ok: false, secs: seconds }); } }, 100); }); }
 // Incoming call. Urgent calls connect by themselves after two rings.
 function ring(id, flow, { who = "reyes", urgent = false } = {}) {
-  if (phone.state !== "idle" || !playing) return false; phone.state = "ringing"; phShow(who, urgent ? "Urgent call…" : "Incoming call…", urgent); $("phoneBtn").classList.add("ring");
+  if (phone.state !== "idle" || !playing) return false; phone.state = "ringing"; phone.who = who; callScreen(who, urgent ? "Connecting…" : "Incoming voice call…", { urgent }); $("phoneBtn").classList.add("ring");
   let rings = 0; const rt = setInterval(() => { audio.play("select"); setTimeout(() => audio.play("select"), 180); rings++; if (urgent && rings >= 2) pick(); if (!urgent && rings >= 10) miss(); }, 1300); audio.play("select");
-  const pick = async () => { clearInterval(rt); $("phoneBtn").classList.remove("ring"); $("phOpts").innerHTML = ""; phone.state = "active"; $("phStatus").textContent = "On the line"; logEv("call", { id, answered: true }); try { await flow(); } finally { await sleep(1800); phHide(); } };
+  const pick = async () => { clearInterval(rt); $("phoneBtn").classList.remove("ring"); callScreenOff(); $("phOpts").innerHTML = ""; phone.state = "active"; phShow(who, "On the line", urgent); startClock(); logEv("call", { id, answered: true }); try { await flow(); } finally { await sleep(1800); phHide(); } };
   const miss = () => { clearInterval(rt); mission.missed++; mission.calls[id] = mission.calls[id] || { missed: true }; logEv("call", { id, answered: false }); save(); phHide(); };
-  $("phOpts").innerHTML = urgent ? "" : `<div class="row"><button class="answer">Answer (C)</button><button class="decline">Decline</button></div>`;
-  if (!urgent) { $("phOpts").querySelector(".answer").onclick = pick; $("phOpts").querySelector(".decline").onclick = miss; }
+  $("csAccept").onclick = pick; $("csDecline").onclick = miss;
   phone.answer = urgent ? null : pick; return true;
 }
 const dist2 = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
@@ -663,8 +699,9 @@ async function menuFlow() {
   if (i === 2) return found.size ? checkinFlow("Go on then. What have you found that matters most?") : say("reyes", "You haven't investigated anything yet. Start with whatever stands out.");
   return say("reyes", LINES.menu.bye);
 }
-function callReyes() { if (phone.state === "ringing" && phone.answer) return phone.answer(); if (phone.state !== "idle" || !playing) return; phone.state = "active"; phShow("reyes", "Calling…"); audio.play("select");
-  logEv("call", { id: "outgoing", answered: true }); setTimeout(async () => { $("phStatus").textContent = "On the line"; try { await menuFlow(); } finally { await sleep(1500); phHide(); } }, 1200); }
+function callReyes() { if (phone.state === "ringing" && phone.answer) return phone.answer(); if (phone.state !== "idle" || !playing) return; phone.state = "dialing";
+  callScreen("reyes", "Calling…", { accept: false, declineLabel: "Cancel" }); audio.play("select"); let cancelled = false; $("csDecline").onclick = () => { cancelled = true; phHide(); };
+  logEv("call", { id: "outgoing", answered: true }); setTimeout(async () => { if (cancelled) return; callScreenOff(); phone.state = "active"; phShow("reyes", "On the line"); startClock(); try { await menuFlow(); } finally { await sleep(1500); phHide(); } }, 1800); }
 $("phoneBtn").onclick = () => callReyes();
 // Situations that trigger calls, checked a few times a second while the player is in the cave.
 let lastCheck = 0, readyAt = 0;
