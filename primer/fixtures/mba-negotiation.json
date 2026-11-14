@@ -1,0 +1,20 @@
+{
+  "title": "Salary negotiation: interests before positions",
+  "learners": "First-year MBA students in a core negotiations course. Most have 3-5 years of work experience and have negotiated a job offer at least once.",
+  "objective": "Students prepare for and conduct a negotiation by separating interests from positions, identifying their BATNA, and proposing options that create value for both sides",
+  "priorKnowledge": "The terms BATNA, reservation price and ZOPA from last week's lecture",
+  "misconceptions": ["The best opening move is to state your bottom line so nobody wastes time", "Negotiation is a fixed pie where every gain for one side is a loss for the other"],
+  "studentWork": "Advise a colleague who is about to negotiate a job offer, and help them plan what to ask for and why",
+  "evidenceOfProgress": ["Distinguishes the underlying interests of each party from their stated positions", "Identifies the BATNA and explains how it sets the reservation price", "Proposes at least one option that creates value for both sides instead of splitting the difference"],
+  "constraints": "The colleague has only one other offer, and it is weaker",
+  "template": "roleplay",
+  "world": "none",
+  "materials": [{ "name": "Lecture notes week 3", "text": "A position is what a party says they want; an interest is the reason they want it. Two parties can hold opposed positions while having compatible interests. Skilled negotiators ask why before they ask how much. Your BATNA is your best alternative to a negotiated agreement: what you will do if this negotiation fails. The BATNA determines your reservation price, the point at which you are better off walking away. A strong BATNA gives you leverage; a weak BATNA should be improved before you negotiate, not revealed during it. The zone of possible agreement, or ZOPA, lies between the two reservation prices. Value is created when parties trade issues they value differently: a candidate may value a later start date or remote days more than the employer values granting them. Splitting the difference on a single issue such as salary only divides value; adding issues such as start date, signing bonus, title, or review timing can create value for both sides. Revealing your bottom line early anchors the discussion at your worst acceptable outcome." }],
+  "answers": {
+    "character": "a nervous colleague, two years out of college, who has a job offer in hand and wants to be told what number to ask for",
+    "stakes": "the colleague will either accept a weak offer immediately or blurt out their bottom line and damage the relationship with their future manager",
+    "difficulty": "Moderate",
+    "help": "Guiding questions, then point back to the materials",
+    "transfer": "negotiating project deadlines and resources with another team inside your own company"
+  }
+}

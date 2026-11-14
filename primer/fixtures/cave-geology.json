@@ -1,0 +1,20 @@
+{
+  "title": "Reading a limestone cave",
+  "learners": "Year 9 earth science students (age 13-14) at the end of a unit on rocks and weathering. Mixed reading levels.",
+  "objective": "Students use field evidence to explain how a limestone cave and its formations are made, and what that evidence says about the past",
+  "priorKnowledge": "The rock cycle, and that acids react with carbonates to release carbon dioxide",
+  "misconceptions": ["Caves are carved by fast flowing rivers cutting through the rock", "Stalactites and stalagmites are made of ice or frozen water"],
+  "studentWork": "Explain to a new volunteer cave guide what the evidence in the cave shows, so the guide can explain it to visitors accurately",
+  "evidenceOfProgress": ["Explains that slightly acidic water dissolves limestone and uses the acid fizz test as evidence the rock is calcite", "Explains that stalactites and stalagmites grow when dripping water loses carbon dioxide and deposits calcite", "Uses a measurement and a growth rate to estimate how old a formation is", "Uses fossils in the wall as evidence that the limestone formed on an ancient sea floor"],
+  "constraints": "Do not use the word 'erosion' when you mean dissolving",
+  "template": "teachback",
+  "world": "cave",
+  "materials": [{ "name": "Unit handout: karst and caves", "text": "Limestone is made mostly of the mineral calcite, which is calcium carbonate. Rainwater absorbs carbon dioxide from the air and soil and becomes a weak carbonic acid. This slightly acidic water seeps into cracks and slowly dissolves limestone; over hundreds of thousands of years the cracks widen into caves. A drop of dilute hydrochloric acid on limestone fizzes because the calcite reacts and releases carbon dioxide gas; a rock that does not fizz is not limestone. When water carrying dissolved calcite drips into the cave air it loses carbon dioxide and can no longer hold all of its calcite, so a thin film of calcite is deposited. Stalactites grow down from the ceiling and stalagmites grow up from the floor where the drips land. Stalagmites grow very slowly, typically about 0.1 millimetres per year, so a stalagmite two metres tall is roughly twenty thousand years old. Limestone forms on shallow sea floors from lime mud and the skeletons of sea animals; fossils such as crinoid stems and shells in a cave wall show the rock was once a sea floor. A landscape shaped by dissolving rock is called karst." }],
+  "answers": {
+    "character": "a new volunteer guide who starts leading school tours next week and is worried about saying something wrong",
+    "stakes": "the guide will repeat whatever they are told to hundreds of visitors, including any mistakes",
+    "difficulty": "Gentle",
+    "help": "Guiding questions, then point back to the materials",
+    "transfer": "a sea cliff with layered rock and fossils that you visit on holiday"
+  }
+}
