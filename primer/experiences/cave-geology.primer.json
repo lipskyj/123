@@ -1,24 +1,24 @@
 {
  "packages": [
   {
-   "id": "exp-5vyjz9",
-   "designId": "design-1e7vpn2",
+   "id": "exp-12qaryv",
+   "designId": "design-13h7kmp",
    "designVersion": 1,
    "title": "Reading a limestone cave",
-   "builtAt": "2026-11-14T10:29:44.900Z",
+   "builtAt": "2026-11-14T10:48:26.417Z",
    "provider": "deterministic",
    "approval": {
     "type": "test",
     "by": "Automated test",
-    "at": "2026-11-14T10:29:44.900Z"
+    "at": "2026-11-14T10:48:26.416Z"
    },
    "design": {
-    "id": "design-1e7vpn2",
-    "intakeId": "intake-68e783",
+    "id": "design-13h7kmp",
+    "intakeId": "intake-xe9lj6",
     "version": 1,
     "state": "test-approved",
     "supersedes": null,
-    "createdAt": "2026-11-14T10:29:44.899Z",
+    "createdAt": "2026-11-14T10:48:26.416Z",
     "title": "Reading a limestone cave",
     "template": "teachback",
     "world": "cave",
@@ -30,8 +30,8 @@
      }
     },
     "learnerProfile": {
-     "text": "Year 9 earth science students (age 13-14) at the end of a unit on rocks and weathering. Mixed reading levels",
-     "priorKnowledge": "The rock cycle, and that acids react with carbonates to release carbon dioxide",
+     "text": "",
+     "priorKnowledge": "",
      "source": {
       "kind": "teacher",
       "field": "learners"
@@ -325,9 +325,7 @@
       }
      }
     ],
-    "constraints": [
-     "Do not use the word 'erosion' when you mean dissolving"
-    ],
+    "constraints": [],
     "transfer": {
      "text": "a sea cliff with layered rock and fossils that you visit on holiday",
      "source": {
@@ -335,35 +333,13 @@
       "field": "answers.transfer"
      }
     },
-    "assumptions": [
-     {
-      "text": "You did not name the character, so Primer chose \"Dana Okafor\". Use Edit to change it.",
-      "source": "ai",
-      "field": "character.name"
-     },
-     {
-      "text": "Primer wrote the character's questions from your success criteria using fixed sentence patterns. Read them under \"Practice\" and edit any that sound wrong or give too much away.",
-      "source": "ai",
-      "field": "questions"
-     }
-    ],
+    "assumptions": [],
     "recommendations": [],
     "overrides": {},
     "revisions": [],
     "history": [
      {
-      "at": "2026-11-14T10:29:44.899Z",
-      "actor": {
-       "type": "system",
-       "name": "Primer (deterministic provider)"
-      },
-      "action": "propose",
-      "from": null,
-      "to": "draft",
-      "note": "Proposed from educator intake."
-     },
-     {
-      "at": "2026-11-14T10:29:44.900Z",
+      "at": "2026-11-14T10:48:26.416Z",
       "actor": {
        "type": "test",
        "name": "Automated test"
@@ -371,11 +347,11 @@
       "action": "approve",
       "from": "draft",
       "to": "test-approved",
-      "note": "Synthetic approval for the bundled sample."
+      "note": ""
      }
     ],
     "preparation": {
-     "briefing": "Purpose: Students use field evidence to explain how a limestone cave and its formations are made, and what that evidence says about the past.\nYour role: Explain to a new volunteer cave guide what the evidence in the cave shows, so the guide can explain it to visitors accurately.\nYou will teach Dana Okafor, a new volunteer guide who starts leading school tours next week and is worried about saying something wrong.",
+     "briefing": "Purpose: Students use field evidence to explain how a limestone cave and its formations are made, and what that evidence says about the past.\nYour role: Explain to a new volunteer cave guide what the evidence in the cave shows, so the guide can explain it to visitors accurately.\nYou will teach Dana Okafor.",
      "keyPoints": [
       {
        "text": "Limestone is made mostly of the mineral calcite, which is calcium carbonate.",
@@ -419,62 +395,64 @@
      ]
     },
     "practice": {
-     "opening": "Hi, I'm Dana. I'm a new volunteer guide who starts leading school tours next week and is worried about saying something wrong. I was told you can help me understand this. I really am starting from zero, so go slowly.",
+     "opening": "Hi, I'm Dana. I was told you could help me understand this. I'm starting from zero, so please go slowly.",
      "challenges": [
       {
        "criterionId": "c1",
        "written": "primer",
-       "prompt": "Here's something I don't understand yet: slightly, acidic and water. How would you explain it to me?",
+       "prompt": "Where should I start? What's the most important idea I need to get?",
        "harder": "Okay, I think I follow. But suppose someone disagreed with you. What would you say to convince them?",
        "support": [
-        "I'm lost. Could you try again with one concrete example?",
-        "Go back to the course material you read before we started. Which part deals with slightly, acidic and water? What does it imply here?"
+        "I'm not sure I follow yet. Can you say a bit more, maybe with an example?",
+        "Maybe look back at the course material from before we started. Is there a part of it that helps here?"
        ]
       },
       {
        "criterionId": "c2",
        "written": "primer",
-       "prompt": "Here's something I don't understand yet: stalactites, stalagmites and grow. How would you explain it to me?",
+       "prompt": "Okay. What else do I need to understand to really get this?",
        "harder": "Okay, I think I follow. But suppose someone disagreed with you. What would you say to convince them?",
        "support": [
-        "I'm lost. Could you try again with one concrete example?",
-        "Go back to the course material you read before we started. Which part deals with stalactites, stalagmites and grow? What does it imply here?"
+        "I'm not sure I follow yet. Can you say a bit more, maybe with an example?",
+        "Maybe look back at the course material from before we started. Is there a part of it that helps here?"
        ]
       },
       {
        "criterionId": "c3",
        "written": "primer",
-       "prompt": "Here's something I don't understand yet: measurement, growth and rate. How would you explain it to me?",
+       "prompt": "What do people usually get wrong about this, and why are they wrong?",
        "harder": "Okay, I think I follow. But suppose someone disagreed with you. What would you say to convince them?",
        "support": [
-        "I'm lost. Could you try again with one concrete example?",
-        "Go back to the course material you read before we started. Which part deals with measurement, growth and rate? What does it imply here?"
+        "I'm not sure I follow yet. Can you say a bit more, maybe with an example?",
+        "Maybe look back at the course material from before we started. Is there a part of it that helps here?"
        ]
       },
       {
        "criterionId": "c4",
        "written": "primer",
-       "prompt": "Here's something I don't understand yet: fossils, wall and evidence. How would you explain it to me?",
+       "prompt": "How would I know whether I had understood it properly?",
        "harder": "Okay, I think I follow. But suppose someone disagreed with you. What would you say to convince them?",
        "support": [
-        "I'm lost. Could you try again with one concrete example?",
-        "Go back to the course material you read before we started. Which part deals with fossils, wall and evidence? What does it imply here?"
+        "I'm not sure I follow yet. Can you say a bit more, maybe with an example?",
+        "Maybe look back at the course material from before we started. Is there a part of it that helps here?"
        ]
       }
      ],
+     "ack": "Oh, that's useful, it answers something I was going to ask.",
      "probes": [
       {
        "misconceptionId": "m1",
-       "voice": "Oh! So does that mean caves are carved by fast flowing rivers cutting through the rock?",
-       "challenge": "Hold on. A moment ago you said something that sounded like \"caves are carved by fast flowing rivers cutting through the rock\". If that were true, what would we expect to see? Does that match what you know?"
+       "voice": "Wait, I read somewhere that caves are carved by fast flowing rivers cutting through the rock. Is that right?",
+       "challenge": "Hold on. You said something that sounded like \"caves are carved by fast flowing rivers cutting through the rock\". If that were true, what would we expect to see? Does that match what you know?"
       },
       {
        "misconceptionId": "m2",
-       "voice": "Oh! So does that mean stalactites and stalagmites are made of ice or frozen water?",
-       "challenge": "Hold on. A moment ago you said something that sounded like \"stalactites and stalagmites are made of ice or frozen water\". If that were true, what would we expect to see? Does that match what you know?"
+       "voice": "Wait, I read somewhere that stalactites and stalagmites are made of ice or frozen water. Is that right?",
+       "challenge": "Hold on. You said something that sounded like \"stalactites and stalagmites are made of ice or frozen water\". If that were true, what would we expect to see? Does that match what you know?"
       }
      ],
      "closing": "Thank you. I think I could explain some of this to someone else now.",
+     "closingUnsure": "Thanks for trying. I'm still a bit confused, so I'll keep reading about it.",
      "refusal": "I can't tell you the answer; I'm the one who doesn't know it! Try explaining the part you're surest of.",
      "maxTurns": 14,
      "raise": false,
@@ -489,9 +467,9 @@
      "transfer": "A different situation: a sea cliff with layered rock and fossils that you visit on holiday. What from this session would you use there, and what would you change?"
     },
     "prompts": {
-     "character": "You play Dana Okafor, a new volunteer guide who starts leading school tours next week and is worried about saying something wrong, in a teachback for these learners: Year 9 earth science students (age 13-14) at the end of a unit on rocks and weathering. Mixed reading levels.\nLearning goal (do not drift from it): Students use field evidence to explain how a limestone cave and its formations are made, and what that evidence says about the past\nThe learner's job: Explain to a new volunteer cave guide what the evidence in the cave shows, so the guide can explain it to visitors accurately\nStakes: the guide will repeat whatever they are told to hundreds of visitors, including any mistakes\nDifficulty: gentle. Help policy: questions-then-materials.\nStay in character. Never give the answer or do the learner's work. Raise the challenge only after the learner shows evidence; give support only as the help policy allows.\nClassroom constraints (for you, never say them aloud): Do not use the word 'erosion' when you mean dissolving\nTeacher notes: none",
-     "assessor": "Record evidence only for these educator-approved criteria, quoting the learner's own words:\n- c1: Explains that slightly acidic water dissolves limestone and uses the acid fizz test as evidence the rock is calcite (look for: slightly, acidic, water, dissolves, limestone, uses, acid, fizz, test, evidence, rock, calcite)\n- c2: Explains that stalactites and stalagmites grow when dripping water loses carbon dioxide and deposits calcite (look for: stalactites, stalagmites, grow, dripping, water, loses, carbon, dioxide, deposits, calcite, limestone, acid)\n- c3: Uses a measurement and a growth rate to estimate how old a formation is (look for: measurement, growth, rate, estimate, formation)\n- c4: Uses fossils in the wall as evidence that the limestone formed on an ancient sea floor (look for: fossils, wall, evidence, limestone, formed, ancient, floor, grow, carbonate, stalactites, stalagmites, skeletons)\nWatch for these misconceptions:\n- m1: Caves are carved by fast flowing rivers cutting through the rock\n- m2: Stalactites and stalagmites are made of ice or frozen water\nDo not assess anything the learner was not asked to do. Mark observation separately from inference.",
-     "feedback": "Write feedback for the learning goal \"Students use field evidence to explain how a limestone cave and its formations are made, and what that evidence says about the past\". Ask for self-assessment first. For each criterion cite the learner's actual words and the turn they came from. Say \"not assessed\" where the learner had no fair opportunity. Offer concrete next actions and finish with the transfer question."
+     "character": "Withheld from the student copy.",
+     "assessor": "Withheld from the student copy.",
+     "feedback": "Withheld from the student copy."
     }
    }
   }

@@ -1,24 +1,24 @@
 {
  "packages": [
   {
-   "id": "exp-12z8itu",
-   "designId": "design-16kqs8h",
+   "id": "exp-u4g2k1",
+   "designId": "design-wh2gwn",
    "designVersion": 1,
    "title": "Salary negotiation: interests before positions",
-   "builtAt": "2026-11-14T10:29:44.895Z",
+   "builtAt": "2026-11-14T10:48:26.412Z",
    "provider": "deterministic",
    "approval": {
     "type": "test",
     "by": "Automated test",
-    "at": "2026-11-14T10:29:44.894Z"
+    "at": "2026-11-14T10:48:26.412Z"
    },
    "design": {
-    "id": "design-16kqs8h",
-    "intakeId": "intake-10m58af",
+    "id": "design-wh2gwn",
+    "intakeId": "intake-1f6nl2m",
     "version": 1,
     "state": "test-approved",
     "supersedes": null,
-    "createdAt": "2026-11-14T10:29:44.892Z",
+    "createdAt": "2026-11-14T10:48:26.411Z",
     "title": "Salary negotiation: interests before positions",
     "template": "roleplay",
     "world": null,
@@ -30,8 +30,8 @@
      }
     },
     "learnerProfile": {
-     "text": "First-year MBA students in a core negotiations course. Most have 3-5 years of work experience and have negotiated a job offer at least once",
-     "priorKnowledge": "The terms BATNA, reservation price and ZOPA from last week's lecture",
+     "text": "",
+     "priorKnowledge": "",
      "source": {
       "kind": "teacher",
       "field": "learners"
@@ -288,9 +288,7 @@
       }
      }
     ],
-    "constraints": [
-     "The colleague has only one other offer, and it is weaker"
-    ],
+    "constraints": [],
     "transfer": {
      "text": "negotiating project deadlines and resources with another team inside your own company",
      "source": {
@@ -298,35 +296,13 @@
       "field": "answers.transfer"
      }
     },
-    "assumptions": [
-     {
-      "text": "You did not name the character, so Primer chose \"Dana Okafor\". Use Edit to change it.",
-      "source": "ai",
-      "field": "character.name"
-     },
-     {
-      "text": "Primer wrote the character's questions from your success criteria using fixed sentence patterns. Read them under \"Practice\" and edit any that sound wrong or give too much away.",
-      "source": "ai",
-      "field": "questions"
-     }
-    ],
+    "assumptions": [],
     "recommendations": [],
     "overrides": {},
     "revisions": [],
     "history": [
      {
-      "at": "2026-11-14T10:29:44.892Z",
-      "actor": {
-       "type": "system",
-       "name": "Primer (deterministic provider)"
-      },
-      "action": "propose",
-      "from": null,
-      "to": "draft",
-      "note": "Proposed from educator intake."
-     },
-     {
-      "at": "2026-11-14T10:29:44.894Z",
+      "at": "2026-11-14T10:48:26.412Z",
       "actor": {
        "type": "test",
        "name": "Automated test"
@@ -334,11 +310,11 @@
       "action": "approve",
       "from": "draft",
       "to": "test-approved",
-      "note": "Synthetic approval for the bundled sample."
+      "note": ""
      }
     ],
     "preparation": {
-     "briefing": "Purpose: Students prepare for and conduct a negotiation by separating interests from positions, identifying their BATNA, and proposing options that create value for both sides.\nYour role: Advise a colleague who is about to negotiate a job offer, and help them plan what to ask for and why.\nYou will work with Dana Okafor, a nervous colleague, two years out of college, who has a job offer in hand and wants to be told what number to ask for.",
+     "briefing": "Purpose: Students prepare for and conduct a negotiation by separating interests from positions, identifying their BATNA, and proposing options that create value for both sides.\nYour role: Advise a colleague who is about to negotiate a job offer, and help them plan what to ask for and why.\nYou will talk with Dana Okafor.",
      "keyPoints": [
       {
        "text": "Value is created when parties trade issues they value differently: a candidate may value a later start date or remote days more than the employer values granting them.",
@@ -382,52 +358,54 @@
      ]
     },
     "practice": {
-     "opening": "I'm Dana Okafor, a nervous colleague, two years out of college, who has a job offer in hand and wants to be told what number to ask for. Let me be direct about why I need you: the colleague will either accept a weak offer immediately or blurt out their bottom line and damage the relationship with their future manager.",
+     "opening": "Hi, I'm Dana Okafor. Thanks for making time. I really need your help with this.",
      "challenges": [
       {
        "criterionId": "c1",
        "written": "primer",
-       "prompt": "Let's take the next part: interests, party and positions. What is your thinking, and what is it based on?",
-       "harder": "That helps. Now think about what is at stake here: the colleague will either accept a weak offer immediately or blurt out their bottom line and damage the relationship with their future manager. Does what you said still hold, and why?",
+       "prompt": "Where would you start with my situation?",
+       "harder": "That helps. But this matters a lot to me, so let me push: why are you sure? What would make you change your advice?",
        "support": [
-        "I'm not sure that settles it. What exactly are you basing that on?",
-        "Go back to the course material you read before we started. Which part deals with interests, party and positions? What does it imply here?"
+        "Can you say a bit more about what you're basing that on?",
+        "Maybe look back at the course material from before we started. Is there a part of it that helps here?"
        ]
       },
       {
        "criterionId": "c2",
        "written": "primer",
-       "prompt": "Let's take the next part: BATNA, reservation and price. What is your thinking, and what is it based on?",
-       "harder": "That helps. Now think about what is at stake here: the colleague will either accept a weak offer immediately or blurt out their bottom line and damage the relationship with their future manager. Does what you said still hold, and why?",
+       "prompt": "What else should I be thinking about before I decide?",
+       "harder": "That helps. But this matters a lot to me, so let me push: why are you sure? What would make you change your advice?",
        "support": [
-        "I'm not sure that settles it. What exactly are you basing that on?",
-        "Go back to the course material you read before we started. Which part deals with BATNA, reservation and price? What does it imply here?"
+        "Can you say a bit more about what you're basing that on?",
+        "Maybe look back at the course material from before we started. Is there a part of it that helps here?"
        ]
       },
       {
        "criterionId": "c3",
        "written": "primer",
-       "prompt": "Let's take the next part: option, value and splitting. What is your thinking, and what is it based on?",
-       "harder": "That helps. Now think about what is at stake here: the colleague will either accept a weak offer immediately or blurt out their bottom line and damage the relationship with their future manager. Does what you said still hold, and why?",
+       "prompt": "What would you do differently from what I had planned?",
+       "harder": "That helps. But this matters a lot to me, so let me push: why are you sure? What would make you change your advice?",
        "support": [
-        "I'm not sure that settles it. What exactly are you basing that on?",
-        "Go back to the course material you read before we started. Which part deals with option, value and splitting? What does it imply here?"
+        "Can you say a bit more about what you're basing that on?",
+        "Maybe look back at the course material from before we started. Is there a part of it that helps here?"
        ]
       }
      ],
+     "ack": "That's useful, it covers something I was going to ask about.",
      "probes": [
       {
        "misconceptionId": "m1",
-       "voice": "I've always heard that the best opening move is to state your bottom line so nobody wastes time. I'm planning on that basis. Any reason I shouldn't?",
-       "challenge": "Hold on. A moment ago you said something that sounded like \"the best opening move is to state your bottom line so nobody wastes time\". If that were true, what would we expect to see? Does that match what you know?"
+       "voice": "I've always heard that the best opening move is to state your bottom line so nobody wastes time. Any reason I shouldn't go with that?",
+       "challenge": "Hold on. You said something that sounded like \"the best opening move is to state your bottom line so nobody wastes time\". If that were true, what would we expect to see? Does that match what you know?"
       },
       {
        "misconceptionId": "m2",
-       "voice": "I've always heard that negotiation is a fixed pie where every gain for one side is a loss for the other. I'm planning on that basis. Any reason I shouldn't?",
-       "challenge": "Hold on. A moment ago you said something that sounded like \"negotiation is a fixed pie where every gain for one side is a loss for the other\". If that were true, what would we expect to see? Does that match what you know?"
+       "voice": "I've always heard that negotiation is a fixed pie where every gain for one side is a loss for the other. Any reason I shouldn't go with that?",
+       "challenge": "Hold on. You said something that sounded like \"negotiation is a fixed pie where every gain for one side is a loss for the other\". If that were true, what would we expect to see? Does that match what you know?"
       }
      ],
      "closing": "All right. I have what I need to decide. Thank you for your time.",
+     "closingUnsure": "Thanks for your time. I'm still not sure what to do, so I'll think about it some more.",
      "refusal": "I can't answer that for you. Your judgement is exactly what I came for. Start with what you're surest of.",
      "maxTurns": 11,
      "raise": true,
@@ -442,9 +420,9 @@
      "transfer": "A different situation: negotiating project deadlines and resources with another team inside your own company. What from this session would you use there, and what would you change?"
     },
     "prompts": {
-     "character": "You play Dana Okafor, a nervous colleague, two years out of college, who has a job offer in hand and wants to be told what number to ask for, in a roleplay for these learners: First-year MBA students in a core negotiations course. Most have 3-5 years of work experience and have negotiated a job offer at least once.\nLearning goal (do not drift from it): Students prepare for and conduct a negotiation by separating interests from positions, identifying their BATNA, and proposing options that create value for both sides\nThe learner's job: Advise a colleague who is about to negotiate a job offer, and help them plan what to ask for and why\nStakes: the colleague will either accept a weak offer immediately or blurt out their bottom line and damage the relationship with their future manager\nDifficulty: moderate. Help policy: questions-then-materials.\nStay in character. Never give the answer or do the learner's work. Raise the challenge only after the learner shows evidence; give support only as the help policy allows.\nClassroom constraints (for you, never say them aloud): The colleague has only one other offer, and it is weaker\nTeacher notes: none",
-     "assessor": "Record evidence only for these educator-approved criteria, quoting the learner's own words:\n- c1: Distinguishes the underlying interests of each party from their stated positions (look for: underlying, interests, party, stated, positions, want, compatible, reason, opposed, hold)\n- c2: Identifies the BATNA and explains how it sets the reservation price (look for: batna, explains, sets, reservation, price, alternative, determines, negotiated, better, negotiation, agreement)\n- c3: Proposes at least one option that creates value for both sides instead of splitting the difference (look for: option, creates, value, sides, splitting, difference, start, date, issues, candidate, differently, employer)\nWatch for these misconceptions:\n- m1: The best opening move is to state your bottom line so nobody wastes time\n- m2: Negotiation is a fixed pie where every gain for one side is a loss for the other\nDo not assess anything the learner was not asked to do. Mark observation separately from inference.",
-     "feedback": "Write feedback for the learning goal \"Students prepare for and conduct a negotiation by separating interests from positions, identifying their BATNA, and proposing options that create value for both sides\". Ask for self-assessment first. For each criterion cite the learner's actual words and the turn they came from. Say \"not assessed\" where the learner had no fair opportunity. Offer concrete next actions and finish with the transfer question."
+     "character": "Withheld from the student copy.",
+     "assessor": "Withheld from the student copy.",
+     "feedback": "Withheld from the student copy."
     }
    }
   }

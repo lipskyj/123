@@ -16,7 +16,8 @@ export function createRuntime(store, provider) {
   function journal(s, text) { s.journal.push({ phase: s.phase, at: now(), text }); }
 
   function start(packageId, learner) {
-    const pkg = store.get("packages", packageId); const errors = validatePackage(pkg);
+    const pkg = store.get("packages", packageId); if (pkg && pkg.withdrawn) throw new Error("Your teacher has withdrawn this experience" + (pkg.withdrawn.reason === "replaced" ? " and replaced it with a newer version." : "."));
+    const errors = validatePackage(pkg);
     if (errors.length) throw new Error("This experience cannot be started: " + errors.join(" "));
     const s = { id: "session-" + hash(packageId + now() + Math.random()), packageId, learner: { name: (learner && learner.name) || "Learner" }, startedAt: now(), phase: "preparation",
       classroomApproved: pkg.approval.type === "educator", turns: [], events: [], evidence: [], adaptations: [], journal: [],
@@ -29,11 +30,11 @@ export function createRuntime(store, provider) {
   function submitPreparation(sessionId, answers) {
     const s = store.get("sessions", sessionId), d = pkgOf(s).design; if (s.phase !== "preparation") throw new Error("Preparation is already complete.");
     if (!answers || answers.length < d.preparation.activation.length || answers.some((a) => !a || !a.trim())) throw new Error("Please answer each preparation question in your own words.");
-    d.preparation.activation.forEach((q, i) => { addTurn(s, "primer", q, { kind: "activation" }); const t = addTurn(s, "learner", answers[i].trim(), { kind: "activation-answer" }); recordEvidence(s, d, t, null); });
+    d.preparation.activation.forEach((q, i) => { addTurn(s, "primer", q, { kind: "activation" }); const t = addTurn(s, "learner", answers[i].trim(), { kind: "activation-answer" }); for (const e of recordEvidence(s, d, t, null)) if (e.kind === "criterion") e.kind = "prior-knowledge"; });
     journal(s, `Preparation: learner answered ${answers.length} activation question(s).`);
     s.phase = "practice"; event(s, "phase", { to: "practice" });
     addTurn(s, "character", provider.line("opening", d), { kind: "opening" });
-    if (!d.world) promptCurrent(s, d);
+    if (!d.world) { if (!promptCurrent(s, d)) finishPractice(s, d); }
     return save(s);
   }
 
@@ -43,16 +44,24 @@ export function createRuntime(store, provider) {
     return out;
   }
   function adapt(s, kind, turn, reason, evidence, goalRef, extra = {}) { const a = { id: "a" + (s.adaptations.length + 1), kind, turnId: turn.id, reason, evidenceIds: evidence.map((e) => e.id), goalRef, at: now(), ...extra }; s.adaptations.push(a); return a; }
-  function promptCurrent(s, d) { const ch = d.practice.challenges[s.practice.index]; const t = addTurn(s, "character", provider.line("prompt", d, { criterionId: ch.criterionId }), { kind: "prompt", criterionId: ch.criterionId }); s.practice.prompted[ch.criterionId] = t.id; s.practice.attempts = 0; }
+  const covered = (s, cid) => s.evidence.some((e) => e.kind === "criterion" && e.ref === cid);
+  // Ask the next criterion the learner has not already shown. Returns false when none is left.
+  function promptCurrent(s, d) { while (s.practice.index < d.practice.challenges.length && covered(s, d.practice.challenges[s.practice.index].criterionId)) s.practice.index++;
+    if (s.practice.index >= d.practice.challenges.length) return false; const ch = d.practice.challenges[s.practice.index];
+    // Primer's generic questions are worded in sequence; the first one asked always uses the first wording.
+    const first = !Object.keys(s.practice.prompted).length, lead = d.practice.challenges[0];
+    if (first && ch !== lead && ch.written !== "teacher" && lead.written !== "teacher") { const t = addTurn(s, "character", lead.prompt, { kind: "prompt", criterionId: ch.criterionId }); s.practice.prompted[ch.criterionId] = t.id; s.practice.attempts = 0; return true; } const t = addTurn(s, "character", provider.line("prompt", d, { criterionId: ch.criterionId }), { kind: "prompt", criterionId: ch.criterionId }); s.practice.prompted[ch.criterionId] = t.id; s.practice.attempts = 0; return true; }
   function advance(s, d) {
     const p = s.practice; p.index++;
+    while (p.index < d.practice.challenges.length && covered(s, d.practice.challenges[p.index].criterionId)) p.index++;
     if (p.index >= d.practice.challenges.length) return finishPractice(s, d);
     // Teachback / roleplay: the character voices one educator-listed misconception part-way through, so the learner gets a fair chance to address it.
     if (!p.voiced && d.practice.probes.length && p.index >= 1) { p.voiced = true; const settled = new Set(s.evidence.filter((e) => e.kind.startsWith("misconception")).map((e) => e.ref)); const pr = d.practice.probes.find((x) => !p.probed[x.misconceptionId] && !settled.has(x.misconceptionId));
       if (pr) { p.probed[pr.misconceptionId] = "voiced"; p.pending = { type: "voice", misconceptionId: pr.misconceptionId }; addTurn(s, "character", provider.line("probe-voice", d, { misconceptionId: pr.misconceptionId }), { kind: "probe-voice", misconceptionId: pr.misconceptionId }); return; } }
-    promptCurrent(s, d);
+    if (!promptCurrent(s, d)) finishPractice(s, d);
   }
-  function finishPractice(s, d) { s.practice.done = true; addTurn(s, "character", provider.line("closing", d), { kind: "closing" }); journal(s, `Practice ended after ${s.practice.learnerTurns} learner turn(s).`); s.phase = "feedback"; event(s, "phase", { to: "feedback" }); }
+  function finishPractice(s, d) { s.practice.done = true; const shown = s.evidence.filter((e) => e.kind === "criterion").length;
+    addTurn(s, "character", provider.line("closing", d, { unsure: shown < Math.ceil(d.criteria.length / 2) }), { kind: "closing" }); journal(s, `Practice ended after ${s.practice.learnerTurns} learner turn(s).`); s.phase = "feedback"; event(s, "phase", { to: "feedback" }); }
 
   // A world (e.g. the cave) reports what the learner did there. Field notes are the learner's own words and count as evidence.
   function worldEvent(sessionId, ev) {
@@ -61,7 +70,7 @@ export function createRuntime(store, provider) {
     if (ev.note && ev.note.trim()) { const t = addTurn(s, "learner", ev.note.trim(), { kind: "field-note", worldEventId: e.id, feature: ev.feature }); recordEvidence(s, d, t, null); }
     return save(s);
   }
-  function leaveWorld(sessionId) { const s = store.get("sessions", sessionId), d = pkgOf(s).design; if (s.practice.worldLeft) return s; s.practice.worldLeft = true; event(s, "world-left", {}); journal(s, `Field work: ${s.events.filter((e) => e.type === "world").length} investigation(s) recorded.`); promptCurrent(s, d); return save(s); }
+  function leaveWorld(sessionId) { const s = store.get("sessions", sessionId), d = pkgOf(s).design; if (s.practice.worldLeft) return s; s.practice.worldLeft = true; event(s, "world-left", {}); journal(s, `Field work: ${s.events.filter((e) => e.type === "world").length} investigation(s) recorded.`); if (!promptCurrent(s, d)) finishPractice(s, d); return save(s); }
 
   // ----- Practice -----
   function say(sessionId, text) {
@@ -81,7 +90,7 @@ export function createRuntime(store, provider) {
       // The character has just said the misconception aloud, so a plain disagreement is a correction even without repeating its words.
       if (!corrected && /\b(no|nope|not|never|wrong|incorrect|false|disagree|myth|misconception|mistake|mistaken)\b|n't/i.test(turn.text)) { corrected = true; s.evidence.push({ id: "ev" + (s.evidence.length + 1), kind: "misconception-corrected", ref: mid, turnId: turn.id, phase: "practice", quote: quote(turn.text, 200), strength: "partial", matched: [], basis: "observed", promptedFor: null }); }
       if (!corrected) s.evidence.push({ id: "ev" + (s.evidence.length + 1), kind: "misconception-unaddressed", ref: mid, turnId: turn.id, phase: "practice", quote: quote(turn.text, 200), strength: "clear", matched: [], basis: "observed", promptedFor: null });
-      promptCurrent(s, d); return save(s); }
+      if (!promptCurrent(s, d)) finishPractice(s, d); return save(s); }
     // 3. The learner states an educator-listed misconception: probe it once, tied to that misconception.
     const voiced = ev.find((e) => e.kind === "misconception-voiced" && p.probed[e.ref] !== "challenged");
     if (voiced) { p.probed[voiced.ref] = "challenged"; adapt(s, "probe", turn, "Learner's statement matched an educator-listed misconception; the character asked them to test it.", [voiced], voiced.ref); reply("probe-challenge", { misconceptionId: voiced.ref }, { misconceptionId: voiced.ref }); return save(s); }
@@ -91,7 +100,10 @@ export function createRuntime(store, provider) {
       if (rules.raise && !p.raised[ch.criterionId] && p.learnerTurns < rules.maxTurns - 1) { p.raised[ch.criterionId] = true; adapt(s, "raise", turn, "Learner showed evidence for this criterion, so the character raised the challenge within the same goal.", [hit], ch.criterionId); reply("raise", { criterionId: ch.criterionId, learnerText: turn.text }, { criterionId: ch.criterionId }); return save(s); }
       advance(s, d); return save(s);
     }
-    if (p.raised[ch.criterionId]) { advance(s, d); return save(s); }   // answered the harder follow-up; move on either way
+    if (p.raised[ch.criterionId]) { advance(s, d); return save(s); }
+    // 4b. Evidence for a different criterion: acknowledge it (that criterion will not be asked again), then return to the current question.
+    const other = ev.find((e) => e.kind === "criterion" && e.ref !== ch.criterionId);
+    if (other) { adapt(s, "acknowledge", turn, "Learner showed evidence for a different criterion; the character acknowledged it and returned to the current question.", [other], other.ref); reply("ack", { criterionId: ch.criterionId }, { criterionId: ch.criterionId }); return save(s); }   // answered the harder follow-up; move on either way
     // 5. No evidence yet: support within the educator's help policy, then move on.
     p.attempts++;
     if (p.attempts >= rules.maxAttempts || p.learnerTurns >= rules.maxTurns) { event(s, "opportunity-closed", { criterionId: ch.criterionId, attempts: p.attempts }); if (p.learnerTurns >= rules.maxTurns) finishPractice(s, d); else advance(s, d); return save(s); }
@@ -120,9 +132,9 @@ export function createRuntime(store, provider) {
       if (ev.length) strengths.push({ criterionId: c.id, criterion: c.text, observation: `You addressed this in your own words ${places.join(" and ")}${helped ? ` (after ${support} follow-up question${support > 1 ? "s" : ""})` : ""}.`, citations: ev.slice(0, 3).map(cite),
         inference: ev.some((e) => e.strength === "clear") ? "Inference: this looks secure." + (raised ? " You were then given a harder version of the question." : "") : "Inference: this is developing; the idea is there but not yet fully worked out.", basis: "observed" });
       else if (promptId) { const replies = s.turns.filter((t) => t.who === "learner" && t.criterionId === c.id);
-        growth.push({ criterionId: c.id, criterion: c.text, observation: `You were asked about this ("${quote(turn(promptId).text, 110)}") and your ${replies.length > 1 ? replies.length + " replies" : "reply"} did not bring in ${c.lookFors.slice(0, 3).join(", ")}.`,
+        growth.push({ criterionId: c.id, criterion: c.text, observation: `You were asked about this ("${quote(turn(promptId).text, 110)}"), and ${replies.length > 1 ? `your ${replies.length} replies did` : "your reply did"} not yet show it.`,
           citations: replies.slice(0, 2).map((t) => ({ turnId: t.id, phase: t.phase, where: where(t.id), quote: quote(t.text, 200) })), inference: "Inference: this may need more work. It is also possible you understand it but did not say it.",
-          nextAction: `Go back to the course material shown in the Prepare step, find the part about ${c.lookFors.slice(0, 2).join(" and ")}, then write two sentences in which you ${toTask(c.text)}.`, basis: "observed" }); }
+          nextAction: `Re-read the course material from the Prepare step, then write two or three sentences on this: ${c.text.charAt(0).toLowerCase() + c.text.slice(1)}.`, basis: "observed" }); }
       else notAssessed.push({ criterionId: c.id, criterion: c.text, reason: "The session ended before you were asked about this, so it is not assessed." });
     }
     const misconceptions = d.misconceptions.map((m) => { const ev = s.evidence.filter((e) => e.ref === m.id); if (!ev.length) return null;

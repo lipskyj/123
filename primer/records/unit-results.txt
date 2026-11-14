@@ -30,3 +30,11 @@ ok 29 - persistence: an interrupted session resumes from storage with nothing lo
 ok 30 - recovery: corrupt or missing records fail with a clear message instead of crashing
 ok 31 - provider: deterministic output is reproducible and the provider is replaceable (record / replay)
 ok 32 - failure modes: no goal drift, character drift or unsupported assessment across both fixtures
+ok 33 - round 2 N1: teacher-chosen look-fors match phrases and negations
+ok 34 - round 2 N2: a misconception written in different words is still recognised
+ok 35 - round 2 N3: withdrawing approval stops students opening it; rebuilding replaces the old experience
+ok 36 - round 2 N4: the student copy carries no private teacher text
+ok 37 - round 2 F1/F4 (cold audit): character speech never contains the teacher's descriptions
+ok 38 - round 2 F1 (cold audit): evidence for another criterion is acknowledged and that criterion is not asked again
+ok 39 - round 2 F2 (cold audit): warm-up answers are not credited as evidence, and feedback does not list the hidden words
+ok 40 - round 2 F12: an old version can be restored as a new draft

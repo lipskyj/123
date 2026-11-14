@@ -1,10 +1,10 @@
 {
- "id": "session-1zchok",
- "packageId": "exp-sn5awp",
+ "id": "session-8f4n8k",
+ "packageId": "exp-9u0d4o",
  "learner": {
   "name": "Ada"
  },
- "startedAt": "2026-11-14T10:29:47.932Z",
+ "startedAt": "2026-11-14T10:48:28.986Z",
  "phase": "ended",
  "classroomApproved": true,
  "turns": [
@@ -13,7 +13,7 @@
    "who": "primer",
    "text": "Before you begin: in your own words, what do you already know about \"Salary negotiation: interests before positions\"?",
    "phase": "preparation",
-   "at": "2026-11-14T10:29:48.033Z",
+   "at": "2026-11-14T10:48:29.071Z",
    "kind": "activation"
   },
   {
@@ -21,7 +21,7 @@
    "who": "learner",
    "text": "I know a BATNA is your fallback.",
    "phase": "preparation",
-   "at": "2026-11-14T10:29:48.033Z",
+   "at": "2026-11-14T10:48:29.071Z",
    "kind": "activation-answer"
   },
   {
@@ -29,7 +29,7 @@
    "who": "primer",
    "text": "Which idea from earlier lessons do you expect to need most here, and why?",
    "phase": "preparation",
-   "at": "2026-11-14T10:29:48.034Z",
+   "at": "2026-11-14T10:48:29.071Z",
    "kind": "activation"
   },
   {
@@ -37,23 +37,23 @@
    "who": "learner",
    "text": "Probably working out what the other side really wants.",
    "phase": "preparation",
-   "at": "2026-11-14T10:29:48.034Z",
+   "at": "2026-11-14T10:48:29.071Z",
    "kind": "activation-answer"
   },
   {
    "id": "t5",
    "who": "character",
-   "text": "I'm Dana Okafor, a colleague returning to work after five years away. Let me be direct about why I need you: the colleague will either accept a weak offer immediately or blurt out their bottom line and damage the relationship with their future manager.",
+   "text": "Hi, I'm Dana Okafor. Thanks for making time. I really need your help with this.",
    "phase": "practice",
-   "at": "2026-11-14T10:29:48.034Z",
+   "at": "2026-11-14T10:48:29.071Z",
    "kind": "opening"
   },
   {
    "id": "t6",
    "who": "character",
-   "text": "Let's take the next part: interests, party and positions. What is your thinking, and what is it based on?",
+   "text": "Where would you start with my situation?",
    "phase": "practice",
-   "at": "2026-11-14T10:29:48.034Z",
+   "at": "2026-11-14T10:48:29.072Z",
    "kind": "prompt",
    "criterionId": "c1"
   },
@@ -62,16 +62,16 @@
    "who": "learner",
    "text": "Can you just tell me the answer?",
    "phase": "practice",
-   "at": "2026-11-14T10:29:48.100Z",
+   "at": "2026-11-14T10:48:29.141Z",
    "kind": "practice",
    "criterionId": "c1"
   },
   {
    "id": "t8",
    "who": "character",
-   "text": "I can't answer that for you. Your judgement is exactly what I came for. Start with what you're surest of. Let's take the next part: interests, party and positions. What is your thinking, and what is it based on?",
+   "text": "I can't answer that for you. Your judgement is exactly what I came for. Start with what you're surest of. Where would you start with my situation?",
    "phase": "practice",
-   "at": "2026-11-14T10:29:48.101Z",
+   "at": "2026-11-14T10:48:29.141Z",
    "kind": "redirect",
    "criterionId": "c1"
   },
@@ -80,16 +80,16 @@
    "who": "learner",
    "text": "My advice: Distinguishes the underlying interests of each party from their stated positions. That means thinking about underlying, interests, party, stated, positions, want, compatible, reason, opposed, hold.",
    "phase": "practice",
-   "at": "2026-11-14T10:29:48.320Z",
+   "at": "2026-11-14T10:48:29.372Z",
    "kind": "practice",
    "criterionId": "c1"
   },
   {
    "id": "t10",
    "who": "character",
-   "text": "You said \"My advice: Distinguishes the underlying interests of each party from…\". That helps. Now think about what is at stake here: the colleague will either accept a weak offer immediately or blurt out their bottom line and damage the relationship with their future manager. Does what you said still hold, and why?",
+   "text": "That helps. But this matters a lot to me, so let me push: why are you sure? What would make you change your advice?",
    "phase": "practice",
-   "at": "2026-11-14T10:29:48.320Z",
+   "at": "2026-11-14T10:48:29.373Z",
    "kind": "raise",
    "criterionId": "c1"
   },
@@ -98,16 +98,16 @@
    "who": "learner",
    "text": "My advice: Distinguishes the underlying interests of each party from their stated positions. That means thinking about underlying, interests, party, stated, positions, want, compatible, reason, opposed, hold.",
    "phase": "practice",
-   "at": "2026-11-14T10:29:48.432Z",
+   "at": "2026-11-14T10:48:29.493Z",
    "kind": "practice",
    "criterionId": "c1"
   },
   {
    "id": "t12",
    "who": "character",
-   "text": "I've always heard that the best opening move is to state your bottom line so nobody wastes time. I'm planning on that basis. Any reason I shouldn't?",
+   "text": "I've always heard that the best opening move is to state your bottom line so nobody wastes time. Any reason I shouldn't go with that?",
    "phase": "practice",
-   "at": "2026-11-14T10:29:48.433Z",
+   "at": "2026-11-14T10:48:29.493Z",
    "kind": "probe-voice",
    "misconceptionId": "m1"
   },
@@ -116,16 +116,16 @@
    "who": "learner",
    "text": "No, that is wrong. That is a common misconception and it would hurt you.",
    "phase": "practice",
-   "at": "2026-11-14T10:29:48.550Z",
+   "at": "2026-11-14T10:48:29.605Z",
    "kind": "practice",
    "criterionId": "c2"
   },
   {
    "id": "t14",
    "who": "character",
-   "text": "Let's take the next part: BATNA, reservation and price. What is your thinking, and what is it based on?",
+   "text": "What else should I be thinking about before I decide?",
    "phase": "practice",
-   "at": "2026-11-14T10:29:48.550Z",
+   "at": "2026-11-14T10:48:29.605Z",
    "kind": "prompt",
    "criterionId": "c2"
   },
@@ -134,16 +134,16 @@
    "who": "learner",
    "text": "My advice: Identifies the BATNA and explains how it sets the reservation price. That means thinking about batna, explains, sets, reservation, price, alternative, determines, negotiated, better, negotiation, agreement.",
    "phase": "practice",
-   "at": "2026-11-14T10:29:48.666Z",
+   "at": "2026-11-14T10:48:29.720Z",
    "kind": "practice",
    "criterionId": "c2"
   },
   {
    "id": "t16",
    "who": "character",
-   "text": "You said \"My advice: Identifies the BATNA and explains how it sets the reservat…\". That helps. Now think about what is at stake here: the colleague will either accept a weak offer immediately or blurt out their bottom line and damage the relationship with their future manager. Does what you said still hold, and why?",
+   "text": "That helps. But this matters a lot to me, so let me push: why are you sure? What would make you change your advice?",
    "phase": "practice",
-   "at": "2026-11-14T10:29:48.666Z",
+   "at": "2026-11-14T10:48:29.720Z",
    "kind": "raise",
    "criterionId": "c2"
   },
@@ -152,16 +152,16 @@
    "who": "learner",
    "text": "My advice: Identifies the BATNA and explains how it sets the reservation price. That means thinking about batna, explains, sets, reservation, price, alternative, determines, negotiated, better, negotiation, agreement.",
    "phase": "practice",
-   "at": "2026-11-14T10:29:48.782Z",
+   "at": "2026-11-14T10:48:29.837Z",
    "kind": "practice",
    "criterionId": "c2"
   },
   {
    "id": "t18",
    "who": "character",
-   "text": "Let's take the next part: option, value and splitting. What is your thinking, and what is it based on?",
+   "text": "What would you do differently from what I had planned?",
    "phase": "practice",
-   "at": "2026-11-14T10:29:48.783Z",
+   "at": "2026-11-14T10:48:29.837Z",
    "kind": "prompt",
    "criterionId": "c3"
   },
@@ -170,16 +170,16 @@
    "who": "learner",
    "text": "My advice: Proposes at least one option that creates value for both sides instead of splitting the difference. That means thinking about option, creates, value, sides, splitting, difference, start, date, issues, candidate, differently, employer.",
    "phase": "practice",
-   "at": "2026-11-14T10:29:48.899Z",
+   "at": "2026-11-14T10:48:29.953Z",
    "kind": "practice",
    "criterionId": "c3"
   },
   {
    "id": "t20",
    "who": "character",
-   "text": "You said \"My advice: Proposes at least one option that creates value for both s…\". That helps. Now think about what is at stake here: the colleague will either accept a weak offer immediately or blurt out their bottom line and damage the relationship with their future manager. Does what you said still hold, and why?",
+   "text": "That helps. But this matters a lot to me, so let me push: why are you sure? What would make you change your advice?",
    "phase": "practice",
-   "at": "2026-11-14T10:29:48.899Z",
+   "at": "2026-11-14T10:48:29.954Z",
    "kind": "raise",
    "criterionId": "c3"
   },
@@ -188,16 +188,16 @@
    "who": "learner",
    "text": "My advice: Proposes at least one option that creates value for both sides instead of splitting the difference. That means thinking about option, creates, value, sides, splitting, difference, start, date, issues, candidate, differently, employer.",
    "phase": "practice",
-   "at": "2026-11-14T10:29:49.015Z",
+   "at": "2026-11-14T10:48:30.071Z",
    "kind": "practice",
    "criterionId": "c3"
   },
   {
    "id": "t22",
    "who": "character",
-   "text": "Let's take the next part: improving, BATNA and meeting. What is your thinking, and what is it based on?",
+   "text": "What's the risk if I get this wrong?",
    "phase": "practice",
-   "at": "2026-11-14T10:29:49.016Z",
+   "at": "2026-11-14T10:48:30.072Z",
    "kind": "prompt",
    "criterionId": "c4"
   },
@@ -206,16 +206,16 @@
    "who": "learner",
    "text": "My advice: Recommends improving the BATNA before the meeting. That means thinking about improving, batna, meeting.",
    "phase": "practice",
-   "at": "2026-11-14T10:29:49.132Z",
+   "at": "2026-11-14T10:48:30.204Z",
    "kind": "practice",
    "criterionId": "c4"
   },
   {
    "id": "t24",
    "who": "character",
-   "text": "You said \"My advice: Recommends improving the BATNA before the meeting. That me…\". That helps. Now think about what is at stake here: the colleague will either accept a weak offer immediately or blurt out their bottom line and damage the relationship with their future manager. Does what you said still hold, and why?",
+   "text": "That helps. But this matters a lot to me, so let me push: why are you sure? What would make you change your advice?",
    "phase": "practice",
-   "at": "2026-11-14T10:29:49.132Z",
+   "at": "2026-11-14T10:48:30.204Z",
    "kind": "raise",
    "criterionId": "c4"
   },
@@ -224,7 +224,7 @@
    "who": "learner",
    "text": "My advice: Recommends improving the BATNA before the meeting. That means thinking about improving, batna, meeting.",
    "phase": "practice",
-   "at": "2026-11-14T10:29:49.249Z",
+   "at": "2026-11-14T10:48:30.321Z",
    "kind": "practice",
    "criterionId": "c4"
   },
@@ -233,7 +233,7 @@
    "who": "character",
    "text": "All right. I have what I need to decide. Thank you for your time.",
    "phase": "practice",
-   "at": "2026-11-14T10:29:49.249Z",
+   "at": "2026-11-14T10:48:30.321Z",
    "kind": "closing"
   },
   {
@@ -241,7 +241,7 @@
    "who": "primer",
    "text": "Before you see any feedback: how do you think that went? Which moment are you most satisfied with?",
    "phase": "feedback",
-   "at": "2026-11-14T10:29:49.383Z",
+   "at": "2026-11-14T10:48:30.455Z",
    "kind": "self-assessment"
   },
   {
@@ -249,7 +249,7 @@
    "who": "learner",
    "text": "I think I explained interests well.",
    "phase": "feedback",
-   "at": "2026-11-14T10:29:49.383Z",
+   "at": "2026-11-14T10:48:30.455Z",
    "kind": "self-assessment-answer"
   },
   {
@@ -257,7 +257,7 @@
    "who": "primer",
    "text": "What would you do differently if you did it again?",
    "phase": "feedback",
-   "at": "2026-11-14T10:29:49.383Z",
+   "at": "2026-11-14T10:48:30.455Z",
    "kind": "self-assessment"
   },
   {
@@ -265,7 +265,7 @@
    "who": "learner",
    "text": "I would ask more questions first.",
    "phase": "feedback",
-   "at": "2026-11-14T10:29:49.383Z",
+   "at": "2026-11-14T10:48:30.455Z",
    "kind": "self-assessment-answer"
   },
   {
@@ -273,7 +273,7 @@
    "who": "primer",
    "text": "Imagine the same ideas coming up somewhere quite different from Dana Okafor's situation. Describe one such situation and how you would handle it.",
    "phase": "feedback",
-   "at": "2026-11-14T10:29:49.451Z",
+   "at": "2026-11-14T10:48:30.520Z",
    "kind": "transfer"
   },
   {
@@ -281,7 +281,7 @@
    "who": "learner",
    "text": "With another team I would look for their interests and my BATNA before proposing options.",
    "phase": "feedback",
-   "at": "2026-11-14T10:29:49.451Z",
+   "at": "2026-11-14T10:48:30.520Z",
    "kind": "transfer-answer"
   }
  ],
@@ -290,32 +290,32 @@
    "id": "e1",
    "type": "session-started",
    "phase": "preparation",
-   "at": "2026-11-14T10:29:47.932Z",
+   "at": "2026-11-14T10:48:28.986Z",
    "approval": {
     "type": "educator",
     "by": "Synthetic Teacher (e2e test)",
-    "at": "2026-11-14T10:29:47.383Z"
+    "at": "2026-11-14T10:48:28.403Z"
    }
   },
   {
    "id": "e2",
    "type": "phase",
    "phase": "practice",
-   "at": "2026-11-14T10:29:48.034Z",
+   "at": "2026-11-14T10:48:29.071Z",
    "to": "practice"
   },
   {
    "id": "e3",
    "type": "phase",
    "phase": "feedback",
-   "at": "2026-11-14T10:29:49.249Z",
+   "at": "2026-11-14T10:48:30.321Z",
    "to": "feedback"
   },
   {
    "id": "e4",
    "type": "session-ended",
    "phase": "ended",
-   "at": "2026-11-14T10:29:49.451Z"
+   "at": "2026-11-14T10:48:30.520Z"
   }
  ],
  "evidence": [
@@ -328,15 +328,15 @@
    "quote": "My advice: Distinguishes the underlying interests of each party from their stated positions. That means thinking about underlying, interests, party, stated, positions, want, compatible, reason, oppos…",
    "strength": "clear",
    "matched": [
-    "underly",
-    "interest",
+    "underlying",
+    "interests",
     "party",
-    "stat",
-    "position",
+    "stated",
+    "positions",
     "want",
     "compatible",
     "reason",
-    "oppos",
+    "opposed",
     "hold"
    ],
    "basis": "observed",
@@ -351,15 +351,15 @@
    "quote": "My advice: Distinguishes the underlying interests of each party from their stated positions. That means thinking about underlying, interests, party, stated, positions, want, compatible, reason, oppos…",
    "strength": "clear",
    "matched": [
-    "underly",
-    "interest",
+    "underlying",
+    "interests",
     "party",
-    "stat",
-    "position",
+    "stated",
+    "positions",
     "want",
     "compatible",
     "reason",
-    "oppos",
+    "opposed",
     "hold"
    ],
    "basis": "observed",
@@ -387,16 +387,16 @@
    "strength": "clear",
    "matched": [
     "batna",
-    "explain",
+    "explains",
     "sets",
-    "reserv",
+    "reservation",
     "price",
     "alternative",
-    "determin",
-    "negotiat",
+    "determines",
+    "negotiated",
     "better",
-    "negoti",
-    "agree"
+    "negotiation",
+    "agreement"
    ],
    "basis": "observed",
    "promptedFor": "c2"
@@ -411,16 +411,16 @@
    "strength": "clear",
    "matched": [
     "batna",
-    "explain",
+    "explains",
     "sets",
-    "reserv",
+    "reservation",
     "price",
     "alternative",
-    "determin",
-    "negotiat",
+    "determines",
+    "negotiated",
     "better",
-    "negoti",
-    "agree"
+    "negotiation",
+    "agreement"
    ],
    "basis": "observed",
    "promptedFor": "c2"
@@ -435,16 +435,16 @@
    "strength": "clear",
    "matched": [
     "option",
-    "creat",
+    "creates",
     "value",
-    "side",
-    "splitt",
+    "sides",
+    "splitting",
     "difference",
     "start",
     "date",
-    "issu",
+    "issues",
     "candidate",
-    "different",
+    "differently",
     "employer"
    ],
    "basis": "observed",
@@ -460,16 +460,16 @@
    "strength": "clear",
    "matched": [
     "option",
-    "creat",
+    "creates",
     "value",
-    "side",
-    "splitt",
+    "sides",
+    "splitting",
     "difference",
     "start",
     "date",
-    "issu",
+    "issues",
     "candidate",
-    "different",
+    "differently",
     "employer"
    ],
    "basis": "observed",
@@ -482,11 +482,11 @@
    "turnId": "t23",
    "phase": "practice",
    "quote": "My advice: Recommends improving the BATNA before the meeting. That means thinking about improving, batna, meeting.",
-   "strength": "partial",
+   "strength": "clear",
    "matched": [
-    "improv",
+    "improving",
     "batna",
-    "meet"
+    "meeting"
    ],
    "basis": "observed",
    "promptedFor": "c4"
@@ -498,11 +498,11 @@
    "turnId": "t25",
    "phase": "practice",
    "quote": "My advice: Recommends improving the BATNA before the meeting. That means thinking about improving, batna, meeting.",
-   "strength": "partial",
+   "strength": "clear",
    "matched": [
-    "improv",
+    "improving",
     "batna",
-    "meet"
+    "meeting"
    ],
    "basis": "observed",
    "promptedFor": "c4"
@@ -516,7 +516,7 @@
    "reason": "Learner asked to be given the answer; the character declined and restated the task.",
    "evidenceIds": [],
    "goalRef": "c1",
-   "at": "2026-11-14T10:29:48.101Z"
+   "at": "2026-11-14T10:48:29.141Z"
   },
   {
    "id": "a2",
@@ -527,7 +527,7 @@
     "ev1"
    ],
    "goalRef": "c1",
-   "at": "2026-11-14T10:29:48.320Z"
+   "at": "2026-11-14T10:48:29.373Z"
   },
   {
    "id": "a3",
@@ -538,7 +538,7 @@
     "ev4"
    ],
    "goalRef": "c2",
-   "at": "2026-11-14T10:29:48.666Z"
+   "at": "2026-11-14T10:48:29.720Z"
   },
   {
    "id": "a4",
@@ -549,7 +549,7 @@
     "ev6"
    ],
    "goalRef": "c3",
-   "at": "2026-11-14T10:29:48.899Z"
+   "at": "2026-11-14T10:48:29.954Z"
   },
   {
    "id": "a5",
@@ -560,28 +560,28 @@
     "ev8"
    ],
    "goalRef": "c4",
-   "at": "2026-11-14T10:29:49.132Z"
+   "at": "2026-11-14T10:48:30.204Z"
   }
  ],
  "journal": [
   {
    "phase": "preparation",
-   "at": "2026-11-14T10:29:48.034Z",
+   "at": "2026-11-14T10:48:29.071Z",
    "text": "Preparation: learner answered 2 activation question(s)."
   },
   {
    "phase": "practice",
-   "at": "2026-11-14T10:29:49.249Z",
+   "at": "2026-11-14T10:48:30.321Z",
    "text": "Practice ended after 10 learner turn(s)."
   },
   {
    "phase": "feedback",
-   "at": "2026-11-14T10:29:49.383Z",
+   "at": "2026-11-14T10:48:30.456Z",
    "text": "Feedback: 4 strength(s), 0 growth area(s), 0 not assessed."
   },
   {
    "phase": "ended",
-   "at": "2026-11-14T10:29:49.451Z",
+   "at": "2026-11-14T10:48:30.520Z",
    "text": "Session ended."
   }
  ],
@@ -621,7 +621,7 @@
   }
  ],
  "feedback": {
-  "generatedAt": "2026-11-14T10:29:49.383Z",
+  "generatedAt": "2026-11-14T10:48:30.456Z",
   "goal": "Students prepare for and conduct a negotiation by separating interests from positions, identifying their BATNA, and proposing options that create value for both sides",
   "strengths": [
    {
@@ -705,7 +705,7 @@
       "quote": "My advice: Recommends improving the BATNA before the meeting. That means thinking about improving, batna, meeting."
      }
     ],
-    "inference": "Inference: this is developing; the idea is there but not yet fully worked out.",
+    "inference": "Inference: this looks secure. You were then given a harder version of the question.",
     "basis": "observed"
    }
   ],
@@ -771,6 +771,6 @@
   "criteriaEchoed": [],
   "note": "Observation: your answer does not yet connect back to the ideas from this session."
  },
- "updatedAt": "2026-11-14T10:29:49.451Z",
- "endedAt": "2026-11-14T10:29:49.451Z"
+ "updatedAt": "2026-11-14T10:48:30.520Z",
+ "endedAt": "2026-11-14T10:48:30.520Z"
 }

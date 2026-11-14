@@ -1,0 +1,1361 @@
+{
+  "packages": [
+    {
+      "id": "exp-1qwgw6m",
+      "designId": "design-1moz80l",
+      "designVersion": 40,
+      "title": "What a p-value does and does not tell you",
+      "builtAt": "2026-11-14T10:42:10.936Z",
+      "provider": "deterministic",
+      "approval": {
+        "type": "educator",
+        "by": "Fresh Teacher 2 (simulated)",
+        "at": "2026-11-14T10:42:10.089Z"
+      },
+      "design": {
+        "id": "design-1moz80l",
+        "intakeId": "intake-1rmcwb5",
+        "version": 40,
+        "state": "educator-approved",
+        "supersedes": "design-p41ul1",
+        "createdAt": "2026-11-14T10:42:09.229Z",
+        "title": "What a p-value does and does not tell you",
+        "template": "teachback",
+        "world": null,
+        "goal": {
+          "text": "Students can correctly interpret a p-value from a two-group comparison in plain language, and can explain what it does and does not tell us",
+          "source": {
+            "kind": "teacher",
+            "field": "edit"
+          }
+        },
+        "learnerProfile": {
+          "text": "Second-year undergraduate psychology students in a research methods seminar (ages 19-21, about 28 per group). Many are anxious about maths and switch off if spoken to in formulas. Speak to them in plain English, use the sleep-and-memory study as the running example, and do not be condescending",
+          "priorKnowledge": "They know means, standard deviations and the idea that samples vary by chance. They have met the null hypothesis in lectures and have run an independent-samples t-test in software by following instructions, but they have never had to say in words what the output means",
+          "source": {
+            "kind": "teacher",
+            "field": "learners"
+          }
+        },
+        "learnerRole": {
+          "text": "Explain the nap study result to Jordan, a classmate who missed the lecture: say what p = .03 actually means, correct Jordan's wrong readings of it, and say what else you would look at before deciding whether the finding matters",
+          "source": {
+            "kind": "teacher",
+            "field": "edit"
+          }
+        },
+        "character": {
+          "name": "Jordan",
+          "role": "a classmate who missed the lecture and has to write up the nap study for a lab report due tomorrow. Jordan is confident, wants a sentence that is safe to put in the report, and will push back until your explanation actually makes sense",
+          "source": {
+            "kind": "teacher",
+            "field": "edit"
+          },
+          "nameSource": {
+            "kind": "teacher",
+            "field": "edit"
+          }
+        },
+        "materials": [
+          {
+            "name": "Pasted material",
+            "text": "Reading a p-value: the sleep and memory study\n\nA researcher wants to know whether a short nap helps people remember word lists. Forty students are randomly split into two groups. One group naps for 20 minutes after studying a list of 30 words; the other group sits quietly. The nap group recalls 17.1 words on average and the quiet group recalls 14.9. An independent-samples t-test gives p = .03.\n\nWhat does p = .03 mean? Start with the null hypothesis: in the population, napping makes no difference to recall. The p-value answers one narrow question. If the null hypothesis were true, how often would random sampling alone produce a difference between groups at least as large as the one we observed? Here the answer is about 3 times in 100. The p-value is therefore a statement about the data, assuming the null hypothesis. It is not a statement about the hypothesis.\n\nThis is why p = .03 does not mean there is a 3% chance that the null hypothesis is true, and it does not mean there is a 97% chance that napping works. To say how probable a hypothesis is, we would need extra information that the test does not use, such as how plausible the effect was before the study.\n\nBy convention, a p-value below .05 is called statistically significant, and we reject the null hypothesis. That label says nothing about how big or how important the effect is. With thousands of participants, a trivially small difference can produce a tiny p-value. To judge size, look at the effect size (here the difference is 2.2 words, Cohen's d of about 0.7) and at the 95% confidence interval for the difference (0.2 to 4.2 words), which shows how uncertain the estimate is.\n\nFinally, a p-value above .05 does not prove there is no effect. A small study may simply lack the power to detect a real difference. Absence of evidence is not evidence of absence. Report what you found, how big it was, and how sure you can be."
+          }
+        ],
+        "notes": [],
+        "stakes": {
+          "text": "Jordan writes in the lab report that 'there is only a 3% chance the null hypothesis is true, so napping definitely improves memory a lot'. The marker takes marks off for misinterpreting the test, and Jordan goes on repeating the mistake in their final-year project",
+          "source": {
+            "kind": "teacher",
+            "field": "answers.stakes"
+          }
+        },
+        "difficulty": "moderate",
+        "helpPolicy": "questions-then-materials",
+        "criteria": [
+          {
+            "id": "c1",
+            "text": "States that the p-value is calculated assuming the null hypothesis is true (it is the probability of data at least this extreme if there were really no difference)",
+            "lookFors": [
+              "assuming",
+              "assume",
+              "if",
+              "no difference",
+              "did nothing",
+              "null",
+              "as big",
+              "as large",
+              "how often",
+              "random",
+              "luck",
+              "data",
+              "3 times in 100",
+              "out of 100"
+            ],
+            "source": {
+              "kind": "teacher",
+              "field": "evidenceOfProgress[0]",
+              "materials": [
+                {
+                  "material": "Pasted material",
+                  "excerpt": "Start with the null hypothesis: in the population, napping makes no difference to recall."
+                },
+                {
+                  "material": "Pasted material",
+                  "excerpt": "If the null hypothesis were true, how often would random sampling alone produce a difference between groups at least as…"
+                },
+                {
+                  "material": "Pasted material",
+                  "excerpt": "Reading a p-value: the sleep and memory study A researcher wants to know whether a short nap helps people remember word…"
+                },
+                {
+                  "material": "Pasted material",
+                  "excerpt": "The p-value is therefore a statement about the data, assuming the null hypothesis."
+                },
+                {
+                  "material": "Pasted material",
+                  "excerpt": "A small study may simply lack the power to detect a real difference."
+                },
+                {
+                  "material": "Pasted material",
+                  "excerpt": "This is why p = .03 does not mean there is a 3% chance that the null hypothesis is true, and it does not mean there is…"
+                }
+              ]
+            },
+            "question": "So what does p = .03 actually mean? What is the 3% a percentage of?"
+          },
+          {
+            "id": "c2",
+            "text": "Explicitly rejects the reading that p is the probability the null hypothesis is true or that the result is due to chance",
+            "lookFors": [
+              "not",
+              "doesn't",
+              "isn't",
+              "can't",
+              "cannot",
+              "no",
+              "mistake",
+              "wrong",
+              "misreading",
+              "about the data",
+              "other information",
+              "before the study"
+            ],
+            "source": {
+              "kind": "teacher",
+              "field": "evidenceOfProgress[1]",
+              "materials": [
+                {
+                  "material": "Pasted material",
+                  "excerpt": "Start with the null hypothesis: in the population, napping makes no difference to recall."
+                },
+                {
+                  "material": "Pasted material",
+                  "excerpt": "If the null hypothesis were true, how often would random sampling alone produce a difference between groups at least as…"
+                },
+                {
+                  "material": "Pasted material",
+                  "excerpt": "The p-value is therefore a statement about the data, assuming the null hypothesis."
+                },
+                {
+                  "material": "Pasted material",
+                  "excerpt": "This is why p = .03 does not mean there is a 3% chance that the null hypothesis is true, and it does not mean there is…"
+                }
+              ]
+            },
+            "question": "Hang on. If the null hypothesis is 'napping does nothing', why can't the test just tell me how likely it is that napping does nothing?"
+          },
+          {
+            "id": "c3",
+            "text": "Separates statistical significance from the size or importance of the effect, and refers to the effect size or confidence interval",
+            "lookFors": [
+              "effect size",
+              "size",
+              "how big",
+              "big",
+              "tiny",
+              "small difference",
+              "important",
+              "importance",
+              "confidence interval",
+              "interval",
+              "2.2",
+              "cohen",
+              "0.7",
+              "significant"
+            ],
+            "source": {
+              "kind": "teacher",
+              "field": "evidenceOfProgress[2]",
+              "materials": [
+                {
+                  "material": "Pasted material",
+                  "excerpt": "To say how probable a hypothesis is, we would need extra information that the test does not use, such as how plausible…"
+                }
+              ]
+            },
+            "question": "Fine, but .03 is a really small number, so the nap effect must be huge, right? Can I write that napping has a big effect on memory?"
+          },
+          {
+            "id": "c4",
+            "text": "Says that a non-significant result is not proof of no effect, and mentions sample size or power",
+            "lookFors": [
+              "proof",
+              "prove",
+              "power",
+              "sample",
+              "small study",
+              "40 people",
+              "absence",
+              "evidence",
+              "detect",
+              "too few",
+              "miss",
+              "real difference"
+            ],
+            "source": {
+              "kind": "teacher",
+              "field": "evidenceOfProgress[3]",
+              "materials": [
+                {
+                  "material": "Pasted material",
+                  "excerpt": "To say how probable a hypothesis is, we would need extra information that the test does not use, such as how plausible…"
+                }
+              ]
+            },
+            "question": "And if it had come out as p = .20, I'd just write that napping does nothing, yeah?"
+          }
+        ],
+        "misconceptions": [
+          {
+            "id": "m1",
+            "text": "there's only a 3% chance the null hypothesis is true, so a 97% chance that napping really works",
+            "cues": [
+              "theres",
+              "chance",
+              "null",
+              "hypothesis",
+              "true",
+              "chance",
+              "napping",
+              "really",
+              "works"
+            ],
+            "source": {
+              "kind": "teacher",
+              "field": "misconceptions[0]"
+            },
+            "distinct": [
+              "theres"
+            ]
+          },
+          {
+            "id": "m2",
+            "text": "a smaller p-value means a bigger, more important effect, and a p-value above .05 would prove napping does nothing",
+            "cues": [
+              "smaller",
+              "value",
+              "means",
+              "bigger",
+              "important",
+              "effect",
+              "value",
+              "prove",
+              "napping",
+              "nothing"
+            ],
+            "source": {
+              "kind": "teacher",
+              "field": "misconceptions[1]"
+            },
+            "distinct": [
+              "smaller",
+              "bigger",
+              "nothing"
+            ]
+          }
+        ],
+        "concepts": [
+          {
+            "term": "hypothesis",
+            "fact": "Start with the null hypothesis: in the population, napping makes no difference to recall.",
+            "source": {
+              "material": "Pasted material",
+              "excerpt": "Start with the null hypothesis: in the population, napping makes no difference to recall."
+            }
+          },
+          {
+            "term": "difference",
+            "fact": "If the null hypothesis were true, how often would random sampling alone produce a difference between groups at least as large as the one we observed?",
+            "source": {
+              "material": "Pasted material",
+              "excerpt": "If the null hypothesis were true, how often would random sampling alone produce a difference between groups at least as…"
+            }
+          },
+          {
+            "term": "group",
+            "fact": "Forty students are randomly split into two groups.",
+            "source": {
+              "material": "Pasted material",
+              "excerpt": "Forty students are randomly split into two groups."
+            }
+          },
+          {
+            "term": "value",
+            "fact": "Reading a p-value: the sleep and memory study A researcher wants to know whether a short nap helps people remember word lists.",
+            "source": {
+              "material": "Pasted material",
+              "excerpt": "Reading a p-value: the sleep and memory study A researcher wants to know whether a short nap helps people remember word…"
+            }
+          },
+          {
+            "term": "null",
+            "fact": "The p-value is therefore a statement about the data, assuming the null hypothesis.",
+            "source": {
+              "material": "Pasted material",
+              "excerpt": "The p-value is therefore a statement about the data, assuming the null hypothesis."
+            }
+          },
+          {
+            "term": "effect",
+            "fact": "To say how probable a hypothesis is, we would need extra information that the test does not use, such as how plausible the effect was before the study.",
+            "source": {
+              "material": "Pasted material",
+              "excerpt": "To say how probable a hypothesis is, we would need extra information that the test does not use, such as how plausible…"
+            }
+          },
+          {
+            "term": "word",
+            "fact": "One group naps for 20 minutes after studying a list of 30 words; the other group sits quietly.",
+            "source": {
+              "material": "Pasted material",
+              "excerpt": "One group naps for 20 minutes after studying a list of 30 words; the other group sits quietly."
+            }
+          },
+          {
+            "term": "study",
+            "fact": "A small study may simply lack the power to detect a real difference.",
+            "source": {
+              "material": "Pasted material",
+              "excerpt": "A small study may simply lack the power to detect a real difference."
+            }
+          },
+          {
+            "term": "recall",
+            "fact": "The nap group recalls 17.1 words on average and the quiet group recalls 14.9.",
+            "source": {
+              "material": "Pasted material",
+              "excerpt": "The nap group recalls 17.1 words on average and the quiet group recalls 14.9."
+            }
+          },
+          {
+            "term": "mean",
+            "fact": "This is why p = .03 does not mean there is a 3% chance that the null hypothesis is true, and it does not mean there is a 97% chance that napping works.",
+            "source": {
+              "material": "Pasted material",
+              "excerpt": "This is why p = .03 does not mean there is a 3% chance that the null hypothesis is true, and it does not mean there is…"
+            }
+          }
+        ],
+        "constraints": [
+          "Must fit in 15 minutes of a 50-minute seminar",
+          "Text only: students work on their own laptops in a shared room with no headphones, so no audio",
+          "No formulas or calculation required; plain-language reasoning only"
+        ],
+        "transfer": {
+          "text": "a newspaper headline says a new revision app 'significantly improves exam scores (p = .04)' in a study of 6,000 pupils, and a friend asks whether they should pay for it",
+          "source": {
+            "kind": "teacher",
+            "field": "edit"
+          }
+        },
+        "assumptions": [
+          {
+            "text": "Template chosen by Primer: Teachback, based on the student work you described.",
+            "source": "ai",
+            "field": "template"
+          }
+        ],
+        "recommendations": [],
+        "overrides": {
+          "practice.opening": "Hi, I'm Jordan. I missed the stats lecture and I have to write up the nap study by tomorrow. The output says p = .03. I was going to write 'there's only a 3% chance the result is a fluke', but someone said that's not quite right.",
+          "preparation.activation": [
+            "Before you start: in one sentence, what do you think p = .03 tells you about the nap study?",
+            "Apart from the p-value, what else would you want to know before saying napping 'works'?"
+          ],
+          "practice.maxTurns": 12,
+          "preparation.briefing": "Purpose: Practise explaining, in plain words, what a p-value from a two-group study does and does not tell you.\nYour role: Your classmate Jordan missed the lecture on the sleep-and-memory study (nap group 17.1 words, quiet group 14.9 words, p = .03) and has a lab report due tomorrow. Help Jordan understand what the result really means, correct anything Jordan gets wrong, and say what else they should look at before deciding whether the nap effect matters.\nYou will talk to Jordan, who is confident and will push back until your explanation actually makes sense.\nKeep in mind: no formulas or calculations are needed. Use the nap study as your example and the material below to check yourself."
+        },
+        "revisions": [
+          {
+            "id": "rev1",
+            "at": "2026-11-14T10:32:16.080Z",
+            "request": "The character should be called Jordan, not Aiko Tanaka. Jordan is a classmate who missed the lecture and needs to write up the nap study for a lab report due tomorrow.",
+            "changes": [
+              "saved as a note for you only (students never see it): \"The character should be called Jordan, not Aiko Tanaka. Jordan is a classmate who missed the lecture and needs to write up the nap study for a lab report due tomorrow\". Nothing in the experience changed. Use the Edit buttons to make this change yourself."
+            ],
+            "understood": false
+          },
+          {
+            "id": "rev2",
+            "at": "2026-11-14T10:32:24.646Z",
+            "request": "Call the character Alex",
+            "changes": [
+              "saved as a note for you only (students never see it): \"Call the character Alex\". Nothing in the experience changed. Use the Edit buttons to make this change yourself."
+            ],
+            "understood": false
+          },
+          {
+            "id": "rev3",
+            "at": "2026-11-14T10:32:28.110Z",
+            "request": "Please rename the character to Jordan again",
+            "changes": [
+              "saved as a note for you only (students never see it): \"Please rename the character to Jordan again\". Nothing in the experience changed. Use the Edit buttons to make this change yourself."
+            ],
+            "understood": false
+          },
+          {
+            "id": "rev4",
+            "at": "2026-11-14T10:32:36.244Z",
+            "request": "call the character: Alex",
+            "changes": [
+              "saved as a note for you only (students never see it): \"call the character: Alex\". Nothing in the experience changed. Use the Edit buttons to make this change yourself."
+            ],
+            "understood": false
+          },
+          {
+            "id": "rev5",
+            "at": "2026-11-14T10:32:39.645Z",
+            "request": "make it harder",
+            "changes": [
+              "Difficulty: moderate → demanding"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev6",
+            "at": "2026-11-14T10:32:52.797Z",
+            "request": "The follow-up questions shouldn't mention the 15-minute seminar constraint to students; that is a note for me, not something the character would say. Also the character's questions read like my marking criteria pasted into a sentence - please make them sound like a confused student.",
+            "changes": [
+              "saved as a note for you only (students never see it): \"The follow-up questions shouldn't mention the 15-minute seminar constraint to students; that is a note for me, not something the character would say. Also the character's questions read like my marking criteria pasted into a sentence - please make them sound like a confused student\". Nothing in the experience changed. Use the Edit buttons to make this change yourself."
+            ],
+            "understood": false
+          },
+          {
+            "id": "rev7",
+            "at": "2026-11-14T10:32:56.378Z",
+            "request": "Remove the last constraint (the one beginning 'The follow-up questions shouldn't mention'). I don't want students to see it.",
+            "changes": [
+              "Removed: \"The follow-up questions shouldn't mention the 15-minute seminar constraint to students; that is a note for me, not something the character would say. Also the character's questions read like my marking criteria pasted into a sentence - please make them sound like a confused student\""
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev8",
+            "at": "2026-11-14T10:33:59.043Z",
+            "request": "Direct edit of difficulty",
+            "changes": [
+              "difficulty edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev9",
+            "at": "2026-11-14T10:34:41.656Z",
+            "request": "Direct edit of character.name",
+            "changes": [
+              "character.name edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev10",
+            "at": "2026-11-14T10:34:43.121Z",
+            "request": "Direct edit of character.name",
+            "changes": [
+              "character.name edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev11",
+            "at": "2026-11-14T10:34:44.589Z",
+            "request": "Direct edit of notes",
+            "changes": [
+              "notes edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev12",
+            "at": "2026-11-14T10:35:05.540Z",
+            "request": "Direct edit of practice.opening",
+            "changes": [
+              "practice.opening edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev13",
+            "at": "2026-11-14T10:35:07.105Z",
+            "request": "Direct edit of criteria.0.question",
+            "changes": [
+              "criteria.0.question edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev14",
+            "at": "2026-11-14T10:35:08.638Z",
+            "request": "Direct edit of criteria.1.question",
+            "changes": [
+              "criteria.1.question edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev15",
+            "at": "2026-11-14T10:35:10.189Z",
+            "request": "Direct edit of criteria.2.question",
+            "changes": [
+              "criteria.2.question edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev16",
+            "at": "2026-11-14T10:35:11.706Z",
+            "request": "Direct edit of criteria.3.question",
+            "changes": [
+              "criteria.3.question edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev17",
+            "at": "2026-11-14T10:35:13.222Z",
+            "request": "Direct edit of preparation.activation",
+            "changes": [
+              "preparation.activation edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev18",
+            "at": "2026-11-14T10:35:14.705Z",
+            "request": "Direct edit of practice.maxTurns",
+            "changes": [
+              "practice.maxTurns edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev19",
+            "at": "2026-11-14T10:35:16.204Z",
+            "request": "Direct edit of transfer.text",
+            "changes": [
+              "transfer.text edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev20",
+            "at": "2026-11-14T10:35:31.955Z",
+            "request": "Direct edit of misconceptions.0.text",
+            "changes": [
+              "misconceptions.0.text edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev21",
+            "at": "2026-11-14T10:35:33.474Z",
+            "request": "Direct edit of misconceptions.1.text",
+            "changes": [
+              "misconceptions.1.text edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev22",
+            "at": "2026-11-14T10:35:35.054Z",
+            "request": "Direct edit of criteria.0.lookFors",
+            "changes": [
+              "criteria.0.lookFors edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev23",
+            "at": "2026-11-14T10:35:36.588Z",
+            "request": "Direct edit of criteria.1.lookFors",
+            "changes": [
+              "criteria.1.lookFors edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev24",
+            "at": "2026-11-14T10:35:38.069Z",
+            "request": "Direct edit of criteria.2.lookFors",
+            "changes": [
+              "criteria.2.lookFors edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev25",
+            "at": "2026-11-14T10:35:39.640Z",
+            "request": "Direct edit of criteria.3.lookFors",
+            "changes": [
+              "criteria.3.lookFors edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev26",
+            "at": "2026-11-14T10:35:53.686Z",
+            "request": "Direct edit of criteria.1.lookFors",
+            "changes": [
+              "criteria.1.lookFors edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev27",
+            "at": "2026-11-14T10:35:55.220Z",
+            "request": "Direct edit of preparation.briefing",
+            "changes": [
+              "preparation.briefing edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev28",
+            "at": "2026-11-14T10:39:38.798Z",
+            "request": "Direct edit of learnerRole.text",
+            "changes": [
+              "learnerRole.text edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev29",
+            "at": "2026-11-14T10:39:40.379Z",
+            "request": "Direct edit of character.role",
+            "changes": [
+              "character.role edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev30",
+            "at": "2026-11-14T10:39:41.912Z",
+            "request": "Direct edit of practice.opening",
+            "changes": [
+              "practice.opening edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev31",
+            "at": "2026-11-14T10:39:43.449Z",
+            "request": "Direct edit of criteria.0.question",
+            "changes": [
+              "criteria.0.question edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev32",
+            "at": "2026-11-14T10:39:45.011Z",
+            "request": "Direct edit of criteria.1.question",
+            "changes": [
+              "criteria.1.question edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev33",
+            "at": "2026-11-14T10:39:46.545Z",
+            "request": "Direct edit of criteria.0.lookFors",
+            "changes": [
+              "criteria.0.lookFors edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev34",
+            "at": "2026-11-14T10:39:48.082Z",
+            "request": "Direct edit of criteria.1.lookFors",
+            "changes": [
+              "criteria.1.lookFors edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev35",
+            "at": "2026-11-14T10:39:49.610Z",
+            "request": "Direct edit of criteria.2.lookFors",
+            "changes": [
+              "criteria.2.lookFors edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev36",
+            "at": "2026-11-14T10:39:51.128Z",
+            "request": "Direct edit of criteria.3.lookFors",
+            "changes": [
+              "criteria.3.lookFors edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev37",
+            "at": "2026-11-14T10:39:52.645Z",
+            "request": "Direct edit of transfer.text",
+            "changes": [
+              "transfer.text edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev38",
+            "at": "2026-11-14T10:40:06.795Z",
+            "request": "Direct edit of goal.text",
+            "changes": [
+              "goal.text edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev39",
+            "at": "2026-11-14T10:42:09.226Z",
+            "request": "Direct edit of practice.maxTurns",
+            "changes": [
+              "practice.maxTurns edited by Fresh Teacher 2 (simulated)"
+            ],
+            "understood": true
+          }
+        ],
+        "history": [
+          {
+            "at": "2026-11-14T10:31:22.272Z",
+            "actor": {
+              "type": "system",
+              "name": "Primer (deterministic provider)"
+            },
+            "action": "propose",
+            "from": null,
+            "to": "draft",
+            "note": "Proposed from educator intake."
+          },
+          {
+            "at": "2026-11-14T10:32:16.082Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "revise",
+            "from": "draft",
+            "to": "revised",
+            "note": "The character should be called Jordan, not Aiko Tanaka. Jordan is a classmate who missed the lecture and needs to write up the nap study for a lab report due tomorrow."
+          },
+          {
+            "at": "2026-11-14T10:32:24.648Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "revise",
+            "from": "revised",
+            "to": "revised",
+            "note": "Call the character Alex"
+          },
+          {
+            "at": "2026-11-14T10:32:28.112Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "revise",
+            "from": "revised",
+            "to": "revised",
+            "note": "Please rename the character to Jordan again"
+          },
+          {
+            "at": "2026-11-14T10:32:36.245Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "revise",
+            "from": "revised",
+            "to": "revised",
+            "note": "call the character: Alex"
+          },
+          {
+            "at": "2026-11-14T10:32:39.647Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "revise",
+            "from": "revised",
+            "to": "revised",
+            "note": "make it harder"
+          },
+          {
+            "at": "2026-11-14T10:32:52.799Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "revise",
+            "from": "revised",
+            "to": "revised",
+            "note": "The follow-up questions shouldn't mention the 15-minute seminar constraint to students; that is a note for me, not something the character would say. Also the character's questions read like my marking criteria pasted into a sentence - please make them sound like a confused student."
+          },
+          {
+            "at": "2026-11-14T10:32:56.379Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "revise",
+            "from": "revised",
+            "to": "revised",
+            "note": "Remove the last constraint (the one beginning 'The follow-up questions shouldn't mention'). I don't want students to see it."
+          },
+          {
+            "at": "2026-11-14T10:33:47.397Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "reject",
+            "from": "revised",
+            "to": "rejected",
+            "note": "Testing whether reject lets me continue editing"
+          },
+          {
+            "at": "2026-11-14T10:33:59.045Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "rejected",
+            "to": "revised",
+            "note": "Edited difficulty"
+          },
+          {
+            "at": "2026-11-14T10:34:41.657Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited character.name"
+          },
+          {
+            "at": "2026-11-14T10:34:43.121Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited character.name"
+          },
+          {
+            "at": "2026-11-14T10:34:44.589Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited notes"
+          },
+          {
+            "at": "2026-11-14T10:35:05.541Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited practice.opening"
+          },
+          {
+            "at": "2026-11-14T10:35:07.105Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited criteria.0.question"
+          },
+          {
+            "at": "2026-11-14T10:35:08.638Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited criteria.1.question"
+          },
+          {
+            "at": "2026-11-14T10:35:10.189Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited criteria.2.question"
+          },
+          {
+            "at": "2026-11-14T10:35:11.706Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited criteria.3.question"
+          },
+          {
+            "at": "2026-11-14T10:35:13.222Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited preparation.activation"
+          },
+          {
+            "at": "2026-11-14T10:35:14.705Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited practice.maxTurns"
+          },
+          {
+            "at": "2026-11-14T10:35:16.205Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited transfer.text"
+          },
+          {
+            "at": "2026-11-14T10:35:31.960Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited misconceptions.0.text"
+          },
+          {
+            "at": "2026-11-14T10:35:33.475Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited misconceptions.1.text"
+          },
+          {
+            "at": "2026-11-14T10:35:35.054Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited criteria.0.lookFors"
+          },
+          {
+            "at": "2026-11-14T10:35:36.588Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited criteria.1.lookFors"
+          },
+          {
+            "at": "2026-11-14T10:35:38.070Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited criteria.2.lookFors"
+          },
+          {
+            "at": "2026-11-14T10:35:39.641Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited criteria.3.lookFors"
+          },
+          {
+            "at": "2026-11-14T10:35:53.688Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited criteria.1.lookFors"
+          },
+          {
+            "at": "2026-11-14T10:35:55.220Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited preparation.briefing"
+          },
+          {
+            "at": "2026-11-14T10:36:08.669Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "approve",
+            "from": "revised",
+            "to": "educator-approved",
+            "note": ""
+          },
+          {
+            "at": "2026-11-14T10:39:38.799Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "educator-approved",
+            "to": "revised",
+            "note": "Edited learnerRole.text"
+          },
+          {
+            "at": "2026-11-14T10:39:40.379Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited character.role"
+          },
+          {
+            "at": "2026-11-14T10:39:41.912Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited practice.opening"
+          },
+          {
+            "at": "2026-11-14T10:39:43.449Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited criteria.0.question"
+          },
+          {
+            "at": "2026-11-14T10:39:45.011Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited criteria.1.question"
+          },
+          {
+            "at": "2026-11-14T10:39:46.545Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited criteria.0.lookFors"
+          },
+          {
+            "at": "2026-11-14T10:39:48.083Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited criteria.1.lookFors"
+          },
+          {
+            "at": "2026-11-14T10:39:49.610Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited criteria.2.lookFors"
+          },
+          {
+            "at": "2026-11-14T10:39:51.128Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited criteria.3.lookFors"
+          },
+          {
+            "at": "2026-11-14T10:39:52.645Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited transfer.text"
+          },
+          {
+            "at": "2026-11-14T10:40:06.797Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited goal.text"
+          },
+          {
+            "at": "2026-11-14T10:40:07.640Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "approve",
+            "from": "revised",
+            "to": "educator-approved",
+            "note": ""
+          },
+          {
+            "at": "2026-11-14T10:41:48.106Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "reject",
+            "from": "educator-approved",
+            "to": "rejected",
+            "note": "Checking what withdrawing approval does to the built experience"
+          },
+          {
+            "at": "2026-11-14T10:42:09.229Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "edit",
+            "from": "rejected",
+            "to": "revised",
+            "note": "Edited practice.maxTurns"
+          },
+          {
+            "at": "2026-11-14T10:42:10.089Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher 2 (simulated)"
+            },
+            "action": "approve",
+            "from": "revised",
+            "to": "educator-approved",
+            "note": ""
+          }
+        ],
+        "preparation": {
+          "briefing": "Purpose: Practise explaining, in plain words, what a p-value from a two-group study does and does not tell you.\nYour role: Your classmate Jordan missed the lecture on the sleep-and-memory study (nap group 17.1 words, quiet group 14.9 words, p = .03) and has a lab report due tomorrow. Help Jordan understand what the result really means, correct anything Jordan gets wrong, and say what else they should look at before deciding whether the nap effect matters.\nYou will talk to Jordan, who is confident and will push back until your explanation actually makes sense.\nKeep in mind: no formulas or calculations are needed. Use the nap study as your example and the material below to check yourself.",
+          "keyPoints": [
+            {
+              "text": "Start with the null hypothesis: in the population, napping makes no difference to recall.",
+              "source": {
+                "material": "Pasted material",
+                "excerpt": "Start with the null hypothesis: in the population, napping makes no difference to recall."
+              }
+            },
+            {
+              "text": "If the null hypothesis were true, how often would random sampling alone produce a difference between groups at least as large as the one we observed?",
+              "source": {
+                "material": "Pasted material",
+                "excerpt": "If the null hypothesis were true, how often would random sampling alone produce a difference between groups at least as…"
+              }
+            },
+            {
+              "text": "Forty students are randomly split into two groups.",
+              "source": {
+                "material": "Pasted material",
+                "excerpt": "Forty students are randomly split into two groups."
+              }
+            },
+            {
+              "text": "Reading a p-value: the sleep and memory study A researcher wants to know whether a short nap helps people remember word lists.",
+              "source": {
+                "material": "Pasted material",
+                "excerpt": "Reading a p-value: the sleep and memory study A researcher wants to know whether a short nap helps people remember word…"
+              }
+            },
+            {
+              "text": "The p-value is therefore a statement about the data, assuming the null hypothesis.",
+              "source": {
+                "material": "Pasted material",
+                "excerpt": "The p-value is therefore a statement about the data, assuming the null hypothesis."
+              }
+            }
+          ],
+          "activation": [
+            "Before you start: in one sentence, what do you think p = .03 tells you about the nap study?",
+            "Apart from the p-value, what else would you want to know before saying napping 'works'?"
+          ]
+        },
+        "practice": {
+          "opening": "Hi, I'm Jordan. I missed the stats lecture and I have to write up the nap study by tomorrow. The output says p = .03. I was going to write 'there's only a 3% chance the result is a fluke', but someone said that's not quite right.",
+          "challenges": [
+            {
+              "criterionId": "c1",
+              "written": "teacher",
+              "prompt": "So what does p = .03 actually mean? What is the 3% a percentage of?",
+              "harder": "Okay, I think I follow. But suppose someone disagreed with you. What would you say to convince them?",
+              "support": [
+                "I'm lost. Could you try again with one concrete example?",
+                "Go back to the course material you read before we started. Which part deals with p-value, assuming and null? What does it imply here?"
+              ]
+            },
+            {
+              "criterionId": "c2",
+              "written": "teacher",
+              "prompt": "Hang on. If the null hypothesis is 'napping does nothing', why can't the test just tell me how likely it is that napping does nothing?",
+              "harder": "Okay, I think I follow. But suppose someone disagreed with you. What would you say to convince them?",
+              "support": [
+                "I'm lost. Could you try again with one concrete example?",
+                "Go back to the course material you read before we started. Which part deals with probability, null and hypothesis? What does it imply here?"
+              ]
+            },
+            {
+              "criterionId": "c3",
+              "written": "teacher",
+              "prompt": "Fine, but .03 is a really small number, so the nap effect must be huge, right? Can I write that napping has a big effect on memory?",
+              "harder": "Okay, I think I follow. But suppose someone disagreed with you. What would you say to convince them?",
+              "support": [
+                "I'm lost. Could you try again with one concrete example?",
+                "Go back to the course material you read before we started. Which part deals with significance, size and importance? What does it imply here?"
+              ]
+            },
+            {
+              "criterionId": "c4",
+              "written": "teacher",
+              "prompt": "And if it had come out as p = .20, I'd just write that napping does nothing, yeah?",
+              "harder": "Okay, I think I follow. But suppose someone disagreed with you. What would you say to convince them?",
+              "support": [
+                "I'm lost. Could you try again with one concrete example?",
+                "Go back to the course material you read before we started. Which part deals with non-significant, result and proof? What does it imply here?"
+              ]
+            }
+          ],
+          "probes": [
+            {
+              "misconceptionId": "m1",
+              "voice": "Oh! So does that mean there's only a 3% chance the null hypothesis is true, so a 97% chance that napping really works?",
+              "challenge": "Hold on. A moment ago you said something that sounded like \"there's only a 3% chance the null hypothesis is true, so a 97% chance that napping really works\". If that were true, what would we expect to see? Does that match what you know?"
+            },
+            {
+              "misconceptionId": "m2",
+              "voice": "Oh! So does that mean a smaller p-value means a bigger, more important effect, and a p-value above .05 would prove napping does nothing?",
+              "challenge": "Hold on. A moment ago you said something that sounded like \"a smaller p-value means a bigger, more important effect, and a p-value above .05 would prove napping does nothing\". If that were true, what would we expect to see? Does that match what you know?"
+            }
+          ],
+          "closing": "Thank you. I think I could explain some of this to someone else now.",
+          "refusal": "I can't tell you the answer; I'm the one who doesn't know it! Try explaining the part you're surest of.",
+          "maxTurns": 12,
+          "raise": true,
+          "maxAttempts": 3,
+          "minTurns": 4
+        },
+        "feedback": {
+          "selfAssessment": [
+            "Before you see any feedback: how do you think that went? Which moment are you most satisfied with?",
+            "What would you do differently if you did it again?"
+          ],
+          "transfer": "A different situation: a newspaper headline says a new revision app 'significantly improves exam scores (p = .04)' in a study of 6,000 pupils, and a friend asks whether they should pay for it. What from this session would you use there, and what would you change?"
+        },
+        "prompts": {
+          "character": "You play Jordan, a classmate who missed the lecture and has to write up the nap study for a lab report due tomorrow. Jordan is confident, wants a sentence that is safe to put in the report, and will push back until your explanation actually makes sense, in a teachback for these learners: Second-year undergraduate psychology students in a research methods seminar (ages 19-21, about 28 per group). Many are anxious about maths and switch off if spoken to in formulas. Speak to them in plain English, use the sleep-and-memory study as the running example, and do not be condescending.\nLearning goal (do not drift from it): Students can correctly interpret a p-value from a two-group comparison in plain language, and can explain what it does and does not tell us\nThe learner's job: Explain the nap study result to Jordan, a classmate who missed the lecture: say what p = .03 actually means, correct Jordan's wrong readings of it, and say what else you would look at before deciding whether the finding matters\nStakes: Jordan writes in the lab report that 'there is only a 3% chance the null hypothesis is true, so napping definitely improves memory a lot'. The marker takes marks off for misinterpreting the test, and Jordan goes on repeating the mistake in their final-year project\nDifficulty: moderate. Help policy: questions-then-materials.\nStay in character. Never give the answer or do the learner's work. Raise the challenge only after the learner shows evidence; give support only as the help policy allows.\nClassroom constraints (for you, never say them aloud): Must fit in 15 minutes of a 50-minute seminar; Text only: students work on their own laptops in a shared room with no headphones, so no audio; No formulas or calculation required; plain-language reasoning only\nTeacher notes: none",
+          "assessor": "Record evidence only for these educator-approved criteria, quoting the learner's own words:\n- c1: States that the p-value is calculated assuming the null hypothesis is true (it is the probability of data at least this extreme if there were really no difference) (look for: assuming, assume, if, no difference, did nothing, null, as big, as large, how often, random, luck, data, 3 times in 100, out of 100)\n- c2: Explicitly rejects the reading that p is the probability the null hypothesis is true or that the result is due to chance (look for: not, doesn't, isn't, can't, cannot, no, mistake, wrong, misreading, about the data, other information, before the study)\n- c3: Separates statistical significance from the size or importance of the effect, and refers to the effect size or confidence interval (look for: effect size, size, how big, big, tiny, small difference, important, importance, confidence interval, interval, 2.2, cohen, 0.7, significant)\n- c4: Says that a non-significant result is not proof of no effect, and mentions sample size or power (look for: proof, prove, power, sample, small study, 40 people, absence, evidence, detect, too few, miss, real difference)\nWatch for these misconceptions:\n- m1: there's only a 3% chance the null hypothesis is true, so a 97% chance that napping really works\n- m2: a smaller p-value means a bigger, more important effect, and a p-value above .05 would prove napping does nothing\nDo not assess anything the learner was not asked to do. Mark observation separately from inference.",
+          "feedback": "Write feedback for the learning goal \"Students can correctly interpret a p-value from a two-group comparison in plain language, and can explain what it does and does not tell us\". Ask for self-assessment first. For each criterion cite the learner's actual words and the turn they came from. Say \"not assessed\" where the learner had no fair opportunity. Offer concrete next actions and finish with the transfer question."
+        }
+      }
+    }
+  ]
+}

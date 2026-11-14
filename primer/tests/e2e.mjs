@@ -33,7 +33,8 @@ check("classroom constraint is marked as never shown to students", /never shown 
 await p.fill("#tname", "Synthetic Teacher (e2e test)"); await p.click("#revBtn"); await p.waitForFunction(() => /Version 2/.test(document.querySelector("main").innerText));
 t = await text(); check("revision produced version 2 and changed the design", /Revised draft/.test(t) && /demanding/.test(t) && /Recommends improving the BATNA/.test(t));
 await p.click("button.ed[data-path='character.role']"); await p.fill("#edText", "a colleague returning to work after five years away"); await p.click("#edSave"); await p.waitForFunction(() => /Version 3/.test(document.querySelector("main").innerText));
-t = await text(); check("direct edit propagated to the practice scene", (t.match(/returning to work after five years away/g) || []).length >= 2);
+{ const all = await p.locator("main").evaluate((m) => m.textContent); const spoken = await p.locator("details").nth(1).evaluate((m) => m.textContent);
+check("direct edit reaches the character's instructions but is not spoken aloud", /You play .*returning to work after five years away/.test(all) && !/returning to work after five years away/.test(spoken)); }
 await p.click("#apBtn"); await p.waitForSelector("#buildBtn"); check("educator approval recorded", /Educator-approved/.test(await text()));
 await p.click("#buildBtn"); await p.waitForSelector("#openLink"); await p.screenshot({ path: out + "/teacher-design.png", fullPage: true });
 const expHref = await p.locator("#openLink").getAttribute("href");

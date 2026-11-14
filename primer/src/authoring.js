@@ -8,6 +8,7 @@ import { hash, splitList } from "./text.js";
 const now = () => new Date().toISOString();
 
 export function createAuthoring(store, provider) {
+  const A_latest = (intakeId) => versions(intakeId).at(-1);
   const versions = (intakeId) => store.list("designs").filter((d) => d.intakeId === intakeId).sort((a, b) => a.version - b.version);
   const latest = (intakeId) => versions(intakeId).at(-1) || null;
 
@@ -70,7 +71,16 @@ export function createAuthoring(store, provider) {
     d.history.push({ at: now(), actor, action: accepted ? "accept-recommendation" : "decline-recommendation", from: d.state, to: d.state, note: r.text }); return store.put("designs", d);
   }
   const approveDesign = (designId, actor, note) => store.put("designs", approve(current(designId), actor, note));
-  const rejectDesign = (designId, actor, note) => store.put("designs", reject(current(designId), actor, note));
+  // Rejecting an approved design withdraws every experience built from it.
+  function rejectDesign(designId, actor, note) { const d = store.put("designs", reject(current(designId), actor, note));
+    for (const p of store.list("packages").filter((x) => x.designId === designId && !x.withdrawn)) store.put("packages", { ...p, withdrawn: { at: now(), by: actor.name, reason: "withdrawn" } }); return d; }
+  // Restoring an old version copies it into a new draft that needs approval.
+  function restore(designId, actor) { const old = store.get("designs", designId); if (!old) throw new Error("Version not found."); const prev = A_latest(old.intakeId);
+    if (prev.id === old.id) throw new Error("This is already the latest version."); const next = structuredClone(old); next.state = prev.state; return newVersion(prev, next, actor, "restore", `Restored version ${old.version}`); }
+  // The copy given to students: everything the runtime needs, nothing the teacher marked private.
+  function studentCopy(d) { const c = structuredClone(d); c.learnerProfile = { text: "", priorKnowledge: "", source: c.learnerProfile.source }; c.constraints = []; c.notes = []; c.assumptions = []; c.recommendations = []; c.revisions = []; c.overrides = {};
+    c.prompts = { character: "Withheld from the student copy.", assessor: "Withheld from the student copy.", feedback: "Withheld from the student copy." };
+    c.history = c.history.filter((h) => h.action === "approve").slice(-1).map((h) => ({ ...h, note: "" })); return c; }
 
   // Build the learner experience. Refused unless the design is approved; the package records who approved it and how.
   function build(designId) {
@@ -78,8 +88,9 @@ export function createAuthoring(store, provider) {
     if (!isApproved(d)) throw new Error(`This design is "${d.state}". Only an approved design can be built into a learner experience.`);
     const ap = [...d.history].reverse().find((h) => h.action === "approve");
     const pkg = { id: "exp-" + hash(d.id + d.state), designId: d.id, designVersion: d.version, title: d.title, builtAt: now(), provider: provider.name,
-      approval: { type: d.state === "educator-approved" ? "educator" : "test", by: ap.actor.name, at: ap.at }, design: d };
+      approval: { type: d.state === "educator-approved" ? "educator" : "test", by: ap.actor.name, at: ap.at }, design: studentCopy(d) };
     const errors = validatePackage(pkg); if (errors.length) throw new Error("Package invalid: " + errors.join(" "));
+    for (const old of store.list("packages").filter((x) => x.design.intakeId === d.intakeId && x.id !== pkg.id && !x.withdrawn)) store.put("packages", { ...old, withdrawn: { at: now(), by: "Primer", reason: "replaced" } });
     return store.put("packages", pkg);
   }
   // How each part of the design traces back to educator input.
@@ -87,10 +98,10 @@ export function createAuthoring(store, provider) {
     const d = store.get("designs", designId), intake = store.get("intakes", d.intakeId), rows = [];
     const add = (element, value, src) => rows.push({ element, value, from: src.kind === "teacher" ? `Educator: ${src.field}` : `Primer suggestion (${src.field})`, kind: src.kind });
     add("Learning goal", d.goal.text, d.goal.source); add("Learner role", d.learnerRole.text, d.learnerRole.source); add("Character", `${d.character.name}, ${d.character.role}`, d.character.source);
-    add("Stakes", d.stakes.text, d.stakes.source); d.criteria.forEach((c) => add(`Criterion ${c.id}`, c.text, c.source)); d.misconceptions.forEach((m) => add(`Misconception ${m.id}`, m.text, m.source));
+    add("Stakes", d.stakes.text, d.stakes.source); d.criteria.forEach((c) => add(`Criterion ${c.id.slice(1)}`, c.text, c.source)); d.misconceptions.forEach((m) => add(`Misconception ${m.id.slice(1)}`, m.text, m.source));
     d.concepts.forEach((c) => rows.push({ element: `Key point "${c.term}"`, value: c.fact, from: `Educator material: ${c.source.material}`, kind: "teacher" }));
-    d.revisions.forEach((r) => rows.push({ element: `Revision ${r.id}`, value: r.changes.join("; "), from: `Educator request: "${r.request}"`, kind: "teacher" }));
+    d.revisions.forEach((r) => rows.push({ element: `Change ${r.id.slice(3)}`, value: r.changes.join("; "), from: `Educator request: "${r.request}"`, kind: "teacher" }));
     return { intake, rows };
   }
-  return { saveIntake, nextQuestion, answer, propose, revise, edit, setRecommendation, approveDesign, rejectDesign, build, versions, latest, trace };
+  return { saveIntake, nextQuestion, answer, propose, revise, edit, setRecommendation, approveDesign, rejectDesign, restore, build, versions, latest, trace };
 }

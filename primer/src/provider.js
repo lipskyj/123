@@ -1,7 +1,7 @@
 // Deterministic provider: a rule-based stand-in for a language model. It builds designs from the educator's own
 // words and materials, detects evidence by matching learner text against educator-approved look-fors, and writes
 // character lines from design fields. It makes no network calls and gives the same output for the same input.
-import { sentences, content, stems, stem, keyTerms, overlap, NEGATION, ANSWER_SEEKING, quote, hash, rng, pick } from "./text.js";
+import { sentences, content, stems, stem, keyTerms, overlap, matchLookFors, NEGATION, ANSWER_SEEKING, quote, hash, rng, pick } from "./text.js";
 
 const NAMES = ["Dana Okafor", "Marek Lindqvist", "Priya Raman", "Tomás Herrera", "Aiko Tanaka", "Samira Haddad", "Jonas Weber", "Lucia Ferrante"];
 const GENERIC = new Set("explicitly correctly clearly accurately properly reading refers mentions mention least really rejects reject gives give shows show states state says say names name makes make takes take includes include using based rather instead without within least most more less well thing things way ways part parts kind kinds something anything someone anyone means mean meaning non etc example examples".split(" "));
@@ -22,11 +22,13 @@ export function splitCharacter(text) {
   if ((m = t.match(/^([A-Z][a-z'-]+(?: [A-Z][a-z'-]+)?)\s*(?:,|—|–| - | is | who is )\s*(.+)$/))) return { name: m[1], role: m[2].trim() };
   return { name: "", role: t };
 }
-const lc = (s) => (s ? s.charAt(0).toLowerCase() + s.slice(1) : s);
+const lc = (s) => (s && /^[A-Z][a-z]+\s+[A-Z]/.test(s) ? s : lcRaw(s));
+const lcRaw = (s) => (s ? s.charAt(0).toLowerCase() + s.slice(1) : s);
 const strip = (s) => (s || "").trim().replace(/[.?!]+$/, "");
 // "Explains why limestone fizzes" -> "explain why limestone fizzes"
 export function toTask(criterion) {
-  const w = strip(criterion).split(/\s+/); if (!w.length) return "";
+  let w = strip(criterion).split(/\s+/); if (!w.length) return "";
+  if (w.length > 1 && /ly$/i.test(w[0])) { const rest = toTask(w.slice(1).join(" ")); return w[0].toLowerCase() + " " + rest; }
   let v = w[0].toLowerCase();
   if (v.endsWith("ies")) v = v.slice(0, -3) + "y"; else if (/(ches|shes|sses|xes|zes)$/.test(v)) v = v.slice(0, -2); else if (v.endsWith("s") && !v.endsWith("ss")) v = v.slice(0, -1);
   return [v, ...w.slice(1)].join(" ");
@@ -110,7 +112,7 @@ export class DeterministicProvider {
       constraints: (intake.constraints || "").split(/\n/).map((s) => strip(s)).filter(Boolean),
       transfer: { text: strip(ans.transfer), source: { kind: ans.transfer ? "teacher" : "ai", field: "answers.transfer" } },
       assumptions, recommendations: recs, overrides: {}, revisions: [],
-      history: [{ at: new Date().toISOString(), actor: { type: "system", name: "Primer (" + this.name + " provider)" }, action: "propose", from: null, to: "draft", note: "Proposed from educator intake." }],
+      history: [{ at: new Date().toISOString(), actor: { type: "system", name: "Primer" }, action: "propose", from: null, to: "draft", note: "Proposed from educator intake." }],
     };
     return this.derive(design);
   }
@@ -122,9 +124,13 @@ export class DeterministicProvider {
     // Words that belong to a misconception but not to the correct account; a learner must use at least one before a statement counts as that misconception.
     const corpus = new Set([...d.concepts.flatMap((c) => content(c.fact)), ...d.criteria.flatMap((c) => [...content(c.text), ...c.lookFors])].map(stem));
     for (const m of d.misconceptions) { if (!m.cues || !m.cues.length) m.cues = content(m.text).slice(0, 10); m.distinct = m.cues.filter((w) => !corpus.has(stem(w))); }
-    const roleText = lc(ch.role.replace(/^(a|an|the)\s+/i, (m) => m.toLowerCase()));
+    // Drop "Primer decided" notes for anything the teacher has since supplied.
+    const taught = { stakes: d.stakes.source, character: d.character.source, "character.name": d.character.nameSource, transfer: d.transfer.source };
+    d.assumptions = d.assumptions.filter((a) => !(taught[a.field] && taught[a.field].kind === "teacher"));
+    const TB_Q = ["Where should I start? What's the most important idea I need to get?", "Okay. What else do I need to understand to really get this?", "What do people usually get wrong about this, and why are they wrong?", "How would I know whether I had understood it properly?", "Can you give me an example that shows it?", "Is there anything that would change the answer?"];
+    const RP_Q = ["Where would you start with my situation?", "What else should I be thinking about before I decide?", "What would you do differently from what I had planned?", "What's the risk if I get this wrong?", "Is there an option I haven't considered?", "What would you say if they push back?"];
     d.preparation = {
-      briefing: `Purpose: ${d.goal.text}.\nYour role: ${d.learnerRole.text}.\nYou will ${tb ? "teach" : "work with"} ${ch.name}, ${roleText}.`,
+      briefing: `Purpose: ${d.goal.text}.\nYour role: ${d.learnerRole.text}.\nYou will ${tb ? "teach" : "talk with"} ${ch.name}.`,
       keyPoints: d.concepts.slice(0, 5).map((c) => ({ text: c.fact, source: c.source })),
       activation: [
         `Before you begin: in your own words, what do you already know about "${d.title}"?`,
@@ -132,24 +138,26 @@ export class DeterministicProvider {
       ],
     };
     d.practice = {
-      opening: tb ? `Hi, I'm ${first}. I'm ${roleText}. I was told you can help me understand this. I really am starting from zero, so go slowly.`
-                  : `I'm ${ch.name}, ${roleText}. Let me be direct about why I need you: ${lc(strip(d.stakes.text))}.`,
-      challenges: d.criteria.map((c) => { const topic = topicOf(c); return { criterionId: c.id, written: c.question ? "teacher" : "primer",
-        prompt: c.question || (tb ? `Here's something I don't understand yet: ${topic}. How would you explain it to me?` : `Let's take the next part: ${topic}. What is your thinking, and what is it based on?`),
-        harder: tb ? `Okay, I think I follow. But suppose someone disagreed with you. What would you say to convince them?` : `That helps. Now think about what is at stake here: ${lc(strip(d.stakes.text))}. Does what you said still hold, and why?`,
-        support: [tb ? `I'm lost. Could you try again with one concrete example?` : `I'm not sure that settles it. What exactly are you basing that on?`,
-          `Go back to the course material you read before we started. Which part deals with ${topic}? What does it imply here?`] }; }),
+      opening: tb ? `Hi, I'm ${first}. I was told you could help me understand this. I'm starting from zero, so please go slowly.`
+                  : `Hi, I'm ${ch.name}. Thanks for making time. I really need your help with this.`,
+      challenges: d.criteria.map((c, i) => ({ criterionId: c.id, written: c.question ? "teacher" : "primer",
+        prompt: c.question || (tb ? TB_Q : RP_Q)[i % 6],
+        harder: tb ? `Okay, I think I follow. But suppose someone disagreed with you. What would you say to convince them?` : `That helps. But this matters a lot to me, so let me push: why are you sure? What would make you change your advice?`,
+        support: [tb ? `I'm not sure I follow yet. Can you say a bit more, maybe with an example?` : `Can you say a bit more about what you're basing that on?`,
+          `Maybe look back at the course material from before we started. Is there a part of it that helps here?`] })),
+      ack: tb ? `Oh, that's useful, it answers something I was going to ask.` : `That's useful, it covers something I was going to ask about.`,
       probes: d.misconceptions.map((m) => ({ misconceptionId: m.id,
-        voice: tb ? `Oh! So does that mean ${lc(strip(m.text))}?` : `I've always heard that ${lc(strip(m.text))}. I'm planning on that basis. Any reason I shouldn't?`,
-        challenge: `Hold on. A moment ago you said something that sounded like "${lc(strip(m.text))}". If that were true, what would we expect to see? Does that match what you know?` })),
+        voice: tb ? `Wait, I read somewhere that ${lc(strip(m.text))}. Is that right?` : `I've always heard that ${lc(strip(m.text))}. Any reason I shouldn't go with that?`,
+        challenge: `Hold on. You said something that sounded like "${lc(strip(m.text))}". If that were true, what would we expect to see? Does that match what you know?` })),
       closing: tb ? `Thank you. I think I could explain some of this to someone else now.` : `All right. I have what I need to decide. Thank you for your time.`,
+      closingUnsure: tb ? `Thanks for trying. I'm still a bit confused, so I'll keep reading about it.` : `Thanks for your time. I'm still not sure what to do, so I'll think about it some more.`,
       refusal: tb ? `I can't tell you the answer; I'm the one who doesn't know it! Try explaining the part you're surest of.` : `I can't answer that for you. Your judgement is exactly what I came for. Start with what you're surest of.`,
       maxTurns: Math.max(6, d.criteria.length * 3 + 2), ...difficultyRules(d.difficulty),
     };
     const tr = strip(d.transfer.text);
     d.feedback = {
       selfAssessment: ["Before you see any feedback: how do you think that went? Which moment are you most satisfied with?", "What would you do differently if you did it again?"],
-      transfer: tr ? `A different situation: ${tr}. What from this session would you use there, and what would you change?`
+      transfer: tr ? (/\?\s*$/.test(d.transfer.text) ? d.transfer.text.trim() : `A different situation: ${tr}. What from this session would you use there, and what would you change?`)
         : `Imagine the same ideas coming up somewhere quite different from ${ch.name}'s situation. Describe one such situation and how you would handle it.`,
     };
     const crit = d.criteria.map((c) => `- ${c.id}: ${c.text} (look for: ${c.lookFors.join(", ")})`).join("\n");
@@ -175,7 +183,7 @@ export class DeterministicProvider {
     if ((m = req.match(/add (?:a |another |the )?misconception\s*[:\-–]?\s*(.+)/i))) { const text = strip(m[1]); const id = "m" + (Math.max(0, ...d.misconceptions.map((c) => +c.id.slice(1))) + 1);
       d.misconceptions.push({ id, text, cues: content(text).slice(0, 10), source: { kind: "teacher", field: "revision" } }); changes.push(`Added misconception ${id}: ${text}`); }
     let named = false;
-    if (/character|name/i.test(req) && (m = req.match(/\b(?:called|named|rename(?:d)?(?: the character)?(?: to| as)?|call the character|name(?: is| should be| to))\s+([A-Z][\w'-]+(?: [A-Z][\w'-]+)?)/))) { named = true; if (m[1] !== d.character.name) { changes.push(`Character name: ${d.character.name} → ${m[1]}`); d.character.name = m[1]; d.character.nameSource = { kind: "teacher", field: "revision" }; } }
+    if (/character|name/i.test(req) && (m = req.match(/\b(?:called|named|rename(?:d)?(?: the character)?(?: to| as)?|[Cc]all the character|name(?: is| should be| to))\s+([A-Z][\w'-]+(?: [A-Z][\w'-]+)?)/))) { named = true; if (m[1] !== d.character.name) { changes.push(`Character name: ${d.character.name} → ${m[1]}`); d.character.name = m[1]; d.character.nameSource = { kind: "teacher", field: "revision" }; } }
     if (/\b(?:remove|delete|drop)\b.*\b(?:last |latest )?(?:note|constraint)s?\b/i.test(req)) { const list = (d.notes || []).length ? d.notes : d.constraints; if (list.length) { const gone = list.pop(); changes.push(`Removed: "${gone}"`); } else changes.push("There was no note or constraint to remove"); named = true; }
     if (!named && (m = req.match(/(?:the )?character should be\s+(?!called|named)(.+)/i))) { changes.push(`Character role: ${d.character.role} → ${strip(m[1])}`); d.character.role = strip(m[1]); d.character.source = { kind: "teacher", field: "revision" }; }
     if ((m = req.match(/\b(?:switch to|use|make it a?)\s*(teachback|roleplay)\b/i))) { const t = m[1].toLowerCase(); if (t !== d.template) { changes.push(`Template: ${d.template} → ${t}`); d.template = t; } }
@@ -195,14 +203,15 @@ export class DeterministicProvider {
   // ---------- runtime ----------
   assess(text, design) {
     const out = [], nWords = content(text).length;
-    for (const c of design.criteria) { const target = [...new Set(c.lookFors.map(stem))]; const { hits } = overlap(text, target);
-      const need = Math.max(2, Math.ceil(target.length * 0.25));
-      // Words shared with other criteria are not enough by themselves: at least one hit must be specific to this criterion.
-      const others = new Set(design.criteria.filter((x) => x !== c).flatMap((x) => x.lookFors.map(stem))); const own = target.filter((t) => !others.has(t));
-      if (hits.length >= need && nWords >= 5 && (!own.length || hits.some((h) => own.includes(h)))) out.push({ kind: "criterion", ref: c.id, strength: hits.length >= need + 2 ? "clear" : "partial", matched: hits }); }
+    const count = new Map(); for (const c of design.criteria) for (const lf of new Set(c.lookFors.map((x) => x.toLowerCase()))) count.set(lf, (count.get(lf) || 0) + 1);
+    for (const c of design.criteria) { const lfs = [...new Set(c.lookFors.map((x) => x.toLowerCase()))]; const hits = matchLookFors(text, lfs);
+      const need = Math.max(2, Math.ceil(lfs.length * 0.2));
+      // Look-fors shared with other criteria are not enough by themselves: at least one hit must belong only to this criterion.
+      const own = lfs.filter((x) => count.get(x) === 1);
+      if (hits.length >= need && nWords >= 4 && (!own.length || hits.some((h) => own.includes(h)))) out.push({ kind: "criterion", ref: c.id, strength: hits.length >= need + 1 ? "clear" : "partial", matched: hits }); }
     for (const m of design.misconceptions) { const target = [...new Set(m.cues.map(stem))]; const { hits, score } = overlap(text, target);
       const distinct = (m.distinct || []).map(stem), hasDistinct = !distinct.length || hits.some((h) => distinct.includes(h));
-      if (hits.length >= 2 && score >= 0.4 && hasDistinct) out.push({ kind: NEGATION.test(text) ? "misconception-corrected" : "misconception-voiced", ref: m.id, strength: "clear", matched: hits }); }
+      if (hits.length >= 2 && score >= 0.25 && hasDistinct) out.push({ kind: NEGATION.test(text) ? "misconception-corrected" : "misconception-voiced", ref: m.id, strength: "clear", matched: hits }); }
     return out;
   }
   isAnswerSeeking(text) { return ANSWER_SEEKING.test(text); }
@@ -212,13 +221,14 @@ export class DeterministicProvider {
     switch (kind) {
       case "opening": return p.opening;
       case "prompt": return ch.prompt;
-      case "raise": return echo + ch.harder;
+      case "raise": return ch.harder;
       case "support": return ch.support[Math.min(ctx.level - 1, ch.support.length - 1)];
       case "repeat": return `Let me ask again. ${ch.prompt}`;
       case "redirect": return p.refusal + " " + ch.prompt;
+      case "ack": return `${p.ack} ${ch.prompt}`;
       case "probe-voice": return p.probes.find((x) => x.misconceptionId === ctx.misconceptionId).voice;
       case "probe-challenge": return p.probes.find((x) => x.misconceptionId === ctx.misconceptionId).challenge;
-      case "closing": return p.closing;
+      case "closing": return ctx.unsure && p.closingUnsure ? p.closingUnsure : p.closing;
     }
     throw new Error("Unknown line kind " + kind);
   }

@@ -25,6 +25,10 @@ export function keyTerms(text, n = 12) {
 }
 
 // Share of `targetStems` present in text. Returns { score, hits }.
+// Look-for matching. Each look-for may be a single word or a phrase, and may be a short or "stop" word such as
+// "not" or "doesn't" when the teacher chose it. Returns the look-fors (as written) found in the text.
+export const norm = (t) => " " + words(t).map(stem).join(" ") + " ";
+export function matchLookFors(text, lookFors) { const T = norm(text); return [...new Set(lookFors)].filter((lf) => { const k = norm(lf).trim(); return k && T.includes(" " + k + " "); }); }
 export function overlap(text, targetStems) {
   const have = new Set(content(text).map(stem));
   const hits = targetStems.filter((s) => have.has(s));

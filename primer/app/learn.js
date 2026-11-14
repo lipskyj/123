@@ -25,7 +25,7 @@ async function render() {
 }
 
 async function viewHome() {
-  const bundled = await loadBundled(); const local = store.list("packages"); const open = store.list("sessions").filter((s) => s.phase !== "ended" && store.get("packages", s.packageId));
+  const bundled = await loadBundled(); const local = store.list("packages").filter((x) => !x.withdrawn); const open = store.list("sessions").filter((s) => s.phase !== "ended" && store.get("packages", s.packageId));
   const seen = new Set(local.map((x) => x.id));
   app.innerHTML = `<h1>Choose an experience</h1>
     ${open.length ? `<h2>Continue where you stopped</h2>${open.map((s) => `<div class="card row"><b>${esc(store.get("packages", s.packageId).title)}</b><span class="dim small">${esc(s.learner.name)} · ${s.phase}</span><span style="flex:1"></span><a href="?session=${s.id}">Continue</a></div>`).join("")}` : ""}
@@ -41,8 +41,9 @@ async function viewStart(id, file) {
   const pkg = await ensurePackage(id, file); if (!pkg) throw new Error("That experience is not available in this browser. Ask your teacher for the experience file.");
   const d = pkg.design;
   app.innerHTML = `<h1>${esc(pkg.title)}</h1>${pkg.approval.type === "test" ? `<div class="notice">Test build. Your teacher has not yet approved this for classroom use.</div>` : ""}
-    <div class="card"><p><b>What this is for:</b> ${esc(d.goal.text)}.</p><p><b>What you will do:</b> ${esc(d.learnerRole.text)}.</p>
-    <p class="dim">Three parts: prepare, practise with ${esc(d.character.name)}${d.world ? " after field work in a 3D cave" : ""}, then feedback on what you actually wrote. About ${Math.max(10, Math.round((d.practice.maxTurns * 1.5 + 8 + (d.world ? 10 : 0)) / 5) * 5)} minutes at most. Your work is saved in this browser as you go.</p>
+    ${pkg.withdrawn ? `<div class="notice bad">Your teacher has withdrawn this experience.</div>` : ""}
+    <div class="card"><p style="white-space:pre-wrap">${esc(d.preparation.briefing)}</p>
+    <p class="dim">Three parts: prepare, practise with ${esc(d.character.name)}${d.world ? " after field work in a 3D cave" : ""}, then feedback on what you actually wrote. Practice is at most ${d.practice.maxTurns} replies, and you can end it earlier. Your work is saved in this browser as you go.</p>
     <div id="err" class="notice bad" hidden tabindex="-1" role="alert"></div>
     <label for="name">Your first name</label><input type="text" id="name" autocomplete="given-name"><div class="row end" style="margin-top:12px"><button class="primary" id="startBtn">Start</button></div></div>`;
   $("startBtn").onclick = () => { try { const name = $("name").value.trim(); if (!name) throw new Error("Enter your first name."); const s = R.start(pkg.id, { name }); go("session=" + s.id); } catch (e) { fail(e); } };
@@ -61,8 +62,8 @@ function viewSession(id) {
 
 function viewPrep(s, d, head) {
   app.innerHTML = `${head}<h1>Prepare</h1><div class="card"><p style="white-space:pre-wrap">${esc(d.preparation.briefing)}</p></div>
-    ${d.preparation.keyPoints.length ? `<h2>Key points from your course material</h2>${d.preparation.keyPoints.map((k) => `<blockquote>${esc(k.text)}<small>${esc(k.source.material)}</small></blockquote>`).join("")}` : ""}
-    ${(d.materials || []).length ? `<details><summary>Read all of the course material</summary>${d.materials.map((m) => `<h3>${esc(m.name)}</h3><p style="white-space:pre-wrap">${esc(m.text)}</p>`).join("")}</details><p class="dim small">You can come back to this material during practice.</p>` : ""}
+    ${d.preparation.keyPoints.length ? `<h2>Key points from your course material</h2>${d.preparation.keyPoints.map((k) => `<blockquote>${esc(k.text)}</blockquote>`).join("")}` : ""}
+    ${(d.materials || []).length ? `<details><summary>Read all of the course material</summary>${d.materials.map((m) => `<h3>${esc(/^Pasted material$/.test(m.name) ? "Course material" : m.name.replace(/\.(txt|md|csv)$/i, ""))}</h3><p style="white-space:pre-wrap">${esc(m.text)}</p>`).join("")}</details><p class="dim small">You can come back to this material during practice.</p>` : ""}
     <h2>Before you begin</h2><p class="dim">Answer in your own words. There are no wrong answers here; it gets your thinking started.</p>
     ${d.preparation.activation.map((q, i) => `<label for="a${i}">${esc(q)}</label><textarea id="a${i}"></textarea>`).join("")}
     <div class="row end" style="margin-top:14px"><button class="primary" id="next">Start practice</button></div>`;
@@ -89,7 +90,7 @@ function viewWorld(s, d, head) {
 
 function viewChat(s, d, head) {
   const turns = s.turns.filter((t) => t.phase === "practice" && t.kind !== "field-note");
-  app.innerHTML = `${head}<h1>Practice</h1><p class="dim">You are talking with ${esc(d.character.name)}, ${esc(d.character.role)}. Your job: ${esc(d.learnerRole.text)}.</p>
+  app.innerHTML = `${head}<h1>Practice</h1><p class="dim">You are talking with ${esc(d.character.name)}.</p><details><summary>Your briefing</summary><p style="white-space:pre-wrap">${esc(d.preparation.briefing)}</p></details>
     ${d.world ? `<details><summary>Your field notes</summary>${s.turns.filter((t) => t.kind === "field-note").map((t) => `<blockquote>${esc(t.text)}</blockquote>`).join("") || `<p class="dim">None.</p>`}</details>` : ""}
     <div class="chat" id="chat" role="log" aria-label="Conversation">${turns.map((t) => `<div class="msg ${t.who === "learner" ? "learner" : ""}"><span class="name">${t.who === "learner" ? esc(s.learner.name) : esc(d.character.name)}</span>${esc(t.text)}</div>`).join("")}</div>
     ${(d.materials || []).length ? `<details><summary>Course material</summary>${d.materials.map((m) => `<p style="white-space:pre-wrap">${esc(m.text)}</p>`).join("")}</details>` : ""}

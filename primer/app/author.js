@@ -119,12 +119,12 @@ function viewDesign(designId) {
   app.innerHTML = `<div class="steps"><span class="done">1 Your lesson</span><span class="done">2 A few questions</span><span class="${isApproved(d) ? "done" : "on"}">3 Review the design</span><span class="${isApproved(d) ? "on" : ""}">4 Approve and open</span></div>
     <h1>${esc(d.title)}</h1><div class="row">${badge(d.state)}<span class="dim small">Version ${d.version} of ${versions.length} · ${esc(TEMPLATE_HELP[d.template].split(" — ")[0])}${d.world ? " · " + esc(WORLDS[d.world]) : ""}</span></div>
     ${msg ? `<div class="notice ok" role="status">${esc(msg)}</div>` : ""}
-    ${!live ? `<div class="notice">This version has been replaced. <a href="#design/${newest.id}">Open the latest version (${newest.version})</a>.</div>` : ""}
+    ${!live ? `<div class="notice">This version has been replaced. <a href="#design/${newest.id}">Open the latest version (${newest.version})</a>, or <button class="link" id="restoreBtn">restore this version</button> as a new draft.</div>` : ""}
     ${d.state === "test-approved" ? `<div class="notice">Approved for testing only. Students will see a "Test build" label. Approve it yourself before classroom use.</div>` : ""}
     ${d.state === "rejected" ? `<div class="notice">You rejected this version. Students cannot open it. Edit anything below, or request a change, to continue from a new draft.</div>` : ""}
     ${isApproved(d) && live ? `<div class="notice">Any edit now creates a new draft that needs your approval again. Students keep the approved version until then.</div>` : ""}
     <div id="err" class="notice bad" hidden tabindex="-1" role="alert"></div>
-    ${live ? `<div class="card"><label for="tname" style="margin-top:0">Your name<span class="hint">Recorded with every edit, change and decision.</span></label><input type="text" id="tname" value="${esc(savedName())}" autocomplete="name"></div>` : ""}
+    ${true ? `<div class="card"><label for="tname" style="margin-top:0">Your name<span class="hint">Recorded with every edit, change and decision.</span></label><input type="text" id="tname" value="${esc(savedName())}" autocomplete="name"></div>` : ""}
 
     <h2>What students will learn and do</h2><div class="card">
       ${F("Learning goal", d.goal.text, d.goal.source, "goal.text")}${F("Students (not shown to them)", d.learnerProfile.text, d.learnerProfile.source, "learnerProfile.text")}${F("The student's job", d.learnerRole.text, d.learnerRole.source, "learnerRole.text")}
@@ -142,11 +142,12 @@ function viewDesign(designId) {
     <h2>Misconceptions to test</h2><div class="card">${d.misconceptions.length ? d.misconceptions.map((m, i) => F(`Misconception ${i + 1}`, m.text, m.source, `misconceptions.${i}.text`)).join("") : `<p class="dim">None listed.</p>`}</div>
 
     <h2>What the student experiences</h2>
-    <details open><summary>1. Preparation</summary><div class="field"><div class="k">Briefing${ed("preparation.briefing", "Briefing")}</div><div class="v">${esc(d.preparation.briefing)}</div></div>
-      <div class="field"><div class="k">Highlighted from your material (students can also read all of it)</div>${d.preparation.keyPoints.map((k) => `<blockquote>${esc(k.text)}<small>${esc(k.source.material)}</small></blockquote>`).join("") || `<p class="dim">No sentences could be highlighted; students still see the full material.</p>`}</div>
+    <details open><summary>1. Preparation</summary><div class="field"><div class="k">Briefing${ed("preparation.briefing", "Briefing")}</div><p class="dim small" style="margin:2px 0">Students see this text exactly as written, on the start page and during practice. Check that it does not give away answers.</p><div class="v">${esc(d.preparation.briefing)}</div></div>
+      <div class="field"><div class="k">Highlighted from your material (students can also read all of it)${ed("preparation.keyPoints", "Highlighted sentences (one per line)")}</div>${d.preparation.keyPoints.map((k) => `<blockquote>${esc(k.text)}<small>${esc(k.source.material)}</small></blockquote>`).join("") || `<p class="dim">No sentences could be highlighted; students still see the full material.</p>`}</div>
       <div class="field"><div class="k">Questions before they start${ed("preparation.activation", "Questions before they start (one per line)")}</div><ol>${d.preparation.activation.map((q) => `<li>${esc(q)}</li>`).join("")}</ol></div></details>
     <details open><summary>2. Practice with ${esc(d.character.name)}</summary><div class="field"><div class="k">Opening line${ed("practice.opening", "Opening line")}</div><div class="v">${esc(d.practice.opening)}</div></div>
-      ${d.practice.challenges.map((c) => `<div class="field"><div class="k">For criterion ${d.criteria.findIndex((x) => x.id === c.criterionId) + 1}</div><div class="v"><b>Asks:</b> ${esc(c.prompt)}\n<b>If the student shows it:</b> ${d.practice.raise ? esc(c.harder) : "moves on (gentle difficulty)"}\n<b>If the student is stuck:</b> ${d.helpPolicy === "none" ? "repeats the question" : esc(c.support.slice(0, d.helpPolicy === "questions" ? 1 : 2).join(" → "))}</div></div>`).join("")}
+      <div class="field"><div class="k">When a student answers a different criterion first${ed("practice.ack", "Acknowledgement line")}</div><div class="v">${esc(d.practice.ack)} <span class="dim">(then repeats the current question; that criterion is not asked again)</span></div></div>
+      ${d.practice.challenges.map((c, ci) => `<div class="field"><div class="k">For criterion ${d.criteria.findIndex((x) => x.id === c.criterionId) + 1}${ed(`practice.challenges.${ci}.harder`, "Follow-up when the student shows it").replace(">Edit<", ">Edit follow-up<")}${ed(`practice.challenges.${ci}.support.0`, "First line when the student is stuck").replace(">Edit<", ">Edit stuck line<")}</div><div class="v"><b>Asks:</b> ${esc(c.prompt)}\n<b>If the student shows it:</b> ${d.practice.raise ? esc(c.harder) : "moves on (gentle difficulty)"}\n<b>If the student is stuck:</b> ${d.helpPolicy === "none" ? "repeats the question" : esc(c.support.slice(0, d.helpPolicy === "questions" ? 1 : 2).join(" → "))}</div></div>`).join("")}
       ${d.practice.probes.map((p) => `<div class="field"><div class="k">Misconception check</div><div class="v">${esc(p.voice)}</div></div>`).join("")}
       <div class="field"><div class="k">If the student asks for the answer</div><div class="v">${esc(d.practice.refusal)}</div></div><p class="dim small">Up to ${d.practice.maxTurns} student replies; ${d.practice.maxAttempts} attempts per criterion. Students can also end practice themselves.</p></details>
     <details><summary>3. Feedback and transfer</summary><div class="field"><div class="k">Self-assessment first</div><ol>${d.feedback.selfAssessment.map((q) => `<li>${esc(q)}</li>`).join("")}</ol></div>
@@ -167,21 +168,24 @@ function viewDesign(designId) {
     <h2>Decision</h2><div class="card">
       ${isApproved(d) ? `<p><b>${d.state === "educator-approved" ? "You approved this design." : "This design is approved for testing only."}</b></p>` : d.state === "rejected" ? `<p><b>Rejected.</b> Edit or request a change to continue.</p>` : `<p>Students cannot open anything until you approve.</p>`}
       <div class="row">${d.state !== "educator-approved" && d.state !== "rejected" ? `<button class="primary" id="apBtn">Approve for classroom use</button>` : ""}${!isApproved(d) && d.state !== "rejected" ? `<button id="tapBtn">Approve for testing only</button>` : ""}${d.state !== "rejected" ? `<button class="danger" id="rjBtn">${isApproved(d) ? "Withdraw approval (reject)" : "Reject this version"}</button>` : ""}</div>
+      ${pkg && pkg.withdrawn ? `<p class="dim">The student experience built from this version has been withdrawn; students can no longer start it on this device.</p>` : ""}
       ${isApproved(d) ? `<hr style="border:0;border-top:1px solid var(--line);margin:16px 0">${pkg ? `<p><b>The student experience is ready.</b></p><div class="row"><a href="learn.html?exp=${pkg.id}" id="openLink"><button class="primary" type="button">Open as a student</button></a><button id="dlBtn">Download experience file</button><a href="#sessions/${pkg.id}">Student sessions on this device</a></div>
         <p class="dim small" style="margin-top:10px">To give it to students: send them the downloaded file. On the student page they choose "Open an experience file". Their work stays in their own browser, so you will only see sessions from this device.</p>` : `<button class="primary" id="buildBtn">Create the student experience</button>`}` : ""}</div>` : ""}`;
 
   const ENUM_OPTS = { difficulty: [["gentle", "Gentle — never raises the challenge"], ["moderate", "Moderate"], ["demanding", "Demanding — fewer attempts"]], helpPolicy: Object.entries(HELP), template: Object.entries(TEMPLATE_HELP) };
-  const LISTS = new Set(["constraints", "notes", "preparation.activation"]);
+  const LISTS = new Set(["constraints", "notes", "preparation.activation", "preparation.keyPoints"]);
   app.querySelectorAll(".ed").forEach((b) => (b.onclick = async () => {
     const path = b.dataset.path; let cur;
     try { needName(); } catch (e) { return fail(e); }
     const mq = path.match(/^criteria\.(\d+)\.question$/);
+    if (path === "preparation.keyPoints") cur = d.preparation.keyPoints.map((k) => k.text); else
     cur = mq ? d.practice.challenges.find((x) => x.criterionId === d.criteria[+mq[1]].id).prompt : path === "practice.maxTurns" ? String(d.practice.maxTurns) : path.split(".").reduce((o, k) => (o == null ? o : o[k]), d);
     const isList = Array.isArray(cur), isWords = /lookFors$/.test(path);
     const val = await openEditor({ label: b.dataset.label, options: ENUM_OPTS[path] || null, value: isList ? cur.join(isWords ? ", " : "\n") : cur ?? "",
       hint: isWords ? "Separate words with commas. A student's answer must contain several of these, including at least one that belongs only to this criterion." : LISTS.has(path) ? "One per line. Leave empty to remove all." : path === "practice.maxTurns" ? "A number from 2 to 40." : "" });
     if (val == null) return;
-    const out = isList ? val.split(isWords ? "," : "\n").map((x) => x.trim()).filter(Boolean) : val.trim();
+    let out = isList ? val.split(isWords ? "," : "\n").map((x) => x.trim()).filter(Boolean) : val.trim();
+    if (path === "preparation.keyPoints") out = out.map((t) => ({ text: t, source: { material: "Highlighted by you" } }));
     if (!isList && !out) return fail(new Error("That field cannot be empty."));
     try { const nd = A.edit(d.id, path, out, needName()); flash = `Saved as version ${nd.version}. Everything that depends on it was updated${isApproved(d) ? "; it needs your approval again" : ""}.`; go("design/" + nd.id); } catch (e) { fail(e); } }));
   app.querySelectorAll(".rec").forEach((b) => (b.onclick = () => { try { A.setRecommendation(d.id, b.dataset.id, b.dataset.a === "1", needName()); route(); } catch (e) { fail(e); } }));
@@ -192,6 +196,7 @@ function viewDesign(designId) {
   if ($("rjBtn")) $("rjBtn").onclick = async () => { try { needName(); } catch (e) { return fail(e); }
     const why = await openEditor({ label: "Why are you rejecting this version?", hint: "Kept in the history. Students will not be able to open it. You can still edit it afterwards to continue from a new draft." }); if (why == null) return;
     decide(() => A.rejectDesign(d.id, needName(), why.trim()), "Rejected. Edit anything, or request a change, to continue from a new draft."); };
+  if ($("restoreBtn")) $("restoreBtn").onclick = () => { try { const nd = A.restore(d.id, needName()); flash = `Version ${d.version} restored as version ${nd.version}. It needs your approval.`; go("design/" + nd.id); } catch (e) { fail(e); } };
   if ($("buildBtn")) $("buildBtn").onclick = () => decide(() => A.build(d.id), "The student experience is ready.");
   if ($("dlBtn")) $("dlBtn").onclick = () => download(`${pkg.title.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}.primer.json`, { packages: [pkg] });
 }
@@ -202,7 +207,7 @@ function viewSessions(pkgId) {
   const pkg = store.get("packages", pkgId); if (!pkg) throw new Error("That experience was not found in this browser.");
   const sessions = store.list("sessions").filter((s) => s.packageId === pkgId).sort((a, b) => b.startedAt.localeCompare(a.startedAt)); const d = pkg.design;
   const label = (ref) => { const c = d.criteria.find((x) => x.id === ref); const m = d.misconceptions.find((x) => x.id === ref); return c ? "Criterion: " + c.text : m ? "Misconception: " + m.text : ref; };
-  const KIND = { raise: "Raised the challenge", support: "Gave support", repeat: "Repeated the question", redirect: "Declined to give the answer", probe: "Tested a misconception" };
+  const KIND = { acknowledge: "Acknowledged an answer to another criterion", raise: "Raised the challenge", support: "Gave support", repeat: "Repeated the question", redirect: "Declined to give the answer", probe: "Tested a misconception" };
   app.innerHTML = `<p><a href="#design/${pkg.designId}">← Back to the design</a></p><h1>Student sessions</h1><p class="dim">${esc(pkg.title)} · sessions recorded in this browser only.</p>
     ${sessions.length ? "" : `<div class="card"><p>No sessions yet. Open the experience as a student to create one.</p></div>`}
     ${sessions.map((s) => `<details><summary>${esc(s.learner.name)} · ${esc(s.startedAt.slice(0, 16).replace("T", " "))} · ${s.phase === "ended" ? "completed" : "in progress (" + s.phase + ")"}</summary>

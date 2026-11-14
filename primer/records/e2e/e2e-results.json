@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-14T10:29:54.303Z",
+ "ranAt": "2026-11-14T10:48:34.172Z",
  "results": [
   {
    "name": "landing page shows teacher and student entry points",
@@ -57,7 +57,7 @@
    "detail": ""
   },
   {
-   "name": "direct edit propagated to the practice scene",
+   "name": "direct edit reaches the character's instructions but is not spoken aloud",
    "ok": true,
    "detail": ""
   },

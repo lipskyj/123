@@ -15,7 +15,7 @@ No install or build step. From the repository root:
 python3 -m http.server 8000
 ```
 
-Then open <http://localhost:8000/primer/>. Choose **I'm a teacher** or **I'm a student**.
+Then open <http://localhost:8000/primer/> (the repository root page is unrelated to Primer). Choose **I'm a teacher** or **I'm a student**.
 
 On GitHub Pages the same files are served at `/<repo>/primer/`.
 
@@ -23,7 +23,7 @@ On GitHub Pages the same files are served at `/<repo>/primer/`.
 
 ```sh
 cd primer
-node --test tests/primer.test.mjs                 # 25 engine tests (Node 22+)
+node --test tests/primer.test.mjs                 # engine tests (Node 22+)
 node tests/e2e.mjs http://localhost:8000/primer/  # browser test; needs Playwright and the server above
 node tools/build-fixtures.mjs                     # rebuild the two bundled sample experiences
 node tools/build-status.mjs                       # regenerate BUILD_STATUS.html from the records

@@ -35,7 +35,7 @@ test("authoring: educator materials and inputs shape the design", () => {
   assert.ok(a.concepts.some((c) => /batna/i.test(c.term))); assert.ok(b.concepts.some((c) => /calcite|limestone/i.test(c.term)));
   for (const d of [a, b]) for (const c of d.concepts) assert.ok(fixture(d === a ? "mba-negotiation" : "cave-geology").materials[0].text.includes(c.fact.replace(/…$/, "").slice(0, 60)), "key points are quoted from the educator's materials");
   assert.notEqual(a.practice.opening, b.practice.opening); assert.notDeepEqual(a.criteria.map((c) => c.text), b.criteria.map((c) => c.text));
-  assert.match(a.practice.opening, /bottom line|weak offer/); assert.match(b.prompts.character, /volunteer guide/);
+  assert.match(a.prompts.character, /bottom line|weak offer/); assert.ok(!/bottom line|weak offer/.test(a.practice.opening), "teacher's stakes text is not spoken by the character"); assert.match(b.prompts.character, /volunteer guide/);
 });
 test("authoring: skipped questions become visible AI assumptions", () => {
   const env = setup(), { answers, ...fields } = fixture("mba-negotiation"); delete fields.template; const intake = env.authoring.saveIntake(fields);
@@ -51,7 +51,7 @@ test("authoring: a natural-language revision changes the design and propagates d
   assert.match(r.design.prompts.assessor, /improving the BATNA/); assert.match(r.design.prompts.character, /demanding/); assert.equal(r.design.practice.maxAttempts, 2);
   assert.equal(env.store.get("designs", design.id).state, "superseded");
   const r2 = env.authoring.revise(r.design.id, "The character should be a senior engineer changing careers", TEACHER);
-  assert.match(r2.design.practice.opening, /senior engineer/); assert.match(r2.design.preparation.briefing, /senior engineer/);
+  assert.match(r2.design.prompts.character, /senior engineer/); assert.ok(!/senior engineer/.test(r2.design.practice.opening));
 });
 test("authoring: a request Primer cannot interpret becomes a teacher-only note, never student-facing text", () => {
   const env = setup(), { design } = author(env, "cave-geology"); const r = env.authoring.revise(design.id, "Please keep sentences short because several students are new to English", TEACHER);
@@ -74,8 +74,8 @@ test("review F2/F6/F16: classroom constraints are never spoken by the character 
 test("review F4/F5: a character named by the teacher keeps that name; renaming changes only the name", () => {
   const env = setup(), { answers, ...fields } = fixture("mba-negotiation"); const intake = env.authoring.saveIntake(fields);
   for (let q; (q = env.authoring.nextQuestion(intake.id)); ) env.authoring.answer(intake.id, q.id, q.id === "character" ? "A classmate called Jordan who missed the lecture" : answers[q.id] || "");
-  const d = env.authoring.propose(intake.id); assert.equal(d.character.name, "Jordan"); assert.equal(d.character.nameSource.kind, "teacher"); assert.match(d.practice.opening, /^I'm Jordan, a classmate who missed the lecture/);
-  const r = env.authoring.revise(d.id, "The character should be called Sam, not Jordan", TEACHER); assert.equal(r.design.character.name, "Sam"); assert.equal(r.design.character.role, d.character.role); assert.match(r.design.practice.opening, /^I'm Sam, a classmate/);
+  const d = env.authoring.propose(intake.id); assert.equal(d.character.name, "Jordan"); assert.equal(d.character.nameSource.kind, "teacher"); assert.match(d.practice.opening, /^Hi, I'm Jordan\./); assert.equal(d.character.role, "A classmate who missed the lecture");
+  const r = env.authoring.revise(d.id, "The character should be called Sam, not Jordan", TEACHER); assert.equal(r.design.character.name, "Sam"); assert.equal(r.design.character.role, d.character.role); assert.match(r.design.practice.opening, /^Hi, I'm Sam\./);
   const plain = author(setup(), "mba-negotiation").design; assert.equal(plain.character.nameSource.kind, "ai"); assert.ok(plain.assumptions.some((a) => a.field === "character.name"));
 });
 test("review F3: a rejected design can be reopened by editing; the new version needs approval", () => {
@@ -226,3 +226,49 @@ test("failure modes: no goal drift, character drift or unsupported assessment ac
     for (const t of s.turns.filter((x) => x.who === "character")) assert.ok([...lines].some((l) => t.text.endsWith(l) || t.text.includes(l)), "character lines come from the approved design");
     for (const e of s.evidence) assert.equal(e.basis, "observed"); }
 });
+
+// ---------- regressions from validation round 2 (fresh-teacher-recheck.md, cold-build-audit.md) ----------
+test("round 2 N1: teacher-chosen look-fors match phrases and negations", () => {
+  const env = setup(), { design } = author(env, "mba-negotiation");
+  const d2 = env.authoring.edit(design.id, "criteria.1.lookFors", ["not", "doesn't", "isn't", "BATNA", "walk away"], TEACHER);
+  const ev = env.provider.assess("Their BATNA isn't strong, so I would walk away rather than accept.", d2); assert.ok(ev.some((e) => e.kind === "criterion" && e.ref === "c2"), JSON.stringify(ev));
+});
+test("round 2 N2: a misconception written in different words is still recognised", () => {
+  const env = setup(), { design } = author(env, "cave-geology"); const d = env.authoring.edit(design.id, "misconceptions.1.text", "a smaller p-value means a bigger, more important effect", TEACHER);
+  assert.ok(env.provider.assess("I think a smaller p means a stronger effect.", d).some((e) => e.kind === "misconception-voiced"));
+});
+test("round 2 N3: withdrawing approval stops students opening it; rebuilding replaces the old experience", () => {
+  const env = setup(), { design } = author(env, "mba-negotiation"); const ok = env.authoring.approveDesign(design.id, TEACHER); const pkg = env.authoring.build(ok.id);
+  env.authoring.rejectDesign(ok.id, TEACHER, "not ready"); assert.throws(() => env.runtime.start(pkg.id, {}), /withdrawn/);
+  const r = env.authoring.revise(ok.id, "make it easier", TEACHER); const pkg2 = env.authoring.build(env.authoring.approveDesign(r.design.id, TEACHER).id);
+  assert.ok(env.runtime.start(pkg2.id, {})); assert.equal(env.store.list("packages").filter((p) => !p.withdrawn).length, 1);
+});
+test("round 2 N4: the student copy carries no private teacher text", () => {
+  const env = setup(), { design } = author(env, "mba-negotiation"); const r = env.authoring.revise(design.id, "Remember that Kim in period 3 is absent", TEACHER);
+  env.authoring.rejectDesign(r.design.id, TEACHER, "private reason XYZ"); const r2 = env.authoring.revise(r.design.id, "make it harder", TEACHER);
+  const pkg = env.authoring.build(env.authoring.approveDesign(r2.design.id, TEACHER).id); const blob = JSON.stringify(pkg);
+  for (const secret of ["Kim in period 3", "private reason XYZ", "First-year MBA students", "only one other offer"]) assert.ok(!blob.includes(secret), secret);
+  assert.deepEqual(validatePackage(pkg), []);
+});
+test("round 2 F1/F4 (cold audit): character speech never contains the teacher's descriptions", () => {
+  for (const name of ["mba-negotiation", "cave-geology"]) { const d = author(setup(), name).design; const spoken = [d.practice.opening, d.practice.closing, d.practice.ack, ...d.practice.challenges.flatMap((c) => [c.prompt, c.harder, ...c.support])].join(" ");
+    for (const t of [d.character.role, d.stakes.text, d.learnerProfile.text]) assert.ok(!spoken.includes(t.slice(0, 30)), t); }
+});
+test("round 2 F1 (cold audit): evidence for another criterion is acknowledged and that criterion is not asked again", () => {
+  const env = setup(), pkg = built(env, "mba-negotiation"), d = pkg.design; let s = env.runtime.start(pkg.id, {}); s = env.runtime.submitPreparation(s.id, PREP);
+  const c3 = d.criteria[2]; s = env.runtime.say(s.id, `I would propose options: ${c3.lookFors.join(" ")}.`);
+  assert.equal(s.adaptations.at(-1).kind, "acknowledge"); assert.equal(s.adaptations.at(-1).goalRef, c3.id);
+  let n = 0; while (s.phase === "practice" && n++ < 30) s = env.runtime.say(s.id, "I am not sure.");
+  assert.ok(!s.turns.some((t) => t.kind === "prompt" && t.criterionId === c3.id));
+  s = env.runtime.submitSelfAssessment(s.id, SELF); assert.ok(s.feedback.strengths.some((x) => x.criterionId === c3.id));
+});
+test("round 2 F2 (cold audit): warm-up answers are not credited as evidence, and feedback does not list the hidden words", () => {
+  const env = setup(), pkg = built(env, "mba-negotiation"), d = pkg.design; let s = env.runtime.start(pkg.id, {});
+  s = env.runtime.submitPreparation(s.id, [`${d.criteria[0].lookFors.join(" ")} ${d.criteria[1].lookFors.join(" ")}`, "Not sure."]); s = env.runtime.endPractice(s.id); s = env.runtime.submitSelfAssessment(s.id, SELF);
+  assert.equal(s.feedback.strengths.length, 0); for (const g of s.feedback.growth) assert.ok(!g.observation.includes(d.criteria[0].lookFors.slice(0, 3).join(", ")));
+});
+test("round 2 F12: an old version can be restored as a new draft", () => {
+  const env = setup(), { design } = author(env, "mba-negotiation"); const r = env.authoring.revise(design.id, "make it harder", TEACHER);
+  const back = env.authoring.restore(design.id, TEACHER); assert.equal(back.version, 3); assert.equal(back.difficulty, design.difficulty); assert.equal(back.state, "revised");
+});
+
