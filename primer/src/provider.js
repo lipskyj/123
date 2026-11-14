@@ -213,17 +213,23 @@ export class DeterministicProvider {
       const need = Math.max(2, Math.ceil(lfs.length * 0.2));
       // Look-fors shared with other criteria are not enough by themselves: at least one hit must belong only to this criterion.
       const own = lfs.filter((x) => count.get(x) === 1);
-      if (hits.length >= need && nWords >= 4 && (!own.length || hits.some((h) => own.includes(h)))) out.push({ kind: "criterion", ref: c.id, strength: hits.length >= need + 1 ? "clear" : "partial", matched: hits }); }
+      const substantive = hits.filter((h) => content(h).length > 0);
+      if (hits.length >= need && substantive.length >= 1 && nWords >= 4 && (!own.length || hits.some((h) => own.includes(h)))) out.push({ kind: "criterion", ref: c.id, strength: hits.length >= need + 1 ? "clear" : "partial", matched: hits }); }
     // Misconceptions are judged sentence by sentence: a sentence that matches the idea is a correction only if that
     // sentence itself negates it; an explicit retraction anywhere in the reply also counts as a correction.
     const RETRACT = /\b(i was wrong|i had (it|that|this) (backwards|wrong)|changed my mind|i take (it|that) back|not what i thought|i see now)\b/i;
     const SNEG = /\b(not|no|never|isn'?t|aren'?t|doesn'?t|don'?t|can'?t|cannot|wrong|myth|misconception|mistake|mistaken|incorrect|false|backwards)\b/i;
-    const parts = sentences(text.replace(/([^.!?])$/, "$1.")).flatMap((x) => x.split(/[;:]|,\s*(?:but|so)\s+/i));
+    // Topic words: in a criterion's text AND among the words the teacher listed as evidence for it.
+    const critWords = new Set(design.criteria.flatMap((c) => { const lf = new Set(c.lookFors.flatMap((x) => content(x).map(stem))); return content(c.text).map(stem).filter((w) => lf.has(w)); }));
+    // Whole sentences are judged as one claim; a sentence containing a negation is split so "not X, but Y" separates.
+    const parts = sentences(text.replace(/([^.!?])$/, "$1.")).flatMap((x) => (SNEG.test(x) ? x.split(/[;:]|,\s*(?:but|so|because)\s+/i) : [x]));
     for (const m of design.misconceptions) { const target = [...new Set(m.cues.map(stem))]; if (!target.length) continue;
-      const distinct = (m.distinct || []).map(stem), need = Math.max(2, Math.ceil(target.length * 0.4));
+      const distinct = (m.distinct || []).map(stem), need = Math.max(2, Math.ceil(target.length * 0.35));
       let voiced = null, corrected = null;
-      for (const sen of parts) { const { hits } = overlap(sen, target); if (hits.length < need || (distinct.length && !hits.some((h) => distinct.includes(h)))) continue;
-        if (SNEG.test(sen)) corrected = corrected || hits; else voiced = voiced || hits; }
+      // Words that also occur in the teacher's success criteria are topic words; they count for half.
+      for (const sen of parts) { const { hits } = overlap(sen, target); const weight = hits.reduce((n, h) => n + (critWords.has(h) ? 0.5 : 1), 0); const neg = SNEG.test(sen);
+        if (hits.length < 2 || weight < (neg ? Math.max(2, need - 1) : need)) continue;
+        if (neg) corrected = corrected || hits; else voiced = voiced || hits; }
       if (!voiced && !corrected && RETRACT.test(text)) { const { hits } = overlap(text, target); if (hits.length >= 2) corrected = hits; }
       if (corrected && (!voiced || RETRACT.test(text))) out.push({ kind: "misconception-corrected", ref: m.id, strength: "clear", matched: corrected });
       else if (voiced) out.push({ kind: "misconception-voiced", ref: m.id, strength: "clear", matched: voiced }); }

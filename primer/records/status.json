@@ -1,22 +1,23 @@
 {
- "milestone": "Validation round 4: independent evidence evaluator",
- "overall": "incomplete",
- "summary": "43 engine tests and 34 browser checks pass. Three review rounds (two simulated teachers, a cold-build auditor, three simulated students) found blocking and major problems; each was repaired and the students' real replies are replayed as regression tests. An independent evaluator is now judging the contract against the evidence. Word-based matching remains the main weakness.",
+ "milestone": "Blocked: evidence judging needs a language-model provider",
+ "overall": "blocked",
+ "summary": "Teacher authoring, approval, privacy, the three learner phases and traceability work and are covered by 48 engine tests and 34 browser checks. Independent validation (two simulated teachers, a cold auditor, three simulated students, an evidence evaluator) found that feedback cannot reliably tell stating a misconception from rejecting it, or credit correct work phrased in other words. Six repair rounds of word-matching rules reduced but did not remove these errors. Contract commitment C6 (evidence-grounded feedback) is not met. Next step needs a language-model provider, which needs an API key this environment does not have.",
  "works": [
-  "Teacher intake, one-question-at-a-time interview, proposed design with sources, assumptions and suggestions",
-  "Direct edits and natural-language revision, each creating a new version; downstream prompts and scenes regenerate",
-  "Approval states (draft, revised, test-approved, educator-approved, rejected, superseded) enforced at build and at session start",
-  "Student runtime: Preparation, Practice (Roleplay or Teachback, optional 3D cave field work), Feedback with self-assessment, citations and transfer",
-  "Adaptation tied to criteria and evidence; answer-seeking declined; misconceptions probed",
-  "Persistence and resume; export / import; teacher view of sessions, evidence and adaptations",
-  "Two bundled cross-domain sample experiences produced through the authoring steps"
+  "Teacher intake, one-question-at-a-time interview, proposed design with visible sources, assumptions and suggestions",
+  "Direct edits and plain-language revisions; versions, restore, superseding; every fixed character line visible before approval",
+  "Approval states enforced at build, start and during sessions; test approval labelled everywhere; withdrawal and replacement",
+  "Student copy carries no private teacher text",
+  "Preparation with full material, Practice (Roleplay/Teachback, case facts, optional 3D cave field notes), Feedback with self-assessment, quotations, 'not assessed' and transfer",
+  "Answer requests always declined; criteria never answered are not graded",
+  "Session records with evidence and adaptations visible to the teacher; export/import"
  ],
  "remains": [
-  "Results of the student round and the independent evidence evaluator",
+  "BLOCKER: a language-model provider for evidence judging and character replies (needs an API key; see handoff below)",
+  "Contract C6 not met; C2, C4, C5, C7 only partly",
+  "Re-validation of repair 6 by a fresh evaluator",
   "Paper conformance audit (paper not supplied)",
-  "A language-model provider; current matching is word-based and can still miss or over-credit",
   "Validation with real teachers and students (none has happened)",
-  "Accounts, class rosters, class analytics; withdrawal cannot reach files already sent to students"
+  "Class rosters and teacher view of other devices' sessions; recalling files already sent"
  ],
  "decisions": [
   [
@@ -42,40 +43,30 @@
  ],
  "validation": [
   {
-   "role": "Fresh teacher 1 (simulated, statistics brief)",
-   "result": "All steps completed; approval enforced; 2 blocking + 8 major; would not use. Repaired (repair 3).",
+   "role": "Fresh teacher 1 (simulated)",
+   "result": "Approval enforced; 2 blocking + 8 major; would not use. Addressed in repair 3.",
    "record": "records/validation/fresh-teacher-report.md"
   },
   {
    "role": "Fresh teacher 2 (simulated, re-check)",
-   "result": "11 of 21 fixed, 8 partly; new 1 blocking + 4 major; would not use yet. Repaired (repair 4).",
+   "result": "11 of 21 fixed, 8 partly; new 1 blocking + 4 major. Addressed in repair 4.",
    "record": "records/validation/fresh-teacher-recheck.md"
   },
   {
    "role": "Cold-build auditor",
-   "result": "Starts and works end to end; 0 blocking, 5 major; C5 failed as observed. Repaired (repair 4).",
+   "result": "Works end to end; 5 major; C5 failed as observed. Addressed in repair 4.",
    "record": "records/validation/cold-build-audit.md"
   },
   {
-   "role": "Fresh student Maya (diligent, statistics)",
-   "result": "Completed; did the work herself; feedback misattributed quotes and overstated; one follow-up repeated. Repaired (repair 5).",
-   "record": "records/validation/student-maya-report.md"
-  },
-  {
-   "role": "Fresh student Leo (misconceptions, statistics)",
-   "result": "Completed; beliefs were noticed but stating them was recorded as correcting them; a wrong claim was credited. Repaired (repair 5).",
-   "record": "records/validation/student-leo-report.md"
-  },
-  {
-   "role": "Fresh student Sam (answer-seeker, negotiation)",
-   "result": "Never given the answer; character had no case facts; real work not credited. Partly repaired (case facts, negation); value-creating options still not credited in replay.",
-   "record": "records/validation/student-sam-report.md"
+   "role": "Fresh students Maya, Leo, Sam (simulated)",
+   "result": "Never given answers; misconception and evidence errors in feedback. Repair 5 attempted.",
+   "record": "records/validation/"
   },
   {
    "role": "Independent evidence evaluator",
-   "result": "Running.",
-   "record": "records/validation/"
+   "result": "Not ready for students: C6 fails; 2 blocking + 6 major. Repair 6 attempted; replays still show evidence errors; not re-validated.",
+   "record": "records/validation/independent-evaluation.md"
   }
  ],
- "nextMilestone": "Repair findings from independent validation, rerun, then supply the paper for a conformance audit."
+ "nextMilestone": "Add a language-model provider behind src/provider.js (assess, line, reviseDesign) with the deterministic provider as fallback and replay for tests; then rerun the student replays and a fresh evaluator. Needs an API key and a small server or a teacher-supplied key, because GitHub Pages cannot keep a key secret."
 }

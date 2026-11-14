@@ -319,3 +319,31 @@ test("round 3 (Sam): a negative reply to a voiced misconception is a correction;
   assert.equal(s.feedback.misconceptions.find((m) => m.misconceptionId === "m1").status, "corrected");
   const { s: replayed } = await replay("../records/validation/student-sam-session.json", (e) => built(e, "mba-negotiation")); assert.ok(replayed.turns.some((t) => t.kind === "fact"), "Sam's questions now get case facts");
 });
+
+// ---------- regressions from the independent evaluator (independent-evaluation.md) ----------
+async function statsEnv() { const { readFileSync } = await import("node:fs"); const old = JSON.parse(readFileSync(new URL("../records/validation/statistics-experience.primer.json", import.meta.url))).packages[0].design;
+  const env = setup(); const d = env.provider.derive({ ...structuredClone(old), state: "revised", notes: [], materials: old.materials || [] });
+  env.store.put("intakes", { id: d.intakeId, createdAt: d.createdAt, answers: [], materials: d.materials }); env.store.put("designs", d); return { env, pkg: env.authoring.build(env.authoring.approveDesign(d.id, TEST).id) }; }
+test("evaluator B1/B2: a stated misconception is detected and never credited as mastery", async () => {
+  const { env, pkg } = await statsEnv(); const d = pkg.design;
+  const ev = env.provider.assess("since .03 is pretty small, you can say the nap effect is a big, important one", d);
+  assert.ok(ev.some((e) => e.kind === "misconception-voiced" && e.ref === "m2")); assert.ok(!ev.some((e) => e.kind === "criterion"));
+  assert.ok(env.provider.assess("p = .03 means there is a 3% chance the null hypothesis is true, so 97% chance napping works", d).some((e) => e.kind === "misconception-voiced" && e.ref === "m1"));
+  assert.ok(env.provider.assess("No, a small p does not mean a big effect.", d).some((e) => e.kind === "misconception-corrected" && e.ref === "m2"));
+  const cave = author(setup(), "cave-geology").design; assert.ok(!env.provider.assess("Stalactites and stalagmites grow when dripping water loses carbon dioxide and leaves calcite behind.", cave).some((e) => e.kind.startsWith("misconception")), "topic words alone are not a misconception");
+});
+test("evaluator M3: a criterion asked but never answered is not assessed", () => {
+  const env = setup(), pkg = built(env, "mba-negotiation"); let s = env.runtime.start(pkg.id, {}); s = env.runtime.submitPreparation(s.id, PREP); s = env.runtime.endPractice(s.id); s = env.runtime.submitSelfAssessment(s.id, SELF);
+  assert.equal(s.feedback.growth.length, 0); assert.equal(s.feedback.notAssessed.length, pkg.design.criteria.length);
+});
+test("evaluator M4: bare negation words do not earn credit by themselves", async () => {
+  const { env, pkg } = await statsEnv(); const ev = env.provider.assess("No, I don't know, it's not something I've seen.", pkg.design); assert.ok(!ev.some((e) => e.kind === "criterion"), JSON.stringify(ev));
+});
+test("evaluator M5: claiming a question was already covered only works when it is true", () => {
+  const env = setup(), pkg = built(env, "mba-negotiation"); let s = env.runtime.start(pkg.id, {}); s = env.runtime.submitPreparation(s.id, PREP);
+  const idx = s.practice.index; s = env.runtime.say(s.id, "You already asked me that one."); assert.equal(s.practice.index, idx); assert.equal(s.adaptations.at(-1).kind, "redirect");
+});
+test("evaluator M6: withdrawal also stops a session already in progress", () => {
+  const env = setup(), { design } = author(env, "mba-negotiation"); const ok = env.authoring.approveDesign(design.id, TEACHER); const pkg = env.authoring.build(ok.id);
+  let s = env.runtime.start(pkg.id, {}); s = env.runtime.submitPreparation(s.id, PREP); env.authoring.rejectDesign(ok.id, TEACHER, "withdraw"); assert.throws(() => env.runtime.say(s.id, "Ask about their interests first."), /withdrawn/);
+});

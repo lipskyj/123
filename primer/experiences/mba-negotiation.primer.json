@@ -1,24 +1,24 @@
 {
  "packages": [
   {
-   "id": "exp-2b3mwi",
-   "designId": "design-ydl1xj",
+   "id": "exp-vh5qch",
+   "designId": "design-3y6gxr",
    "designVersion": 1,
    "title": "Salary negotiation: interests before positions",
-   "builtAt": "2026-11-14T15:18:58.525Z",
+   "builtAt": "2026-11-14T15:36:14.338Z",
    "provider": "deterministic",
    "approval": {
     "type": "test",
     "by": "Automated test",
-    "at": "2026-11-14T15:18:58.525Z"
+    "at": "2026-11-14T15:36:14.338Z"
    },
    "design": {
-    "id": "design-ydl1xj",
-    "intakeId": "intake-dt27u6",
+    "id": "design-3y6gxr",
+    "intakeId": "intake-x57z91",
     "version": 1,
     "state": "test-approved",
     "supersedes": null,
-    "createdAt": "2026-11-14T15:18:58.524Z",
+    "createdAt": "2026-11-14T15:36:14.337Z",
     "title": "Salary negotiation: interests before positions",
     "template": "roleplay",
     "world": null,
@@ -305,7 +305,7 @@
     "revisions": [],
     "history": [
      {
-      "at": "2026-11-14T15:18:58.525Z",
+      "at": "2026-11-14T15:36:14.338Z",
       "actor": {
        "type": "test",
        "name": "Automated test"

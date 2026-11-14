@@ -6,8 +6,8 @@ Results come from `records/unit-results.txt`, `records/e2e/e2e-results.json` and
 
 | Suite | Command | Result |
 | --- | --- | --- |
-| Engine | `node --test tests/primer.test.mjs` | 25 of 25 pass |
-| Browser | `node tests/e2e.mjs <baseUrl>` | 30 of 30 pass |
+| Engine | `node --test tests/primer.test.mjs` | 48 of 48 pass (includes replays of three simulated students' real replies and regressions for every validation round) |
+| Browser | `node tests/e2e.mjs <baseUrl>` | 34 of 34 pass |
 
 The browser run plays three complete paths on the real pages: a teacher authoring the MBA brief (including a refused empty form, a natural-language revision, a direct edit, approval and build); a strong student in that experience (including a request for the answer and a page reload mid-session); and a weak student in the bundled cave experience using the 3D field site. Transcripts are saved in `records/e2e/`.
 
@@ -24,7 +24,7 @@ In the cave path the 3D render loop is switched off and tools are used through t
 
 ## Independent validation
 
-See `END_TO_END_VALIDATION.md` and `COLD_BUILD_REVIEW.md`.
+See `END_TO_END_VALIDATION.md` and `COLD_BUILD_REVIEW.md`. Passing automated tests do **not** mean the evidence judging is right: the independent evaluator found that contract commitment C6 fails, and replays on the current build still show misattributed evidence. The automated tests check the specific cases found so far, not judgement in general.
 
 ## Not tested
 

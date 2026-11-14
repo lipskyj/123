@@ -41,3 +41,8 @@ ok 40 - round 2 F12: an old version can be restored as a new draft
 ok 41 - round 3 (Maya): follow-ups vary, 'already asked' moves on, correct answers are not filed as misconceptions
 ok 42 - round 3 (Leo): stating a misconception is never recorded as correcting it, and is not credited as understanding
 ok 43 - round 3 (Sam): a negative reply to a voiced misconception is a correction; questions get case facts
+ok 44 - evaluator B1/B2: a stated misconception is detected and never credited as mastery
+ok 45 - evaluator M3: a criterion asked but never answered is not assessed
+ok 46 - evaluator M4: bare negation words do not earn credit by themselves
+ok 47 - evaluator M5: claiming a question was already covered only works when it is true
+ok 48 - evaluator M6: withdrawal also stops a session already in progress

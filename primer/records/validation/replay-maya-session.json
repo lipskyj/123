@@ -350,7 +350,7 @@
   "revisions": [],
   "history": [
    {
-    "at": "2026-11-14T15:19:49.662Z",
+    "at": "2026-11-14T15:36:52.896Z",
     "actor": {
      "type": "test",
      "name": "Automated test"
@@ -486,12 +486,12 @@
   }
  },
  "session": {
-  "id": "session-eezpjg",
+  "id": "session-1wq25j8",
   "packageId": "exp-1nktad5",
   "learner": {
    "name": "Maya (replay)"
   },
-  "startedAt": "2026-11-14T15:19:49.664Z",
+  "startedAt": "2026-11-14T15:36:52.897Z",
   "phase": "ended",
   "classroomApproved": false,
   "turns": [
@@ -500,7 +500,7 @@
     "who": "primer",
     "text": "Before you start: in one sentence, what do you think p = .03 tells you about the nap study?",
     "phase": "preparation",
-    "at": "2026-11-14T15:19:49.664Z",
+    "at": "2026-11-14T15:36:52.897Z",
     "kind": "activation"
    },
    {
@@ -508,7 +508,7 @@
     "who": "learner",
     "text": "I think it means that if napping actually did nothing, a difference this big would only happen about 3% of the time by chance, so the result is significant.",
     "phase": "preparation",
-    "at": "2026-11-14T15:19:49.664Z",
+    "at": "2026-11-14T15:36:52.897Z",
     "kind": "activation-answer"
    },
    {
@@ -516,7 +516,7 @@
     "who": "primer",
     "text": "Apart from the p-value, what else would you want to know before saying napping 'works'?",
     "phase": "preparation",
-    "at": "2026-11-14T15:19:49.665Z",
+    "at": "2026-11-14T15:36:52.899Z",
     "kind": "activation"
    },
    {
@@ -524,7 +524,7 @@
     "who": "learner",
     "text": "How big the difference actually is, like the effect size, and maybe the confidence interval. Also it was only 40 students so I would want to see if it replicates.",
     "phase": "preparation",
-    "at": "2026-11-14T15:19:49.665Z",
+    "at": "2026-11-14T15:36:52.899Z",
     "kind": "activation-answer"
    },
    {
@@ -532,7 +532,7 @@
     "who": "character",
     "text": "Hi, I'm Jordan. I missed the stats lecture and I have to write up the nap study by tomorrow. The output says p = .03. I was going to write 'there's only a 3% chance the result is a fluke', but someone said that's not quite right.",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.666Z",
+    "at": "2026-11-14T15:36:52.900Z",
     "kind": "opening"
    },
    {
@@ -540,7 +540,7 @@
     "who": "character",
     "text": "So what does p = .03 actually mean? What is the 3% a percentage of?",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.666Z",
+    "at": "2026-11-14T15:36:52.901Z",
     "kind": "prompt",
     "criterionId": "c1"
    },
@@ -549,7 +549,7 @@
     "who": "learner",
     "text": "It's not the chance the result is a fluke. It's like, if napping really made no difference at all, you'd only get a gap this big between the groups about 3 times out of 100 just from random sampling. So the 3% is assuming the null is true.",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.667Z",
+    "at": "2026-11-14T15:36:52.901Z",
     "kind": "practice",
     "criterionId": "c1"
    },
@@ -558,7 +558,7 @@
     "who": "character",
     "text": "Okay, I think I follow. But suppose someone disagreed with you. What would you say to convince them?",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.668Z",
+    "at": "2026-11-14T15:36:52.903Z",
     "kind": "raise",
     "criterionId": "c1"
    },
@@ -567,7 +567,7 @@
     "who": "learner",
     "text": "Um, I guess I'd say the test starts by assuming there's no effect, so it can't then tell you how likely that assumption is. It only tells you how surprising our data would be if the assumption was true.",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.668Z",
+    "at": "2026-11-14T15:36:52.903Z",
     "kind": "practice",
     "criterionId": "c1"
    },
@@ -576,7 +576,7 @@
     "who": "character",
     "text": "Wait, I read somewhere that there's only a 3% chance the null hypothesis is true, so a 97% chance that napping really works. Is that right?",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.669Z",
+    "at": "2026-11-14T15:36:52.904Z",
     "kind": "probe-voice",
     "misconceptionId": "m1"
    },
@@ -585,7 +585,7 @@
     "who": "learner",
     "text": "Because to know how likely napping does nothing you'd need extra info the test doesn't use, like how believable the effect was before the study even happened. The reading said that. The test just takes the null as given and asks about the data.",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.669Z",
+    "at": "2026-11-14T15:36:52.904Z",
     "kind": "practice",
     "criterionId": "c2"
    },
@@ -594,7 +594,7 @@
     "who": "character",
     "text": "Fine, but .03 is a really small number, so the nap effect must be huge, right? Can I write that napping has a big effect on memory?",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.670Z",
+    "at": "2026-11-14T15:36:52.905Z",
     "kind": "prompt",
     "criterionId": "c3"
    },
@@ -603,145 +603,136 @@
     "who": "learner",
     "text": "You already asked me that one. I'd say the same thing really, p is about the data assuming the null, not about the null itself. Did you want to talk about whether the effect is actually big?",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.670Z",
+    "at": "2026-11-14T15:36:52.905Z",
     "kind": "practice",
     "criterionId": "c3"
    },
    {
     "id": "t14",
     "who": "character",
-    "text": "Sorry, you're right, you did. Let's move on.",
+    "text": "I don't think we've covered this one yet. What do you think?",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.670Z",
-    "kind": "move-on",
+    "at": "2026-11-14T15:36:52.906Z",
+    "kind": "redirect",
     "criterionId": "c3"
    },
    {
     "id": "t15",
+    "who": "learner",
+    "text": "No, a small p doesn't mean a big effect. With a huge sample even a tiny difference can get a tiny p. You'd have to look at the effect size, here it's 2.2 words and Cohen's d about 0.7, which I think is medium to large-ish but I'm not totally sure on the cutoffs.",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.906Z",
+    "kind": "practice",
+    "criterionId": "c3"
+   },
+   {
+    "id": "t16",
+    "who": "character",
+    "text": "Could you put that in one sentence I could write down?",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.906Z",
+    "kind": "raise",
+    "criterionId": "c3"
+   },
+   {
+    "id": "t17",
+    "who": "learner",
+    "text": "I'd point them to the confidence interval too. It goes from 0.2 to 4.2 words, so the real effect could be pretty tiny or quite big, we're not that sure. So I wouldn't write 'big effect', more like there's a difference but the size is uncertain.",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.906Z",
+    "kind": "practice",
+    "criterionId": "c3"
+   },
+   {
+    "id": "t18",
     "who": "character",
     "text": "And if it had come out as p = .20, I'd just write that napping does nothing, yeah?",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.670Z",
+    "at": "2026-11-14T15:36:52.907Z",
     "kind": "prompt",
     "criterionId": "c4"
    },
    {
-    "id": "t16",
-    "who": "learner",
-    "text": "No, a small p doesn't mean a big effect. With a huge sample even a tiny difference can get a tiny p. You'd have to look at the effect size, here it's 2.2 words and Cohen's d about 0.7, which I think is medium to large-ish but I'm not totally sure on the cutoffs.",
-    "phase": "practice",
-    "at": "2026-11-14T15:19:49.671Z",
-    "kind": "practice",
-    "criterionId": "c4"
-   },
-   {
-    "id": "t17",
-    "who": "character",
-    "text": "Oh, that's useful, it answers something I was going to ask. And if it had come out as p = .20, I'd just write that napping does nothing, yeah?",
-    "phase": "practice",
-    "at": "2026-11-14T15:19:49.672Z",
-    "kind": "ack",
-    "criterionId": "c4"
-   },
-   {
-    "id": "t18",
-    "who": "learner",
-    "text": "I'd point them to the confidence interval too. It goes from 0.2 to 4.2 words, so the real effect could be pretty tiny or quite big, we're not that sure. So I wouldn't write 'big effect', more like there's a difference but the size is uncertain.",
-    "phase": "practice",
-    "at": "2026-11-14T15:19:49.672Z",
-    "kind": "practice",
-    "criterionId": "c4"
-   },
-   {
     "id": "t19",
-    "who": "character",
-    "text": "Oh, that's useful, it answers something I was going to ask. And if it had come out as p = .20, I'd just write that napping does nothing, yeah?",
+    "who": "learner",
+    "text": "No, a non-significant p doesn't prove there's no effect. With only 40 people the study might not have enough power to pick up a real difference. Absence of evidence isn't evidence of absence, so you'd just say you didn't find a significant difference.",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.672Z",
-    "kind": "ack",
+    "at": "2026-11-14T15:36:52.907Z",
+    "kind": "practice",
     "criterionId": "c4"
    },
    {
     "id": "t20",
-    "who": "learner",
-    "text": "No, a non-significant p doesn't prove there's no effect. With only 40 people the study might not have enough power to pick up a real difference. Absence of evidence isn't evidence of absence, so you'd just say you didn't find a significant difference.",
-    "phase": "practice",
-    "at": "2026-11-14T15:19:49.672Z",
-    "kind": "practice",
-    "criterionId": "c4"
-   },
-   {
-    "id": "t21",
     "who": "character",
     "text": "What would happen if that weren't the case?",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.672Z",
+    "at": "2026-11-14T15:36:52.907Z",
     "kind": "raise",
     "criterionId": "c4"
    },
    {
-    "id": "t22",
+    "id": "t21",
     "who": "learner",
     "text": "Honestly I think I've covered it. For your report just say what you found, how big it was and how sure you can be. Good luck with it!",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.673Z",
+    "at": "2026-11-14T15:36:52.907Z",
     "kind": "practice",
     "criterionId": "c4"
    },
    {
-    "id": "t23",
+    "id": "t22",
     "who": "character",
     "text": "Thank you. I think I could explain some of this to someone else now.",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.673Z",
+    "at": "2026-11-14T15:36:52.908Z",
     "kind": "closing"
    },
    {
-    "id": "t24",
+    "id": "t23",
     "who": "primer",
     "text": "Before you see any feedback: how do you think that went? Which moment are you most satisfied with?",
     "phase": "feedback",
-    "at": "2026-11-14T15:19:49.673Z",
+    "at": "2026-11-14T15:36:52.908Z",
     "kind": "self-assessment"
    },
    {
-    "id": "t25",
+    "id": "t24",
     "who": "learner",
     "text": "I think it went okay. I was happiest with explaining the 3% is about the data if the null is true, not the chance it is a fluke. Jordan kept asking the same question though so it got a bit repetitive.",
     "phase": "feedback",
-    "at": "2026-11-14T15:19:49.673Z",
+    "at": "2026-11-14T15:36:52.908Z",
     "kind": "self-assessment-answer"
    },
    {
-    "id": "t26",
+    "id": "t25",
     "who": "primer",
     "text": "What would you do differently if you did it again?",
     "phase": "feedback",
-    "at": "2026-11-14T15:19:49.673Z",
+    "at": "2026-11-14T15:36:52.908Z",
     "kind": "self-assessment"
    },
    {
-    "id": "t27",
+    "id": "t26",
     "who": "learner",
     "text": "I would explain the confidence interval more clearly and maybe check the Cohen d cutoffs before saying medium or large. I was a bit vague there.",
     "phase": "feedback",
-    "at": "2026-11-14T15:19:49.673Z",
+    "at": "2026-11-14T15:36:52.908Z",
     "kind": "self-assessment-answer"
    },
    {
-    "id": "t28",
+    "id": "t27",
     "who": "primer",
     "text": "A different situation: a newspaper headline says a new revision app 'significantly improves exam scores (p = .04)' in a study of 6,000 pupils, and a friend asks whether they should pay for it. What from this session would you use there, and what would you change?",
     "phase": "feedback",
-    "at": "2026-11-14T15:19:49.674Z",
+    "at": "2026-11-14T15:36:52.909Z",
     "kind": "transfer"
    },
    {
-    "id": "t29",
+    "id": "t28",
     "who": "learner",
     "text": "With 6,000 pupils even a really tiny improvement could come out significant, so p = .04 does not tell you if it is worth paying for. I would want to know how many marks it actually improves scores by and the confidence interval. I would also check who ran the study, I guess, since that is not really from this session.",
     "phase": "feedback",
-    "at": "2026-11-14T15:19:49.674Z",
+    "at": "2026-11-14T15:36:52.909Z",
     "kind": "transfer-answer"
    }
   ],
@@ -750,37 +741,53 @@
     "id": "e1",
     "type": "session-started",
     "phase": "preparation",
-    "at": "2026-11-14T15:19:49.664Z",
+    "at": "2026-11-14T15:36:52.897Z",
     "approval": {
      "type": "test",
      "by": "Automated test",
-     "at": "2026-11-14T15:19:49.662Z"
+     "at": "2026-11-14T15:36:52.896Z"
     }
    },
    {
     "id": "e2",
     "type": "phase",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.666Z",
+    "at": "2026-11-14T15:36:52.900Z",
     "to": "practice"
    },
    {
     "id": "e3",
     "type": "phase",
     "phase": "feedback",
-    "at": "2026-11-14T15:19:49.673Z",
+    "at": "2026-11-14T15:36:52.908Z",
     "to": "feedback"
    },
    {
     "id": "e4",
     "type": "session-ended",
     "phase": "ended",
-    "at": "2026-11-14T15:19:49.674Z"
+    "at": "2026-11-14T15:36:52.909Z"
    }
   ],
   "evidence": [
    {
     "id": "ev1",
+    "kind": "misconception-voiced",
+    "ref": "m2",
+    "turnId": "t2",
+    "phase": "preparation",
+    "quote": "I think it means that if napping actually did nothing, a difference this big would only happen about 3% of the time by chance, so the result is significant.",
+    "strength": "clear",
+    "matched": [
+     "big",
+     "napp",
+     "noth"
+    ],
+    "basis": "observed",
+    "promptedFor": null
+   },
+   {
+    "id": "ev2",
     "kind": "prior-knowledge",
     "ref": "c3",
     "turnId": "t4",
@@ -799,7 +806,7 @@
     "promptedFor": null
    },
    {
-    "id": "ev2",
+    "id": "ev3",
     "kind": "criterion",
     "ref": "c1",
     "turnId": "t7",
@@ -818,7 +825,22 @@
     "promptedFor": "c1"
    },
    {
-    "id": "ev3",
+    "id": "ev4",
+    "kind": "misconception-corrected",
+    "ref": "m2",
+    "turnId": "t7",
+    "phase": "practice",
+    "quote": "It's not the chance the result is a fluke. It's like, if napping really made no difference at all, you'd only get a gap this big between the groups about 3 times out of 100 just from random sampling. So the 3% is assuming the null is true.",
+    "strength": "clear",
+    "matched": [
+     "big",
+     "napp"
+    ],
+    "basis": "observed",
+    "promptedFor": "c1"
+   },
+   {
+    "id": "ev5",
     "kind": "criterion",
     "ref": "c1",
     "turnId": "t9",
@@ -834,7 +856,7 @@
     "promptedFor": "c1"
    },
    {
-    "id": "ev4",
+    "id": "ev6",
     "kind": "criterion",
     "ref": "c2",
     "turnId": "t11",
@@ -850,19 +872,35 @@
     "promptedFor": "c2"
    },
    {
-    "id": "ev5",
+    "id": "ev7",
     "kind": "misconception-corrected",
+    "ref": "m2",
+    "turnId": "t11",
+    "phase": "practice",
+    "quote": "Because to know how likely napping does nothing you'd need extra info the test doesn't use, like how believable the effect was before the study even happened. The reading said that. The test just takes the null as given and asks about the data.",
+    "strength": "clear",
+    "matched": [
+     "effect",
+     "napp",
+     "noth"
+    ],
+    "basis": "observed",
+    "promptedFor": "c2"
+   },
+   {
+    "id": "ev8",
+    "kind": "misconception-unaddressed",
     "ref": "m1",
     "turnId": "t11",
     "phase": "practice",
     "quote": "Because to know how likely napping does nothing you'd need extra info the test doesn't use, like how believable the effect was before the study even happened. The reading said that. The test just…",
-    "strength": "partial",
+    "strength": "clear",
     "matched": [],
     "basis": "observed",
     "promptedFor": null
    },
    {
-    "id": "ev6",
+    "id": "ev9",
     "kind": "criterion",
     "ref": "c1",
     "turnId": "t13",
@@ -878,26 +916,10 @@
     "promptedFor": "c3"
    },
    {
-    "id": "ev7",
-    "kind": "criterion",
-    "ref": "c2",
-    "turnId": "t16",
-    "phase": "practice",
-    "quote": "No, a small p doesn't mean a big effect. With a huge sample even a tiny difference can get a tiny p. You'd have to look at the effect size, here it's 2.2 words and Cohen's d about 0.7, which I think is medium to large-ish but I'm not totally sure on the cutoffs.",
-    "strength": "partial",
-    "matched": [
-     "not",
-     "doesn't",
-     "no"
-    ],
-    "basis": "observed",
-    "promptedFor": "c4"
-   },
-   {
-    "id": "ev8",
+    "id": "ev10",
     "kind": "criterion",
     "ref": "c3",
-    "turnId": "t16",
+    "turnId": "t15",
     "phase": "practice",
     "quote": "No, a small p doesn't mean a big effect. With a huge sample even a tiny difference can get a tiny p. You'd have to look at the effect size, here it's 2.2 words and Cohen's d about 0.7, which I think is medium to large-ish but I'm not totally sure on the cutoffs.",
     "strength": "clear",
@@ -911,13 +933,29 @@
      "0.7"
     ],
     "basis": "observed",
-    "promptedFor": "c4"
+    "promptedFor": "c3"
    },
    {
-    "id": "ev9",
+    "id": "ev11",
+    "kind": "misconception-corrected",
+    "ref": "m2",
+    "turnId": "t15",
+    "phase": "practice",
+    "quote": "No, a small p doesn't mean a big effect. With a huge sample even a tiny difference can get a tiny p. You'd have to look at the effect size, here it's 2.2 words and Cohen's d about 0.7, which I think is medium to large-ish but I'm not totally sure on the cutoffs.",
+    "strength": "clear",
+    "matched": [
+     "small",
+     "big",
+     "effect"
+    ],
+    "basis": "observed",
+    "promptedFor": "c3"
+   },
+   {
+    "id": "ev12",
     "kind": "criterion",
     "ref": "c3",
-    "turnId": "t18",
+    "turnId": "t17",
     "phase": "practice",
     "quote": "I'd point them to the confidence interval too. It goes from 0.2 to 4.2 words, so the real effect could be pretty tiny or quite big, we're not that sure. So I wouldn't write 'big effect', more like there's a difference but the size is uncertain.",
     "strength": "clear",
@@ -929,30 +967,13 @@
      "interval"
     ],
     "basis": "observed",
-    "promptedFor": "c4"
+    "promptedFor": "c3"
    },
    {
-    "id": "ev10",
-    "kind": "criterion",
-    "ref": "c2",
-    "turnId": "t20",
-    "phase": "practice",
-    "quote": "No, a non-significant p doesn't prove there's no effect. With only 40 people the study might not have enough power to pick up a real difference. Absence of evidence isn't evidence of absence, so you'd just say you didn't find a significant difference.",
-    "strength": "clear",
-    "matched": [
-     "not",
-     "doesn't",
-     "isn't",
-     "no"
-    ],
-    "basis": "observed",
-    "promptedFor": "c4"
-   },
-   {
-    "id": "ev11",
+    "id": "ev13",
     "kind": "criterion",
     "ref": "c4",
-    "turnId": "t20",
+    "turnId": "t19",
     "phase": "practice",
     "quote": "No, a non-significant p doesn't prove there's no effect. With only 40 people the study might not have enough power to pick up a real difference. Absence of evidence isn't evidence of absence, so you'd just say you didn't find a significant difference.",
     "strength": "clear",
@@ -975,75 +996,62 @@
     "turnId": "t7",
     "reason": "Learner showed evidence for this criterion, so the character raised the challenge within the same goal.",
     "evidenceIds": [
-     "ev2"
+     "ev3"
     ],
     "goalRef": "c1",
-    "at": "2026-11-14T15:19:49.668Z"
+    "at": "2026-11-14T15:36:52.902Z"
    },
    {
     "id": "a2",
-    "kind": "move-on",
+    "kind": "redirect",
     "turnId": "t13",
-    "reason": "Learner said the question had already been covered; the character moved on.",
-    "evidenceIds": [
-     "ev6"
-    ],
+    "reason": "Learner said the question had been covered, but it had not been asked or answered before; the character kept the question.",
+    "evidenceIds": [],
     "goalRef": "c3",
-    "at": "2026-11-14T15:19:49.670Z"
+    "at": "2026-11-14T15:36:52.906Z"
    },
    {
     "id": "a3",
-    "kind": "acknowledge",
-    "turnId": "t16",
-    "reason": "Learner showed evidence for a different criterion; the character acknowledged it and returned to the current question.",
+    "kind": "raise",
+    "turnId": "t15",
+    "reason": "Learner showed evidence for this criterion, so the character raised the challenge within the same goal.",
     "evidenceIds": [
-     "ev7"
+     "ev10"
     ],
-    "goalRef": "c2",
-    "at": "2026-11-14T15:19:49.672Z"
+    "goalRef": "c3",
+    "at": "2026-11-14T15:36:52.906Z"
    },
    {
     "id": "a4",
-    "kind": "acknowledge",
-    "turnId": "t18",
-    "reason": "Learner showed evidence for a different criterion; the character acknowledged it and returned to the current question.",
-    "evidenceIds": [
-     "ev9"
-    ],
-    "goalRef": "c3",
-    "at": "2026-11-14T15:19:49.672Z"
-   },
-   {
-    "id": "a5",
     "kind": "raise",
-    "turnId": "t20",
+    "turnId": "t19",
     "reason": "Learner showed evidence for this criterion, so the character raised the challenge within the same goal.",
     "evidenceIds": [
-     "ev11"
+     "ev13"
     ],
     "goalRef": "c4",
-    "at": "2026-11-14T15:19:49.672Z"
+    "at": "2026-11-14T15:36:52.907Z"
    }
   ],
   "journal": [
    {
     "phase": "preparation",
-    "at": "2026-11-14T15:19:49.666Z",
+    "at": "2026-11-14T15:36:52.900Z",
     "text": "Preparation: learner answered 2 activation question(s)."
    },
    {
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.673Z",
+    "at": "2026-11-14T15:36:52.908Z",
     "text": "Practice ended after 8 learner turn(s)."
    },
    {
     "phase": "feedback",
-    "at": "2026-11-14T15:19:49.674Z",
+    "at": "2026-11-14T15:36:52.908Z",
     "text": "Feedback: 4 strength(s), 0 growth area(s), 0 not assessed."
    },
    {
     "phase": "ended",
-    "at": "2026-11-14T15:19:49.674Z",
+    "at": "2026-11-14T15:36:52.909Z",
     "text": "Session ended."
    }
   ],
@@ -1052,12 +1060,13 @@
    "attempts": 0,
    "raised": {
     "c1": true,
+    "c3": true,
     "c4": true
    },
    "prompted": {
     "c1": "t6",
     "c3": "t12",
-    "c4": "t15"
+    "c4": "t18"
    },
    "probed": {
     "m1": "voiced"
@@ -1071,16 +1080,16 @@
    {
     "question": "Before you see any feedback: how do you think that went? Which moment are you most satisfied with?",
     "answer": "I think it went okay. I was happiest with explaining the 3% is about the data if the null is true, not the chance it is a fluke. Jordan kept asking the same question though so it got a bit repetitive.",
-    "turnId": "t25"
+    "turnId": "t24"
    },
    {
     "question": "What would you do differently if you did it again?",
     "answer": "I would explain the confidence interval more clearly and maybe check the Cohen d cutoffs before saying medium or large. I was a bit vague there.",
-    "turnId": "t27"
+    "turnId": "t26"
    }
   ],
   "feedback": {
-   "generatedAt": "2026-11-14T15:19:49.673Z",
+   "generatedAt": "2026-11-14T15:36:52.908Z",
    "goal": "Students can correctly interpret a p-value from a two-group comparison in plain language, and can explain what it does and does not tell us",
    "strengths": [
     {
@@ -1120,21 +1129,9 @@
        "phase": "practice",
        "where": "in the conversation",
        "quote": "Because to know how likely napping does nothing you'd need extra info the test doesn't use, like how believable the effect was before the study even happened. The reading said that. The test just takes the null as given and asks about the data."
-      },
-      {
-       "turnId": "t16",
-       "phase": "practice",
-       "where": "in the conversation",
-       "quote": "No, a small p doesn't mean a big effect. With a huge sample even a tiny difference can get a tiny p. You'd have to look at the effect size, here it's 2.2 words and Cohen's d about 0.7, which I think is medium to large-ish but I'm not totally sure on the cutoffs."
-      },
-      {
-       "turnId": "t20",
-       "phase": "practice",
-       "where": "in the conversation",
-       "quote": "No, a non-significant p doesn't prove there's no effect. With only 40 people the study might not have enough power to pick up a real difference. Absence of evidence isn't evidence of absence, so you'd just say you didn't find a significant difference."
       }
      ],
-     "inference": "Inference: this looks secure.",
+     "inference": "Inference: this is developing; the idea is there but not yet fully worked out.",
      "basis": "observed"
     },
     {
@@ -1143,19 +1140,19 @@
      "observation": "You addressed this in your own words in the conversation.",
      "citations": [
       {
-       "turnId": "t16",
+       "turnId": "t15",
        "phase": "practice",
        "where": "in the conversation",
        "quote": "No, a small p doesn't mean a big effect. With a huge sample even a tiny difference can get a tiny p. You'd have to look at the effect size, here it's 2.2 words and Cohen's d about 0.7, which I think is medium to large-ish but I'm not totally sure on the cutoffs."
       },
       {
-       "turnId": "t18",
+       "turnId": "t17",
        "phase": "practice",
        "where": "in the conversation",
        "quote": "I'd point them to the confidence interval too. It goes from 0.2 to 4.2 words, so the real effect could be pretty tiny or quite big, we're not that sure. So I wouldn't write 'big effect', more like there's a difference but the size is uncertain."
       }
      ],
-     "inference": "Inference: this looks secure.",
+     "inference": "Inference: this looks secure. When you were challenged on it, you backed it up.",
      "basis": "observed"
     },
     {
@@ -1164,7 +1161,7 @@
      "observation": "You addressed this in your own words in the conversation.",
      "citations": [
       {
-       "turnId": "t20",
+       "turnId": "t19",
        "phase": "practice",
        "where": "in the conversation",
        "quote": "No, a non-significant p doesn't prove there's no effect. With only 40 people the study might not have enough power to pick up a real difference. Absence of evidence isn't evidence of absence, so you'd just say you didn't find a significant difference."
@@ -1180,13 +1177,33 @@
     {
      "misconceptionId": "m1",
      "misconception": "there's only a 3% chance the null hypothesis is true, so a 97% chance that napping really works",
-     "status": "corrected",
+     "status": "left unchallenged",
      "citations": [
       {
        "turnId": "t11",
        "phase": "practice",
        "where": "in the conversation",
        "quote": "Because to know how likely napping does nothing you'd need extra info the test doesn't use, like how believable the effect was before the study even happened. The reading said that. The test just…"
+      }
+     ],
+     "note": "The character suggested this idea and your reply did not correct it."
+    },
+    {
+     "misconceptionId": "m2",
+     "misconception": "a smaller p-value means a bigger, more important effect, and a p-value above .05 would prove napping does nothing",
+     "status": "corrected",
+     "citations": [
+      {
+       "turnId": "t11",
+       "phase": "practice",
+       "where": "in the conversation",
+       "quote": "Because to know how likely napping does nothing you'd need extra info the test doesn't use, like how believable the effect was before the study even happened. The reading said that. The test just takes the null as given and asks about the data."
+      },
+      {
+       "turnId": "t15",
+       "phase": "practice",
+       "where": "in the conversation",
+       "quote": "No, a small p doesn't mean a big effect. With a huge sample even a tiny difference can get a tiny p. You'd have to look at the effect size, here it's 2.2 words and Cohen's d about 0.7, which I think is medium to large-ish but I'm not totally sure on the cutoffs."
       }
      ],
      "note": "You pushed back on this idea."
@@ -1201,46 +1218,41 @@
      "turnId": "t7"
     },
     {
-     "kind": "move-on",
+     "kind": "redirect",
      "goalRef": "c3",
-     "reason": "Learner said the question had already been covered; the character moved on.",
+     "reason": "Learner said the question had been covered, but it had not been asked or answered before; the character kept the question.",
      "turnId": "t13"
     },
     {
-     "kind": "acknowledge",
-     "goalRef": "c2",
-     "reason": "Learner showed evidence for a different criterion; the character acknowledged it and returned to the current question.",
-     "turnId": "t16"
-    },
-    {
-     "kind": "acknowledge",
+     "kind": "raise",
      "goalRef": "c3",
-     "reason": "Learner showed evidence for a different criterion; the character acknowledged it and returned to the current question.",
-     "turnId": "t18"
+     "reason": "Learner showed evidence for this criterion, so the character raised the challenge within the same goal.",
+     "turnId": "t15"
     },
     {
      "kind": "raise",
      "goalRef": "c4",
      "reason": "Learner showed evidence for this criterion, so the character raised the challenge within the same goal.",
-     "turnId": "t20"
+     "turnId": "t19"
     }
    ],
-   "effortNote": "",
+   "effortNote": "You asked to be given the answer 1 time. The character did not give it, so everything quoted here is your own work.",
    "nextActions": [
-    "Your own next step: \"I would explain the confidence interval more clearly and maybe check the Cohen d cutoffs before saying medium or large. I was a bit vague there.\""
+    "Your own next step: \"I would explain the confidence interval more clearly and maybe check the Cohen d cutoffs before saying medium or large. I was a bit vague there.\"",
+    "Test this idea against your materials: \"there's only a 3% chance the null hypothesis is true, so a 97% chance that napping really works\". What evidence would show it is wrong?"
    ],
    "transferQuestion": "A different situation: a newspaper headline says a new revision app 'significantly improves exam scores (p = .04)' in a study of 6,000 pupils, and a friend asks whether they should pay for it. What from this session would you use there, and what would you change?",
    "limits": "Feedback is based only on what you wrote in this session. It was produced by matching your words against your teacher's criteria, not by a human reading them."
   },
   "transfer": {
-   "turnId": "t29",
+   "turnId": "t28",
    "answer": "With 6,000 pupils even a really tiny improvement could come out significant, so p = .04 does not tell you if it is worth paying for. I would want to know how many marks it actually improves scores by and the confidence interval. I would also check who ran the study, I guess, since that is not really from this session.",
    "criteriaEchoed": [
     "c3"
    ],
    "note": "Observation: your answer uses ideas from this session: separates statistical significance from the size or importance of the effect, and refers to the effect size or confidence interval."
   },
-  "updatedAt": "2026-11-14T15:19:49.674Z",
-  "endedAt": "2026-11-14T15:19:49.674Z"
+  "updatedAt": "2026-11-14T15:36:52.909Z",
+  "endedAt": "2026-11-14T15:36:52.909Z"
  }
 }

@@ -5,12 +5,12 @@
    "designId": "design-1moz80l",
    "designVersion": 40,
    "title": "What a p-value does and does not tell you",
-   "builtAt": "2026-11-14T15:18:58.571Z",
+   "builtAt": "2026-11-14T15:36:14.381Z",
    "provider": "deterministic",
    "approval": {
     "type": "test",
     "by": "Builder (test approval for validation)",
-    "at": "2026-11-14T15:18:58.570Z"
+    "at": "2026-11-14T15:36:14.381Z"
    },
    "design": {
     "id": "design-1moz80l",
@@ -362,7 +362,7 @@
     "revisions": [],
     "history": [
      {
-      "at": "2026-11-14T15:18:58.570Z",
+      "at": "2026-11-14T15:36:14.381Z",
       "actor": {
        "type": "test",
        "name": "Builder (test approval for validation)"

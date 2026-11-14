@@ -43,6 +43,16 @@ node tools/build-status.mjs                       # regenerate BUILD_STATUS.html
 | `docs/` | Contract, design, traceability and test documentation |
 | `BUILD_STATUS.html` | Operator dashboard |
 
+## Status
+
+**Blocked, not complete.** The teacher workflow, approval, privacy, the three learner phases and traceability work. Feedback is not yet trustworthy: an independent evaluation found that it can mistake stating a misconception for rejecting it, and miss correct work phrased in unexpected words (see `docs/END_TO_END_VALIDATION.md`). Do not use it with real students yet.
+
+### To resume
+
+1. Add a language-model provider in `src/provider.js` implementing `assess`, `line` and `reviseDesign` (keep `DeterministicProvider` as the fallback and `ReplayProvider` for tests). The runtime and authoring code call the provider synchronously today, so they need to become async.
+2. Provide an API key. GitHub Pages cannot keep a key secret, so either run a small server that holds the key or let each teacher paste their own key into the browser.
+3. Rerun `node tools/replay-sessions.mjs` and the engine and browser tests, then a fresh independent evaluator using `records/validation/` as evidence.
+
 ## Limits you should know about
 
 - **No language model.** Responses come from a rule-based provider that matches a student's words against the teacher's criteria. It is predictable and private, and it is also literal: it can miss a correct answer phrased in unexpected words. See `docs/SYSTEM_DESIGN.md`.

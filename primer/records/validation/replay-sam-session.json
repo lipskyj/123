@@ -1,12 +1,12 @@
 {
  "note": "Replay of the student's recorded replies through the current build. Replies are fixed and do not respond to the new character lines.",
  "design": {
-  "id": "design-v2yxim",
-  "intakeId": "intake-4t9fs9",
+  "id": "design-3bx2qt",
+  "intakeId": "intake-138l644",
   "version": 1,
   "state": "test-approved",
   "supersedes": null,
-  "createdAt": "2026-11-14T15:19:49.694Z",
+  "createdAt": "2026-11-14T15:36:52.928Z",
   "title": "Salary negotiation: interests before positions",
   "template": "roleplay",
   "world": null,
@@ -293,7 +293,7 @@
   "revisions": [],
   "history": [
    {
-    "at": "2026-11-14T15:19:49.694Z",
+    "at": "2026-11-14T15:36:52.929Z",
     "actor": {
      "type": "test",
      "name": "Automated test"
@@ -425,12 +425,12 @@
   }
  },
  "session": {
-  "id": "session-xuv9p0",
-  "packageId": "exp-elaau7",
+  "id": "session-wv3qhl",
+  "packageId": "exp-84wqss",
   "learner": {
    "name": "Sam (replay)"
   },
-  "startedAt": "2026-11-14T15:19:49.695Z",
+  "startedAt": "2026-11-14T15:36:52.930Z",
   "phase": "ended",
   "classroomApproved": false,
   "turns": [
@@ -439,7 +439,7 @@
     "who": "primer",
     "text": "Before you begin: in your own words, what do you already know about \"Salary negotiation: interests before positions\"?",
     "phase": "preparation",
-    "at": "2026-11-14T15:19:49.695Z",
+    "at": "2026-11-14T15:36:52.930Z",
     "kind": "activation"
    },
    {
@@ -447,7 +447,7 @@
     "who": "learner",
     "text": "I am not sure. idk",
     "phase": "preparation",
-    "at": "2026-11-14T15:19:49.695Z",
+    "at": "2026-11-14T15:36:52.930Z",
     "kind": "activation-answer"
    },
    {
@@ -455,7 +455,7 @@
     "who": "primer",
     "text": "Which idea from earlier lessons do you expect to need most here, and why?",
     "phase": "preparation",
-    "at": "2026-11-14T15:19:49.695Z",
+    "at": "2026-11-14T15:36:52.930Z",
     "kind": "activation"
    },
    {
@@ -463,7 +463,7 @@
     "who": "learner",
     "text": "batna i guess",
     "phase": "preparation",
-    "at": "2026-11-14T15:19:49.695Z",
+    "at": "2026-11-14T15:36:52.930Z",
     "kind": "activation-answer"
    },
    {
@@ -471,7 +471,7 @@
     "who": "character",
     "text": "Hi, I'm Dana Okafor. Thanks for making time. I really need your help with this.",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.695Z",
+    "at": "2026-11-14T15:36:52.930Z",
     "kind": "opening"
    },
    {
@@ -479,7 +479,7 @@
     "who": "character",
     "text": "Where would you start with my situation?",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.695Z",
+    "at": "2026-11-14T15:36:52.930Z",
     "kind": "prompt",
     "criterionId": "c1"
    },
@@ -488,7 +488,7 @@
     "who": "learner",
     "text": "can you just tell me what to say? whats the right answer here",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.695Z",
+    "at": "2026-11-14T15:36:52.930Z",
     "kind": "practice",
     "criterionId": "c1"
    },
@@ -497,7 +497,7 @@
     "who": "character",
     "text": "I can't answer that for you. Your judgement is exactly what I came for. Start with what you're surest of. Where would you start with my situation?",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.695Z",
+    "at": "2026-11-14T15:36:52.931Z",
     "kind": "redirect",
     "criterionId": "c1"
    },
@@ -506,7 +506,7 @@
     "who": "learner",
     "text": "ok what is your situation",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.695Z",
+    "at": "2026-11-14T15:36:52.931Z",
     "kind": "practice",
     "criterionId": "c1"
    },
@@ -515,7 +515,7 @@
     "who": "character",
     "text": "Can you say a bit more about what you're basing that on?",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.696Z",
+    "at": "2026-11-14T15:36:52.931Z",
     "kind": "support",
     "criterionId": "c1",
     "level": 1
@@ -525,7 +525,7 @@
     "who": "learner",
     "text": "im not basing it on anything, you didnt tell me anything about the offer. like how much did they offer you",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.696Z",
+    "at": "2026-11-14T15:36:52.931Z",
     "kind": "practice",
     "criterionId": "c1"
    },
@@ -534,7 +534,7 @@
     "who": "character",
     "text": "Maybe look back at the course material from before we started. Is there a part of it that helps here?",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.696Z",
+    "at": "2026-11-14T15:36:52.931Z",
     "kind": "support",
     "criterionId": "c1",
     "level": 2
@@ -544,7 +544,7 @@
     "who": "learner",
     "text": "ok fine. first thing id figure out is your batna, like what do you do if this offer falls through. do you have another offer or are you staying at your current job?",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.696Z",
+    "at": "2026-11-14T15:36:52.931Z",
     "kind": "practice",
     "criterionId": "c1"
    },
@@ -553,7 +553,7 @@
     "who": "character",
     "text": "I got the offer on Monday: 72,000 base salary, start on the 1st of next month, no signing bonus.",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.696Z",
+    "at": "2026-11-14T15:36:52.931Z",
     "kind": "fact",
     "criterionId": "c1"
    },
@@ -562,25 +562,25 @@
     "who": "learner",
     "text": "probably dont do that, if you say your bottom line thats all theyll give you. you didnt answer about the other offer tho",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.696Z",
+    "at": "2026-11-14T15:36:52.931Z",
     "kind": "practice",
     "criterionId": "c1"
    },
    {
     "id": "t16",
     "who": "character",
-    "text": "I've always heard that the best opening move is to state your bottom line so nobody wastes time. Any reason I shouldn't go with that?",
+    "text": "I've always heard that negotiation is a fixed pie where every gain for one side is a loss for the other. Any reason I shouldn't go with that?",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.697Z",
+    "at": "2026-11-14T15:36:52.932Z",
     "kind": "probe-voice",
-    "misconceptionId": "m1"
+    "misconceptionId": "m2"
    },
    {
     "id": "t17",
     "who": "learner",
     "text": "the other stuff besides salary i guess. like signing bonus or start date or remote days, stuff thats cheap for them but matters to you",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.697Z",
+    "at": "2026-11-14T15:36:52.932Z",
     "kind": "practice",
     "criterionId": "c2"
    },
@@ -589,7 +589,7 @@
     "who": "character",
     "text": "What else should I be thinking about before I decide?",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.698Z",
+    "at": "2026-11-14T15:36:52.933Z",
     "kind": "prompt",
     "criterionId": "c2"
    },
@@ -598,7 +598,7 @@
     "who": "learner",
     "text": "the course stuff said if you only fight about salary you just split it, but if you add other things you can both get more. so like if you want to start later and they dont care that much thats a free win",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.698Z",
+    "at": "2026-11-14T15:36:52.933Z",
     "kind": "practice",
     "criterionId": "c2"
    },
@@ -607,7 +607,7 @@
     "who": "character",
     "text": "Can you say a bit more about what you're basing that on?",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.698Z",
+    "at": "2026-11-14T15:36:52.933Z",
     "kind": "support",
     "criterionId": "c2",
     "level": 1
@@ -617,7 +617,7 @@
     "who": "learner",
     "text": "i literally just used the course material. what do you actually want from this job, like why do you want more money",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.698Z",
+    "at": "2026-11-14T15:36:52.933Z",
     "kind": "practice",
     "criterionId": "c2"
    },
@@ -626,7 +626,7 @@
     "who": "character",
     "text": "Maybe look back at the course material from before we started. Is there a part of it that helps here?",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.698Z",
+    "at": "2026-11-14T15:36:52.933Z",
     "kind": "support",
     "criterionId": "c2",
     "level": 2
@@ -636,7 +636,7 @@
     "who": "learner",
     "text": "you never told me what you planned. whatever. dont lead with your bottom line, know your batna, and ask for more than just salary",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.698Z",
+    "at": "2026-11-14T15:36:52.933Z",
     "kind": "practice",
     "criterionId": "c2"
    },
@@ -645,7 +645,7 @@
     "who": "character",
     "text": "What would you do differently from what I had planned?",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.698Z",
+    "at": "2026-11-14T15:36:52.934Z",
     "kind": "prompt",
     "criterionId": "c3"
    },
@@ -654,7 +654,7 @@
     "who": "character",
     "text": "Thanks for your time. I'm still not sure what to do, so I'll think about it some more.",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.699Z",
+    "at": "2026-11-14T15:36:52.934Z",
     "kind": "closing"
    },
    {
@@ -662,7 +662,7 @@
     "who": "primer",
     "text": "Before you see any feedback: how do you think that went? Which moment are you most satisfied with?",
     "phase": "feedback",
-    "at": "2026-11-14T15:19:49.699Z",
+    "at": "2026-11-14T15:36:52.934Z",
     "kind": "self-assessment"
    },
    {
@@ -670,7 +670,7 @@
     "who": "learner",
     "text": "meh. it kept asking the same stuff. i guess the part where i said ask for start date and bonus not just salary",
     "phase": "feedback",
-    "at": "2026-11-14T15:19:49.699Z",
+    "at": "2026-11-14T15:36:52.934Z",
     "kind": "self-assessment-answer"
    },
    {
@@ -678,7 +678,7 @@
     "who": "primer",
     "text": "What would you do differently if you did it again?",
     "phase": "feedback",
-    "at": "2026-11-14T15:19:49.699Z",
+    "at": "2026-11-14T15:36:52.934Z",
     "kind": "self-assessment"
    },
    {
@@ -686,7 +686,7 @@
     "who": "learner",
     "text": "ask about her interests earlier i guess",
     "phase": "feedback",
-    "at": "2026-11-14T15:19:49.699Z",
+    "at": "2026-11-14T15:36:52.934Z",
     "kind": "self-assessment-answer"
    },
    {
@@ -694,7 +694,7 @@
     "who": "primer",
     "text": "A different situation: negotiating project deadlines and resources with another team inside your own company. What from this session would you use there, and what would you change?",
     "phase": "feedback",
-    "at": "2026-11-14T15:19:49.699Z",
+    "at": "2026-11-14T15:36:52.934Z",
     "kind": "transfer"
    },
    {
@@ -702,7 +702,7 @@
     "who": "learner",
     "text": "probably the same idea of adding more stuff to trade instead of just fighting over the deadline, like we give them more time if they give us a person. and figure out what happens if we dont agree. difference is its the same company so you cant really walk away",
     "phase": "feedback",
-    "at": "2026-11-14T15:19:49.699Z",
+    "at": "2026-11-14T15:36:52.934Z",
     "kind": "transfer-answer"
    }
   ],
@@ -711,25 +711,25 @@
     "id": "e1",
     "type": "session-started",
     "phase": "preparation",
-    "at": "2026-11-14T15:19:49.695Z",
+    "at": "2026-11-14T15:36:52.930Z",
     "approval": {
      "type": "test",
      "by": "Automated test",
-     "at": "2026-11-14T15:19:49.694Z"
+     "at": "2026-11-14T15:36:52.929Z"
     }
    },
    {
     "id": "e2",
     "type": "phase",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.695Z",
+    "at": "2026-11-14T15:36:52.930Z",
     "to": "practice"
    },
    {
     "id": "e3",
     "type": "opportunity-closed",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.697Z",
+    "at": "2026-11-14T15:36:52.932Z",
     "criterionId": "c1",
     "attempts": 3
    },
@@ -737,7 +737,7 @@
     "id": "e4",
     "type": "opportunity-closed",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.698Z",
+    "at": "2026-11-14T15:36:52.934Z",
     "criterionId": "c2",
     "attempts": 3
    },
@@ -745,28 +745,43 @@
     "id": "e5",
     "type": "practice-ended-by-learner",
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.699Z",
+    "at": "2026-11-14T15:36:52.934Z",
     "learnerTurns": 9
    },
    {
     "id": "e6",
     "type": "phase",
     "phase": "feedback",
-    "at": "2026-11-14T15:19:49.699Z",
+    "at": "2026-11-14T15:36:52.934Z",
     "to": "feedback"
    },
    {
     "id": "e7",
     "type": "session-ended",
     "phase": "ended",
-    "at": "2026-11-14T15:19:49.699Z"
+    "at": "2026-11-14T15:36:52.934Z"
    }
   ],
   "evidence": [
    {
     "id": "ev1",
-    "kind": "misconception-unaddressed",
+    "kind": "misconception-corrected",
     "ref": "m1",
+    "turnId": "t15",
+    "phase": "practice",
+    "quote": "probably dont do that, if you say your bottom line thats all theyll give you. you didnt answer about the other offer tho",
+    "strength": "clear",
+    "matched": [
+     "bottom",
+     "line"
+    ],
+    "basis": "observed",
+    "promptedFor": "c1"
+   },
+   {
+    "id": "ev2",
+    "kind": "misconception-unaddressed",
+    "ref": "m2",
     "turnId": "t17",
     "phase": "practice",
     "quote": "the other stuff besides salary i guess. like signing bonus or start date or remote days, stuff thats cheap for them but matters to you",
@@ -774,6 +789,21 @@
     "matched": [],
     "basis": "observed",
     "promptedFor": null
+   },
+   {
+    "id": "ev3",
+    "kind": "misconception-corrected",
+    "ref": "m1",
+    "turnId": "t23",
+    "phase": "practice",
+    "quote": "you never told me what you planned. whatever. dont lead with your bottom line, know your batna, and ask for more than just salary",
+    "strength": "clear",
+    "matched": [
+     "bottom",
+     "line"
+    ],
+    "basis": "observed",
+    "promptedFor": "c2"
    }
   ],
   "adaptations": [
@@ -784,7 +814,7 @@
     "reason": "Learner asked to be given the answer; the character declined and restated the task.",
     "evidenceIds": [],
     "goalRef": "c1",
-    "at": "2026-11-14T15:19:49.695Z"
+    "at": "2026-11-14T15:36:52.931Z"
    },
    {
     "id": "a2",
@@ -793,7 +823,7 @@
     "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
     "evidenceIds": [],
     "goalRef": "c1",
-    "at": "2026-11-14T15:19:49.696Z",
+    "at": "2026-11-14T15:36:52.931Z",
     "level": 1
    },
    {
@@ -803,7 +833,7 @@
     "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
     "evidenceIds": [],
     "goalRef": "c1",
-    "at": "2026-11-14T15:19:49.696Z",
+    "at": "2026-11-14T15:36:52.931Z",
     "level": 2
    },
    {
@@ -813,7 +843,7 @@
     "reason": "Learner asked the character a question; the character shared the next case fact the teacher provided.",
     "evidenceIds": [],
     "goalRef": "c1",
-    "at": "2026-11-14T15:19:49.696Z"
+    "at": "2026-11-14T15:36:52.931Z"
    },
    {
     "id": "a5",
@@ -822,7 +852,7 @@
     "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
     "evidenceIds": [],
     "goalRef": "c2",
-    "at": "2026-11-14T15:19:49.698Z",
+    "at": "2026-11-14T15:36:52.933Z",
     "level": 1
    },
    {
@@ -832,29 +862,29 @@
     "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
     "evidenceIds": [],
     "goalRef": "c2",
-    "at": "2026-11-14T15:19:49.698Z",
+    "at": "2026-11-14T15:36:52.933Z",
     "level": 2
    }
   ],
   "journal": [
    {
     "phase": "preparation",
-    "at": "2026-11-14T15:19:49.695Z",
+    "at": "2026-11-14T15:36:52.930Z",
     "text": "Preparation: learner answered 2 activation question(s)."
    },
    {
     "phase": "practice",
-    "at": "2026-11-14T15:19:49.699Z",
+    "at": "2026-11-14T15:36:52.934Z",
     "text": "Practice ended after 9 learner turn(s)."
    },
    {
     "phase": "feedback",
-    "at": "2026-11-14T15:19:49.699Z",
-    "text": "Feedback: 0 strength(s), 3 growth area(s), 0 not assessed."
+    "at": "2026-11-14T15:36:52.934Z",
+    "text": "Feedback: 0 strength(s), 2 growth area(s), 1 not assessed."
    },
    {
     "phase": "ended",
-    "at": "2026-11-14T15:19:49.699Z",
+    "at": "2026-11-14T15:36:52.934Z",
     "text": "Session ended."
    }
   ],
@@ -868,7 +898,7 @@
     "c3": "t24"
    },
    "probed": {
-    "m1": "voiced"
+    "m2": "voiced"
    },
    "voiced": true,
    "done": true,
@@ -889,7 +919,7 @@
    }
   ],
   "feedback": {
-   "generatedAt": "2026-11-14T15:19:49.699Z",
+   "generatedAt": "2026-11-14T15:36:52.934Z",
    "goal": "Students prepare for and conduct a negotiation by separating interests from positions, identifying their BATNA, and proposing options that create value for both sides",
    "strengths": [],
    "growth": [
@@ -936,22 +966,39 @@
      "inference": "Inference: this may need more work. It is also possible you understand it but did not say it.",
      "nextAction": "Re-read the course material from the Prepare step, then write two or three sentences on this: identifies the BATNA and explains how it sets the reservation price.",
      "basis": "observed"
-    },
+    }
+   ],
+   "notAssessed": [
     {
      "criterionId": "c3",
      "criterion": "Proposes at least one option that creates value for both sides instead of splitting the difference",
-     "observation": "You were asked about this (\"What would you do differently from what I had planned?\"), and your reply did not yet show it.",
-     "citations": [],
-     "inference": "Inference: this may need more work. It is also possible you understand it but did not say it.",
-     "nextAction": "Re-read the course material from the Prepare step, then write two or three sentences on this: proposes at least one option that creates value for both sides instead of splitting the difference.",
-     "basis": "observed"
+     "reason": "You were asked about this but practice ended before you replied, so it is not assessed."
     }
    ],
-   "notAssessed": [],
    "misconceptions": [
     {
      "misconceptionId": "m1",
      "misconception": "The best opening move is to state your bottom line so nobody wastes time",
+     "status": "corrected",
+     "citations": [
+      {
+       "turnId": "t15",
+       "phase": "practice",
+       "where": "in the conversation",
+       "quote": "probably dont do that, if you say your bottom line thats all theyll give you. you didnt answer about the other offer tho"
+      },
+      {
+       "turnId": "t23",
+       "phase": "practice",
+       "where": "in the conversation",
+       "quote": "you never told me what you planned. whatever. dont lead with your bottom line, know your batna, and ask for more than just salary"
+      }
+     ],
+     "note": "You pushed back on this idea."
+    },
+    {
+     "misconceptionId": "m2",
+     "misconception": "Negotiation is a fixed pie where every gain for one side is a loss for the other",
      "status": "left unchallenged",
      "citations": [
       {
@@ -1008,8 +1055,7 @@
     "Your own next step: \"ask about her interests earlier i guess\"",
     "Re-read the course material from the Prepare step, then write two or three sentences on this: distinguishes the underlying interests of each party from their stated positions.",
     "Re-read the course material from the Prepare step, then write two or three sentences on this: identifies the BATNA and explains how it sets the reservation price.",
-    "Re-read the course material from the Prepare step, then write two or three sentences on this: proposes at least one option that creates value for both sides instead of splitting the difference.",
-    "Test this idea against your materials: \"The best opening move is to state your bottom line so nobody wastes time\". What evidence would show it is wrong?"
+    "Test this idea against your materials: \"Negotiation is a fixed pie where every gain for one side is a loss for the other\". What evidence would show it is wrong?"
    ],
    "transferQuestion": "A different situation: negotiating project deadlines and resources with another team inside your own company. What from this session would you use there, and what would you change?",
    "limits": "Feedback is based only on what you wrote in this session. It was produced by matching your words against your teacher's criteria, not by a human reading them."
@@ -1020,7 +1066,7 @@
    "criteriaEchoed": [],
    "note": "Observation: your answer does not yet connect back to the ideas from this session."
   },
-  "updatedAt": "2026-11-14T15:19:49.699Z",
-  "endedAt": "2026-11-14T15:19:49.699Z"
+  "updatedAt": "2026-11-14T15:36:52.934Z",
+  "endedAt": "2026-11-14T15:36:52.934Z"
  }
 }
