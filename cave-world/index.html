@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Cave Field Work</title>
+<title>Cave Field Simulator</title>
 <style>
   @font-face { font-family:"Cinzel"; font-weight:600; font-display:swap; src:url("./vendor/fonts/cinzel-latin-600-normal.woff2") format("woff2"); }
   @font-face { font-family:"Cinzel"; font-weight:700; font-display:swap; src:url("./vendor/fonts/cinzel-latin-700-normal.woff2") format("woff2"); }
@@ -98,6 +98,53 @@
   @keyframes line { to { width:26vh; } }
   body.shake canvas { animation:shake .3s; }
   @keyframes shake { 20%{transform:translate(5px,-4px)} 40%{transform:translate(-5px,3px)} 60%{transform:translate(3px,4px)} 80%{transform:translate(-2px,-2px)} }
+  #proc { position:fixed; left:50%; bottom:12px; transform:translateX(-50%); width:min(540px,94vw); display:none; z-index:4;
+    background:linear-gradient(180deg,rgba(19,28,25,.95),rgba(11,17,15,.95)); border:1px solid var(--line); border-radius:16px; padding:14px 16px; box-shadow:0 20px 60px rgba(0,0,0,.6); }
+  body.proc #proc { display:block; }
+  body.proc #tools, body.proc #toolName, body.proc #stick, body.proc #use, body.proc #prompt { display:none !important; }
+  #proc p { margin:0 0 10px; font-size:15px; line-height:1.45; }
+  #proc .ptitle { font-size:12px; color:var(--dim); margin-bottom:10px; }
+  #proc .ptitle span { display:block; font-family:"Cinzel",Georgia,serif; font-weight:700; font-size:19px; color:#f4efe2; margin-bottom:2px; }
+  #proc .ok { padding:10px 18px; border-color:var(--acc); font-weight:600; }
+  #proc .ok:disabled { opacity:.4; }
+  #proc .opt { display:block; width:100%; text-align:left; padding:10px 12px; margin:6px 0; font-size:15px; line-height:1.35; }
+  #proc .opt:hover { border-color:var(--acc); }
+  #proc .fb { color:var(--warn); }
+  #proc b { color:var(--acc); }
+  .meter .bar { position:relative; height:18px; border-radius:9px; background:rgba(255,255,255,.08); overflow:hidden; margin:4px 0 10px; }
+  .meter .zone { position:absolute; top:0; bottom:0; background:rgba(95,224,181,.35); border-left:2px solid var(--acc); border-right:2px solid var(--acc); }
+  .meter .fill { position:absolute; left:0; top:0; bottom:0; width:0; background:linear-gradient(90deg,rgba(255,255,255,.25),rgba(255,255,255,.75)); }
+  .meter .hold { width:100%; touch-action:none; }
+  .sketch { background:#0a0f0d; border:1px solid var(--line); border-radius:12px; margin-bottom:8px; }
+  .sketch svg { display:block; width:100%; height:130px; }
+  #proc input[type=range] { width:100%; margin:4px 0 12px; accent-color:var(--acc); }
+  .strata { display:flex; flex-direction:column; border-radius:10px; overflow:hidden; margin-bottom:10px; border:1px solid var(--line); }
+  .strata div { padding:5px 10px; font-size:12px; font-weight:600; color:#fff; text-shadow:0 1px 2px #000; transition:all .3s; }
+  .strata div.gone { opacity:.25; padding-top:1px; padding-bottom:1px; font-size:10px; }
+  .strata div.cur { outline:2px solid var(--acc); outline-offset:-2px; }
+  .stars { color:#ffcd5a; letter-spacing:2px; font-size:16px; }
+  .stars i { color:rgba(255,255,255,.2); font-style:normal; }
+  .radio-card { display:flex; gap:12px; align-items:center; margin:10px 0; padding:10px; border:1px solid var(--line); border-radius:12px; background:rgba(95,224,181,.06); }
+  .avatar { width:40px; height:40px; flex:none; border-radius:50%; display:grid; place-items:center; font-weight:700; font-size:14px; color:#06241b; background:linear-gradient(135deg,#5fe0b5,#c9a46a); }
+  .dim { color:var(--dim); }
+  #radio { position:fixed; left:12px; top:56px; max-width:min(420px,calc(100vw - 24px)); display:flex; gap:10px; align-items:flex-start; background:var(--panel); border:1px solid var(--acc);
+    border-radius:14px; padding:10px 12px; z-index:4; opacity:0; transform:translateY(-8px); transition:all .25s; pointer-events:none; }
+  #radio.on { opacity:1; transform:none; }
+  #radio p { margin:0; font-size:14px; line-height:1.45; }
+  #radio p b { color:var(--acc); }
+  #priorOpts .opt, .card .opt { display:block; width:100%; text-align:left; padding:10px 12px; margin:6px 0; font-size:15px; }
+  .opt.sel { border-color:var(--acc); background:rgba(95,224,181,.14); }
+  .card textarea { width:100%; min-height:80px; font:inherit; color:inherit; background:#0a0f0d; border:1px solid var(--line); border-radius:10px; padding:10px; margin:6px 0; }
+  .ev { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-top:1px solid var(--line); font-size:14px; line-height:1.4; }
+  .ev input { margin-top:3px; accent-color:var(--acc); width:18px; height:18px; flex:none; }
+  .chip2 { display:inline-block; font-size:11px; padding:1px 7px; border-radius:999px; border:1px solid var(--line); color:var(--dim); margin-right:4px; }
+  .scale { display:flex; gap:8px; margin:6px 0 12px; } .scale button { flex:1; padding:10px 6px; }
+  .quote { border-left:3px solid var(--acc); padding:4px 10px; margin:6px 0; color:var(--ink); background:rgba(95,224,181,.06); border-radius:0 8px 8px 0; font-size:14px; }
+  .verdict { font-size:15px; padding:10px 12px; border-radius:10px; margin:8px 0; border:1px solid var(--line); }
+  .verdict.good { border-color:var(--acc); } .verdict.weak { border-color:var(--warn); }
+  #reportBtn { padding:7px 14px; border-radius:999px; font-size:13px; font-weight:600; border-color:var(--acc); color:var(--acc); margin-left:auto; }
+  #reportBtn:disabled { opacity:.45; border-color:var(--line); color:var(--dim); }
+  #reportBtn ~ #nbBtn { margin-left:0; }
   .mark::after { content:""; position:absolute; inset:3px; background:var(--warn); opacity:.7; }
   .mark.done::after { display:none; }
   #load { color:var(--dim); font-size:14px; margin-top:8px; }
@@ -112,10 +159,12 @@
 <div id="reticle"></div>
 <div id="fx"></div>
 <div id="hand"></div>
+<div id="proc"></div>
 <div id="prompt"></div>
 
 <div id="top">
   <div class="chip" id="score"></div>
+  <button id="reportBtn" disabled title="Investigate at least 5 finds first">Report</button>
   <button id="nbBtn"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM8 3v18M12 8h4M12 12h4"/></svg>Notebook</button>
   <button id="mute" title="Sound"></button>
 </div>
@@ -126,18 +175,26 @@
 
 <div class="sheet on" id="intro">
   <div class="card">
-    <h1>Cave Field Work</h1>
-    <span class="tag">First-person survey · geology · archaeology</span>
-    <p>You are the specialist sent into an unexplored limestone cave. Walk around, find what looks interesting, and pick the right tool to investigate it. Each correct investigation goes into your field notebook with what it means.</p>
+    <h1>Cave Field Simulator</h1>
+    <span class="tag">Mission briefing · geology · archaeology</span>
+    <div class="radio-card"><div class="avatar" aria-hidden="true">AR</div><div><b id="mentorName"></b><br><span class="dim" id="mentorRole"></span></div></div>
+    <div id="briefText"></div>
+    <h3>Before you go in</h3>
+    <p id="priorQ"></p><div id="priorOpts"></div>
     <h3>Your kit</h3>
     <ul class="kit" id="kitList"></ul>
+    <h3>How it works</h3>
+    <p>Find something interesting, pick the right tool, then carry out the procedure yourself and interpret what you see. Each find earns up to three stars: done, clean technique, right interpretation first time. Using the wrong tool on something fragile damages the site, and that goes in your report. When you have enough evidence, press <b>Report</b> to make your recommendation.</p>
     <h3>Controls</h3>
     <p id="ctl"></p>
-    <p style="color:var(--dim);font-size:13px">Orange diamonds mark things worth a look when you get near. The finds are invented for this generated cave; the science is real.</p>
+    <p style="font-size:13px"><a href="./classic.html" style="color:var(--acc)">Prefer quick exploring? Play the classic version</a></p>
     <button class="ok" id="start" disabled>Enter the cave</button>
     <div id="load">Loading cave…</div>
   </div>
 </div>
+<div id="radio" role="status" aria-live="polite"><div class="avatar" aria-hidden="true">AR</div><p id="radioText"></p></div>
+<div class="sheet" id="report"><div class="card" id="reportCard"></div></div>
+<div class="sheet" id="debrief"><div class="card" id="debriefCard"></div></div>
 <div class="sheet" id="result"><div class="card" id="resultCard"></div></div>
 <div class="sheet" id="notebook"><div class="card" id="nbCard"></div></div>
 
@@ -146,6 +203,8 @@ import * as THREE from "three";
 import { SparkRenderer, SplatMesh } from "@sparkjsdev/spark";
 import { TOOLS, POIS, WRONG } from "./pois.js";
 import { createGameAudio } from "./audio.js";
+import { SIM } from "./sim-data.js";
+import { MENTOR, BRIEF, PRIOR, EVIDENCE, OPTIONS, TAG_NAMES, DAMAGE_TOOLS, RADIO, TRANSFER, NAMES } from "./mission.js";
 const audio = createGameAudio();
 
 const $ = (id) => document.getElementById(id);
@@ -184,14 +243,29 @@ function canStand(x, z) {
 // ---------- state ----------
 let yaw = 0, pitch = -0.05, playing = false, tool = TOOLS[0].id, target = null;
 const found = new Set();
-try { JSON.parse(localStorage.getItem("caveFound") || "[]").forEach((id) => found.add(id)); } catch {}
-const save = () => { try { localStorage.setItem("caveFound", JSON.stringify([...found])); } catch {} };
+try { JSON.parse(localStorage.getItem("caveSimFound") || "[]").forEach((id) => found.add(id)); } catch {}
+const M0 = () => ({ prior: null, log: [], damage: [], wrong: {}, notes: {}, heights: {}, streakWrong: 0, ready: false, report: null, self: null, transfer: null, done: false });
+let mission = M0(); try { const saved = JSON.parse(localStorage.getItem("caveSimMission") || "null"); if (saved) mission = { ...M0(), ...saved }; } catch {}
+const save = () => { try { localStorage.setItem("caveSimFound", JSON.stringify([...found])); localStorage.setItem("caveSimStars", JSON.stringify(stars)); localStorage.setItem("caveSimMission", JSON.stringify(mission)); } catch {} };
+const logEv = (type, data = {}) => { mission.log.push({ t: Date.now(), type, ...data }); save(); };
+const short = (p) => NAMES[p.id] || p.title.split(" — ")[0];
+const Cap = (x) => x.charAt(0).toUpperCase() + x.slice(1);
+const esc = (x) => String(x ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+let radioT = 0;
+function radio(text, ms = 7000) { $("radioText").innerHTML = `<b>${MENTOR.name.split(" ").slice(-1)[0]}:</b> ${esc(text)}`; $("radio").classList.add("on"); clearTimeout(radioT); radioT = setTimeout(() => $("radio").classList.remove("on"), ms); logEv("radio", { text }); }
 
 // ---------- UI: tools ----------
+$("mentorName").textContent = MENTOR.name; $("mentorRole").textContent = MENTOR.role;
+$("briefText").innerHTML = `<h3>${BRIEF.title}</h3>` + BRIEF.lines.map((l) => `<p>${l}</p>`).join("");
+$("priorQ").textContent = PRIOR.q;
+$("priorOpts").innerHTML = PRIOR.options.map((o, i) => `<button class="opt${mission.prior === i ? " sel" : ""}" data-i="${i}">${o}</button>`).join("");
+let caveLoaded = false; const canStart = () => ($("start").disabled = !(caveLoaded && mission.prior !== null));
+$("priorOpts").querySelectorAll(".opt").forEach((b) => (b.onclick = () => { mission.prior = +b.dataset.i; logEv("prior", { choice: PRIOR.options[mission.prior] });
+  $("priorOpts").querySelectorAll(".opt").forEach((x) => x.classList.toggle("sel", x === b)); canStart(); }));
 $("kitList").innerHTML = TOOLS.map((t) => `<li>${t.icon}<span><b>${t.name}</b>${t.verb}</span></li>`).join("");
-$("ctl").textContent = isTouch
+$("ctl").textContent = (isTouch
   ? "Left stick to walk. Drag anywhere else to look around. Tap a tool to select it, then aim the circle at something and press USE."
-  : "Drag the mouse to look. W A S D or arrow keys to walk, Shift to hurry. Keys 1–6 pick a tool, E or Space uses it, N opens the notebook.";
+  : "Drag the mouse to look. W A S D or arrow keys to walk, Shift to hurry. Keys 1–6 pick a tool, E or Space uses it, N opens the notebook.") + " During a procedure, follow the panel at the bottom; press and hold the wide button and release in the green zone.";
 TOOLS.forEach((t, i) => {
   const b = document.createElement("button");
   b.innerHTML = `<small>${i + 1}</small>${t.icon}`; b.title = t.name;
@@ -211,7 +285,10 @@ selectTool(tool);
 const SND = ['<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6M18.500 6.500a8 8 0 0 1 0 11"/>', '<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M17 9l5 6M22 9l-5 6"/>'];
 const drawMute = () => ($("mute").innerHTML = `<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${SND[audio.muted ? 1 : 0]}</svg>`);
 drawMute(); $("mute").onclick = () => { audio.toggle(); drawMute(); };
-const updateScore = () => ($("score").innerHTML = `DISCOVERIES <b>${found.size}</b> / ${POIS.length}`);
+const stars = {}; try { Object.assign(stars, JSON.parse(localStorage.getItem("caveSimStars") || "{}")); } catch {}
+const starSum = () => [...found].reduce((n, id) => n + (stars[id] || 1), 0);
+const starHtml = (n) => `<span class="stars">${"★".repeat(n)}<i>${"★".repeat(3 - n)}</i></span>`;
+const updateScore = () => ($("score").innerHTML = `FINDS <b>${found.size}</b> / ${POIS.length} &nbsp;·&nbsp; <span class="stars">★</span> <b>${starSum()}</b> / ${POIS.length * 3}`);
 updateScore();
 
 // ---------- UI: markers ----------
@@ -253,7 +330,7 @@ function updateTargets() {
 }
 
 // ---------- use a tool ----------
-function openSheet(id) { $(id).classList.add("on"); playing = false; keys.clear(); stick.x = stick.y = 0; }
+function openSheet(id) { $("radio").classList.remove("on"); $(id).classList.add("on"); playing = false; keys.clear(); stick.x = stick.y = 0; }
 function closeSheet(id) { $(id).classList.remove("on"); playing = true; }
 let busy = false;
 function playFx(id, fizz) {
@@ -278,14 +355,19 @@ function useTool() {
   }
   const p = target, card = $("resultCard");
   if (found.has(p.id)) { showEntry(p); return; }
-  audio.play(tool); playFx(tool, p.tool === tool && p.id !== "boulder");
+  if (p.tool === tool) { resolveUse(p, t); return; }
+  audio.play(tool); playFx(tool, false);
   busy = true;
   setTimeout(() => { busy = false; resolveUse(p, t); }, 950);
 }
 function resolveUse(p, t) {
   const card = $("resultCard"), toolId = t.id;
+  if (p.tool === toolId) { startProcedure(p, t); return; }
   if (p.tool !== toolId) {
     audio.play("wrong");
+    const hurt = (DAMAGE_TOOLS[toolId] || []).some((tag) => (EVIDENCE[p.id] || { tags: [] }).tags.includes(tag));
+    logEv("wrong-tool", { find: p.id, tool: toolId, damage: hurt });
+    if (hurt) { mission.damage.push({ find: p.id, tool: toolId }); save(); radio(RADIO.damage(short(p), t.name.toLowerCase()), 9000); }
     card.className = "card warn";
     card.innerHTML = `<h2>Not the right tool</h2><span class="tag">${t.icon} ${t.name}</span><p>${WRONG[toolId]}</p>
       <p style="color:var(--dim)">What you see: ${p.hint}</p><button class="ok" id="rOk">Try something else</button>`;
@@ -311,18 +393,267 @@ function flash(msg) { const pr = $("prompt"); pr.textContent = msg; pr.classList
 
 function showNotebook(done) {
   const rows = POIS.map((p) => found.has(p.id)
-    ? `<div class="entry"><b>${p.title}</b><span class="tag">${p.field}</span><p>${p.learn}</p></div>`
+    ? `<div class="entry"><b>${p.title} ${starHtml(stars[p.id] || 1)}</b><span class="tag">${p.field}</span><p><b>For the report:</b> ${EVIDENCE[p.id].line}${mission.heights[p.id] ? ` You measured ${mission.heights[p.id]} m.` : ""}</p><p class="dim">${p.learn}</p></div>`
     : `<div class="entry locked">Not yet investigated — ${p.hint}</div>`).join("");
   $("nbCard").innerHTML = `<h2>${done ? "Survey complete" : "Field notebook"}</h2>
-    <p>${done ? "You investigated everything in the chamber. Your report: a limestone cave dissolved from an ancient sea floor, a roof collapse that let in light and life, a flood that carried in foreign rock, and people and cave bears who used the shelter."
-              : `${found.size} of ${POIS.length} discoveries recorded.`}</p>${rows}
+    <p>${mission.report ? "Report submitted. " : found.size >= 5 ? "You have enough evidence to write your report. " : `Investigate ${5 - found.size} more to write your report. `}${done ? "You investigated everything in the chamber. Your report: a limestone cave dissolved from an ancient sea floor, a roof collapse that let in light and life, a flood that carried in foreign rock, and people and cave bears who used the shelter."
+              : `${found.size} of ${POIS.length} finds recorded.`} Field rating: <b>${starSum()} / ${POIS.length * 3}</b> stars.</p>${rows}
     <button class="ok" id="nbOk">Back to the cave</button> <button class="ok" id="nbReset" style="border-color:var(--line);font-weight:400">Start over</button>`;
   openSheet("notebook");
   $("nbOk").onclick = () => closeSheet("notebook");
-  $("nbReset").onclick = () => { found.clear(); save(); updateScore(); closeSheet("notebook"); };
+  $("nbReset").onclick = () => { if (!confirm("Start a new mission? Your notebook and report will be cleared.")) return; found.clear(); Object.keys(stars).forEach((k) => delete stars[k]); mission = M0(); save(); location.reload(); };
 }
 $("nbBtn").onclick = () => showNotebook(false);
 $("use").addEventListener("pointerdown", (e) => { e.preventDefault(); e.stopPropagation(); useTool(); });
+
+// ---------- simulator procedures ----------
+let lookOnly = false;
+const proc = $("proc");
+const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+const panel = (p, step, body) => (proc.innerHTML = `<div class="ptitle"><span>${step}</span>${p.title.split(" — ")[0]}</div>${body}`);
+const button = (id) => new Promise((r) => ($(id).onclick = () => r()));
+const choice = () => new Promise((r) => proc.querySelectorAll(".opt").forEach((b, i) => (b.onclick = () => r(i))));
+
+// Press-and-hold meter: resolves with the fill (0..1) at release.
+function holdMeter({ label, zone, speed = 0.55, sound = null }) {
+  return new Promise((resolve) => {
+    const w = document.createElement("div"); w.className = "meter";
+    w.innerHTML = `<div class="bar"><div class="zone" style="left:${zone[0] * 100}%;width:${(zone[1] - zone[0]) * 100}%"></div><div class="fill"></div></div><button class="ok hold">${label}</button>`;
+    proc.appendChild(w);
+    const fill = w.querySelector(".fill"), btn = w.querySelector(".hold");
+    let v = 0, down = false, t0 = 0, timer = 0, tick = 0;
+    const step = () => {
+      v = Math.min(1, ((performance.now() - t0) / 1000) * speed); fill.style.width = v * 100 + "%";
+      if (sound && performance.now() - tick > 240) { tick = performance.now(); audio.play(sound); }
+      if (v >= 1) end();
+    };
+    const end = () => { if (!down) return; down = false; clearInterval(timer); step0(); btn.disabled = true; resolve(v); };
+    const step0 = () => { v = Math.min(1, ((performance.now() - t0) / 1000) * speed); fill.style.width = v * 100 + "%"; };
+    btn.addEventListener("pointerdown", (e) => { e.preventDefault(); if (btn.disabled || down) return; down = true; t0 = performance.now();
+      try { btn.setPointerCapture(e.pointerId); } catch {} timer = setInterval(step, 16); });
+    btn.addEventListener("pointerup", end); btn.addEventListener("pointercancel", end);
+  });
+}
+
+async function procLens(p, res) {
+  const target = 30 + Math.random() * 40; let sharp = false;
+  panel(p, "Focus the lens", `<p>Hold the lens close to your eye, then move in slowly until the detail is sharp.</p>
+    <div class="sketch" id="sk">${SIM[p.id].sketch}</div><input type="range" id="foc" min="0" max="100" step="1" value="${target > 50 ? 4 : 96}">
+    <button class="ok" id="go" disabled>Record the observation</button>`);
+  const sk = $("sk"), foc = $("foc"), go = $("go");
+  foc.oninput = () => { const d = Math.abs(foc.value - target); sk.style.filter = `blur(${Math.max(0, d - 3) / 3}px)`; go.disabled = d > 4;
+    if (d <= 4 && !sharp) { sharp = true; audio.play("lens"); playFx("lens"); } else if (d > 4) sharp = false; };
+  foc.oninput(); await button("go");
+  panel(p, "What you see", `<div class="sketch">${SIM[p.id].sketch}</div><p>${p.seen}</p><button class="ok" id="go">Continue</button>`); await button("go");
+}
+
+async function procHammer(p, res) {
+  panel(p, "Safety first", `<p>You are about to strike rock. Chips fly fast and far.</p><button class="opt">Put on safety goggles</button><button class="opt">Strike now</button>`);
+  if ((await choice()) === 1) {
+    res.tech = false; res.notes.push("Struck without eye protection."); audio.play("wrong");
+    panel(p, "Safety first", `<p class="fb">A chip stings your cheek. Rock splinters can blind; goggles go on before every strike.</p><button class="ok" id="go">Put goggles on</button>`); await button("go");
+  }
+  let hits = 0, misses = 0;
+  while (hits < 2) {
+    panel(p, `Strike ${hits + 1} of 2`, `<p>Swing with the square face of the hammer. Release in the green zone for a clean, controlled blow.</p>${misses ? '<p class="fb">Glancing blow. Too weak does nothing; too hard skids off and shatters the sample.</p>' : ""}`);
+    const v = await holdMeter({ label: "Hold to swing, release to strike", zone: [0.6, 0.82], speed: 0.85 });
+    playFx("hammer"); audio.play("hammer"); await wait(750);
+    if (v >= 0.6 && v <= 0.82) hits++; else misses++;
+  }
+  if (misses > 1) { res.tech = false; res.notes.push("Several uncontrolled blows."); }
+  panel(p, "Fresh surface", `<p>${p.seen}</p><button class="ok" id="go">Continue</button>`); await button("go");
+}
+
+async function procAcid(p, res) {
+  let msg = "", over = false;
+  for (;;) {
+    panel(p, "Apply one drop", `<p>Squeeze the dropper gently over a spot that doesn't matter. One drop is all the test needs.</p>${msg}`);
+    const v = await holdMeter({ label: "Hold to squeeze", zone: [0.3, 0.55], speed: 0.6 });
+    if (v < 0.3) { msg = '<p class="fb">Nothing came out. Squeeze a little longer.</p>'; continue; }
+    if (v > 0.55) { over = true; res.tech = false; res.notes.push("Used more acid than the test needs."); }
+    break;
+  }
+  const fizz = SIM[p.id].fizz; playFx("acid", fizz); audio.play(fizz ? "acid" : "select");
+  panel(p, "Watch the reaction", `${over ? '<p class="fb">That was a squirt, not a drop. More acid tells you nothing extra and etches the rock.</p>' : ""}<p>${p.seen}</p><button class="ok" id="go">Rinse the spot with water</button>`);
+  await button("go");
+}
+
+async function procUv(p, res) {
+  let msg = "";
+  for (;;) {
+    panel(p, "Shine the UV lamp", `<p>Keep the beam away from your eyes and hold it steady on the surface until the response is clear.</p>${msg}`);
+    const v = await holdMeter({ label: "Hold to shine", zone: [0.85, 1], speed: 0.5 });
+    if (v >= 0.85) break; msg = '<p class="fb">Too brief to see anything. Hold it steady.</p>';
+  }
+  playFx("uv"); audio.play("uv");
+  panel(p, "Lamp off — keep watching", `<p>${p.seen}</p><button class="ok" id="go">Note the response</button>`); await button("go");
+}
+
+const strata = (layers, depth) => `<div class="strata">${layers.map((l, i) => `<div class="${i < depth ? "gone" : i === depth ? "cur" : ""}" style="background:${l.color}">${l.name}${i < depth ? " (removed)" : ""}</div>`).join("")}</div>`;
+async function procBrush(p, res) {
+  const layers = SIM[p.id].layers;
+  for (let i = 0; i < layers.length; i++) {
+    let msg = "", over = false;
+    for (;;) {
+      panel(p, `Layer ${i + 1} of ${layers.length}`, `${strata(layers, i)}<p>Scrape thin, even passes with the trowel edge and brush the spoil away. Stop at the layer boundary.</p>${msg}`);
+      const v = await holdMeter({ label: "Hold to scrape", zone: [0.68, 0.9], speed: 0.5, sound: "brush" });
+      if (v < 0.68) { msg = '<p class="fb">You are still above the boundary. Keep going.</p>'; continue; }
+      if (v > 0.9) { over = true; res.tech = false; res.notes.push("Cut through a layer boundary."); }
+      break;
+    }
+    playFx("brush");
+    panel(p, `${layers[i].name} exposed`, `${strata(layers, i + 1)}${over ? '<p class="fb">You cut straight through the boundary. Whatever sat on that surface is now mixed into the layer below.</p>' : ""}<p>${layers[i].text}</p>
+      <button class="ok" id="go">${i < layers.length - 1 ? "Continue down" : "Stop digging"}</button>`);
+    await button("go");
+  }
+  panel(p, "You found something", `<p>${p.seen}</p><p>What do you do first?</p><button class="opt">Lift it out for a closer look</button><button class="opt">Photograph it, record its exact position, and leave it in place</button>`);
+  if ((await choice()) === 0) {
+    res.tech = false; res.notes.push("Lifted a find before recording it."); audio.play("wrong");
+    panel(p, "Recording comes first", `<p class="fb">Once lifted, its position is lost for good, and position is the evidence. You put it back as best you can and record it.</p><button class="ok" id="go">Record it</button>`); await button("go");
+  }
+}
+
+async function procSurvey(p, res) {
+  const m = SIM[p.id].measure, d = Math.hypot(p.pos[0] - camera.position.x, p.pos[2] - camera.position.z), deg = (a) => ((a * 180) / Math.PI).toFixed(1);
+  lookOnly = true; let a1 = null;
+  const live = setInterval(() => { const e = $("ang"); if (e) e.textContent = deg(pitch) + "°"; }, 100);
+  const look = isTouch ? "Drag the view" : "Drag the mouse";
+  if (m.mode === "two") {
+    panel(p, "Sight the base", `<p>Rangefinder distance: <b>${d.toFixed(1)} m</b>. ${look} to put the circle on the <b>base</b>, then mark it.</p><p>Clinometer: <b id="ang"></b></p><button class="ok" id="go">Mark base</button>`);
+    await button("go"); a1 = pitch; audio.play("survey");
+  }
+  panel(p, "Sight the top", `<p>${a1 !== null ? `Base angle <b>${deg(a1)}°</b>.` : `Rangefinder distance: <b>${d.toFixed(1)} m</b>.`} ${look} to put the circle on the <b>${m.top}</b>, then mark it.</p><p>Clinometer: <b id="ang"></b></p><button class="ok" id="go">Mark top</button>`);
+  await button("go"); const a2 = pitch; audio.play("survey"); playFx("survey");
+  clearInterval(live); lookOnly = false;
+  const h = Math.max(0.1, m.mode === "two" ? d * (Math.tan(a2) - Math.tan(a1)) : EYE + d * Math.tan(a2));
+  res.height = h; const ok = Math.abs(h - m.expect) / m.expect < 0.3;
+  if (!ok) { res.tech = false; res.notes.push("Measurement was well off the true value."); }
+  panel(p, "Calculate", `<p>${m.mode === "two" ? `height = distance × (tan top − tan base) = ${d.toFixed(1)} × (tan ${deg(a2)}° − tan ${deg(a1)}°)` : `height = eye height + distance × tan angle = ${EYE} + ${d.toFixed(1)} × tan ${deg(a2)}°`}</p>
+    <p>Result: <b>${h.toFixed(1)} m</b></p>${ok ? "" : `<p class="fb">A careful sighting gives about ${m.expect.toFixed(1)} m. Check that the circle sat exactly on each point when you marked it.</p>`}<button class="ok" id="go">Record</button>`);
+  await button("go");
+}
+
+async function quiz(p, res) {
+  const q = typeof SIM[p.id].quiz === "function" ? SIM[p.id].quiz(res) : SIM[p.id].quiz; let tries = 0, fb = ""; const tried = new Set(); res.wrong = [];
+  for (;;) {
+    panel(p, "Interpret", `<p>${q.q}</p>${q.options.map((o, i) => `<button class="opt"${tried.has(i) ? " disabled" : ""}>${o}</button>`).join("")}${fb}`);
+    const i = await choice(); tries++;
+    if (i === q.correct) break;
+    tried.add(i); res.wrong.push(q.options[i]); audio.play("wrong");
+    // Adaptive support: the first hint points at the evidence; the second also reminds the student what they observed.
+    fb = tries === 1 ? `<p class="fb">Not quite. ${q.why}</p>` : `<p class="fb">Still not it. ${q.why}</p><p class="fb">What you observed: ${p.seen}</p>`;
+  }
+  res.quizFirst = tries === 1;
+}
+
+const PROCS = { lens: procLens, hammer: procHammer, acid: procAcid, uv: procUv, brush: procBrush, survey: procSurvey };
+async function startProcedure(p, t) {
+  playing = false; keys.clear(); stick.x = stick.y = 0; document.body.classList.add("proc"); $("prompt").classList.remove("on");
+  const res = { tech: true, notes: [], quizFirst: false };
+  await PROCS[t.id](p, res);
+  await quiz(p, res);
+  document.body.classList.remove("proc"); proc.innerHTML = "";
+  const n = 1 + (res.tech ? 1 : 0) + (res.quizFirst ? 1 : 0);
+  stars[p.id] = Math.max(stars[p.id] || 0, n); found.add(p.id);
+  if (res.wrong.length) mission.wrong[p.id] = res.wrong; if (res.height) mission.heights[p.id] = +res.height.toFixed(1);
+  mission.notes[p.id] = { tech: res.tech, techNotes: res.notes, first: res.quizFirst };
+  logEv("find", { find: p.id, stars: n, tech: res.tech, first: res.quizFirst }); save(); updateScore(); afterFind(p, res);
+  audio.play(found.size === POIS.length ? "complete" : "discover");
+  const card = $("resultCard"); card.className = "card";
+  card.innerHTML = `<h2>${p.title}</h2><span class="tag">${p.field} · ${t.icon} ${t.name}</span> ${starHtml(n)}
+    <h3>Your work</h3><p>${res.tech ? "Clean technique." : res.notes.join(" ")} ${res.quizFirst ? "Correct interpretation first time." : "Interpretation needed a second try."}${res.height ? ` Measured height: ${res.height.toFixed(1)} m.` : ""}</p>
+    <h3>What it means</h3><p>${p.learn}</p>
+    <button class="ok" id="rOk">${found.size === POIS.length ? "Finish the survey" : "Add to notebook"}</button>`;
+  openSheet("result");
+  $("rOk").onclick = () => { closeSheet("result"); if (found.size === POIS.length) showNotebook(true); };
+}
+function afterFind(p, res) {
+  const name = short(p), lines = [];
+  if (res.notes.some((x) => /eye protection/.test(x))) lines.push(RADIO.goggles); else if (!res.tech) lines.push(RADIO.sloppy(name));
+  mission.streakWrong = res.quizFirst ? 0 : mission.streakWrong + 1;
+  if (mission.streakWrong >= 2) { lines.push(RADIO.struggling); mission.streakWrong = 0; } else lines.push(res.quizFirst ? RADIO.firstTry(name) : RADIO.secondTry(name));
+  if (p.id === PRIOR.linkedFind) lines.push(mission.prior === PRIOR.correct ? RADIO.priorRight : RADIO.prior(PRIOR.options[mission.prior], "they're calcite left by dripping water."));
+  if (found.size >= 5 && !mission.ready) { mission.ready = true; lines.push(RADIO.ready); }
+  save(); updateReport(); setTimeout(() => radio(lines.join(" "), 6000 + lines.length * 2500), 400);
+}
+function updateReport() { const b = $("reportBtn"); b.disabled = found.size < 5; b.title = found.size < 5 ? `Investigate at least 5 finds first (${found.size} so far)` : "Write your report to the council"; }
+
+// ---------- report: a decision with consequences ----------
+function showReport() {
+  const ids = POIS.filter((p) => found.has(p.id)).map((p) => p.id);
+  $("reportCard").innerHTML = `<h2>Report to the council</h2><p class="dim">Your recommendation will decide what happens to this cave. Back it with up to three pieces of your own evidence.</p>
+    <h3>1. Your recommendation</h3><div id="recOpts">${OPTIONS.map((o) => `<button class="opt" data-id="${o.id}">${o.label}</button>`).join("")}</div>
+    <h3>2. Your strongest evidence (choose up to 3)</h3>${ids.map((id) => { const p = POIS.find((x) => x.id === id), e = EVIDENCE[id];
+      return `<label class="ev"><input type="checkbox" value="${id}"><span><b>${Cap(short(p))}</b>${mission.heights[id] ? ` (you measured ${mission.heights[id]} m)` : ""}: ${e.line}<br>${e.tags.map((t) => `<span class="chip2">${TAG_NAMES[t]}</span>`).join("")}</span></label>`; }).join("")}
+    <h3>3. In your own words: why?</h3><textarea id="why" placeholder="One or two sentences for the council"></textarea>
+    <p class="fb" id="repErr" hidden></p>
+    <button class="ok" id="repOk">Submit the report</button> <button class="ok" id="repBack" style="border-color:var(--line);font-weight:400">Keep exploring</button>`;
+  let rec = null;
+  $("reportCard").querySelectorAll("#recOpts .opt").forEach((b) => (b.onclick = () => { rec = b.dataset.id; $("reportCard").querySelectorAll("#recOpts .opt").forEach((x) => x.classList.toggle("sel", x === b)); }));
+  const boxes = [...$("reportCard").querySelectorAll(".ev input")]; boxes.forEach((c) => (c.onchange = () => { if (boxes.filter((x) => x.checked).length > 3) c.checked = false; }));
+  $("reportCard").addEventListener("input", () => ($("repErr").hidden = true)); $("reportCard").addEventListener("click", (e) => { if (e.target.closest(".opt")) $("repErr").hidden = true; });
+  $("repBack").onclick = () => closeSheet("report");
+  $("repOk").onclick = () => { const ev = boxes.filter((x) => x.checked).map((x) => x.value), why = $("why").value.trim();
+    const err = !rec ? "Choose a recommendation." : !ev.length ? "Choose at least one piece of evidence." : why.split(/\s+/).length < 4 ? "Write a sentence explaining why." : "";
+    if (err) { $("repErr").hidden = false; $("repErr").textContent = err; return; }
+    mission.report = { rec, evidence: ev, why, foundAtReport: [...found] }; logEv("report", { rec, evidence: ev }); save(); closeSheet("report"); showDebrief(); };
+  openSheet("report");
+}
+$("reportBtn").onclick = () => showReport();
+
+// ---------- debrief: self-assessment first, then feedback from the record ----------
+function judgeReport() {
+  const r = mission.report, opt = OPTIONS.find((o) => o.id === r.rec);
+  const chosenTags = [...new Set(r.evidence.flatMap((id) => EVIDENCE[id].tags))], foundTags = [...new Set(r.foundAtReport.flatMap((id) => EVIDENCE[id].tags))];
+  const support = chosenTags.filter((t) => opt.supportedBy.includes(t)), against = foundTags.filter((t) => opt.contradictedBy.includes(t));
+  const ignored = ["archaeology", "safety", "life"].filter((t) => foundTags.includes(t) && !chosenTags.includes(t));
+  const offTopic = r.evidence.filter((id) => !EVIDENCE[id].tags.some((t) => opt.supportedBy.includes(t) || opt.contradictedBy.includes(t)));
+  let verdict, good;
+  if (r.rec === "open") { good = false; verdict = `Your own notebook argues against this. You recorded ${against.map((t) => TAG_NAMES[t]).join(", ")}, and opening freely would put those at risk.`; }
+  else if (!support.length) { good = false; verdict = `The recommendation is reasonable, but the evidence you chose doesn't support it: none of it concerns ${opt.supportedBy.map((t) => TAG_NAMES[t]).join(" or ")}.`; }
+  else { good = true; verdict = `Well argued: your evidence on ${support.map((t) => TAG_NAMES[t]).join(" and ")} supports this recommendation.`; }
+  if (r.rec === "guided" && foundTags.includes("archaeology")) verdict += " One gap: you found an archaeological site, and tours would need to keep well away from it until it is excavated.";
+  return { opt, good, verdict, ignored, offTopic };
+}
+function showDebrief() {
+  mission.done = true; save(); const d = $("debriefCard");
+  if (!mission.self) {
+    d.innerHTML = `<h2>Debrief</h2><div class="radio-card"><div class="avatar">AR</div><div>${MENTOR.name}: "Before I tell you what I saw in your log, how do you think it went?"</div></div>
+      <h3>How careful was your technique?</h3><div class="scale" data-k="tech">${["Rough", "Mostly careful", "Careful every time"].map((x, i) => `<button class="opt" data-v="${i + 1}">${x}</button>`).join("")}</div>
+      <h3>How sound was your reasoning?</h3><div class="scale" data-k="reason">${["Lots of guesses", "Some guesses", "Evidence every time"].map((x, i) => `<button class="opt" data-v="${i + 1}">${x}</button>`).join("")}</div>
+      <h3>What would you do differently?</h3><textarea id="diff"></textarea><p class="fb" id="selfErr" hidden>Answer both questions and write a sentence.</p><button class="ok" id="selfOk">See Dr. Reyes's feedback</button>`;
+    const val = {}; d.querySelectorAll(".scale").forEach((sc) => sc.querySelectorAll("button").forEach((b) => (b.onclick = () => { val[sc.dataset.k] = +b.dataset.v; sc.querySelectorAll("button").forEach((x) => x.classList.toggle("sel", x === b)); })));
+    $("selfOk").onclick = () => { const diff = $("diff").value.trim(); if (!val.tech || !val.reason || diff.split(/\s+/).length < 3) { $("selfErr").hidden = false; return; }
+      mission.self = { ...val, diff }; logEv("self", mission.self); save(); showDebrief(); };
+    return openSheet("debrief");
+  }
+  const ids = POIS.filter((p) => found.has(p.id)).map((p) => p.id), name = (id) => short(POIS.find((p) => p.id === id));
+  const clean = ids.filter((id) => mission.notes[id] && mission.notes[id].tech), slips = ids.filter((id) => mission.notes[id] && !mission.notes[id].tech);
+  const first = ids.filter((id) => mission.notes[id] && mission.notes[id].first), J = mission.report ? judgeReport() : null;
+  const techRec = slips.length === 0 ? 3 : slips.length <= 2 ? 2 : 1, reasonRec = first.length >= ids.length * 0.8 ? 3 : first.length >= ids.length * 0.5 ? 2 : 1;
+  const cmp = (self, rec, what) => self === rec ? `You rated your ${what} about right.` : self > rec ? `You rated your ${what} higher than your log shows.` : `You were harder on your ${what} than your log suggests.`;
+  d.innerHTML = `<h2>Debrief with ${MENTOR.name}</h2><p class="dim">Everything below comes from your instrument log: what you actually did in the cave.</p>
+    <h3>Your technique</h3><p>${clean.length} of ${ids.length} procedures done cleanly.</p>${slips.map((id) => `<div class="quote">${Cap(name(id))}: ${esc(mission.notes[id].techNotes.join(" "))}</div>`).join("")}<p class="dim">${cmp(mission.self.tech, techRec, "technique")}</p>
+    <h3>Your reasoning</h3><p>${first.length} of ${ids.length} interpretations right first time.</p>
+    ${Object.entries(mission.wrong).filter(([id]) => found.has(id)).map(([id, w]) => { const q = typeof SIM[id].quiz === "function" ? null : SIM[id].quiz; return `<div class="quote">At the ${name(id)} you first chose “${esc(w[0])}”.${q ? ` ${esc(q.why)}` : ""}</div>`; }).join("")}
+    <p class="dim">${cmp(mission.self.reason, reasonRec, "reasoning")}</p>
+    <h3>Your starting idea</h3><p>${!found.has(PRIOR.linkedFind) ? `You expected cave spikes to be “${esc(PRIOR.options[mission.prior])}”, but you never examined the stalactites, so this wasn't tested.`
+      : mission.prior === PRIOR.correct ? `You expected mineral from dripping water, and your lens work on the stalactites confirmed it.` : `You came in thinking they were “${esc(PRIOR.options[mission.prior].toLowerCase())}”. Your own observation of the stalactites showed calcite deposited by drips.`}</p>
+    <h3>Care for the site</h3><p>${mission.damage.length ? `You damaged the site ${mission.damage.length} time${mission.damage.length > 1 ? "s" : ""}: ${mission.damage.map((x) => `${x.tool} on the ${name(x.find)}`).join("; ")}. The council will read this.` : "No damage. The site is exactly as you found it."}</p>
+    ${J ? `<h3>Your report</h3><p>You recommended: <b>${J.opt.label}</b>, citing the ${mission.report.evidence.map(name).join(", the ")}.</p><div class="quote">“${esc(mission.report.why)}”</div>
+      <div class="verdict ${J.good ? "good" : "weak"}">${J.verdict}</div>${J.ignored.length ? `<p>You found evidence on ${J.ignored.map((t) => TAG_NAMES[t]).join(" and ")} but didn't cite it. The council would want to know.</p>` : ""}
+      ${J.offTopic.length ? `<p class="dim">${Cap(J.offTopic.map((x) => "the " + name(x)).join(", "))} ${J.offTopic.length > 1 ? "are" : "is"} interesting, but ${J.offTopic.length > 1 ? "don't" : "doesn't"} bear on this decision.</p>` : ""}` : ""}
+    <h3>Next steps</h3><ul>${[`Your own: “${esc(mission.self.diff)}”`, ...(slips.length ? ["Before each procedure, say the safety step out loud. Technique is half of a trustworthy result."] : []), ...(ids.length < POIS.length ? [`${POIS.length - ids.length} finds are still uninvestigated. More evidence makes a stronger report.`] : [])].map((x) => `<li>${x}</li>`).join("")}</ul>
+    <h3>One more site</h3>${mission.transfer ? `<div class="quote">${esc(mission.transfer)}</div><p class="dim">${TRANSFER.model}</p>` : `<p>${TRANSFER.q}</p><textarea id="tr"></textarea><p class="fb" id="trErr" hidden>Write at least a sentence.</p><button class="ok" id="trOk">Submit</button>`}
+    <p style="margin-top:16px"><span class="stars">★</span> <b>${starSum()} / ${POIS.length * 3}</b> stars · ${ids.length} finds · ${mission.damage.length} damage</p>
+    <button class="ok" id="dbBack">Back to the cave</button> <button class="ok" id="dbAgain" style="border-color:var(--line);font-weight:400">Start a new mission</button>`;
+  if ($("trOk")) $("trOk").onclick = () => { const v = $("tr").value.trim(); if (v.split(/\s+/).length < 5) { $("trErr").hidden = false; return; } mission.transfer = v; logEv("transfer"); save(); showDebrief(); };
+  $("dbBack").onclick = () => closeSheet("debrief");
+  $("dbAgain").onclick = () => { if (!confirm("Start a new mission? Your notebook and report will be cleared.")) return; found.clear(); Object.keys(stars).forEach((k) => delete stars[k]); mission = M0(); save(); location.reload(); };
+  openSheet("debrief");
+}
+
+window.__sim = { startProcedure, get pitch() { return pitch; }, setPitch: (v) => (pitch = v) };
 
 // ---------- input ----------
 const keys = new Set();
@@ -338,7 +669,7 @@ addEventListener("keyup", (e) => keys.delete(e.code));
 let lookId = null, lx = 0, ly = 0;
 canvas.addEventListener("pointerdown", (e) => { if (lookId === null) { lookId = e.pointerId; lx = e.clientX; ly = e.clientY; canvas.setPointerCapture(e.pointerId); } });
 canvas.addEventListener("pointermove", (e) => {
-  if (e.pointerId !== lookId || !playing) return;
+  if (e.pointerId !== lookId || (!playing && !lookOnly)) return;
   const k = isTouch ? 0.006 : 0.004;
   yaw -= (e.clientX - lx) * k; pitch -= (e.clientY - ly) * k;
   pitch = Math.max(-1.3, Math.min(1.3, pitch)); lx = e.clientX; ly = e.clientY;
@@ -386,10 +717,10 @@ renderer.setAnimationLoop((now) => {
 // ---------- start ----------
 cave.initialized.then(() => {
   $("load").textContent = found.size ? `Welcome back — ${found.size} discoveries already in your notebook.` : "";
-  $("start").disabled = false; window.caveReady = true;
+  caveLoaded = true; canStart(); if (mission.prior === null) $("load").textContent = "Answer the question above to enter."; window.caveReady = true;
 }).catch((e) => ($("load").textContent = "Could not load the cave: " + e.message));
-$("start").onclick = () => { audio.start(); closeSheet("intro"); };
-window.cave = { camera, POIS, renderer, scene, keys, updateTargets, playFx, resolveUse, TOOLS, audio, setView: (x, z, y, p) => { camera.position.x = x; camera.position.z = z; yaw = y; pitch = p; }, select: selectTool, use: useTool, found };
+$("start").onclick = () => { audio.start(); closeSheet("intro"); if (!mission.log.some((e) => e.type === "entered")) { logEv("entered"); setTimeout(() => radio(RADIO.start), 800); } updateReport(); if (mission.done) showDebrief(); };
+window.cave = { mission, showReport, showDebrief, judgeReport, camera, POIS, renderer, scene, keys, updateTargets, playFx, resolveUse, TOOLS, audio, setView: (x, z, y, p) => { camera.position.x = x; camera.position.z = z; yaw = y; pitch = p; }, select: selectTool, use: useTool, found };
 </script>
 </body>
 </html>
