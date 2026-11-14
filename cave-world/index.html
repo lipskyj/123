@@ -176,7 +176,7 @@
   .cs-round { width:68px; height:68px; border-radius:50%; border:0; display:grid; place-items:center; color:#fff; padding:16px; } .cs-round svg { width:100%; height:100%; }
   .cs-round.accept { background:#1fbf5a; animation:bounce 1s infinite; } .cs-round.decline { background:#e5484d; }
   @keyframes bounce { 50% { transform:translateY(-5px); } }
-  .avatar.pic { background-size:cover; background-position:center; color:transparent; }
+  .avatar.pic, .cs-pic.pic { background-size:cover; background-position:center; color:transparent; font-size:0; }
   .wave { display:flex; gap:3px; align-items:center; height:22px; } .wave i { width:3px; height:4px; border-radius:2px; background:var(--acc); opacity:.5; }
   #phone.speaking .wave i { animation:wv .5s infinite alternate; opacity:1; } .wave i:nth-child(2) { animation-delay:.1s !important; } .wave i:nth-child(3) { animation-delay:.2s !important; } .wave i:nth-child(4) { animation-delay:.05s !important; } .wave i:nth-child(5) { animation-delay:.15s !important; }
   @keyframes wv { to { height:20px; } }
