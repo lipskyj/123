@@ -1,0 +1,30 @@
+{
+  "milestone": "Clean-context validation in progress",
+  "overall": "incomplete",
+  "summary": "Core system built and passing its automated tests. Independent validation by fresh agents is running. Paper conformance and language-model behaviour are pending.",
+  "works": [
+    "Teacher intake, one-question-at-a-time interview, proposed design with sources, assumptions and suggestions",
+    "Direct edits and natural-language revision, each creating a new version; downstream prompts and scenes regenerate",
+    "Approval states (draft, revised, test-approved, educator-approved, rejected, superseded) enforced at build and at session start",
+    "Student runtime: Preparation, Practice (Roleplay or Teachback, optional 3D cave field work), Feedback with self-assessment, citations and transfer",
+    "Adaptation tied to criteria and evidence; answer-seeking declined; misconceptions probed",
+    "Persistence and resume; export / import; teacher view of sessions, evidence and adaptations",
+    "Two bundled cross-domain sample experiences produced through the authoring steps"
+  ],
+  "remains": [
+    "Paper conformance audit (paper not supplied)",
+    "A language-model provider (no key available); current behaviour is rule-based",
+    "Validation with real teachers and students (none has happened)",
+    "Sharing beyond files: accounts, class rosters, class analytics",
+    "PDF upload, editing of individual challenge lines, mobile and screen-reader testing"
+  ],
+  "decisions": [
+    ["Clean browser-only redesign instead of extending the reference repository", "The reference needs a server, Google OAuth and OpenAI realtime voice; the owner publishes on GitHub Pages."],
+    ["Deterministic provider behind a provider interface", "No model key in this environment. Record/replay proves the seam."],
+    ["One design record with derived prompts instead of a multi-agent artifact pipeline", "Makes teacher revisions propagate by construction."],
+    ["Mentor phase renamed Preparation", "Matches the prompt's contract wording."],
+    ["Optional 3D world (cave) added as a practice setting", "Requested by the owner; students gather evidence and write field notes before the conversation."]
+  ],
+  "validation": [],
+  "nextMilestone": "Repair findings from independent validation, rerun, then supply the paper for a conformance audit."
+}
