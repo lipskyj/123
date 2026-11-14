@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Illustrated portrait of Victor Hale, a fictional tour operator">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfd9df"/><stop offset=".55" stop-color="#9fb2bd"/><stop offset="1" stop-color="#5d7383"/></linearGradient>
+    <radialGradient id="sun" cx="78%" cy="18%" r="45%"><stop offset="0" stop-color="#fff6dd" stop-opacity=".9"/><stop offset="1" stop-color="#fff6dd" stop-opacity="0"/></radialGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e2a57c"/><stop offset="1" stop-color="#b9774f"/></linearGradient>
+    <linearGradient id="fleece" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2f4466"/><stop offset="1" stop-color="#1a2840"/></linearGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e3e1dc"/><stop offset="1" stop-color="#8f8b85"/></linearGradient>
+    <pattern id="stub" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="1.500" cy="1.500" r=".9" fill="#6b5a4d" opacity=".55"/><circle cx="3.800" cy="3.600" r=".8" fill="#9a8e84" opacity=".55"/></pattern>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/><rect width="400" height="400" fill="url(#sun)"/>
+  <!-- car park hints -->
+  <rect x="0" y="250" width="400" height="150" fill="#4b5a63" opacity=".35"/>
+  <rect x="20" y="226" width="90" height="34" rx="10" fill="#e9ecef" opacity=".55"/><rect x="300" y="232" width="100" height="30" rx="10" fill="#8c2f2f" opacity=".4"/>
+  <circle cx="40" cy="262" r="9" fill="#2a2f33" opacity=".5"/><circle cx="92" cy="262" r="9" fill="#2a2f33" opacity=".5"/>
+  <!-- shoulders / fleece -->
+  <path d="M50 400 C54 330 100 300 158 290 L242 290 C300 300 346 330 350 400Z" fill="url(#fleece)"/>
+  <path d="M166 288 L200 330 L234 288 L240 300 L206 346 L194 346 L160 300Z" fill="#253758"/>
+  <path d="M176 290 L200 322 L224 290 L214 286 L200 304 L186 286Z" fill="#f2f4f6"/>
+  <path d="M196 322 L204 322 L202 400 L198 400Z" fill="#b8c2cc"/><rect x="194" y="330" width="12" height="16" rx="2" fill="#c9d1d8"/>
+  <path d="M98 330 C120 318 140 312 160 312" stroke="#3e5781" stroke-width="3" fill="none" opacity=".7"/>
+  <!-- neck -->
+  <path d="M172 238 L228 238 L232 292 C214 304 186 304 168 292Z" fill="#b9774f"/>
+  <!-- ears -->
+  <ellipse cx="126" cy="186" rx="13" ry="20" fill="#cf8f66"/>
+  <!-- head -->
+  <path d="M134 156 C134 110 164 92 200 92 C236 92 266 110 266 156 C266 214 242 252 200 254 C158 252 134 214 134 156Z" fill="url(#skin)"/>
+  <path d="M146 196 C146 236 172 254 200 254 C228 254 254 236 254 196 C246 222 226 236 200 236 C174 236 154 222 146 196Z" fill="url(#stub)"/>
+  <path d="M174 222 C186 232 214 232 226 222 C228 238 214 250 200 250 C186 250 172 238 174 222Z" fill="url(#stub)"/>
+  <!-- hair swept back -->
+  <path d="M130 150 C124 96 160 70 204 70 C250 70 280 98 272 152 C266 128 252 112 232 106 C214 100 186 98 166 108 C148 116 136 132 130 150Z" fill="url(#hair)"/>
+  <path d="M156 96 C186 82 230 84 262 108 M150 112 C178 96 222 96 254 116" stroke="#ffffff" stroke-width="3" fill="none" opacity=".6"/>
+  <path d="M132 150 C130 168 132 176 134 182 L140 182 C138 168 138 158 140 150Z" fill="#b5b1ab"/>
+  <!-- eyebrows -->
+  <path d="M152 152 C162 146 176 146 186 152" stroke="#7a6f66" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M214 150 C224 142 238 142 248 148" stroke="#7a6f66" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- eyes (slightly narrowed) -->
+  <path d="M154 170 C162 163 178 163 186 170 C178 175 162 175 154 170Z" fill="#f6efe6"/>
+  <path d="M214 170 C222 163 238 163 246 170 C238 175 222 175 214 170Z" fill="#f6efe6"/>
+  <circle cx="170" cy="169.500" r="5" fill="#4d6a7d"/><circle cx="230" cy="169.500" r="5" fill="#4d6a7d"/>
+  <circle cx="170" cy="169.500" r="2.300" fill="#13202a"/><circle cx="230" cy="169.500" r="2.300" fill="#13202a"/>
+  <circle cx="172" cy="167.500" r="1.500" fill="#fff"/><circle cx="232" cy="167.500" r="1.500" fill="#fff"/>
+  <path d="M152 168 C162 160 178 160 188 168 M212 168 C222 160 238 160 248 168" stroke="#5a3a28" stroke-width="2.500" fill="none"/>
+  <path d="M154 176 C162 179 176 179 186 176 M214 176 C222 179 236 179 246 176" stroke="#8a5536" stroke-width="1.400" fill="none" opacity=".7"/>
+  <path d="M148 172 C144 176 144 180 147 182 M252 172 C256 176 256 180 253 182" stroke="#8a5536" stroke-width="1.500" fill="none" opacity=".7"/>
+  <!-- nose -->
+  <path d="M200 172 C198 190 192 200 188 206 C194 212 206 212 212 206 C208 200 202 190 200 172Z" fill="#a8663f" opacity=".5"/>
+  <path d="M188 206 C192 210 196 210 198 208 M212 206 C208 210 204 210 202 208" stroke="#7a4229" stroke-width="2.200" fill="none" stroke-linecap="round"/>
+  <!-- lopsided salesman smile -->
+  <path d="M176 224 C190 232 212 230 228 218" stroke="#7a3328" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M182 226 C194 232 210 230 222 222 C214 230 196 232 182 226Z" fill="#fff6ee"/>
+  <path d="M228 218 C232 216 234 212 233 208" stroke="#8a5536" stroke-width="1.800" fill="none" opacity=".7"/>
+  <!-- hand and phone at his ear (his left, our right) -->
+  <path d="M262 150 C290 140 300 170 296 214 C294 244 280 262 262 266 C250 262 246 246 250 226 L256 170Z" fill="#cf8f66"/>
+  <rect x="252" y="126" width="34" height="96" rx="9" transform="rotate(10 269 174)" fill="#15191c"/>
+  <rect x="257" y="134" width="24" height="78" rx="5" transform="rotate(10 269 174)" fill="#2b3a46"/>
+  <path d="M258 200 C270 196 286 198 296 204 M256 220 C268 216 284 218 294 224 M256 240 C266 236 280 238 288 244" stroke="#a8663f" stroke-width="2.200" fill="none" opacity=".8"/>
+  <path d="M246 230 C252 214 262 210 268 214 C270 226 262 238 252 246Z" fill="#d89a70"/>
+  <!-- watch -->
+  <rect x="262" y="262" width="40" height="18" rx="5" transform="rotate(-12 282 271)" fill="#c9ccd1"/>
+</svg>
