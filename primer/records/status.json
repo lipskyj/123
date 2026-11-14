@@ -1,7 +1,7 @@
 {
- "milestone": "Repairs after independent teacher review; validation re-running",
+ "milestone": "Validation round 3: fresh simulated students",
  "overall": "incomplete",
- "summary": "Core system built; 32 engine tests and 34 browser checks pass. An independent simulated teacher found blocking problems, which were repaired; a second teacher and a cold-build auditor are re-checking. Simulated students and the evidence evaluator follow. Paper conformance and model-based behaviour remain pending.",
+ "summary": "40 engine tests and 34 browser checks pass. Two rounds of independent review (two simulated teachers, one cold-build auditor) found blocking and major problems that have been repaired. Three simulated students are now playing; an independent evidence evaluator follows. Paper conformance and model-based behaviour remain pending.",
  "works": [
   "Teacher intake, one-question-at-a-time interview, proposed design with sources, assumptions and suggestions",
   "Direct edits and natural-language revision, each creating a new version; downstream prompts and scenes regenerate",
@@ -12,11 +12,11 @@
   "Two bundled cross-domain sample experiences produced through the authoring steps"
  ],
  "remains": [
+  "Results of the student round and the independent evidence evaluator",
   "Paper conformance audit (paper not supplied)",
-  "A language-model provider (no key available); current behaviour is rule-based",
+  "A language-model provider; current matching is word-based and can still miss or over-credit",
   "Validation with real teachers and students (none has happened)",
-  "Sharing beyond files: accounts, class rosters, class analytics",
-  "PDF upload, editing of individual challenge lines, mobile and screen-reader testing"
+  "Accounts, class rosters, class analytics; withdrawal cannot reach files already sent to students"
  ],
  "decisions": [
   [
@@ -43,13 +43,23 @@
  "validation": [
   {
    "role": "Fresh teacher 1 (simulated, statistics brief)",
-   "result": "Completed all steps; approval enforced; 2 blocking + 8 major findings; would not use with a class. Repaired.",
+   "result": "All steps completed; approval enforced; 2 blocking + 8 major; would not use. Repaired (repair 3).",
    "record": "records/validation/fresh-teacher-report.md"
   },
   {
-   "role": "Cold-build auditor, attempt 1",
-   "result": "Stopped by a model limit before reporting; rerun.",
-   "record": "\u2014"
+   "role": "Fresh teacher 2 (simulated, re-check)",
+   "result": "11 of 21 fixed, 8 partly; new 1 blocking + 4 major; would not use yet. Repaired (repair 4).",
+   "record": "records/validation/fresh-teacher-recheck.md"
+  },
+  {
+   "role": "Cold-build auditor",
+   "result": "Starts and works end to end; 0 blocking, 5 major; C5 failed as observed. Repaired (repair 4).",
+   "record": "records/validation/cold-build-audit.md"
+  },
+  {
+   "role": "Fresh students (3 profiles)",
+   "result": "Running.",
+   "record": "records/validation/"
   }
  ],
  "nextMilestone": "Repair findings from independent validation, rerun, then supply the paper for a conformance audit."
