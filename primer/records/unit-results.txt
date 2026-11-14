@@ -38,3 +38,6 @@ ok 37 - round 2 F1/F4 (cold audit): character speech never contains the teacher'
 ok 38 - round 2 F1 (cold audit): evidence for another criterion is acknowledged and that criterion is not asked again
 ok 39 - round 2 F2 (cold audit): warm-up answers are not credited as evidence, and feedback does not list the hidden words
 ok 40 - round 2 F12: an old version can be restored as a new draft
+ok 41 - round 3 (Maya): follow-ups vary, 'already asked' moves on, correct answers are not filed as misconceptions
+ok 42 - round 3 (Leo): stating a misconception is never recorded as correcting it, and is not credited as understanding
+ok 43 - round 3 (Sam): a negative reply to a voiced misconception is a correction; questions get case facts

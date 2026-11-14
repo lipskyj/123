@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-14T10:48:34.172Z",
+ "ranAt": "2026-11-14T15:19:19.816Z",
  "results": [
   {
    "name": "landing page shows teacher and student entry points",
@@ -14,7 +14,7 @@
   {
    "name": "interview asks one question at a time",
    "ok": true,
-   "detail": "6 questions"
+   "detail": "7 questions"
   },
   {
    "name": "proposed design is shown as a draft with educator sources",

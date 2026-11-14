@@ -21,7 +21,7 @@ while (await p.locator("#qh").count()) { const q = await p.locator("#qh").innerT
   if (/How should students practise/.test(q)) await p.click("button.opt >> text=Roleplay"); else if (/How hard/.test(q)) await p.click("button.opt >> text=Moderate"); else if (/how much help/.test(q)) await p.click("button.opt >> nth=2");
   else if (/Who should the student talk to/.test(q)) { await p.fill("#ans", fx.answers.character); await p.click("#ok"); } else if (/goes wrong/.test(q)) { await p.fill("#ans", fx.answers.stakes); await p.click("#ok"); } else await p.click("#skip");
   await p.waitForTimeout(60); }
-check("interview asks one question at a time", asked === 6 && new Set(seenQ).size === 6, `${asked} questions`);
+check("interview asks one question at a time", asked === 7 && new Set(seenQ).size === 7, `${asked} questions`);
 let t = await text(); check("proposed design is shown as a draft with educator sources", /Draft/.test(t) && /From you/.test(t) && /Chosen by Primer|Written by Primer/.test(t));
 check("design quotes the educator's material", t.includes("A position is what a party says they want") || /BATNA/.test(t));
 check("skipped question is listed as a decision Primer made", /Decisions Primer made for you/.test(t));

@@ -26,8 +26,8 @@ test("schema: proposed designs, packages and sessions validate", () => {
 test("authoring: interview asks one question at a time and records answers", () => {
   const env = setup(), { answers, ...fields } = fixture("mba-negotiation"); const intake = env.authoring.saveIntake(fields); const seen = [];
   for (let q; (q = env.authoring.nextQuestion(intake.id)); ) { seen.push(q.id); assert.ok(q.text.endsWith("?")); env.authoring.answer(intake.id, q.id, answers[q.id] || ""); }
-  assert.deepEqual(seen, ["character", "stakes", "difficulty", "help", "transfer"]);   // template was already chosen, so it is not asked
-  assert.equal(env.store.get("intakes", intake.id).answers.length, 5);
+  assert.deepEqual(seen, ["character", "stakes", "facts", "difficulty", "help", "transfer"]);   // template was already chosen, so it is not asked
+  assert.equal(env.store.get("intakes", intake.id).answers.length, 6);
 });
 test("authoring: educator materials and inputs shape the design", () => {
   const a = author(setup(), "mba-negotiation").design, b = author(setup(), "cave-geology").design;
@@ -264,7 +264,7 @@ test("round 2 F1 (cold audit): evidence for another criterion is acknowledged an
 });
 test("round 2 F2 (cold audit): warm-up answers are not credited as evidence, and feedback does not list the hidden words", () => {
   const env = setup(), pkg = built(env, "mba-negotiation"), d = pkg.design; let s = env.runtime.start(pkg.id, {});
-  s = env.runtime.submitPreparation(s.id, [`${d.criteria[0].lookFors.join(" ")} ${d.criteria[1].lookFors.join(" ")}`, "Not sure."]); s = env.runtime.endPractice(s.id); s = env.runtime.submitSelfAssessment(s.id, SELF);
+  s = env.runtime.submitPreparation(s.id, [`${d.criteria[0].lookFors.join(" ")} ${d.criteria[1].lookFors.join(" ")}`, "I am not sure."]); s = env.runtime.endPractice(s.id); s = env.runtime.submitSelfAssessment(s.id, SELF);
   assert.equal(s.feedback.strengths.length, 0); for (const g of s.feedback.growth) assert.ok(!g.observation.includes(d.criteria[0].lookFors.slice(0, 3).join(", ")));
 });
 test("round 2 F12: an old version can be restored as a new draft", () => {
@@ -272,3 +272,50 @@ test("round 2 F12: an old version can be restored as a new draft", () => {
   const back = env.authoring.restore(design.id, TEACHER); assert.equal(back.version, 3); assert.equal(back.difficulty, design.difficulty); assert.equal(back.state, "revised");
 });
 
+
+// ---------- regressions from validation round 3 (student-maya-report.md): replay of the student's own replies ----------
+test("round 3 (Maya): follow-ups vary, 'already asked' moves on, correct answers are not filed as misconceptions", async () => {
+  const { readFileSync } = await import("node:fs");
+  const old = JSON.parse(readFileSync(new URL("../records/validation/statistics-experience.primer.json", import.meta.url))).packages[0].design;
+  const env = setup(); const d = env.provider.derive({ ...structuredClone(old), state: "revised", notes: old.notes || [], materials: old.materials || [] });
+  env.store.put("intakes", { id: d.intakeId, createdAt: d.createdAt, answers: [], materials: d.materials }); env.store.put("designs", d);
+  const pkg = env.authoring.build(env.authoring.approveDesign(d.id, TEST).id);
+  const maya = JSON.parse(readFileSync(new URL("../records/validation/student-maya-session.json", import.meta.url)));
+  const said = (k) => maya.turns.filter((t) => t.who === "learner" && t.kind === k).map((t) => t.text);
+  let s = env.runtime.start(pkg.id, { name: "Maya replay" }); s = env.runtime.submitPreparation(s.id, said("activation-answer").map((a) => (a.split(/\s+/).length < 3 ? "I am not sure. " + a : a)));
+  for (const text of said("practice")) { if (s.phase !== "practice") break; s = env.runtime.say(s.id, text); }
+  const harder = s.turns.filter((t) => t.kind === "raise").map((t) => t.text); assert.equal(new Set(harder).size, harder.length, "follow-up lines are not repeated");
+  const afterVoice = (e) => { const i = s.turns.findIndex((t) => t.id === e.turnId); return i > 0 && s.turns[i - 1].kind === "probe-voice"; };
+  const m1 = s.evidence.filter((e) => e.ref === "m1" && !afterVoice(e)); for (const e of m1) assert.match(s.turns.find((t) => t.id === e.turnId).text, /chance|fluke|probab/i, "m1 evidence must be about the chance/probability reading");
+  const already = s.turns.find((t) => /already asked/i.test(t.text)); if (already) { const next = s.turns[s.turns.indexOf(already) + 1]; assert.ok(next.kind !== "raise", "a repeated question is not asked again"); }
+  if (s.phase === "practice") s = env.runtime.endPractice(s.id); s = env.runtime.submitSelfAssessment(s.id, said("self-assessment-answer"));
+  assert.ok(s.feedback.nextActions[0].startsWith("Your own next step")); for (const x of s.feedback.strengths) assert.ok(!/harder version/.test(x.inference));
+  for (const c of [...s.feedback.strengths, ...s.feedback.misconceptions].flatMap((x) => x.citations)) assert.ok(!/\w…$/.test(c.quote) || / \S+…$/.test(c.quote));
+});
+
+// Replays of the other two students' own replies (student-leo-report.md, student-sam-report.md).
+async function replay(file, pkgFn) { const { readFileSync } = await import("node:fs"); const rec = JSON.parse(readFileSync(new URL(file, import.meta.url))); const env = setup(); const pkg = pkgFn(env);
+  const said = (k) => rec.turns.filter((t) => t.who === "learner" && t.kind === k).map((t) => t.text); let s = env.runtime.start(pkg.id, {}); s = env.runtime.submitPreparation(s.id, said("activation-answer").map((a) => (a.split(/\s+/).length < 3 ? "I am not sure. " + a : a)));
+  for (const text of said("practice")) { if (s.phase !== "practice") break; s = env.runtime.say(s.id, text); } if (s.phase === "practice") s = env.runtime.endPractice(s.id);
+  s = env.runtime.submitSelfAssessment(s.id, said("self-assessment-answer")); return { env, pkg, s, rec }; }
+test("round 3 (Leo): stating a misconception is never recorded as correcting it, and is not credited as understanding", async () => {
+  const { readFileSync } = await import("node:fs"); const old = JSON.parse(readFileSync(new URL("../records/validation/statistics-experience.primer.json", import.meta.url))).packages[0].design;
+  const { s } = await replay("../records/validation/student-leo-session.json", (env) => { const d = env.provider.derive({ ...structuredClone(old), state: "revised", notes: [], materials: old.materials || [] });
+    env.store.put("intakes", { id: d.intakeId, createdAt: d.createdAt, answers: [], materials: d.materials }); env.store.put("designs", d); return env.authoring.build(env.authoring.approveDesign(d.id, TEST).id); });
+  const learner = s.turns.filter((t) => t.who === "learner");
+  const leo1 = learner.find((t) => /97%|97 ?percent/.test(t.text) && !/backwards|wrong/i.test(t.text));
+  if (leo1) assert.ok(!s.evidence.some((e) => e.turnId === leo1.id && e.kind === "misconception-corrected"), "stating the 97% belief is not a correction");
+  for (const e of s.evidence.filter((x) => x.kind === "criterion")) assert.ok(!s.evidence.some((x) => x.turnId === e.turnId && x.kind === "misconception-voiced"), "no criterion credit from a turn that voices a misconception");
+  const back = learner.find((t) => /backwards/i.test(t.text)); if (back) assert.ok(s.evidence.some((e) => e.turnId === back.id && e.kind === "misconception-corrected"), "an explicit retraction counts as a correction");
+  const prompts = s.turns.filter((t) => t.kind === "prompt").map((t) => t.text); assert.equal(new Set(prompts).size, prompts.length, "no question asked word for word twice");
+});
+test("round 3 (Sam): a negative reply to a voiced misconception is a correction; questions get case facts", async () => {
+  const env = setup(), pkg = built(env, "mba-negotiation"); assert.ok(pkg.design.practice.facts.length >= 2);
+  let s = env.runtime.start(pkg.id, {}); s = env.runtime.submitPreparation(s.id, PREP);
+  s = env.runtime.say(s.id, "what's your current offer?"); assert.equal(s.turns.at(-1).kind, "fact"); assert.equal(s.turns.at(-1).text, pkg.design.practice.facts[0]);
+  let n = 0; while (s.phase === "practice" && s.turns.at(-1).kind !== "probe-voice" && n++ < 20) { const cid = s.turns.at(-1).criterionId || pkg.design.criteria[s.practice.index].id; s = env.runtime.say(s.id, `My advice: ${pkg.design.criteria.find((c) => c.id === cid).lookFors.join(" ")}.`); }
+  assert.equal(s.turns.at(-1).kind, "probe-voice"); s = env.runtime.say(s.id, "probably dont do that, if you say your bottom line thats all theyll give you");
+  if (s.phase === "practice") s = env.runtime.endPractice(s.id); s = env.runtime.submitSelfAssessment(s.id, SELF);
+  assert.equal(s.feedback.misconceptions.find((m) => m.misconceptionId === "m1").status, "corrected");
+  const { s: replayed } = await replay("../records/validation/student-sam-session.json", (e) => built(e, "mba-negotiation")); assert.ok(replayed.turns.some((t) => t.kind === "fact"), "Sam's questions now get case facts");
+});

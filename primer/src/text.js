@@ -3,11 +3,13 @@ const STOP = new Set(("a an the and or but if then than so of in on at to for fr
   "i you he she we they me my your his her our their them us do does did done doing have has had having will would can could should may might must shall not no yes " +
   "what which who whom whose when where why how all any both each few more most other some such only own same too very just also there here up down out off again once " +
   "because while during before after above below between through until against am s t don doesn isn aren wasn weren won wouldn couldn shouldn ll re ve d m like get got make made use used using one two " +
-  "students student learner learners able understand know explain describe identify apply").split(" "));
+  "students student learner learners able understand know explain describe identify apply theres thats whats its lets youre theyre ive im id youd hes shes isnt arent wasnt dont doesnt didnt cant wont really actually").split(" "));
 
-export const sentences = (t) => (t || "").replace(/\s+/g, " ").split(/(?<=[.!?])\s+(?=[A-Z0-9"'(])/).map((s) => s.trim()).filter((s) => s.length > 0);
+export const sentences = (t) => (t || "").split(/\n+/).flatMap((line) => line.replace(/\s+/g, " ").trim().split(/(?<=[.!?])\s+(?=[A-Z0-9"'(])/).map((s) => s.trim()).filter((s) => s.length > 0 && /[.!?]["')]?$/.test(s))); // lines without end punctuation are headings
 export const words = (t) => (t || "").toLowerCase().replace(/[’']/g, "").match(/[a-z0-9]+/g) || [];
 export function stem(w) {
+  if (w.length > 5 && /(gg|tt|nn|dd|pp)er$/.test(w)) return w.slice(0, -3);   // bigger -> big
+  if (w.length > 5 && /ller$/.test(w)) return w.slice(0, -2);                // smaller -> small
   if (w.length > 5 && w.endsWith("ies")) return w.slice(0, -3) + "y";
   for (const suf of ["ations", "ation", "ments", "ment", "ingly", "ings", "ing", "edly", "ed", "es", "s", "ly"]) {
     if (w.length - suf.length >= 4 && w.endsWith(suf)) return w.slice(0, -suf.length);
@@ -38,7 +40,7 @@ export function overlap(text, targetStems) {
 export const NEGATION = /\b(not|no|never|isn't|isnt|aren't|arent|doesn't|doesnt|don't|dont|wrong|myth|mistake|mistaken|misconception|incorrect|false|actually|rather than|instead)\b/i;
 export const ANSWER_SEEKING = /\b((just )?(tell|give) me (the |an? )?(right |correct |best )?answer|what('s| is) the (right |correct |best )?answer|what should i (say|do|write|answer)|can you (just )?(solve|do|answer) (it|this|that)( for me)?|i give up|just tell me)\b/i;
 
-export function quote(text, max = 160) { const t = (text || "").replace(/\s+/g, " ").trim(); return t.length > max ? t.slice(0, max - 1).trimEnd() + "…" : t; }
+export function quote(text, max = 160) { const t = (text || "").replace(/\s+/g, " ").trim(); if (t.length <= max) return t; const cut = t.slice(0, max); const sp = cut.lastIndexOf(" "); return (sp > max * 0.6 ? cut.slice(0, sp) : cut).replace(/[,;:\s]+$/, "") + "…"; }
 export function splitList(t) { return (t || "").split(/\n|;|•|(?:^|\s)[-*]\s|\d+[.)]\s/).map((s) => s.trim().replace(/^[-*•]\s*/, "")).filter((s) => s.length > 2); }
 export function hash(str) { let h = 2166136261; for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return (h >>> 0).toString(36); }
 export function rng(seed) { let s = typeof seed === "number" ? seed : parseInt(hash(String(seed)), 36); return () => ((s = (Math.imul(s, 1664525) + 1013904223) >>> 0) / 4294967296); }

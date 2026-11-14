@@ -132,6 +132,7 @@ function viewDesign(designId) {
       ${F("How hard the character pushes", d.difficulty, null, "difficulty")}${F("Help when a student is stuck", HELP[d.helpPolicy], null, "helpPolicy")}
       ${F("Kind of practice", TEMPLATE_HELP[d.template], null, "template")}${F("Longest practice (student replies)", String(d.practice.maxTurns), null, "practice.maxTurns")}
       ${F("Classroom constraints (never shown to students)", d.constraints.join("\n") || "None", null, "constraints")}
+      ${F("Facts the character shares when asked (one at a time)", (d.facts || []).join("\n") || "None", null, "facts")}
       ${d.notes && d.notes.length ? F("Your notes (never shown to students)", d.notes.join("\n"), null, "notes") : ""}</div>
 
     <h2>Success criteria</h2><p class="dim small">Feedback covers only these. Under each is the question the character asks and the words that count as evidence of it.</p>
@@ -173,7 +174,7 @@ function viewDesign(designId) {
         <p class="dim small" style="margin-top:10px">To give it to students: send them the downloaded file. On the student page they choose "Open an experience file". Their work stays in their own browser, so you will only see sessions from this device.</p>` : `<button class="primary" id="buildBtn">Create the student experience</button>`}` : ""}</div>` : ""}`;
 
   const ENUM_OPTS = { difficulty: [["gentle", "Gentle — never raises the challenge"], ["moderate", "Moderate"], ["demanding", "Demanding — fewer attempts"]], helpPolicy: Object.entries(HELP), template: Object.entries(TEMPLATE_HELP) };
-  const LISTS = new Set(["constraints", "notes", "preparation.activation", "preparation.keyPoints"]);
+  const LISTS = new Set(["facts", "constraints", "notes", "preparation.activation", "preparation.keyPoints"]);
   app.querySelectorAll(".ed").forEach((b) => (b.onclick = async () => {
     const path = b.dataset.path; let cur;
     try { needName(); } catch (e) { return fail(e); }

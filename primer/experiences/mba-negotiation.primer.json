@@ -1,24 +1,24 @@
 {
  "packages": [
   {
-   "id": "exp-u4g2k1",
-   "designId": "design-wh2gwn",
+   "id": "exp-2b3mwi",
+   "designId": "design-ydl1xj",
    "designVersion": 1,
    "title": "Salary negotiation: interests before positions",
-   "builtAt": "2026-11-14T10:48:26.412Z",
+   "builtAt": "2026-11-14T15:18:58.525Z",
    "provider": "deterministic",
    "approval": {
     "type": "test",
     "by": "Automated test",
-    "at": "2026-11-14T10:48:26.412Z"
+    "at": "2026-11-14T15:18:58.525Z"
    },
    "design": {
-    "id": "design-wh2gwn",
-    "intakeId": "intake-1f6nl2m",
+    "id": "design-ydl1xj",
+    "intakeId": "intake-dt27u6",
     "version": 1,
     "state": "test-approved",
     "supersedes": null,
-    "createdAt": "2026-11-14T10:48:26.411Z",
+    "createdAt": "2026-11-14T15:18:58.524Z",
     "title": "Salary negotiation: interests before positions",
     "template": "roleplay",
     "world": null,
@@ -63,6 +63,13 @@
      }
     ],
     "notes": [],
+    "facts": [
+     "I got the offer on Monday: 72,000 base salary, start on the 1st of next month, no signing bonus.",
+     "My only other offer is from a smaller firm at 65,000, and I don't love it.",
+     "Honestly I'd really like two remote days a week, more than an extra few thousand.",
+     "I was planning to email back today asking for 80,000, because that's what my friend got.",
+     "The hiring manager said they need someone in place before a big project in six weeks."
+    ],
     "stakes": {
      "text": "the colleague will either accept a weak offer immediately or blurt out their bottom line and damage the relationship with their future manager",
      "source": {
@@ -115,9 +122,9 @@
        "alternative",
        "determines",
        "negotiated",
-       "better",
        "negotiation",
-       "agreement"
+       "agreement",
+       "point"
       ],
       "source": {
        "kind": "teacher",
@@ -157,7 +164,7 @@
        "materials": [
         {
          "material": "Lecture notes week 3",
-         "excerpt": "Value is created when parties trade issues they value differently: a candidate may value a later start date or remote d…"
+         "excerpt": "Value is created when parties trade issues they value differently: a candidate may value a later start date or remote…"
         },
         {
          "material": "Lecture notes week 3",
@@ -175,7 +182,6 @@
        "best",
        "opening",
        "move",
-       "state",
        "bottom",
        "line",
        "nobody",
@@ -189,7 +195,6 @@
       "distinct": [
        "opening",
        "move",
-       "state",
        "bottom",
        "line",
        "nobody",
@@ -203,7 +208,6 @@
       "cues": [
        "negotiation",
        "fixed",
-       "pie",
        "every",
        "gain",
        "side",
@@ -215,7 +219,6 @@
       },
       "distinct": [
        "fixed",
-       "pie",
        "every",
        "gain",
        "loss"
@@ -228,7 +231,7 @@
       "fact": "Value is created when parties trade issues they value differently: a candidate may value a later start date or remote days more than the employer values granting them.",
       "source": {
        "material": "Lecture notes week 3",
-       "excerpt": "Value is created when parties trade issues they value differently: a candidate may value a later start date or remote d…"
+       "excerpt": "Value is created when parties trade issues they value differently: a candidate may value a later start date or remote…"
       }
      },
      {
@@ -302,7 +305,7 @@
     "revisions": [],
     "history": [
      {
-      "at": "2026-11-14T10:48:26.412Z",
+      "at": "2026-11-14T15:18:58.525Z",
       "actor": {
        "type": "test",
        "name": "Automated test"
@@ -320,7 +323,7 @@
        "text": "Value is created when parties trade issues they value differently: a candidate may value a later start date or remote days more than the employer values granting them.",
        "source": {
         "material": "Lecture notes week 3",
-        "excerpt": "Value is created when parties trade issues they value differently: a candidate may value a later start date or remote d…"
+        "excerpt": "Value is created when parties trade issues they value differently: a candidate may value a later start date or remote…"
        }
       },
       {
@@ -364,7 +367,7 @@
        "criterionId": "c1",
        "written": "primer",
        "prompt": "Where would you start with my situation?",
-       "harder": "That helps. But this matters a lot to me, so let me push: why are you sure? What would make you change your advice?",
+       "harder": "That helps. But this matters a lot to me, so let me push: why are you sure?",
        "support": [
         "Can you say a bit more about what you're basing that on?",
         "Maybe look back at the course material from before we started. Is there a part of it that helps here?"
@@ -374,7 +377,7 @@
        "criterionId": "c2",
        "written": "primer",
        "prompt": "What else should I be thinking about before I decide?",
-       "harder": "That helps. But this matters a lot to me, so let me push: why are you sure? What would make you change your advice?",
+       "harder": "What would make you change that advice?",
        "support": [
         "Can you say a bit more about what you're basing that on?",
         "Maybe look back at the course material from before we started. Is there a part of it that helps here?"
@@ -384,13 +387,21 @@
        "criterionId": "c3",
        "written": "primer",
        "prompt": "What would you do differently from what I had planned?",
-       "harder": "That helps. But this matters a lot to me, so let me push: why are you sure? What would make you change your advice?",
+       "harder": "What's the weakest part of what you just said?",
        "support": [
         "Can you say a bit more about what you're basing that on?",
         "Maybe look back at the course material from before we started. Is there a part of it that helps here?"
        ]
       }
      ],
+     "facts": [
+      "I got the offer on Monday: 72,000 base salary, start on the 1st of next month, no signing bonus.",
+      "My only other offer is from a smaller firm at 65,000, and I don't love it.",
+      "Honestly I'd really like two remote days a week, more than an extra few thousand.",
+      "I was planning to email back today asking for 80,000, because that's what my friend got.",
+      "The hiring manager said they need someone in place before a big project in six weeks."
+     ],
+     "noMoreFacts": "That's everything I know. What would you suggest?",
      "ack": "That's useful, it covers something I was going to ask about.",
      "probes": [
       {

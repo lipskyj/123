@@ -5,12 +5,12 @@
    "designId": "design-1moz80l",
    "designVersion": 40,
    "title": "What a p-value does and does not tell you",
-   "builtAt": "2026-11-14T10:48:53.310Z",
+   "builtAt": "2026-11-14T15:18:58.571Z",
    "provider": "deterministic",
    "approval": {
     "type": "test",
     "by": "Builder (test approval for validation)",
-    "at": "2026-11-14T10:48:53.310Z"
+    "at": "2026-11-14T15:18:58.570Z"
    },
    "design": {
     "id": "design-1moz80l",
@@ -231,23 +231,18 @@
       "id": "m1",
       "text": "there's only a 3% chance the null hypothesis is true, so a 97% chance that napping really works",
       "cues": [
-       "theres",
        "chance",
        "null",
        "hypothesis",
        "true",
-       "chance",
        "napping",
-       "really",
        "works"
       ],
       "source": {
        "kind": "teacher",
        "field": "misconceptions[0]"
       },
-      "distinct": [
-       "theres"
-      ]
+      "distinct": []
      },
      {
       "id": "m2",
@@ -255,11 +250,9 @@
       "cues": [
        "smaller",
        "value",
-       "means",
        "bigger",
        "important",
        "effect",
-       "value",
        "prove",
        "napping",
        "nothing"
@@ -269,8 +262,6 @@
        "field": "misconceptions[1]"
       },
       "distinct": [
-       "smaller",
-       "bigger",
        "nothing"
       ]
      }
@@ -371,7 +362,7 @@
     "revisions": [],
     "history": [
      {
-      "at": "2026-11-14T10:48:53.310Z",
+      "at": "2026-11-14T15:18:58.570Z",
       "actor": {
        "type": "test",
        "name": "Builder (test approval for validation)"
@@ -443,7 +434,7 @@
        "criterionId": "c2",
        "written": "teacher",
        "prompt": "Hang on. If the null hypothesis is 'napping does nothing', why can't the test just tell me how likely it is that napping does nothing?",
-       "harder": "Okay, I think I follow. But suppose someone disagreed with you. What would you say to convince them?",
+       "harder": "Hmm, how do you know that's true? What's the evidence?",
        "support": [
         "I'm not sure I follow yet. Can you say a bit more, maybe with an example?",
         "Maybe look back at the course material from before we started. Is there a part of it that helps here?"
@@ -453,7 +444,7 @@
        "criterionId": "c3",
        "written": "teacher",
        "prompt": "Fine, but .03 is a really small number, so the nap effect must be huge, right? Can I write that napping has a big effect on memory?",
-       "harder": "Okay, I think I follow. But suppose someone disagreed with you. What would you say to convince them?",
+       "harder": "Could you put that in one sentence I could write down?",
        "support": [
         "I'm not sure I follow yet. Can you say a bit more, maybe with an example?",
         "Maybe look back at the course material from before we started. Is there a part of it that helps here?"
@@ -463,13 +454,15 @@
        "criterionId": "c4",
        "written": "teacher",
        "prompt": "And if it had come out as p = .20, I'd just write that napping does nothing, yeah?",
-       "harder": "Okay, I think I follow. But suppose someone disagreed with you. What would you say to convince them?",
+       "harder": "What would happen if that weren't the case?",
        "support": [
         "I'm not sure I follow yet. Can you say a bit more, maybe with an example?",
         "Maybe look back at the course material from before we started. Is there a part of it that helps here?"
        ]
       }
      ],
+     "facts": [],
+     "noMoreFacts": "I don't know any more than that, sorry. What do you think?",
      "ack": "Oh, that's useful, it answers something I was going to ask.",
      "probes": [
       {

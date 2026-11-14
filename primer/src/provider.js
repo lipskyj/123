@@ -45,6 +45,7 @@ export class DeterministicProvider {
     if (!intake.template) q.push({ id: "template", text: "How should students practise: by acting inside a situation with a character (Roleplay), or by teaching the idea to a newcomer who asks questions (Teachback)?", options: ["Roleplay", "Teachback"], why: "This decides what kind of work students do in the practice scene." });
     q.push({ id: "character", text: "Who should the student talk to in the practice scene, and what does that person want from them?", why: "The character's goal is what makes the student's knowledge necessary." });
     q.push({ id: "stakes", text: "In the scenario, what goes wrong if the student gets it wrong?", why: "Stakes create the productive friction that makes the content matter." });
+    q.push({ id: "facts", text: "What does the character know that they will tell the student if asked (one fact per line)?", why: "Students can only reason about the situation if the character can answer their questions. Facts here are shared one at a time, only when asked." });
     q.push({ id: "difficulty", text: "How hard should the character push the student?", options: ["Gentle", "Moderate", "Demanding"], why: "This sets how quickly the character raises the challenge and how many attempts a student gets." });
     q.push({ id: "help", text: "When a student is stuck, how much help is acceptable?", options: ["No hints — only repeat the question", "Guiding questions only", "Guiding questions, then point back to the materials"], why: "This limits assistance so the student still does the thinking." });
     q.push({ id: "transfer", text: "After the scenario, what different situation should students be able to carry this into?", why: "Used for the transfer question at the end of feedback." });
@@ -94,6 +95,7 @@ export class DeterministicProvider {
     });
     const misconceptions = (intake.misconceptions || []).map((text, i) => ({ id: "m" + (i + 1), text: strip(text), cues: content(text).slice(0, 10), source: { kind: "teacher", field: `misconceptions[${i}]` } }));
 
+    if (!ans.facts) assumptions.push({ text: "No facts were given for the character, so when students ask questions the character can only say it has nothing more to add. Add facts under Edit.", source: "ai", field: "facts" });
     if (!ans.transfer) assumptions.push({ text: "No transfer situation was given, so the final question asks students to think of one themselves.", source: "ai", field: "transfer" });
     if (criteria.length > 5) recs.push({ id: "r1", text: `You listed ${criteria.length} success criteria. A single session rarely gives a fair chance at more than four or five; consider trimming.`, accepted: null });
     if (!misconceptions.length) recs.push({ id: "r2", text: "No misconceptions were listed. Adding one or two lets the character test for them.", accepted: null });
@@ -107,6 +109,7 @@ export class DeterministicProvider {
       learnerRole: { text: strip(intake.studentWork), source: { kind: "teacher", field: "studentWork" } },
       character: { name, role, source: { kind: ans.character ? "teacher" : "ai", field: "answers.character" }, nameSource: { kind: given.name ? "teacher" : "ai", field: "answers.character" } },
       materials: mats.map((m) => ({ name: m.name, text: m.text })), notes: [],
+      facts: (ans.facts || "").split(/\n+/).map((x) => strip(x)).filter(Boolean).map((x) => x + "."),
       stakes: { text: stakes, source: { kind: ans.stakes ? "teacher" : "ai", field: "answers.stakes" } },
       difficulty, helpPolicy, criteria, misconceptions, concepts,
       constraints: (intake.constraints || "").split(/\n/).map((s) => strip(s)).filter(Boolean),
@@ -123,7 +126,7 @@ export class DeterministicProvider {
     const top = d.concepts.slice(0, 3);
     // Words that belong to a misconception but not to the correct account; a learner must use at least one before a statement counts as that misconception.
     const corpus = new Set([...d.concepts.flatMap((c) => content(c.fact)), ...d.criteria.flatMap((c) => [...content(c.text), ...c.lookFors])].map(stem));
-    for (const m of d.misconceptions) { if (!m.cues || !m.cues.length) m.cues = content(m.text).slice(0, 10); m.distinct = m.cues.filter((w) => !corpus.has(stem(w))); }
+    for (const m of d.misconceptions) { m.cues = [...new Set(useful(content(m.text)))].slice(0, 10); m.distinct = m.cues.filter((w) => !corpus.has(stem(w))); }
     // Drop "Primer decided" notes for anything the teacher has since supplied.
     const taught = { stakes: d.stakes.source, character: d.character.source, "character.name": d.character.nameSource, transfer: d.transfer.source };
     d.assumptions = d.assumptions.filter((a) => !(taught[a.field] && taught[a.field].kind === "teacher"));
@@ -142,9 +145,11 @@ export class DeterministicProvider {
                   : `Hi, I'm ${ch.name}. Thanks for making time. I really need your help with this.`,
       challenges: d.criteria.map((c, i) => ({ criterionId: c.id, written: c.question ? "teacher" : "primer",
         prompt: c.question || (tb ? TB_Q : RP_Q)[i % 6],
-        harder: tb ? `Okay, I think I follow. But suppose someone disagreed with you. What would you say to convince them?` : `That helps. But this matters a lot to me, so let me push: why are you sure? What would make you change your advice?`,
+        harder: (tb ? ["Okay, I think I follow. But suppose someone disagreed with you. What would you say to convince them?", "Hmm, how do you know that's true? What's the evidence?", "Could you put that in one sentence I could write down?", "What would happen if that weren't the case?", "Is that always true, or are there exceptions?", "How would you check whether you're right?"]
+                     : ["That helps. But this matters a lot to me, so let me push: why are you sure?", "What would make you change that advice?", "What's the weakest part of what you just said?", "If they pushed back on that, what would you say?", "How would I know if that's working?", "What's the risk if you're wrong about that?"])[i % 6],
         support: [tb ? `I'm not sure I follow yet. Can you say a bit more, maybe with an example?` : `Can you say a bit more about what you're basing that on?`,
           `Maybe look back at the course material from before we started. Is there a part of it that helps here?`] })),
+      facts: d.facts || [], noMoreFacts: tb ? "I don't know any more than that, sorry. What do you think?" : "That's everything I know. What would you suggest?",
       ack: tb ? `Oh, that's useful, it answers something I was going to ask.` : `That's useful, it covers something I was going to ask about.`,
       probes: d.misconceptions.map((m) => ({ misconceptionId: m.id,
         voice: tb ? `Wait, I read somewhere that ${lc(strip(m.text))}. Is that right?` : `I've always heard that ${lc(strip(m.text))}. Any reason I shouldn't go with that?`,
@@ -209,9 +214,25 @@ export class DeterministicProvider {
       // Look-fors shared with other criteria are not enough by themselves: at least one hit must belong only to this criterion.
       const own = lfs.filter((x) => count.get(x) === 1);
       if (hits.length >= need && nWords >= 4 && (!own.length || hits.some((h) => own.includes(h)))) out.push({ kind: "criterion", ref: c.id, strength: hits.length >= need + 1 ? "clear" : "partial", matched: hits }); }
-    for (const m of design.misconceptions) { const target = [...new Set(m.cues.map(stem))]; const { hits, score } = overlap(text, target);
-      const distinct = (m.distinct || []).map(stem), hasDistinct = !distinct.length || hits.some((h) => distinct.includes(h));
-      if (hits.length >= 2 && score >= 0.25 && hasDistinct) out.push({ kind: NEGATION.test(text) ? "misconception-corrected" : "misconception-voiced", ref: m.id, strength: "clear", matched: hits }); }
+    // Misconceptions are judged sentence by sentence: a sentence that matches the idea is a correction only if that
+    // sentence itself negates it; an explicit retraction anywhere in the reply also counts as a correction.
+    const RETRACT = /\b(i was wrong|i had (it|that|this) (backwards|wrong)|changed my mind|i take (it|that) back|not what i thought|i see now)\b/i;
+    const SNEG = /\b(not|no|never|isn'?t|aren'?t|doesn'?t|don'?t|can'?t|cannot|wrong|myth|misconception|mistake|mistaken|incorrect|false|backwards)\b/i;
+    const parts = sentences(text.replace(/([^.!?])$/, "$1.")).flatMap((x) => x.split(/[;:]|,\s*(?:but|so)\s+/i));
+    for (const m of design.misconceptions) { const target = [...new Set(m.cues.map(stem))]; if (!target.length) continue;
+      const distinct = (m.distinct || []).map(stem), need = Math.max(2, Math.ceil(target.length * 0.4));
+      let voiced = null, corrected = null;
+      for (const sen of parts) { const { hits } = overlap(sen, target); if (hits.length < need || (distinct.length && !hits.some((h) => distinct.includes(h)))) continue;
+        if (SNEG.test(sen)) corrected = corrected || hits; else voiced = voiced || hits; }
+      if (!voiced && !corrected && RETRACT.test(text)) { const { hits } = overlap(text, target); if (hits.length >= 2) corrected = hits; }
+      if (corrected && (!voiced || RETRACT.test(text))) out.push({ kind: "misconception-corrected", ref: m.id, strength: "clear", matched: corrected });
+      else if (voiced) out.push({ kind: "misconception-voiced", ref: m.id, strength: "clear", matched: voiced }); }
+    // A reply that states a misconception is not evidence for any criterion.
+    if (out.some((e) => e.kind === "misconception-voiced")) return out.filter((e) => e.kind !== "criterion");
+    // Correcting a misconception is evidence for a criterion that is about rejecting it.
+    for (const e of out.filter((x) => x.kind === "misconception-corrected")) { const m = design.misconceptions.find((x) => x.id === e.ref);
+      for (const c of design.criteria) if (!out.some((x) => x.kind === "criterion" && x.ref === c.id) && /\b(reject|not|isn'?t|wrong|misconception|misread|distinguish|separat|rather than|instead of)/i.test(c.text) && overlap(c.text, stems(m.text)).hits.length >= 2)
+        out.push({ kind: "criterion", ref: c.id, strength: "partial", matched: e.matched, via: m.id }); }
     return out;
   }
   isAnswerSeeking(text) { return ANSWER_SEEKING.test(text); }

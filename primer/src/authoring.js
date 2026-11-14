@@ -51,7 +51,7 @@ export function createAuthoring(store, provider) {
     return { design: newVersion(prev, design, actor, "revise", request), changes, understood };
   }
   // Direct edit of one field. Core fields re-derive everything downstream; derived text is kept as an override.
-  const CORE = /^(title|goal\.text|learnerRole\.text|learnerProfile\.(text|priorKnowledge)|character\.(name|role)|stakes\.text|transfer\.text|difficulty|helpPolicy|template|criteria\.\d+\.(text|lookFors|question)|misconceptions\.\d+\.text|constraints|notes)$/;
+  const CORE = /^(title|goal\.text|learnerRole\.text|learnerProfile\.(text|priorKnowledge)|character\.(name|role)|stakes\.text|transfer\.text|difficulty|helpPolicy|template|criteria\.\d+\.(text|lookFors|question)|misconceptions\.\d+\.text|constraints|notes|facts)$/;
   const ENUM = { difficulty: ["gentle", "moderate", "demanding"], helpPolicy: ["none", "questions", "questions-then-materials"], template: ["roleplay", "teachback"] };
   function edit(designId, path, value, actor) {
     const prev = current(designId); const d = structuredClone(prev);

@@ -1,24 +1,24 @@
 {
  "packages": [
   {
-   "id": "exp-12qaryv",
-   "designId": "design-13h7kmp",
+   "id": "exp-teoop1",
+   "designId": "design-u2txso",
    "designVersion": 1,
    "title": "Reading a limestone cave",
-   "builtAt": "2026-11-14T10:48:26.417Z",
+   "builtAt": "2026-11-14T15:18:58.531Z",
    "provider": "deterministic",
    "approval": {
     "type": "test",
     "by": "Automated test",
-    "at": "2026-11-14T10:48:26.416Z"
+    "at": "2026-11-14T15:18:58.530Z"
    },
    "design": {
-    "id": "design-13h7kmp",
-    "intakeId": "intake-xe9lj6",
+    "id": "design-u2txso",
+    "intakeId": "intake-1qytd88",
     "version": 1,
     "state": "test-approved",
     "supersedes": null,
-    "createdAt": "2026-11-14T10:48:26.416Z",
+    "createdAt": "2026-11-14T15:18:58.530Z",
     "title": "Reading a limestone cave",
     "template": "teachback",
     "world": "cave",
@@ -63,6 +63,12 @@
      }
     ],
     "notes": [],
+    "facts": [
+     "I've only read the sign at the entrance, which says the cave is 'very old'.",
+     "Visitors always ask how long the big stalagmite took to grow; it's about two metres tall.",
+     "There's a stream at the back of the cave, but it's tiny.",
+     "Some school groups put a drop of vinegar on the rock and it fizzes, and I don't know why."
+    ],
     "stakes": {
      "text": "the guide will repeat whatever they are told to hundreds of visitors, including any mistakes",
      "source": {
@@ -100,11 +106,11 @@
         },
         {
          "material": "Unit handout: karst and caves",
-         "excerpt": "A drop of dilute hydrochloric acid on limestone fizzes because the calcite reacts and releases carbon dioxide gas; a ro…"
+         "excerpt": "A drop of dilute hydrochloric acid on limestone fizzes because the calcite reacts and releases carbon dioxide gas; a…"
         },
         {
          "material": "Unit handout: karst and caves",
-         "excerpt": "This slightly acidic water seeps into cracks and slowly dissolves limestone; over hundreds of thousands of years the cr…"
+         "excerpt": "This slightly acidic water seeps into cracks and slowly dissolves limestone; over hundreds of thousands of years the…"
         },
         {
          "material": "Unit handout: karst and caves",
@@ -140,7 +146,7 @@
        "materials": [
         {
          "material": "Unit handout: karst and caves",
-         "excerpt": "A drop of dilute hydrochloric acid on limestone fizzes because the calcite reacts and releases carbon dioxide gas; a ro…"
+         "excerpt": "A drop of dilute hydrochloric acid on limestone fizzes because the calcite reacts and releases carbon dioxide gas; a…"
         },
         {
          "material": "Unit handout: karst and caves",
@@ -156,7 +162,7 @@
         },
         {
          "material": "Unit handout: karst and caves",
-         "excerpt": "Stalagmites grow very slowly, typically about 0.1 millimetres per year, so a stalagmite two metres tall is roughly twen…"
+         "excerpt": "Stalagmites grow very slowly, typically about 0.1 millimetres per year, so a stalagmite two metres tall is roughly…"
         }
        ]
       }
@@ -245,7 +251,6 @@
       "cues": [
        "stalactites",
        "stalagmites",
-       "ice",
        "frozen",
        "water"
       ],
@@ -254,7 +259,6 @@
        "field": "misconceptions[1]"
       },
       "distinct": [
-       "ice",
        "frozen"
       ]
      }
@@ -273,7 +277,7 @@
       "fact": "A drop of dilute hydrochloric acid on limestone fizzes because the calcite reacts and releases carbon dioxide gas; a rock that does not fizz is not limestone.",
       "source": {
        "material": "Unit handout: karst and caves",
-       "excerpt": "A drop of dilute hydrochloric acid on limestone fizzes because the calcite reacts and releases carbon dioxide gas; a ro…"
+       "excerpt": "A drop of dilute hydrochloric acid on limestone fizzes because the calcite reacts and releases carbon dioxide gas; a…"
       }
      },
      {
@@ -281,7 +285,7 @@
       "fact": "This slightly acidic water seeps into cracks and slowly dissolves limestone; over hundreds of thousands of years the cracks widen into caves.",
       "source": {
        "material": "Unit handout: karst and caves",
-       "excerpt": "This slightly acidic water seeps into cracks and slowly dissolves limestone; over hundreds of thousands of years the cr…"
+       "excerpt": "This slightly acidic water seeps into cracks and slowly dissolves limestone; over hundreds of thousands of years the…"
       }
      },
      {
@@ -313,7 +317,7 @@
       "fact": "Stalagmites grow very slowly, typically about 0.1 millimetres per year, so a stalagmite two metres tall is roughly twenty thousand years old.",
       "source": {
        "material": "Unit handout: karst and caves",
-       "excerpt": "Stalagmites grow very slowly, typically about 0.1 millimetres per year, so a stalagmite two metres tall is roughly twen…"
+       "excerpt": "Stalagmites grow very slowly, typically about 0.1 millimetres per year, so a stalagmite two metres tall is roughly…"
       }
      },
      {
@@ -339,7 +343,7 @@
     "revisions": [],
     "history": [
      {
-      "at": "2026-11-14T10:48:26.416Z",
+      "at": "2026-11-14T15:18:58.530Z",
       "actor": {
        "type": "test",
        "name": "Automated test"
@@ -364,14 +368,14 @@
        "text": "A drop of dilute hydrochloric acid on limestone fizzes because the calcite reacts and releases carbon dioxide gas; a rock that does not fizz is not limestone.",
        "source": {
         "material": "Unit handout: karst and caves",
-        "excerpt": "A drop of dilute hydrochloric acid on limestone fizzes because the calcite reacts and releases carbon dioxide gas; a ro…"
+        "excerpt": "A drop of dilute hydrochloric acid on limestone fizzes because the calcite reacts and releases carbon dioxide gas; a…"
        }
       },
       {
        "text": "This slightly acidic water seeps into cracks and slowly dissolves limestone; over hundreds of thousands of years the cracks widen into caves.",
        "source": {
         "material": "Unit handout: karst and caves",
-        "excerpt": "This slightly acidic water seeps into cracks and slowly dissolves limestone; over hundreds of thousands of years the cr…"
+        "excerpt": "This slightly acidic water seeps into cracks and slowly dissolves limestone; over hundreds of thousands of years the…"
        }
       },
       {
@@ -411,7 +415,7 @@
        "criterionId": "c2",
        "written": "primer",
        "prompt": "Okay. What else do I need to understand to really get this?",
-       "harder": "Okay, I think I follow. But suppose someone disagreed with you. What would you say to convince them?",
+       "harder": "Hmm, how do you know that's true? What's the evidence?",
        "support": [
         "I'm not sure I follow yet. Can you say a bit more, maybe with an example?",
         "Maybe look back at the course material from before we started. Is there a part of it that helps here?"
@@ -421,7 +425,7 @@
        "criterionId": "c3",
        "written": "primer",
        "prompt": "What do people usually get wrong about this, and why are they wrong?",
-       "harder": "Okay, I think I follow. But suppose someone disagreed with you. What would you say to convince them?",
+       "harder": "Could you put that in one sentence I could write down?",
        "support": [
         "I'm not sure I follow yet. Can you say a bit more, maybe with an example?",
         "Maybe look back at the course material from before we started. Is there a part of it that helps here?"
@@ -431,13 +435,20 @@
        "criterionId": "c4",
        "written": "primer",
        "prompt": "How would I know whether I had understood it properly?",
-       "harder": "Okay, I think I follow. But suppose someone disagreed with you. What would you say to convince them?",
+       "harder": "What would happen if that weren't the case?",
        "support": [
         "I'm not sure I follow yet. Can you say a bit more, maybe with an example?",
         "Maybe look back at the course material from before we started. Is there a part of it that helps here?"
        ]
       }
      ],
+     "facts": [
+      "I've only read the sign at the entrance, which says the cave is 'very old'.",
+      "Visitors always ask how long the big stalagmite took to grow; it's about two metres tall.",
+      "There's a stream at the back of the cave, but it's tiny.",
+      "Some school groups put a drop of vinegar on the rock and it fizzes, and I don't know why."
+     ],
+     "noMoreFacts": "I don't know any more than that, sorry. What do you think?",
      "ack": "Oh, that's useful, it answers something I was going to ask.",
      "probes": [
       {
