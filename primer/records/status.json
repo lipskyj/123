@@ -1,7 +1,7 @@
 {
- "milestone": "Validation round 3: fresh simulated students",
+ "milestone": "Validation round 4: independent evidence evaluator",
  "overall": "incomplete",
- "summary": "40 engine tests and 34 browser checks pass. Two rounds of independent review (two simulated teachers, one cold-build auditor) found blocking and major problems that have been repaired. Three simulated students are now playing; an independent evidence evaluator follows. Paper conformance and model-based behaviour remain pending.",
+ "summary": "43 engine tests and 34 browser checks pass. Three review rounds (two simulated teachers, a cold-build auditor, three simulated students) found blocking and major problems; each was repaired and the students' real replies are replayed as regression tests. An independent evaluator is now judging the contract against the evidence. Word-based matching remains the main weakness.",
  "works": [
   "Teacher intake, one-question-at-a-time interview, proposed design with sources, assumptions and suggestions",
   "Direct edits and natural-language revision, each creating a new version; downstream prompts and scenes regenerate",
@@ -57,7 +57,22 @@
    "record": "records/validation/cold-build-audit.md"
   },
   {
-   "role": "Fresh students (3 profiles)",
+   "role": "Fresh student Maya (diligent, statistics)",
+   "result": "Completed; did the work herself; feedback misattributed quotes and overstated; one follow-up repeated. Repaired (repair 5).",
+   "record": "records/validation/student-maya-report.md"
+  },
+  {
+   "role": "Fresh student Leo (misconceptions, statistics)",
+   "result": "Completed; beliefs were noticed but stating them was recorded as correcting them; a wrong claim was credited. Repaired (repair 5).",
+   "record": "records/validation/student-leo-report.md"
+  },
+  {
+   "role": "Fresh student Sam (answer-seeker, negotiation)",
+   "result": "Never given the answer; character had no case facts; real work not credited. Partly repaired (case facts, negation); value-creating options still not credited in replay.",
+   "record": "records/validation/student-sam-report.md"
+  },
+  {
+   "role": "Independent evidence evaluator",
    "result": "Running.",
    "record": "records/validation/"
   }
