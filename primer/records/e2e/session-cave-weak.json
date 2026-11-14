@@ -1,19 +1,19 @@
 {
- "id": "session-zztc1a",
- "packageId": "exp-j5tqkb",
+ "id": "session-806sd0",
+ "packageId": "exp-5vyjz9",
  "learner": {
   "name": "Ben"
  },
- "startedAt": "2026-11-14T05:29:48.953Z",
+ "startedAt": "2026-11-14T10:29:49.919Z",
  "phase": "feedback",
  "classroomApproved": false,
  "turns": [
   {
    "id": "t1",
    "who": "primer",
-   "text": "Before you begin: in your own words, what do you already know about limestone?",
+   "text": "Before you begin: in your own words, what do you already know about \"Reading a limestone cave\"?",
    "phase": "preparation",
-   "at": "2026-11-14T05:29:49.036Z",
+   "at": "2026-11-14T10:29:50.017Z",
    "kind": "activation"
   },
   {
@@ -21,15 +21,15 @@
    "who": "learner",
    "text": "Limestone is a rock.",
    "phase": "preparation",
-   "at": "2026-11-14T05:29:49.036Z",
+   "at": "2026-11-14T10:29:50.017Z",
    "kind": "activation-answer"
   },
   {
    "id": "t3",
    "who": "primer",
-   "text": "Your teacher expects you to bring this with you: The rock cycle, and that acids react with carbonates to release carbon dioxide. Where might it matter in what you are about to do?",
+   "text": "Which idea from earlier lessons do you expect to need most here, and why?",
    "phase": "preparation",
-   "at": "2026-11-14T05:29:49.037Z",
+   "at": "2026-11-14T10:29:50.017Z",
    "kind": "activation"
   },
   {
@@ -37,7 +37,7 @@
    "who": "learner",
    "text": "Explaining how long it takes.",
    "phase": "preparation",
-   "at": "2026-11-14T05:29:49.037Z",
+   "at": "2026-11-14T10:29:50.017Z",
    "kind": "activation-answer"
   },
   {
@@ -45,7 +45,7 @@
    "who": "character",
    "text": "Hi, I'm Dana. I'm a new volunteer guide who starts leading school tours next week and is worried about saying something wrong. I was told you can help me understand this. I really am starting from zero, so go slowly.",
    "phase": "practice",
-   "at": "2026-11-14T05:29:49.037Z",
+   "at": "2026-11-14T10:29:50.017Z",
    "kind": "opening"
   },
   {
@@ -53,7 +53,7 @@
    "who": "learner",
    "text": "It fizzes with the acid so the wall is calcite limestone and slightly acidic water dissolves it slowly.",
    "phase": "practice",
-   "at": "2026-11-14T05:29:50.503Z",
+   "at": "2026-11-14T10:29:51.541Z",
    "kind": "field-note",
    "worldEventId": "e3",
    "feature": "limestone"
@@ -63,7 +63,7 @@
    "who": "learner",
    "text": "It is about two metres tall and at a growth rate of 0.1 mm a year that makes it roughly twenty thousand years old.",
    "phase": "practice",
-   "at": "2026-11-14T05:29:50.571Z",
+   "at": "2026-11-14T10:29:51.616Z",
    "kind": "field-note",
    "worldEventId": "e4",
    "feature": "stalagmite"
@@ -73,7 +73,7 @@
    "who": "learner",
    "text": "There are crinoid fossils and shells in the wall so this limestone formed on an ancient sea floor.",
    "phase": "practice",
-   "at": "2026-11-14T05:29:50.657Z",
+   "at": "2026-11-14T10:29:51.701Z",
    "kind": "field-note",
    "worldEventId": "e5",
    "feature": "fossil"
@@ -81,9 +81,9 @@
   {
    "id": "t9",
    "who": "character",
-   "text": "Here's what I don't get yet. Can you explain that slightly acidic water dissolves limestone and uses the acid fizz test as evidence the rock is calcite, in a way a beginner would follow?",
+   "text": "Here's something I don't understand yet: slightly, acidic and water. How would you explain it to me?",
    "phase": "practice",
-   "at": "2026-11-14T05:29:50.787Z",
+   "at": "2026-11-14T10:29:51.834Z",
    "kind": "prompt",
    "criterionId": "c1"
   },
@@ -92,7 +92,7 @@
    "who": "learner",
    "text": "Stalactites are made of ice, frozen water I think.",
    "phase": "practice",
-   "at": "2026-11-14T05:29:50.869Z",
+   "at": "2026-11-14T10:29:51.915Z",
    "kind": "practice",
    "criterionId": "c1"
   },
@@ -101,7 +101,7 @@
    "who": "character",
    "text": "Hold on. A moment ago you said something that sounded like \"stalactites and stalagmites are made of ice or frozen water\". If that were true, what would we expect to see? Does that match what you know?",
    "phase": "practice",
-   "at": "2026-11-14T05:29:50.869Z",
+   "at": "2026-11-14T10:29:51.915Z",
    "kind": "probe-challenge",
    "misconceptionId": "m2"
   },
@@ -110,7 +110,7 @@
    "who": "learner",
    "text": "I am not sure.",
    "phase": "practice",
-   "at": "2026-11-14T05:29:50.986Z",
+   "at": "2026-11-14T10:29:52.033Z",
    "kind": "practice",
    "criterionId": "c1"
   },
@@ -119,7 +119,7 @@
    "who": "character",
    "text": "I'm lost. Could you try again with one concrete example?",
    "phase": "practice",
-   "at": "2026-11-14T05:29:50.986Z",
+   "at": "2026-11-14T10:29:52.033Z",
    "kind": "support",
    "criterionId": "c1",
    "level": 1
@@ -129,16 +129,16 @@
    "who": "learner",
    "text": "I am not sure.",
    "phase": "practice",
-   "at": "2026-11-14T05:29:51.085Z",
+   "at": "2026-11-14T10:29:52.157Z",
    "kind": "practice",
    "criterionId": "c1"
   },
   {
    "id": "t15",
    "who": "character",
-   "text": "Go back to what you were given before we started. Which part of it deals with slightly and acidic? What does it imply here?",
+   "text": "Go back to the course material you read before we started. Which part deals with slightly, acidic and water? What does it imply here?",
    "phase": "practice",
-   "at": "2026-11-14T05:29:51.086Z",
+   "at": "2026-11-14T10:29:52.157Z",
    "kind": "support",
    "criterionId": "c1",
    "level": 2
@@ -148,16 +148,16 @@
    "who": "learner",
    "text": "I am not sure.",
    "phase": "practice",
-   "at": "2026-11-14T05:29:51.204Z",
+   "at": "2026-11-14T10:29:52.283Z",
    "kind": "practice",
    "criterionId": "c1"
   },
   {
    "id": "t17",
    "who": "character",
-   "text": "Oh! So that means caves are carved by fast flowing rivers cutting through the rock, right?",
+   "text": "Oh! So does that mean caves are carved by fast flowing rivers cutting through the rock?",
    "phase": "practice",
-   "at": "2026-11-14T05:29:51.204Z",
+   "at": "2026-11-14T10:29:52.283Z",
    "kind": "probe-voice",
    "misconceptionId": "m1"
   },
@@ -166,16 +166,16 @@
    "who": "learner",
    "text": "I am not sure.",
    "phase": "practice",
-   "at": "2026-11-14T05:29:51.318Z",
+   "at": "2026-11-14T10:29:52.399Z",
    "kind": "practice",
    "criterionId": "c2"
   },
   {
    "id": "t19",
    "who": "character",
-   "text": "Here's what I don't get yet. Can you explain that stalactites and stalagmites grow when dripping water loses carbon dioxide and deposits calcite, in a way a beginner would follow?",
+   "text": "Here's something I don't understand yet: stalactites, stalagmites and grow. How would you explain it to me?",
    "phase": "practice",
-   "at": "2026-11-14T05:29:51.319Z",
+   "at": "2026-11-14T10:29:52.399Z",
    "kind": "prompt",
    "criterionId": "c2"
   },
@@ -184,7 +184,7 @@
    "who": "learner",
    "text": "I am not sure.",
    "phase": "practice",
-   "at": "2026-11-14T05:29:51.420Z",
+   "at": "2026-11-14T10:29:52.515Z",
    "kind": "practice",
    "criterionId": "c2"
   },
@@ -193,7 +193,7 @@
    "who": "character",
    "text": "I'm lost. Could you try again with one concrete example?",
    "phase": "practice",
-   "at": "2026-11-14T05:29:51.420Z",
+   "at": "2026-11-14T10:29:52.515Z",
    "kind": "support",
    "criterionId": "c2",
    "level": 1
@@ -203,16 +203,16 @@
    "who": "learner",
    "text": "I am not sure.",
    "phase": "practice",
-   "at": "2026-11-14T05:29:51.519Z",
+   "at": "2026-11-14T10:29:52.633Z",
    "kind": "practice",
    "criterionId": "c2"
   },
   {
    "id": "t23",
    "who": "character",
-   "text": "Go back to what you were given before we started. Which part of it deals with stalactites and stalagmites? What does it imply here?",
+   "text": "Go back to the course material you read before we started. Which part deals with stalactites, stalagmites and grow? What does it imply here?",
    "phase": "practice",
-   "at": "2026-11-14T05:29:51.519Z",
+   "at": "2026-11-14T10:29:52.633Z",
    "kind": "support",
    "criterionId": "c2",
    "level": 2
@@ -222,16 +222,16 @@
    "who": "learner",
    "text": "I am not sure.",
    "phase": "practice",
-   "at": "2026-11-14T05:29:51.636Z",
+   "at": "2026-11-14T10:29:52.749Z",
    "kind": "practice",
    "criterionId": "c2"
   },
   {
    "id": "t25",
    "who": "character",
-   "text": "Here's what I don't get yet. Can you use a measurement and a growth rate to estimate how old a formation is, in a way a beginner would follow?",
+   "text": "Here's something I don't understand yet: measurement, growth and rate. How would you explain it to me?",
    "phase": "practice",
-   "at": "2026-11-14T05:29:51.636Z",
+   "at": "2026-11-14T10:29:52.749Z",
    "kind": "prompt",
    "criterionId": "c3"
   },
@@ -240,7 +240,7 @@
    "who": "learner",
    "text": "I am not sure.",
    "phase": "practice",
-   "at": "2026-11-14T05:29:51.754Z",
+   "at": "2026-11-14T10:29:52.866Z",
    "kind": "practice",
    "criterionId": "c3"
   },
@@ -249,7 +249,7 @@
    "who": "character",
    "text": "I'm lost. Could you try again with one concrete example?",
    "phase": "practice",
-   "at": "2026-11-14T05:29:51.754Z",
+   "at": "2026-11-14T10:29:52.866Z",
    "kind": "support",
    "criterionId": "c3",
    "level": 1
@@ -259,16 +259,16 @@
    "who": "learner",
    "text": "I am not sure.",
    "phase": "practice",
-   "at": "2026-11-14T05:29:51.871Z",
+   "at": "2026-11-14T10:29:52.982Z",
    "kind": "practice",
    "criterionId": "c3"
   },
   {
    "id": "t29",
    "who": "character",
-   "text": "Go back to what you were given before we started. Which part of it deals with measurement and growth? What does it imply here?",
+   "text": "Go back to the course material you read before we started. Which part deals with measurement, growth and rate? What does it imply here?",
    "phase": "practice",
-   "at": "2026-11-14T05:29:51.871Z",
+   "at": "2026-11-14T10:29:52.983Z",
    "kind": "support",
    "criterionId": "c3",
    "level": 2
@@ -278,16 +278,16 @@
    "who": "learner",
    "text": "I am not sure.",
    "phase": "practice",
-   "at": "2026-11-14T05:29:51.986Z",
+   "at": "2026-11-14T10:29:53.098Z",
    "kind": "practice",
    "criterionId": "c3"
   },
   {
    "id": "t31",
    "who": "character",
-   "text": "Here's what I don't get yet. Can you use fossils in the wall as evidence that the limestone formed on an ancient sea floor, in a way a beginner would follow?",
+   "text": "Here's something I don't understand yet: fossils, wall and evidence. How would you explain it to me?",
    "phase": "practice",
-   "at": "2026-11-14T05:29:51.986Z",
+   "at": "2026-11-14T10:29:53.098Z",
    "kind": "prompt",
    "criterionId": "c4"
   },
@@ -296,7 +296,7 @@
    "who": "learner",
    "text": "I am not sure.",
    "phase": "practice",
-   "at": "2026-11-14T05:29:52.103Z",
+   "at": "2026-11-14T10:29:53.216Z",
    "kind": "practice",
    "criterionId": "c4"
   },
@@ -305,7 +305,7 @@
    "who": "character",
    "text": "I'm lost. Could you try again with one concrete example?",
    "phase": "practice",
-   "at": "2026-11-14T05:29:52.103Z",
+   "at": "2026-11-14T10:29:53.216Z",
    "kind": "support",
    "criterionId": "c4",
    "level": 1
@@ -315,16 +315,16 @@
    "who": "learner",
    "text": "I am not sure.",
    "phase": "practice",
-   "at": "2026-11-14T05:29:52.219Z",
+   "at": "2026-11-14T10:29:53.332Z",
    "kind": "practice",
    "criterionId": "c4"
   },
   {
    "id": "t35",
    "who": "character",
-   "text": "Go back to what you were given before we started. Which part of it deals with fossils and wall? What does it imply here?",
+   "text": "Go back to the course material you read before we started. Which part deals with fossils, wall and evidence? What does it imply here?",
    "phase": "practice",
-   "at": "2026-11-14T05:29:52.219Z",
+   "at": "2026-11-14T10:29:53.332Z",
    "kind": "support",
    "criterionId": "c4",
    "level": 2
@@ -334,7 +334,7 @@
    "who": "learner",
    "text": "I am not sure.",
    "phase": "practice",
-   "at": "2026-11-14T05:29:52.337Z",
+   "at": "2026-11-14T10:29:53.450Z",
    "kind": "practice",
    "criterionId": "c4"
   },
@@ -343,7 +343,7 @@
    "who": "character",
    "text": "Thank you. I think I could explain some of this to someone else now.",
    "phase": "practice",
-   "at": "2026-11-14T05:29:52.337Z",
+   "at": "2026-11-14T10:29:53.450Z",
    "kind": "closing"
   },
   {
@@ -351,7 +351,7 @@
    "who": "primer",
    "text": "Before you see any feedback: how do you think that went? Which moment are you most satisfied with?",
    "phase": "feedback",
-   "at": "2026-11-14T05:29:52.501Z",
+   "at": "2026-11-14T10:29:53.582Z",
    "kind": "self-assessment"
   },
   {
@@ -359,7 +359,7 @@
    "who": "learner",
    "text": "Not great.",
    "phase": "feedback",
-   "at": "2026-11-14T05:29:52.501Z",
+   "at": "2026-11-14T10:29:53.582Z",
    "kind": "self-assessment-answer"
   },
   {
@@ -367,7 +367,7 @@
    "who": "primer",
    "text": "What would you do differently if you did it again?",
    "phase": "feedback",
-   "at": "2026-11-14T05:29:52.501Z",
+   "at": "2026-11-14T10:29:53.582Z",
    "kind": "self-assessment"
   },
   {
@@ -375,7 +375,7 @@
    "who": "learner",
    "text": "Read the handout again.",
    "phase": "feedback",
-   "at": "2026-11-14T05:29:52.501Z",
+   "at": "2026-11-14T10:29:53.582Z",
    "kind": "self-assessment-answer"
   }
  ],
@@ -384,25 +384,25 @@
    "id": "e1",
    "type": "session-started",
    "phase": "preparation",
-   "at": "2026-11-14T05:29:48.953Z",
+   "at": "2026-11-14T10:29:49.919Z",
    "approval": {
     "type": "test",
     "by": "Automated test",
-    "at": "2026-11-14T05:29:03.787Z"
+    "at": "2026-11-14T10:29:44.900Z"
    }
   },
   {
    "id": "e2",
    "type": "phase",
    "phase": "practice",
-   "at": "2026-11-14T05:29:49.037Z",
+   "at": "2026-11-14T10:29:50.017Z",
    "to": "practice"
   },
   {
    "id": "e3",
    "type": "world",
    "phase": "practice",
-   "at": "2026-11-14T05:29:50.503Z",
+   "at": "2026-11-14T10:29:51.541Z",
    "feature": "limestone",
    "featureName": "The wall fizzes",
    "tool": "acid",
@@ -416,7 +416,7 @@
    "id": "e4",
    "type": "world",
    "phase": "practice",
-   "at": "2026-11-14T05:29:50.571Z",
+   "at": "2026-11-14T10:29:51.616Z",
    "feature": "stalagmite",
    "featureName": "Stalagmites",
    "tool": "survey",
@@ -430,7 +430,7 @@
    "id": "e5",
    "type": "world",
    "phase": "practice",
-   "at": "2026-11-14T05:29:50.657Z",
+   "at": "2026-11-14T10:29:51.701Z",
    "feature": "fossil",
    "featureName": "Fossils in the wall",
    "tool": "lens",
@@ -444,13 +444,13 @@
    "id": "e6",
    "type": "world-left",
    "phase": "practice",
-   "at": "2026-11-14T05:29:50.787Z"
+   "at": "2026-11-14T10:29:51.834Z"
   },
   {
    "id": "e7",
    "type": "opportunity-closed",
    "phase": "practice",
-   "at": "2026-11-14T05:29:51.204Z",
+   "at": "2026-11-14T10:29:52.283Z",
    "criterionId": "c1",
    "attempts": 3
   },
@@ -458,7 +458,7 @@
    "id": "e8",
    "type": "opportunity-closed",
    "phase": "practice",
-   "at": "2026-11-14T05:29:51.636Z",
+   "at": "2026-11-14T10:29:52.749Z",
    "criterionId": "c2",
    "attempts": 3
   },
@@ -466,7 +466,7 @@
    "id": "e9",
    "type": "opportunity-closed",
    "phase": "practice",
-   "at": "2026-11-14T05:29:51.986Z",
+   "at": "2026-11-14T10:29:53.098Z",
    "criterionId": "c3",
    "attempts": 3
   },
@@ -474,7 +474,7 @@
    "id": "e10",
    "type": "opportunity-closed",
    "phase": "practice",
-   "at": "2026-11-14T05:29:52.337Z",
+   "at": "2026-11-14T10:29:53.450Z",
    "criterionId": "c4",
    "attempts": 3
   },
@@ -482,7 +482,7 @@
    "id": "e11",
    "type": "phase",
    "phase": "feedback",
-   "at": "2026-11-14T05:29:52.337Z",
+   "at": "2026-11-14T10:29:53.450Z",
    "to": "feedback"
   }
  ],
@@ -518,8 +518,7 @@
    "strength": "partial",
    "matched": [
     "growth",
-    "rate",
-    "old"
+    "rate"
    ],
    "basis": "observed",
    "promptedFor": null
@@ -538,7 +537,6 @@
     "limestone",
     "form",
     "ancient",
-    "sea",
     "floor"
    ],
    "basis": "observed",
@@ -563,12 +561,12 @@
   },
   {
    "id": "ev5",
-   "kind": "misconception-unaddressed",
+   "kind": "misconception-corrected",
    "ref": "m1",
    "turnId": "t18",
    "phase": "practice",
    "quote": "I am not sure.",
-   "strength": "clear",
+   "strength": "partial",
    "matched": [],
    "basis": "observed",
    "promptedFor": null
@@ -584,7 +582,7 @@
     "ev4"
    ],
    "goalRef": "m2",
-   "at": "2026-11-14T05:29:50.869Z"
+   "at": "2026-11-14T10:29:51.915Z"
   },
   {
    "id": "a2",
@@ -593,7 +591,7 @@
    "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
    "evidenceIds": [],
    "goalRef": "c1",
-   "at": "2026-11-14T05:29:50.986Z",
+   "at": "2026-11-14T10:29:52.033Z",
    "level": 1
   },
   {
@@ -603,7 +601,7 @@
    "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
    "evidenceIds": [],
    "goalRef": "c1",
-   "at": "2026-11-14T05:29:51.086Z",
+   "at": "2026-11-14T10:29:52.157Z",
    "level": 2
   },
   {
@@ -613,7 +611,7 @@
    "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
    "evidenceIds": [],
    "goalRef": "c2",
-   "at": "2026-11-14T05:29:51.420Z",
+   "at": "2026-11-14T10:29:52.515Z",
    "level": 1
   },
   {
@@ -623,7 +621,7 @@
    "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
    "evidenceIds": [],
    "goalRef": "c2",
-   "at": "2026-11-14T05:29:51.519Z",
+   "at": "2026-11-14T10:29:52.633Z",
    "level": 2
   },
   {
@@ -633,7 +631,7 @@
    "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
    "evidenceIds": [],
    "goalRef": "c3",
-   "at": "2026-11-14T05:29:51.754Z",
+   "at": "2026-11-14T10:29:52.866Z",
    "level": 1
   },
   {
@@ -643,7 +641,7 @@
    "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
    "evidenceIds": [],
    "goalRef": "c3",
-   "at": "2026-11-14T05:29:51.871Z",
+   "at": "2026-11-14T10:29:52.982Z",
    "level": 2
   },
   {
@@ -653,7 +651,7 @@
    "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
    "evidenceIds": [],
    "goalRef": "c4",
-   "at": "2026-11-14T05:29:52.103Z",
+   "at": "2026-11-14T10:29:53.216Z",
    "level": 1
   },
   {
@@ -663,29 +661,29 @@
    "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
    "evidenceIds": [],
    "goalRef": "c4",
-   "at": "2026-11-14T05:29:52.219Z",
+   "at": "2026-11-14T10:29:53.332Z",
    "level": 2
   }
  ],
  "journal": [
   {
    "phase": "preparation",
-   "at": "2026-11-14T05:29:49.037Z",
+   "at": "2026-11-14T10:29:50.017Z",
    "text": "Preparation: learner answered 2 activation question(s)."
   },
   {
    "phase": "practice",
-   "at": "2026-11-14T05:29:50.787Z",
+   "at": "2026-11-14T10:29:51.834Z",
    "text": "Field work: 3 investigation(s) recorded."
   },
   {
    "phase": "practice",
-   "at": "2026-11-14T05:29:52.337Z",
+   "at": "2026-11-14T10:29:53.450Z",
    "text": "Practice ended after 14 learner turn(s)."
   },
   {
    "phase": "feedback",
-   "at": "2026-11-14T05:29:52.502Z",
+   "at": "2026-11-14T10:29:53.582Z",
    "text": "Feedback: 3 strength(s), 1 growth area(s), 0 not assessed."
   }
  ],
@@ -722,7 +720,7 @@
   }
  ],
  "feedback": {
-  "generatedAt": "2026-11-14T05:29:52.502Z",
+  "generatedAt": "2026-11-14T10:29:53.582Z",
   "goal": "Students use field evidence to explain how a limestone cave and its formations are made, and what that evidence says about the past",
   "strengths": [
    {
@@ -775,7 +773,7 @@
    {
     "criterionId": "c2",
     "criterion": "Explains that stalactites and stalagmites grow when dripping water loses carbon dioxide and deposits calcite",
-    "observation": "You were asked about this (\"Here's what I don't get yet. Can you explain that stalactites and stalagmites grow when dripping water loses…\") and your 4 replies did not bring in stalactites, stalagmites, grow.",
+    "observation": "You were asked about this (\"Here's something I don't understand yet: stalactites, stalagmites and grow. How would you explain it to me?\") and your 4 replies did not bring in stalactites, stalagmites, grow.",
     "citations": [
      {
       "turnId": "t18",
@@ -800,7 +798,7 @@
    {
     "misconceptionId": "m1",
     "misconception": "Caves are carved by fast flowing rivers cutting through the rock",
-    "status": "left unchallenged",
+    "status": "corrected",
     "citations": [
      {
       "turnId": "t18",
@@ -809,7 +807,7 @@
       "quote": "I am not sure."
      }
     ],
-    "note": "The character suggested this idea and your reply did not correct it."
+    "note": "You pushed back on this idea."
    },
    {
     "misconceptionId": "m2",
@@ -886,12 +884,11 @@
   "effortNote": "",
   "nextActions": [
    "Go back to the course material shown in the Prepare step, find the part about stalactites and stalagmites, then write two sentences in which you explain that stalactites and stalagmites grow when dripping water loses carbon dioxide and deposits calcite.",
-   "Test this idea against your materials: \"Caves are carved by fast flowing rivers cutting through the rock\". What evidence would show it is wrong?",
    "Test this idea against your materials: \"Stalactites and stalagmites are made of ice or frozen water\". What evidence would show it is wrong?"
   ],
   "transferQuestion": "A different situation: a sea cliff with layered rock and fossils that you visit on holiday. What from this session would you use there, and what would you change?",
   "limits": "Feedback is based only on what you wrote in this session. It was produced by matching your words against your teacher's criteria, not by a human reading them."
  },
  "transfer": null,
- "updatedAt": "2026-11-14T05:29:52.502Z"
+ "updatedAt": "2026-11-14T10:29:53.582Z"
 }

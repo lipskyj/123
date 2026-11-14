@@ -7,7 +7,14 @@ const NAMES = ["Dana Okafor", "Marek Lindqvist", "Priya Raman", "Tomás Herrera"
 const GENERIC = new Set("explicitly correctly clearly accurately properly reading refers mentions mention least really rejects reject gives give shows show states state says say names name makes make takes take includes include using based rather instead without within least most more less well thing things way ways part parts kind kinds something anything someone anyone means mean meaning non etc example examples".split(" "));
 const useful = (words) => words.filter((w) => w.length > 3 && !GENERIC.has(w));
 // A short neutral phrase naming what a criterion is about, without stating the claim it makes.
-export function topicOf(criterion) { const t = useful(content(criterion.text.replace(/^\s*\S+\s+/, " "))); const u = [...new Set(t)].slice(0, 3); return u.length > 1 ? u.slice(0, -1).join(", ") + " and " + u.at(-1) : u[0] || "this"; }
+export function topicOf(criterion) {
+  const VERBISH = /^(explain|identif|propos|distinguish|recommend|creat|set|use|describ|appl|compar|justif|evaluat|analy|predict|calculat|estimat|interpret|argu|defin|list|giv|show|stat|mak|tak|reject|accept|connect|link|relat|separat|consider|support)/i;
+  const seen = new Set(), out = [];
+  for (const w of criterion.text.replace(/^\s*\S+\s+/, " ").match(/[A-Za-z][A-Za-z'-]+/g) || []) { const l = w.toLowerCase();
+    if (l.length < 4 || GENERIC.has(l) || VERBISH.test(l) || !content(l).length || ["underlying", "each", "both", "side", "sides", "instead", "before", "after", "between", "least"].includes(l)) continue;
+    const k = stem(l); if (seen.has(k)) continue; seen.add(k); out.push(/^[A-Z]{2,}$/.test(w) ? w : l); if (out.length === 3) break; }
+  return out.length > 1 ? out.slice(0, -1).join(", ") + " and " + out.at(-1) : out[0] || "this";
+}
 // "Jordan, a classmate" / "a classmate called Jordan who ..." -> { name, role }
 export function splitCharacter(text) {
   let t = (text || "").trim().replace(/[.?!]+$/, ""), m;

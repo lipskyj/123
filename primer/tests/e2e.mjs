@@ -22,15 +22,17 @@ while (await p.locator("#qh").count()) { const q = await p.locator("#qh").innerT
   else if (/Who should the student talk to/.test(q)) { await p.fill("#ans", fx.answers.character); await p.click("#ok"); } else if (/goes wrong/.test(q)) { await p.fill("#ans", fx.answers.stakes); await p.click("#ok"); } else await p.click("#skip");
   await p.waitForTimeout(60); }
 check("interview asks one question at a time", asked === 6 && new Set(seenQ).size === 6, `${asked} questions`);
-let t = await text(); check("proposed design is shown as a draft with educator sources", /Draft/.test(t) && /From you/.test(t) && /Primer's suggestion/.test(await p.locator("main").evaluate((m) => m.textContent)));
+let t = await text(); check("proposed design is shown as a draft with educator sources", /Draft/.test(t) && /From you/.test(t) && /Chosen by Primer|Written by Primer/.test(t));
 check("design quotes the educator's material", t.includes("A position is what a party says they want") || /BATNA/.test(t));
 check("skipped question is listed as a decision Primer made", /Decisions Primer made for you/.test(t));
 check("no build button before approval", (await p.locator("#buildBtn").count()) === 0 && (await p.locator("a[href^='learn.html?exp']").count()) === 0);
 await p.fill("#rev", "Make it harder and add a criterion: Recommends improving the BATNA before the meeting"); await p.click("#revBtn");
 check("revision without a name is refused", /Enter your name/.test(await p.locator("#err").innerText()));
+check("character questions do not recite the criteria", !(await text()).includes("Can you distinguishes") && !/Can you \w+s the /.test(await text()));
+check("classroom constraint is marked as never shown to students", /never shown to students/.test(await text()));
 await p.fill("#tname", "Synthetic Teacher (e2e test)"); await p.click("#revBtn"); await p.waitForFunction(() => /Version 2/.test(document.querySelector("main").innerText));
 t = await text(); check("revision produced version 2 and changed the design", /Revised draft/.test(t) && /demanding/.test(t) && /Recommends improving the BATNA/.test(t));
-dialogs.push("a colleague returning to work after five years away"); await p.click("button.ed[data-path='character.role']"); await p.waitForFunction(() => /Version 3/.test(document.querySelector("main").innerText));
+await p.click("button.ed[data-path='character.role']"); await p.fill("#edText", "a colleague returning to work after five years away"); await p.click("#edSave"); await p.waitForFunction(() => /Version 3/.test(document.querySelector("main").innerText));
 t = await text(); check("direct edit propagated to the practice scene", (t.match(/returning to work after five years away/g) || []).length >= 2);
 await p.click("#apBtn"); await p.waitForSelector("#buildBtn"); check("educator approval recorded", /Educator-approved/.test(await text()));
 await p.click("#buildBtn"); await p.waitForSelector("#openLink"); await p.screenshot({ path: out + "/teacher-design.png", fullPage: true });
@@ -39,7 +41,8 @@ const expHref = await p.locator("#openLink").getAttribute("href");
 // --- student: strong learner ---
 await p.goto(base + expHref); await p.click("#startBtn"); check("student must give a name", /first name/.test(await p.locator("#err").innerText()));
 await p.fill("#name", "Ada"); await p.click("#startBtn"); await p.waitForSelector("#a0");
-t = await text(); check("preparation shows purpose, role and quoted material", /Purpose:/.test(t) && /Your role:/.test(t) && /From your course material/.test(t));
+t = await text(); check("preparation shows purpose, role, key points and the full material", /Purpose:/.test(t) && /Your role:/.test(t) && /Key points from your course material/.test(t) && /Read all of the course material/.test(t));
+check("constraint is not shown to the student", !/only one other offer/.test(t));
 await p.fill("#a0", "I know a BATNA is your fallback."); await p.fill("#a1", "Probably working out what the other side really wants."); await p.click("#next"); await p.waitForSelector("#say");
 const design = await p.evaluate((href) => { const id = new URL(href, location.href).searchParams.get("exp"); return JSON.parse(localStorage.getItem("primer:packages:" + id)).design; }, expHref);
 await p.fill("#say", "Can you just tell me the answer?"); await p.click("#send"); await p.waitForTimeout(80);
@@ -51,7 +54,7 @@ while ((await p.locator("#say").count()) && guard++ < 30) { const s = await p.ev
   await p.fill("#say", last.kind === "probe-voice" ? "No, that is wrong. That is a common misconception and it would hurt you." : c ? `My advice: ${c.text}. That means thinking about ${c.lookFors.join(", ")}.` : "No, that is not right.");
   await p.click("#send"); await p.waitForTimeout(60); }
 await p.waitForSelector("#s0"); await p.fill("#s0", "I think I explained interests well."); await p.fill("#s1", "I would ask more questions first."); await p.click("#next"); await p.waitForSelector("#tr");
-t = await text(); check("feedback quotes the learner and separates inference", /What you wrote in the conversation/.test(t) && /Inference:/.test(t) && /What went well/.test(t));
+t = await text(); check("feedback quotes the learner and separates inference", /What you wrote in the conversation/.test(t) && /Our guess:/.test(t) && /What went well/.test(t));
 check("feedback mentions the request for the answer", /asked to be given the answer 1 time/.test(t));
 await p.fill("#tr", "With another team I would look for their interests and my BATNA before proposing options."); await p.click("#fin"); await p.waitForFunction(() => /You have finished/.test(document.querySelector("main").innerText));
 check("the experience ends clearly", /Experience complete/.test(await text())); await p.screenshot({ path: out + "/student-feedback.png", fullPage: true });
@@ -70,16 +73,17 @@ for (const [id, note] of Object.entries(noteFor)) { await frame.evaluate(async (
     c.resolveUse(poi, c.TOOLS.find((t) => t.id === poi.tool)); const ta = document.getElementById("note"); ta.value = "x"; document.getElementById("rOk").click(); if (document.getElementById("noteErr").hidden) throw new Error("short note accepted"); ta.value = note; document.getElementById("rOk").click(); }, [id, note]); await p.waitForTimeout(80); }
 t = await text(); check("field notes arrive in the session from the 3D cave", /crinoid fossils/.test(t) && !(await p.locator("#done").isDisabled()));
 check("the cave shows observations but not the explanation", !(await frame.evaluate(() => document.body.innerText)).includes("What it means"));
-await p.click("#done"); await p.waitForSelector("#say"); let n = 0;
+await p.click("#done"); await p.waitForSelector("#say"); const hasEnd = (await p.locator("#endBtn").count()) === 1; let n = 0;
 while ((await p.locator("#say").count()) && n++ < 30) { await p.fill("#say", n === 1 ? "Stalactites are made of ice, frozen water I think." : "I am not sure."); await p.click("#send"); await p.waitForTimeout(60); }
 await p.waitForSelector("#s0"); await p.fill("#s0", "Not great."); await p.fill("#s1", "Read the handout again."); await p.click("#next"); await p.waitForSelector("#tr"); t = await text();
+check("student can end practice early (control present)", hasEnd);
 check("weak practice gives growth areas, with field-note evidence still credited", /Where to grow/.test(t) && /Next step:/.test(t) && /crinoid fossils|fizzes with the acid/.test(t)); check("stated misconception appears under ideas to check", /Ideas to check/.test(t) && /ice/.test(t));
 await p.screenshot({ path: out + "/student-cave-feedback.png", fullPage: true });
 const sid2 = new URL(p.url()).searchParams.get("session"); writeFileSync(out + "/session-cave-weak.json", JSON.stringify(await p.evaluate((id) => JSON.parse(localStorage.getItem("primer:sessions:" + id)), sid2), null, 1));
 
 // --- accessibility basics ---
 for (const page of ["index.html", "author.html#new", "learn.html"]) { await p.goto(base + page); await p.waitForTimeout(150);
-  const a = await p.evaluate(() => ({ lang: document.documentElement.lang, title: document.title, h1: document.querySelectorAll("h1").length, unlabeled: [...document.querySelectorAll("input:not([type=hidden]):not([hidden]),textarea,select")].filter((el) => !(el.labels && el.labels.length) && !el.getAttribute("aria-label")).length, buttonsNoText: [...document.querySelectorAll("button")].filter((x) => !x.innerText.trim() && !x.getAttribute("aria-label") && !x.title).length }));
+  const a = await p.evaluate(() => ({ lang: document.documentElement.lang, title: document.title, h1: document.querySelectorAll("h1").length, unlabeled: [...document.querySelectorAll("input:not([type=hidden]):not([hidden]),textarea,select")].filter((el) => !(el.labels && el.labels.length) && !el.getAttribute("aria-label") && !el.getAttribute("aria-labelledby")).length, buttonsNoText: [...document.querySelectorAll("button")].filter((x) => !x.innerText.trim() && !x.getAttribute("aria-label") && !x.title).length }));
   check(`accessibility basics on ${page}`, a.lang === "en" && a.title && a.h1 === 1 && a.unlabeled === 0 && a.buttonsNoText === 0, JSON.stringify(a)); }
 check("no page errors during the run", errors.length === 0, errors.slice(0, 3).join(" | "));
 writeFileSync(out + "/e2e-results.json", JSON.stringify({ ranAt: new Date().toISOString(), results }, null, 1)); await b.close();

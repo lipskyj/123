@@ -29,10 +29,10 @@ async function viewHome() {
   const seen = new Set(local.map((x) => x.id));
   app.innerHTML = `<h1>Choose an experience</h1>
     ${open.length ? `<h2>Continue where you stopped</h2>${open.map((s) => `<div class="card row"><b>${esc(store.get("packages", s.packageId).title)}</b><span class="dim small">${esc(s.learner.name)} · ${s.phase}</span><span style="flex:1"></span><a href="?session=${s.id}">Continue</a></div>`).join("")}` : ""}
-    <h2>Available</h2>
-    ${local.map((x) => card(x.id, x.title, x.design.goal.text, x.approval.type, "")).join("")}${bundled.filter((b) => !seen.has(b.id)).map((b) => card(b.id, b.title, b.goal, b.approval, b.file)).join("")}
-    ${local.length + bundled.length ? "" : `<div class="card"><p>No experiences are available in this browser yet.</p></div>`}
-    <h2>Got a file from your teacher?</h2><div class="card"><label for="file" style="margin-top:0">Open an experience file</label><input type="file" id="file" accept=".json"><div id="err" class="notice bad" hidden tabindex="-1" role="alert"></div></div>`;
+    <h2>From your teacher</h2>
+    ${local.filter((x) => !bundled.some((b) => b.id === x.id)).map((x) => card(x.id, x.title, x.design.goal.text, x.approval.type, "")).join("") || `<div class="card"><p class="dim" style="margin:0">Nothing yet. If your teacher sent you a file, open it below.</p></div>`}
+    <h2>Got a file from your teacher?</h2><div class="card"><label for="file" style="margin-top:0">Open an experience file</label><input type="file" id="file" accept=".json"><div id="err" class="notice bad" hidden tabindex="-1" role="alert"></div></div>
+    ${bundled.length ? `<h2>Sample experiences</h2><p class="dim small">Examples that come with Primer, for trying it out.</p>${bundled.map((b) => card(b.id, b.title, b.goal, b.approval, b.file)).join("")}` : ""}`;
   $("file").onchange = async (e) => { try { const data = JSON.parse(await e.target.files[0].text()); const pk = (data.packages || [])[0]; if (!pk) throw new Error("That file does not contain an experience."); const errs = validatePackage(pk); if (errs.length) throw new Error("This experience cannot be opened: " + errs[0]); store.put("packages", pk); go("exp=" + pk.id); } catch (err) { fail(err); } };
 }
 const card = (id, title, goal, approval, file) => `<div class="card"><div class="row"><b>${esc(title)}</b>${approval === "test" ? `<span class="badge test-approved">Test build</span>` : ""}<span style="flex:1"></span><a href="?exp=${id}${file ? "&file=" + encodeURIComponent(file) : ""}">Open</a></div><p class="dim small" style="margin:6px 0 0">${esc(goal)}</p></div>`;
@@ -42,7 +42,7 @@ async function viewStart(id, file) {
   const d = pkg.design;
   app.innerHTML = `<h1>${esc(pkg.title)}</h1>${pkg.approval.type === "test" ? `<div class="notice">Test build. Your teacher has not yet approved this for classroom use.</div>` : ""}
     <div class="card"><p><b>What this is for:</b> ${esc(d.goal.text)}.</p><p><b>What you will do:</b> ${esc(d.learnerRole.text)}.</p>
-    <p class="dim">Three parts: prepare, practise with ${esc(d.character.name)}${d.world ? " after field work in a 3D cave" : ""}, then feedback on what you actually wrote. About 15–25 minutes. Your work is saved in this browser as you go.</p>
+    <p class="dim">Three parts: prepare, practise with ${esc(d.character.name)}${d.world ? " after field work in a 3D cave" : ""}, then feedback on what you actually wrote. About ${Math.max(10, Math.round((d.practice.maxTurns * 1.5 + 8 + (d.world ? 10 : 0)) / 5) * 5)} minutes at most. Your work is saved in this browser as you go.</p>
     <div id="err" class="notice bad" hidden tabindex="-1" role="alert"></div>
     <label for="name">Your first name</label><input type="text" id="name" autocomplete="given-name"><div class="row end" style="margin-top:12px"><button class="primary" id="startBtn">Start</button></div></div>`;
   $("startBtn").onclick = () => { try { const name = $("name").value.trim(); if (!name) throw new Error("Enter your first name."); const s = R.start(pkg.id, { name }); go("session=" + s.id); } catch (e) { fail(e); } };
@@ -61,7 +61,8 @@ function viewSession(id) {
 
 function viewPrep(s, d, head) {
   app.innerHTML = `${head}<h1>Prepare</h1><div class="card"><p style="white-space:pre-wrap">${esc(d.preparation.briefing)}</p></div>
-    ${d.preparation.keyPoints.length ? `<h2>From your course material</h2>${d.preparation.keyPoints.map((k) => `<blockquote>${esc(k.text)}<small>${esc(k.source.material)}</small></blockquote>`).join("")}` : ""}
+    ${d.preparation.keyPoints.length ? `<h2>Key points from your course material</h2>${d.preparation.keyPoints.map((k) => `<blockquote>${esc(k.text)}<small>${esc(k.source.material)}</small></blockquote>`).join("")}` : ""}
+    ${(d.materials || []).length ? `<details><summary>Read all of the course material</summary>${d.materials.map((m) => `<h3>${esc(m.name)}</h3><p style="white-space:pre-wrap">${esc(m.text)}</p>`).join("")}</details><p class="dim small">You can come back to this material during practice.</p>` : ""}
     <h2>Before you begin</h2><p class="dim">Answer in your own words. There are no wrong answers here; it gets your thinking started.</p>
     ${d.preparation.activation.map((q, i) => `<label for="a${i}">${esc(q)}</label><textarea id="a${i}"></textarea>`).join("")}
     <div class="row end" style="margin-top:14px"><button class="primary" id="next">Start practice</button></div>`;
@@ -91,9 +92,12 @@ function viewChat(s, d, head) {
   app.innerHTML = `${head}<h1>Practice</h1><p class="dim">You are talking with ${esc(d.character.name)}, ${esc(d.character.role)}. Your job: ${esc(d.learnerRole.text)}.</p>
     ${d.world ? `<details><summary>Your field notes</summary>${s.turns.filter((t) => t.kind === "field-note").map((t) => `<blockquote>${esc(t.text)}</blockquote>`).join("") || `<p class="dim">None.</p>`}</details>` : ""}
     <div class="chat" id="chat" role="log" aria-label="Conversation">${turns.map((t) => `<div class="msg ${t.who === "learner" ? "learner" : ""}"><span class="name">${t.who === "learner" ? esc(s.learner.name) : esc(d.character.name)}</span>${esc(t.text)}</div>`).join("")}</div>
-    <label for="say">Your reply</label><textarea id="say"></textarea><div class="row end" style="margin-top:10px"><span class="dim small">Ctrl+Enter to send</span><button class="primary" id="send">Send</button></div>`;
+    ${(d.materials || []).length ? `<details><summary>Course material</summary>${d.materials.map((m) => `<p style="white-space:pre-wrap">${esc(m.text)}</p>`).join("")}</details>` : ""}
+    <label for="say">Your reply</label><textarea id="say"></textarea><div class="row end" style="margin-top:10px"><button class="link" id="endBtn">End practice now</button><span style="flex:1"></span><span class="dim small">Ctrl+Enter to send</span><button class="primary" id="send">Send</button></div>
+    <p class="dim small">Reply ${s.practice.learnerTurns} of at most ${d.practice.maxTurns}.</p>`;
   const send = () => { try { R.say(s.id, $("say").value); render(); } catch (e) { fail(e); } };
-  $("send").onclick = send; $("say").onkeydown = (e) => { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) send(); }; $("say").focus(); $("chat").lastElementChild?.scrollIntoView({ block: "nearest" });
+  $("send").onclick = send;
+  $("endBtn").onclick = () => { if (!confirm("End practice now? Anything you have not been asked about yet will be marked as not assessed.")) return; try { R.endPractice(s.id); render(); } catch (e) { fail(e); } }; $("say").onkeydown = (e) => { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) send(); }; $("say").focus(); $("chat").lastElementChild?.scrollIntoView({ block: "nearest" });
 }
 
 function viewFeedback(s, d, head) {
@@ -107,8 +111,8 @@ function viewFeedback(s, d, head) {
   const f = s.feedback, cites = (cs) => cs.map((c) => `<blockquote>${esc(c.quote)}<small>What you wrote ${esc(c.where || 'during ' + c.phase)}</small></blockquote>`).join("");
   app.innerHTML = `${head}<h1>${s.phase === "ended" ? "Experience complete" : "Your feedback"}</h1><p class="dim">Goal: ${esc(f.goal)}.</p>
     ${f.selfAssessmentNote ? `<div class="card"><p>${esc(f.selfAssessmentNote)}</p></div>` : ""}
-    <h2>What went well</h2>${f.strengths.length ? f.strengths.map((x) => `<div class="card"><b>${esc(x.criterion)}</b><p>${esc(x.observation)}</p>${cites(x.citations)}<p class="dim small">${esc(x.inference)}</p></div>`).join("") : `<p class="dim">Nothing you wrote matched the criteria yet. See below for where to start.</p>`}
-    <h2>Where to grow</h2>${f.growth.length ? f.growth.map((x) => `<div class="card"><b>${esc(x.criterion)}</b><p>${esc(x.observation)}</p>${cites(x.citations)}<p class="dim small">${esc(x.inference)}</p><p><b>Next step:</b> ${esc(x.nextAction)}</p></div>`).join("") : `<p class="dim">No growth areas were identified from this session.</p>`}
+    <h2>What went well</h2>${f.strengths.length ? f.strengths.map((x) => `<div class="card"><b>${esc(x.criterion)}</b><p>${esc(x.observation)}</p>${cites(x.citations)}<p class="dim small">${esc(x.inference.replace(/^Inference:/, "Our guess:"))}</p></div>`).join("") : `<p class="dim">Nothing you wrote matched the criteria yet. See below for where to start.</p>`}
+    <h2>Where to grow</h2>${f.growth.length ? f.growth.map((x) => `<div class="card"><b>${esc(x.criterion)}</b><p>${esc(x.observation)}</p>${cites(x.citations)}<p class="dim small">${esc(x.inference.replace(/^Inference:/, "Our guess:"))}</p><p><b>Next step:</b> ${esc(x.nextAction)}</p></div>`).join("") : `<p class="dim">No growth areas were identified from this session.</p>`}
     ${f.misconceptions.length ? `<h2>Ideas to check</h2>${f.misconceptions.map((x) => `<div class="card"><b>"${esc(x.misconception)}"</b><p>${esc(x.note)}</p>${cites(x.citations)}</div>`).join("")}` : ""}
     ${f.notAssessed.length ? `<h2>Not assessed</h2><div class="card"><ul class="clean">${f.notAssessed.map((x) => `<li><b>${esc(x.criterion)}</b><br><span class="dim small">${esc(x.reason)}</span></li>`).join("")}</ul></div>` : ""}
     ${f.effortNote ? `<p>${esc(f.effortNote)}</p>` : ""}<p class="dim small">${esc(f.limits)}</p>

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-14T05:29:53.217Z",
+ "ranAt": "2026-11-14T10:29:54.303Z",
  "results": [
   {
    "name": "landing page shows teacher and student entry points",
@@ -42,6 +42,16 @@
    "detail": ""
   },
   {
+   "name": "character questions do not recite the criteria",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "classroom constraint is marked as never shown to students",
+   "ok": true,
+   "detail": ""
+  },
+  {
    "name": "revision produced version 2 and changed the design",
    "ok": true,
    "detail": ""
@@ -62,7 +72,12 @@
    "detail": ""
   },
   {
-   "name": "preparation shows purpose, role and quoted material",
+   "name": "preparation shows purpose, role, key points and the full material",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "constraint is not shown to the student",
    "ok": true,
    "detail": ""
   },
@@ -118,6 +133,11 @@
   },
   {
    "name": "the cave shows observations but not the explanation",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "student can end practice early (control present)",
    "ok": true,
    "detail": ""
   },

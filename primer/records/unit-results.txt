@@ -4,22 +4,29 @@ ok 3 - authoring: interview asks one question at a time and records answers
 ok 4 - authoring: educator materials and inputs shape the design
 ok 5 - authoring: skipped questions become visible AI assumptions
 ok 6 - authoring: a natural-language revision changes the design and propagates downstream
-ok 7 - authoring: a request Primer cannot interpret is recorded honestly as a constraint
-ok 8 - authoring: direct edits create a new version; edits to derived text survive later revisions
-ok 9 - authoring: trace links design elements to educator input
-ok 10 - approval: an unapproved design cannot be built or played
-ok 11 - approval: test approval is labelled and never counts as educator approval
-ok 12 - approval: a tampered package is refused by the runtime
-ok 13 - approval: revising an approved design supersedes it and the new version needs its own approval
-ok 14 - runtime: preparation, practice and feedback are connected and the session ends clearly
-ok 15 - runtime: adaptation raises challenge only on evidence and stays tied to an approved criterion
-ok 16 - runtime: a struggling learner gets limited support, never the answer, and is not credited
-ok 17 - runtime: asking for the answer is declined in character and logged
-ok 18 - runtime: a stated misconception is probed once; a voiced one that goes uncorrected is recorded
-ok 19 - runtime: criteria the learner never had a chance at are reported as not assessed
-ok 20 - runtime: feedback cites only text the learner actually wrote (no invented evidence)
-ok 21 - runtime: world practice gates the conversation until field work is done
-ok 22 - persistence: an interrupted session resumes from storage with nothing lost
-ok 23 - recovery: corrupt or missing records fail with a clear message instead of crashing
-ok 24 - provider: deterministic output is reproducible and the provider is replaceable (record / replay)
-ok 25 - failure modes: no goal drift, character drift or unsupported assessment across both fixtures
+ok 7 - authoring: a request Primer cannot interpret becomes a teacher-only note, never student-facing text
+ok 8 - review F1: the character's questions do not recite the success criteria
+ok 9 - review F2/F6/F16: classroom constraints are never spoken by the character or shown in the briefing
+ok 10 - review F4/F5: a character named by the teacher keeps that name; renaming changes only the name
+ok 11 - review F3: a rejected design can be reopened by editing; the new version needs approval
+ok 12 - review F8/F9: students get the full material, distinct key points and clean preparation questions
+ok 13 - review F10: a misconception the learner already rejected is not voiced; a plain 'no' counts as a correction
+ok 14 - review F17: a learner can end practice early; unasked criteria are not assessed
+ok 15 - authoring: direct edits create a new version; edits to derived text survive later revisions
+ok 16 - authoring: trace links design elements to educator input
+ok 17 - approval: an unapproved design cannot be built or played
+ok 18 - approval: test approval is labelled and never counts as educator approval
+ok 19 - approval: a tampered package is refused by the runtime
+ok 20 - approval: revising an approved design supersedes it and the new version needs its own approval
+ok 21 - runtime: preparation, practice and feedback are connected and the session ends clearly
+ok 22 - runtime: adaptation raises challenge only on evidence and stays tied to an approved criterion
+ok 23 - runtime: a struggling learner gets limited support, never the answer, and is not credited
+ok 24 - runtime: asking for the answer is declined in character and logged
+ok 25 - runtime: a stated misconception is probed once; a voiced one that goes uncorrected is recorded
+ok 26 - runtime: criteria the learner never had a chance at are reported as not assessed
+ok 27 - runtime: feedback cites only text the learner actually wrote (no invented evidence)
+ok 28 - runtime: world practice gates the conversation until field work is done
+ok 29 - persistence: an interrupted session resumes from storage with nothing lost
+ok 30 - recovery: corrupt or missing records fail with a clear message instead of crashing
+ok 31 - provider: deterministic output is reproducible and the provider is replaceable (record / replay)
+ok 32 - failure modes: no goal drift, character drift or unsupported assessment across both fixtures
