@@ -1,6 +1,7 @@
 # Project notes for Claude
 
 ## About the user
+At the start of every non-trivial task, load the `orchestrator` skill and follow it.
 The user is not a professional developer and does not want to remember
 commands, workflows or checklists. **You are responsible for the process.**
 Do all of the steps below automatically, without being asked, and without
