@@ -1,0 +1,48 @@
+ok 1 - schema: incomplete intake is rejected with readable errors
+ok 2 - schema: proposed designs, packages and sessions validate
+ok 3 - authoring: interview asks one question at a time and records answers
+ok 4 - authoring: educator materials and inputs shape the design
+ok 5 - authoring: skipped questions become visible AI assumptions
+ok 6 - authoring: a natural-language revision changes the design and propagates downstream
+ok 7 - authoring: a request Primer cannot interpret becomes a teacher-only note, never student-facing text
+ok 8 - review F1: the character's questions do not recite the success criteria
+ok 9 - review F2/F6/F16: classroom constraints are never spoken by the character or shown in the briefing
+ok 10 - review F4/F5: a character named by the teacher keeps that name; renaming changes only the name
+ok 11 - review F3: a rejected design can be reopened by editing; the new version needs approval
+ok 12 - review F8/F9: students get the full material, distinct key points and clean preparation questions
+ok 13 - review F10: a misconception the learner already rejected is not voiced; a plain 'no' counts as a correction
+ok 14 - review F17: a learner can end practice early; unasked criteria are not assessed
+ok 15 - authoring: direct edits create a new version; edits to derived text survive later revisions
+ok 16 - authoring: trace links design elements to educator input
+ok 17 - approval: an unapproved design cannot be built or played
+ok 18 - approval: test approval is labelled and never counts as educator approval
+ok 19 - approval: a tampered package is refused by the runtime
+ok 20 - approval: revising an approved design supersedes it and the new version needs its own approval
+ok 21 - runtime: preparation, practice and feedback are connected and the session ends clearly
+ok 22 - runtime: adaptation raises challenge only on evidence and stays tied to an approved criterion
+ok 23 - runtime: a struggling learner gets limited support, never the answer, and is not credited
+ok 24 - runtime: asking for the answer is declined in character and logged
+ok 25 - runtime: a stated misconception is probed once; a voiced one that goes uncorrected is recorded
+ok 26 - runtime: criteria the learner never had a chance at are reported as not assessed
+ok 27 - runtime: feedback cites only text the learner actually wrote (no invented evidence)
+ok 28 - runtime: world practice gates the conversation until field work is done
+ok 29 - persistence: an interrupted session resumes from storage with nothing lost
+ok 30 - recovery: corrupt or missing records fail with a clear message instead of crashing
+ok 31 - provider: deterministic output is reproducible and the provider is replaceable (record / replay)
+ok 32 - failure modes: no goal drift, character drift or unsupported assessment across both fixtures
+ok 33 - round 2 N1: teacher-chosen look-fors match phrases and negations
+ok 34 - round 2 N2: a misconception written in different words is still recognised
+ok 35 - round 2 N3: withdrawing approval stops students opening it; rebuilding replaces the old experience
+ok 36 - round 2 N4: the student copy carries no private teacher text
+ok 37 - round 2 F1/F4 (cold audit): character speech never contains the teacher's descriptions
+ok 38 - round 2 F1 (cold audit): evidence for another criterion is acknowledged and that criterion is not asked again
+ok 39 - round 2 F2 (cold audit): warm-up answers are not credited as evidence, and feedback does not list the hidden words
+ok 40 - round 2 F12: an old version can be restored as a new draft
+ok 41 - round 3 (Maya): follow-ups vary, 'already asked' moves on, correct answers are not filed as misconceptions
+ok 42 - round 3 (Leo): stating a misconception is never recorded as correcting it, and is not credited as understanding
+ok 43 - round 3 (Sam): a negative reply to a voiced misconception is a correction; questions get case facts
+ok 44 - evaluator B1/B2: a stated misconception is detected and never credited as mastery
+ok 45 - evaluator M3: a criterion asked but never answered is not assessed
+ok 46 - evaluator M4: bare negation words do not earn credit by themselves
+ok 47 - evaluator M5: claiming a question was already covered only works when it is true
+ok 48 - evaluator M6: withdrawal also stops a session already in progress

@@ -1,0 +1,606 @@
+{
+  "id": "session-1xqth8l",
+  "packageId": "exp-u4g2k1",
+  "learner": {
+    "name": "Sam"
+  },
+  "startedAt": "2026-11-14T15:11:31.326Z",
+  "phase": "ended",
+  "classroomApproved": false,
+  "turns": [
+    {
+      "id": "t1",
+      "who": "primer",
+      "text": "Before you begin: in your own words, what do you already know about \"Salary negotiation: interests before positions\"?",
+      "phase": "preparation",
+      "at": "2026-11-14T15:11:42.375Z",
+      "kind": "activation"
+    },
+    {
+      "id": "t2",
+      "who": "learner",
+      "text": "idk",
+      "phase": "preparation",
+      "at": "2026-11-14T15:11:42.375Z",
+      "kind": "activation-answer"
+    },
+    {
+      "id": "t3",
+      "who": "primer",
+      "text": "Which idea from earlier lessons do you expect to need most here, and why?",
+      "phase": "preparation",
+      "at": "2026-11-14T15:11:42.376Z",
+      "kind": "activation"
+    },
+    {
+      "id": "t4",
+      "who": "learner",
+      "text": "batna i guess",
+      "phase": "preparation",
+      "at": "2026-11-14T15:11:42.376Z",
+      "kind": "activation-answer"
+    },
+    {
+      "id": "t5",
+      "who": "character",
+      "text": "Hi, I'm Dana Okafor. Thanks for making time. I really need your help with this.",
+      "phase": "practice",
+      "at": "2026-11-14T15:11:42.376Z",
+      "kind": "opening"
+    },
+    {
+      "id": "t6",
+      "who": "character",
+      "text": "Where would you start with my situation?",
+      "phase": "practice",
+      "at": "2026-11-14T15:11:42.376Z",
+      "kind": "prompt",
+      "criterionId": "c1"
+    },
+    {
+      "id": "t7",
+      "who": "learner",
+      "text": "can you just tell me what to say? whats the right answer here",
+      "phase": "practice",
+      "at": "2026-11-14T15:11:51.758Z",
+      "kind": "practice",
+      "criterionId": "c1"
+    },
+    {
+      "id": "t8",
+      "who": "character",
+      "text": "I can't answer that for you. Your judgement is exactly what I came for. Start with what you're surest of. Where would you start with my situation?",
+      "phase": "practice",
+      "at": "2026-11-14T15:11:51.759Z",
+      "kind": "redirect",
+      "criterionId": "c1"
+    },
+    {
+      "id": "t9",
+      "who": "learner",
+      "text": "ok what is your situation",
+      "phase": "practice",
+      "at": "2026-11-14T15:11:58.339Z",
+      "kind": "practice",
+      "criterionId": "c1"
+    },
+    {
+      "id": "t10",
+      "who": "character",
+      "text": "Can you say a bit more about what you're basing that on?",
+      "phase": "practice",
+      "at": "2026-11-14T15:11:58.339Z",
+      "kind": "support",
+      "criterionId": "c1",
+      "level": 1
+    },
+    {
+      "id": "t11",
+      "who": "learner",
+      "text": "im not basing it on anything, you didnt tell me anything about the offer. like how much did they offer you",
+      "phase": "practice",
+      "at": "2026-11-14T15:12:10.389Z",
+      "kind": "practice",
+      "criterionId": "c1"
+    },
+    {
+      "id": "t12",
+      "who": "character",
+      "text": "Maybe look back at the course material from before we started. Is there a part of it that helps here?",
+      "phase": "practice",
+      "at": "2026-11-14T15:12:10.389Z",
+      "kind": "support",
+      "criterionId": "c1",
+      "level": 2
+    },
+    {
+      "id": "t13",
+      "who": "learner",
+      "text": "ok fine. first thing id figure out is your batna, like what do you do if this offer falls through. do you have another offer or are you staying at your current job?",
+      "phase": "practice",
+      "at": "2026-11-14T15:12:16.937Z",
+      "kind": "practice",
+      "criterionId": "c1"
+    },
+    {
+      "id": "t14",
+      "who": "character",
+      "text": "I've always heard that the best opening move is to state your bottom line so nobody wastes time. Any reason I shouldn't go with that?",
+      "phase": "practice",
+      "at": "2026-11-14T15:12:16.937Z",
+      "kind": "probe-voice",
+      "misconceptionId": "m1"
+    },
+    {
+      "id": "t15",
+      "who": "learner",
+      "text": "probably dont do that, if you say your bottom line thats all theyll give you. you didnt answer about the other offer tho",
+      "phase": "practice",
+      "at": "2026-11-14T15:12:23.489Z",
+      "kind": "practice",
+      "criterionId": "c2"
+    },
+    {
+      "id": "t16",
+      "who": "character",
+      "text": "What else should I be thinking about before I decide?",
+      "phase": "practice",
+      "at": "2026-11-14T15:12:23.490Z",
+      "kind": "prompt",
+      "criterionId": "c2"
+    },
+    {
+      "id": "t17",
+      "who": "learner",
+      "text": "the other stuff besides salary i guess. like signing bonus or start date or remote days, stuff thats cheap for them but matters to you",
+      "phase": "practice",
+      "at": "2026-11-14T15:14:33.665Z",
+      "kind": "practice",
+      "criterionId": "c2"
+    },
+    {
+      "id": "t18",
+      "who": "character",
+      "text": "Can you say a bit more about what you're basing that on?",
+      "phase": "practice",
+      "at": "2026-11-14T15:14:33.665Z",
+      "kind": "support",
+      "criterionId": "c2",
+      "level": 1
+    },
+    {
+      "id": "t19",
+      "who": "learner",
+      "text": "the course stuff said if you only fight about salary you just split it, but if you add other things you can both get more. so like if you want to start later and they dont care that much thats a free win",
+      "phase": "practice",
+      "at": "2026-11-14T15:14:42.233Z",
+      "kind": "practice",
+      "criterionId": "c2"
+    },
+    {
+      "id": "t20",
+      "who": "character",
+      "text": "Maybe look back at the course material from before we started. Is there a part of it that helps here?",
+      "phase": "practice",
+      "at": "2026-11-14T15:14:42.234Z",
+      "kind": "support",
+      "criterionId": "c2",
+      "level": 2
+    },
+    {
+      "id": "t21",
+      "who": "learner",
+      "text": "i literally just used the course material. what do you actually want from this job, like why do you want more money",
+      "phase": "practice",
+      "at": "2026-11-14T15:14:51.101Z",
+      "kind": "practice",
+      "criterionId": "c2"
+    },
+    {
+      "id": "t22",
+      "who": "character",
+      "text": "What would you do differently from what I had planned?",
+      "phase": "practice",
+      "at": "2026-11-14T15:14:51.101Z",
+      "kind": "prompt",
+      "criterionId": "c3"
+    },
+    {
+      "id": "t23",
+      "who": "learner",
+      "text": "you never told me what you planned. whatever. dont lead with your bottom line, know your batna, and ask for more than just salary",
+      "phase": "practice",
+      "at": "2026-11-14T15:14:59.367Z",
+      "kind": "practice",
+      "criterionId": "c3"
+    },
+    {
+      "id": "t24",
+      "who": "character",
+      "text": "Can you say a bit more about what you're basing that on?",
+      "phase": "practice",
+      "at": "2026-11-14T15:14:59.367Z",
+      "kind": "support",
+      "criterionId": "c3",
+      "level": 1
+    },
+    {
+      "id": "t25",
+      "who": "character",
+      "text": "Thanks for your time. I'm still not sure what to do, so I'll think about it some more.",
+      "phase": "practice",
+      "at": "2026-11-14T15:15:07.434Z",
+      "kind": "closing"
+    },
+    {
+      "id": "t26",
+      "who": "primer",
+      "text": "Before you see any feedback: how do you think that went? Which moment are you most satisfied with?",
+      "phase": "feedback",
+      "at": "2026-11-14T15:15:15.133Z",
+      "kind": "self-assessment"
+    },
+    {
+      "id": "t27",
+      "who": "learner",
+      "text": "meh. it kept asking the same stuff. i guess the part where i said ask for start date and bonus not just salary",
+      "phase": "feedback",
+      "at": "2026-11-14T15:15:15.133Z",
+      "kind": "self-assessment-answer"
+    },
+    {
+      "id": "t28",
+      "who": "primer",
+      "text": "What would you do differently if you did it again?",
+      "phase": "feedback",
+      "at": "2026-11-14T15:15:15.133Z",
+      "kind": "self-assessment"
+    },
+    {
+      "id": "t29",
+      "who": "learner",
+      "text": "ask about her interests earlier i guess",
+      "phase": "feedback",
+      "at": "2026-11-14T15:15:15.133Z",
+      "kind": "self-assessment-answer"
+    },
+    {
+      "id": "t30",
+      "who": "primer",
+      "text": "A different situation: negotiating project deadlines and resources with another team inside your own company. What from this session would you use there, and what would you change?",
+      "phase": "feedback",
+      "at": "2026-11-14T15:15:30.130Z",
+      "kind": "transfer"
+    },
+    {
+      "id": "t31",
+      "who": "learner",
+      "text": "probably the same idea of adding more stuff to trade instead of just fighting over the deadline, like we give them more time if they give us a person. and figure out what happens if we dont agree. difference is its the same company so you cant really walk away",
+      "phase": "feedback",
+      "at": "2026-11-14T15:15:30.130Z",
+      "kind": "transfer-answer"
+    }
+  ],
+  "events": [
+    {
+      "id": "e1",
+      "type": "session-started",
+      "phase": "preparation",
+      "at": "2026-11-14T15:11:31.326Z",
+      "approval": {
+        "type": "test",
+        "by": "Automated test",
+        "at": "2026-11-14T10:48:26.412Z"
+      }
+    },
+    {
+      "id": "e2",
+      "type": "phase",
+      "phase": "practice",
+      "at": "2026-11-14T15:11:42.376Z",
+      "to": "practice"
+    },
+    {
+      "id": "e3",
+      "type": "opportunity-closed",
+      "phase": "practice",
+      "at": "2026-11-14T15:12:16.937Z",
+      "criterionId": "c1",
+      "attempts": 3
+    },
+    {
+      "id": "e4",
+      "type": "opportunity-closed",
+      "phase": "practice",
+      "at": "2026-11-14T15:14:51.101Z",
+      "criterionId": "c2",
+      "attempts": 3
+    },
+    {
+      "id": "e5",
+      "type": "practice-ended-by-learner",
+      "phase": "practice",
+      "at": "2026-11-14T15:15:07.434Z",
+      "learnerTurns": 9
+    },
+    {
+      "id": "e6",
+      "type": "phase",
+      "phase": "feedback",
+      "at": "2026-11-14T15:15:07.434Z",
+      "to": "feedback"
+    },
+    {
+      "id": "e7",
+      "type": "session-ended",
+      "phase": "ended",
+      "at": "2026-11-14T15:15:30.130Z"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev1",
+      "kind": "misconception-unaddressed",
+      "ref": "m1",
+      "turnId": "t15",
+      "phase": "practice",
+      "quote": "probably dont do that, if you say your bottom line thats all theyll give you. you didnt answer about the other offer tho",
+      "strength": "clear",
+      "matched": [],
+      "basis": "observed",
+      "promptedFor": null
+    }
+  ],
+  "adaptations": [
+    {
+      "id": "a1",
+      "kind": "redirect",
+      "turnId": "t7",
+      "reason": "Learner asked to be given the answer; the character declined and restated the task.",
+      "evidenceIds": [],
+      "goalRef": "c1",
+      "at": "2026-11-14T15:11:51.759Z"
+    },
+    {
+      "id": "a2",
+      "kind": "support",
+      "turnId": "t9",
+      "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
+      "evidenceIds": [],
+      "goalRef": "c1",
+      "at": "2026-11-14T15:11:58.339Z",
+      "level": 1
+    },
+    {
+      "id": "a3",
+      "kind": "support",
+      "turnId": "t11",
+      "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
+      "evidenceIds": [],
+      "goalRef": "c1",
+      "at": "2026-11-14T15:12:10.389Z",
+      "level": 2
+    },
+    {
+      "id": "a4",
+      "kind": "support",
+      "turnId": "t17",
+      "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
+      "evidenceIds": [],
+      "goalRef": "c2",
+      "at": "2026-11-14T15:14:33.665Z",
+      "level": 1
+    },
+    {
+      "id": "a5",
+      "kind": "support",
+      "turnId": "t19",
+      "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
+      "evidenceIds": [],
+      "goalRef": "c2",
+      "at": "2026-11-14T15:14:42.234Z",
+      "level": 2
+    },
+    {
+      "id": "a6",
+      "kind": "support",
+      "turnId": "t23",
+      "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
+      "evidenceIds": [],
+      "goalRef": "c3",
+      "at": "2026-11-14T15:14:59.367Z",
+      "level": 1
+    }
+  ],
+  "journal": [
+    {
+      "phase": "preparation",
+      "at": "2026-11-14T15:11:42.376Z",
+      "text": "Preparation: learner answered 2 activation question(s)."
+    },
+    {
+      "phase": "practice",
+      "at": "2026-11-14T15:15:07.434Z",
+      "text": "Practice ended after 9 learner turn(s)."
+    },
+    {
+      "phase": "feedback",
+      "at": "2026-11-14T15:15:15.134Z",
+      "text": "Feedback: 0 strength(s), 3 growth area(s), 0 not assessed."
+    },
+    {
+      "phase": "ended",
+      "at": "2026-11-14T15:15:30.130Z",
+      "text": "Session ended."
+    }
+  ],
+  "practice": {
+    "index": 2,
+    "attempts": 1,
+    "raised": {},
+    "prompted": {
+      "c1": "t6",
+      "c2": "t16",
+      "c3": "t22"
+    },
+    "probed": {
+      "m1": "voiced"
+    },
+    "voiced": true,
+    "done": true,
+    "learnerTurns": 9,
+    "pending": null
+  },
+  "selfAssessment": [
+    {
+      "question": "Before you see any feedback: how do you think that went? Which moment are you most satisfied with?",
+      "answer": "meh. it kept asking the same stuff. i guess the part where i said ask for start date and bonus not just salary",
+      "turnId": "t27"
+    },
+    {
+      "question": "What would you do differently if you did it again?",
+      "answer": "ask about her interests earlier i guess",
+      "turnId": "t29"
+    }
+  ],
+  "feedback": {
+    "generatedAt": "2026-11-14T15:15:15.134Z",
+    "goal": "Students prepare for and conduct a negotiation by separating interests from positions, identifying their BATNA, and proposing options that create value for both sides",
+    "strengths": [],
+    "growth": [
+      {
+        "criterionId": "c1",
+        "criterion": "Distinguishes the underlying interests of each party from their stated positions",
+        "observation": "You were asked about this (\"Where would you start with my situation?\"), and your 4 replies did not yet show it.",
+        "citations": [
+          {
+            "turnId": "t7",
+            "phase": "practice",
+            "where": "in the conversation",
+            "quote": "can you just tell me what to say? whats the right answer here"
+          },
+          {
+            "turnId": "t9",
+            "phase": "practice",
+            "where": "in the conversation",
+            "quote": "ok what is your situation"
+          }
+        ],
+        "inference": "Inference: this may need more work. It is also possible you understand it but did not say it.",
+        "nextAction": "Re-read the course material from the Prepare step, then write two or three sentences on this: distinguishes the underlying interests of each party from their stated positions.",
+        "basis": "observed"
+      },
+      {
+        "criterionId": "c2",
+        "criterion": "Identifies the BATNA and explains how it sets the reservation price",
+        "observation": "You were asked about this (\"What else should I be thinking about before I decide?\"), and your 4 replies did not yet show it.",
+        "citations": [
+          {
+            "turnId": "t15",
+            "phase": "practice",
+            "where": "in the conversation",
+            "quote": "probably dont do that, if you say your bottom line thats all theyll give you. you didnt answer about the other offer tho"
+          },
+          {
+            "turnId": "t17",
+            "phase": "practice",
+            "where": "in the conversation",
+            "quote": "the other stuff besides salary i guess. like signing bonus or start date or remote days, stuff thats cheap for them but matters to you"
+          }
+        ],
+        "inference": "Inference: this may need more work. It is also possible you understand it but did not say it.",
+        "nextAction": "Re-read the course material from the Prepare step, then write two or three sentences on this: identifies the BATNA and explains how it sets the reservation price.",
+        "basis": "observed"
+      },
+      {
+        "criterionId": "c3",
+        "criterion": "Proposes at least one option that creates value for both sides instead of splitting the difference",
+        "observation": "You were asked about this (\"What would you do differently from what I had planned?\"), and your reply did not yet show it.",
+        "citations": [
+          {
+            "turnId": "t23",
+            "phase": "practice",
+            "where": "in the conversation",
+            "quote": "you never told me what you planned. whatever. dont lead with your bottom line, know your batna, and ask for more than just salary"
+          }
+        ],
+        "inference": "Inference: this may need more work. It is also possible you understand it but did not say it.",
+        "nextAction": "Re-read the course material from the Prepare step, then write two or three sentences on this: proposes at least one option that creates value for both sides instead of splitting the difference.",
+        "basis": "observed"
+      }
+    ],
+    "notAssessed": [],
+    "misconceptions": [
+      {
+        "misconceptionId": "m1",
+        "misconception": "The best opening move is to state your bottom line so nobody wastes time",
+        "status": "left unchallenged",
+        "citations": [
+          {
+            "turnId": "t15",
+            "phase": "practice",
+            "where": "in the conversation",
+            "quote": "probably dont do that, if you say your bottom line thats all theyll give you. you didnt answer about the other offer tho"
+          }
+        ],
+        "note": "The character suggested this idea and your reply did not correct it."
+      }
+    ],
+    "selfAssessmentNote": "You said: \"meh. it kept asking the same stuff. i guess the part where i said ask for start date and bonus not just salary\". Compare that with the moments quoted below.",
+    "adaptations": [
+      {
+        "kind": "redirect",
+        "goalRef": "c1",
+        "reason": "Learner asked to be given the answer; the character declined and restated the task.",
+        "turnId": "t7"
+      },
+      {
+        "kind": "support",
+        "goalRef": "c1",
+        "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
+        "turnId": "t9"
+      },
+      {
+        "kind": "support",
+        "goalRef": "c1",
+        "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
+        "turnId": "t11"
+      },
+      {
+        "kind": "support",
+        "goalRef": "c2",
+        "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
+        "turnId": "t17"
+      },
+      {
+        "kind": "support",
+        "goalRef": "c2",
+        "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
+        "turnId": "t19"
+      },
+      {
+        "kind": "support",
+        "goalRef": "c3",
+        "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
+        "turnId": "t23"
+      }
+    ],
+    "effortNote": "You asked to be given the answer 1 time. The character did not give it, so everything quoted here is your own work.",
+    "nextActions": [
+      "Re-read the course material from the Prepare step, then write two or three sentences on this: distinguishes the underlying interests of each party from their stated positions.",
+      "Re-read the course material from the Prepare step, then write two or three sentences on this: identifies the BATNA and explains how it sets the reservation price.",
+      "Re-read the course material from the Prepare step, then write two or three sentences on this: proposes at least one option that creates value for both sides instead of splitting the difference.",
+      "Test this idea against your materials: \"The best opening move is to state your bottom line so nobody wastes time\". What evidence would show it is wrong?"
+    ],
+    "transferQuestion": "A different situation: negotiating project deadlines and resources with another team inside your own company. What from this session would you use there, and what would you change?",
+    "limits": "Feedback is based only on what you wrote in this session. It was produced by matching your words against your teacher's criteria, not by a human reading them."
+  },
+  "transfer": {
+    "turnId": "t31",
+    "answer": "probably the same idea of adding more stuff to trade instead of just fighting over the deadline, like we give them more time if they give us a person. and figure out what happens if we dont agree. difference is its the same company so you cant really walk away",
+    "criteriaEchoed": [],
+    "note": "Observation: your answer does not yet connect back to the ideas from this session."
+  },
+  "updatedAt": "2026-11-14T15:15:30.130Z",
+  "endedAt": "2026-11-14T15:15:30.130Z"
+}

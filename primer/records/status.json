@@ -1,0 +1,72 @@
+{
+ "milestone": "Blocked: evidence judging needs a language-model provider",
+ "overall": "blocked",
+ "summary": "Teacher authoring, approval, privacy, the three learner phases and traceability work and are covered by 48 engine tests and 34 browser checks. Independent validation (two simulated teachers, a cold auditor, three simulated students, an evidence evaluator) found that feedback cannot reliably tell stating a misconception from rejecting it, or credit correct work phrased in other words. Six repair rounds of word-matching rules reduced but did not remove these errors. Contract commitment C6 (evidence-grounded feedback) is not met. Next step needs a language-model provider, which needs an API key this environment does not have.",
+ "works": [
+  "Teacher intake, one-question-at-a-time interview, proposed design with visible sources, assumptions and suggestions",
+  "Direct edits and plain-language revisions; versions, restore, superseding; every fixed character line visible before approval",
+  "Approval states enforced at build, start and during sessions; test approval labelled everywhere; withdrawal and replacement",
+  "Student copy carries no private teacher text",
+  "Preparation with full material, Practice (Roleplay/Teachback, case facts, optional 3D cave field notes), Feedback with self-assessment, quotations, 'not assessed' and transfer",
+  "Answer requests always declined; criteria never answered are not graded",
+  "Session records with evidence and adaptations visible to the teacher; export/import"
+ ],
+ "remains": [
+  "BLOCKER: a language-model provider for evidence judging and character replies (needs an API key; see handoff below)",
+  "Contract C6 not met; C2, C4, C5, C7 only partly",
+  "Re-validation of repair 6 by a fresh evaluator",
+  "Paper conformance audit (paper not supplied)",
+  "Validation with real teachers and students (none has happened)",
+  "Class rosters and teacher view of other devices' sessions; recalling files already sent"
+ ],
+ "decisions": [
+  [
+   "Clean browser-only redesign instead of extending the reference repository",
+   "The reference needs a server, Google OAuth and OpenAI realtime voice; the owner publishes on GitHub Pages."
+  ],
+  [
+   "Deterministic provider behind a provider interface",
+   "No model key in this environment. Record/replay proves the seam."
+  ],
+  [
+   "One design record with derived prompts instead of a multi-agent artifact pipeline",
+   "Makes teacher revisions propagate by construction."
+  ],
+  [
+   "Mentor phase renamed Preparation",
+   "Matches the prompt's contract wording."
+  ],
+  [
+   "Optional 3D world (cave) added as a practice setting",
+   "Requested by the owner; students gather evidence and write field notes before the conversation."
+  ]
+ ],
+ "validation": [
+  {
+   "role": "Fresh teacher 1 (simulated)",
+   "result": "Approval enforced; 2 blocking + 8 major; would not use. Addressed in repair 3.",
+   "record": "records/validation/fresh-teacher-report.md"
+  },
+  {
+   "role": "Fresh teacher 2 (simulated, re-check)",
+   "result": "11 of 21 fixed, 8 partly; new 1 blocking + 4 major. Addressed in repair 4.",
+   "record": "records/validation/fresh-teacher-recheck.md"
+  },
+  {
+   "role": "Cold-build auditor",
+   "result": "Works end to end; 5 major; C5 failed as observed. Addressed in repair 4.",
+   "record": "records/validation/cold-build-audit.md"
+  },
+  {
+   "role": "Fresh students Maya, Leo, Sam (simulated)",
+   "result": "Never given answers; misconception and evidence errors in feedback. Repair 5 attempted.",
+   "record": "records/validation/"
+  },
+  {
+   "role": "Independent evidence evaluator",
+   "result": "Not ready for students: C6 fails; 2 blocking + 6 major. Repair 6 attempted; replays still show evidence errors; not re-validated.",
+   "record": "records/validation/independent-evaluation.md"
+  }
+ ],
+ "nextMilestone": "Add a language-model provider behind src/provider.js (assess, line, reviseDesign) with the deterministic provider as fallback and replay for tests; then rerun the student replays and a fresh evaluator. Needs an API key and a small server or a teacher-supplied key, because GitHub Pages cannot keep a key secret."
+}

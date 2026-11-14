@@ -1,0 +1,643 @@
+{
+  "packages": [
+    {
+      "id": "exp-v3pwiy",
+      "designId": "design-hlwx3o",
+      "designVersion": 7,
+      "title": "What a p-value does and does not tell you",
+      "builtAt": "2026-11-14T10:18:38.692Z",
+      "provider": "deterministic",
+      "approval": {
+        "type": "educator",
+        "by": "Fresh Teacher (simulated)",
+        "at": "2026-11-14T10:18:37.134Z"
+      },
+      "design": {
+        "id": "design-hlwx3o",
+        "intakeId": "intake-sqyjhd",
+        "version": 7,
+        "state": "educator-approved",
+        "supersedes": "design-hvwisn",
+        "createdAt": "2026-11-14T05:39:04.117Z",
+        "title": "What a p-value does and does not tell you",
+        "template": "teachback",
+        "world": null,
+        "goal": {
+          "text": "Students can correctly interpret a p-value from a two-group comparison in plain language, and can explain what it does not tell us (it is not the probability the null hypothesis is true, and it says nothing about how large or important the effect is)",
+          "source": {
+            "kind": "teacher",
+            "field": "objective"
+          }
+        },
+        "learnerProfile": {
+          "text": "Second-year undergraduate psychology students in a research methods seminar (ages 19-21, about 28 per group). Many are anxious about maths and switch off if spoken to in formulas. Speak to them in plain English, use the sleep-and-memory study as the running example, and do not be condescending",
+          "priorKnowledge": "They know means, standard deviations and the idea that samples vary by chance. They have met the null hypothesis in lectures and have run an independent-samples t-test in software by following instructions, but they have never had to say in words what the output means",
+          "source": {
+            "kind": "teacher",
+            "field": "learners"
+          }
+        },
+        "learnerRole": {
+          "text": "Explain the result of the sleep-and-memory study to a sceptical classmate who missed the lecture and thinks p = .03 means there is a 3% chance the result is a fluke. The student should say what the p-value means, correct the classmate's wrong readings, and say what else they would need to look at before deciding whether the finding matters",
+          "source": {
+            "kind": "teacher",
+            "field": "studentWork"
+          }
+        },
+        "character": {
+          "name": "Aiko Tanaka",
+          "role": "a classmate who missed the lecture and has to write up the nap study for a lab report due tomorrow. Confident but wrong about what p = .03 means, and will push back until the explanation makes sense",
+          "source": {
+            "kind": "teacher",
+            "field": "answers.character"
+          }
+        },
+        "stakes": {
+          "text": "Jordan writes in the lab report that 'there is only a 3% chance the null hypothesis is true, so napping definitely improves memory a lot'. The marker takes marks off for misinterpreting the test, and Jordan goes on repeating the mistake in their final-year project",
+          "source": {
+            "kind": "teacher",
+            "field": "answers.stakes"
+          }
+        },
+        "difficulty": "moderate",
+        "helpPolicy": "questions-then-materials",
+        "criteria": [
+          {
+            "id": "c1",
+            "text": "States that the p-value is calculated assuming the null hypothesis is true (it is the probability of data at least this extreme if there were really no difference)",
+            "lookFors": [
+              "value",
+              "calculated",
+              "assuming",
+              "null",
+              "hypothesis",
+              "true",
+              "probability",
+              "data",
+              "least",
+              "extreme",
+              "really",
+              "difference"
+            ],
+            "source": {
+              "kind": "teacher",
+              "field": "evidenceOfProgress[0]",
+              "materials": [
+                {
+                  "material": "Pasted material",
+                  "excerpt": "Start with the null hypothesis: in the population, napping makes no difference to recall."
+                },
+                {
+                  "material": "Pasted material",
+                  "excerpt": "Start with the null hypothesis: in the population, napping makes no difference to recall."
+                },
+                {
+                  "material": "Pasted material",
+                  "excerpt": "Reading a p-value: the sleep and memory study A researcher wants to know whether a short nap helps people remember word…"
+                },
+                {
+                  "material": "Pasted material",
+                  "excerpt": "Start with the null hypothesis: in the population, napping makes no difference to recall."
+                }
+              ]
+            }
+          },
+          {
+            "id": "c2",
+            "text": "Explicitly rejects the reading that p is the probability the null hypothesis is true or that the result is due to chance",
+            "lookFors": [
+              "not the probability",
+              "does not mean",
+              "null",
+              "assuming",
+              "if there were no difference",
+              "about the data"
+            ],
+            "source": {
+              "kind": "teacher",
+              "field": "evidenceOfProgress[1]",
+              "materials": [
+                {
+                  "material": "Pasted material",
+                  "excerpt": "Start with the null hypothesis: in the population, napping makes no difference to recall."
+                },
+                {
+                  "material": "Pasted material",
+                  "excerpt": "Start with the null hypothesis: in the population, napping makes no difference to recall."
+                },
+                {
+                  "material": "Pasted material",
+                  "excerpt": "Start with the null hypothesis: in the population, napping makes no difference to recall."
+                }
+              ]
+            }
+          },
+          {
+            "id": "c3",
+            "text": "Separates statistical significance from the size or importance of the effect, and refers to the effect size or confidence interval",
+            "lookFors": [
+              "statistical",
+              "significance",
+              "size",
+              "importance",
+              "effect",
+              "refers",
+              "confidence",
+              "interval",
+              "hypothesis",
+              "plausible",
+              "probable",
+              "information"
+            ],
+            "source": {
+              "kind": "teacher",
+              "field": "evidenceOfProgress[2]",
+              "materials": [
+                {
+                  "material": "Pasted material",
+                  "excerpt": "To say how probable a hypothesis is, we would need extra information that the test does not use, such as how plausible…"
+                }
+              ]
+            }
+          },
+          {
+            "id": "c4",
+            "text": "Says that a non-significant result is not proof of no effect, and mentions sample size or power",
+            "lookFors": [
+              "non",
+              "significant",
+              "result",
+              "proof",
+              "effect",
+              "mentions",
+              "sample",
+              "size",
+              "power",
+              "hypothesis",
+              "plausible",
+              "probable"
+            ],
+            "source": {
+              "kind": "teacher",
+              "field": "evidenceOfProgress[3]",
+              "materials": [
+                {
+                  "material": "Pasted material",
+                  "excerpt": "To say how probable a hypothesis is, we would need extra information that the test does not use, such as how plausible…"
+                }
+              ]
+            }
+          },
+          {
+            "id": "c5",
+            "text": "Uses the actual numbers from the nap study (17.1 versus 14.9 words, p = .03) when explaining, rather than talking only in general terms",
+            "lookFors": [
+              "actual",
+              "numbers",
+              "nap",
+              "study",
+              "versus",
+              "words",
+              "explaining",
+              "rather",
+              "talking",
+              "general",
+              "terms"
+            ],
+            "source": {
+              "kind": "teacher",
+              "field": "revision"
+            }
+          }
+        ],
+        "misconceptions": [
+          {
+            "id": "m1",
+            "text": "p = .03 means there is a 3% chance the null hypothesis is true (or a 97% chance the treatment works)",
+            "cues": [
+              "means",
+              "chance",
+              "null",
+              "hypothesis",
+              "true",
+              "chance",
+              "treatment",
+              "works"
+            ],
+            "source": {
+              "kind": "teacher",
+              "field": "misconceptions[0]"
+            },
+            "distinct": [
+              "treatment",
+              "works"
+            ]
+          },
+          {
+            "id": "m2",
+            "text": "A smaller p-value means a bigger or more important effect, and p > .05 proves there is no effect",
+            "cues": [
+              "smaller",
+              "value",
+              "means",
+              "bigger",
+              "important",
+              "effect",
+              "proves",
+              "effect"
+            ],
+            "source": {
+              "kind": "teacher",
+              "field": "misconceptions[1]"
+            },
+            "distinct": [
+              "smaller",
+              "bigger",
+              "important",
+              "proves"
+            ]
+          }
+        ],
+        "concepts": [
+          {
+            "term": "hypothesis",
+            "fact": "Start with the null hypothesis: in the population, napping makes no difference to recall.",
+            "source": {
+              "material": "Pasted material",
+              "excerpt": "Start with the null hypothesis: in the population, napping makes no difference to recall."
+            }
+          },
+          {
+            "term": "difference",
+            "fact": "Start with the null hypothesis: in the population, napping makes no difference to recall.",
+            "source": {
+              "material": "Pasted material",
+              "excerpt": "Start with the null hypothesis: in the population, napping makes no difference to recall."
+            }
+          },
+          {
+            "term": "group",
+            "fact": "Forty students are randomly split into two groups.",
+            "source": {
+              "material": "Pasted material",
+              "excerpt": "Forty students are randomly split into two groups."
+            }
+          },
+          {
+            "term": "value",
+            "fact": "Reading a p-value: the sleep and memory study A researcher wants to know whether a short nap helps people remember word lists.",
+            "source": {
+              "material": "Pasted material",
+              "excerpt": "Reading a p-value: the sleep and memory study A researcher wants to know whether a short nap helps people remember word…"
+            }
+          },
+          {
+            "term": "null",
+            "fact": "Start with the null hypothesis: in the population, napping makes no difference to recall.",
+            "source": {
+              "material": "Pasted material",
+              "excerpt": "Start with the null hypothesis: in the population, napping makes no difference to recall."
+            }
+          },
+          {
+            "term": "effect",
+            "fact": "To say how probable a hypothesis is, we would need extra information that the test does not use, such as how plausible the effect was before the study.",
+            "source": {
+              "material": "Pasted material",
+              "excerpt": "To say how probable a hypothesis is, we would need extra information that the test does not use, such as how plausible…"
+            }
+          },
+          {
+            "term": "word",
+            "fact": "Reading a p-value: the sleep and memory study A researcher wants to know whether a short nap helps people remember word lists.",
+            "source": {
+              "material": "Pasted material",
+              "excerpt": "Reading a p-value: the sleep and memory study A researcher wants to know whether a short nap helps people remember word…"
+            }
+          },
+          {
+            "term": "study",
+            "fact": "Reading a p-value: the sleep and memory study A researcher wants to know whether a short nap helps people remember word lists.",
+            "source": {
+              "material": "Pasted material",
+              "excerpt": "Reading a p-value: the sleep and memory study A researcher wants to know whether a short nap helps people remember word…"
+            }
+          },
+          {
+            "term": "recall",
+            "fact": "The nap group recalls 17.1 words on average and the quiet group recalls 14.9.",
+            "source": {
+              "material": "Pasted material",
+              "excerpt": "The nap group recalls 17.1 words on average and the quiet group recalls 14.9."
+            }
+          },
+          {
+            "term": "mean",
+            "fact": "What does p = .03 mean?",
+            "source": {
+              "material": "Pasted material",
+              "excerpt": "What does p = .03 mean?"
+            }
+          }
+        ],
+        "constraints": [
+          "Must fit in 15 minutes of a 50-minute seminar",
+          "Text only: students work on their own laptops in a shared room with no headphones, so no audio",
+          "No formulas or calculation required",
+          "plain-language reasoning only"
+        ],
+        "transfer": {
+          "text": "A newspaper headline says a new revision app 'significantly improves exam scores (p = .04)' in a study of 6,000 pupils. What would you want to know before recommending the app to a friend, and why?",
+          "source": {
+            "kind": "ai",
+            "field": "answers.transfer"
+          }
+        },
+        "assumptions": [
+          {
+            "text": "Template chosen by Primer: Teachback, based on the student work you described.",
+            "source": "ai",
+            "field": "template"
+          },
+          {
+            "text": "No transfer situation was given, so the final question asks students to think of one themselves.",
+            "source": "ai",
+            "field": "transfer"
+          }
+        ],
+        "recommendations": [],
+        "overrides": {
+          "practice.opening": "Hi, I'm Jordan. I missed the stats lecture and I have to write up the nap study by tomorrow. The output says p = .03, so that means there's only a 3% chance the result is a fluke, right? Can I just write that?",
+          "preparation.briefing": "Purpose: Interpret a p-value from a two-group comparison in plain language, and explain what it does not tell us.\nYour role: Explain the result of the sleep-and-memory study to a sceptical classmate who missed the lecture and thinks p = .03 means there is a 3% chance the result is a fluke. Say what the p-value means, correct the wrong readings, and say what else you would look at before deciding whether the finding matters.\nYou will teach Jordan, a classmate who missed the lecture and has to write up the nap study for a lab report due tomorrow.\nKeep in mind: You have about 15 minutes. No formulas or calculation needed; plain-language reasoning only."
+        },
+        "revisions": [
+          {
+            "id": "rev1",
+            "at": "2026-11-14T05:38:58.665Z",
+            "request": "Add a criterion: Uses the actual numbers from the nap study (17.1 versus 14.9 words, p = .03) when explaining, rather than talking only in general terms",
+            "changes": [
+              "Added criterion c5: Uses the actual numbers from the nap study (17.1 versus 14.9 words, p = .03) when explaining, rather than talking only in general terms"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev2",
+            "at": "2026-11-14T05:38:59.917Z",
+            "request": "Direct edit of character.role",
+            "changes": [
+              "character.role edited by Fresh Teacher (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev3",
+            "at": "2026-11-14T05:39:00.968Z",
+            "request": "Direct edit of practice.opening",
+            "changes": [
+              "practice.opening edited by Fresh Teacher (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev4",
+            "at": "2026-11-14T05:39:02.016Z",
+            "request": "Direct edit of criteria.1.lookFors",
+            "changes": [
+              "criteria.1.lookFors edited by Fresh Teacher (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev5",
+            "at": "2026-11-14T05:39:03.065Z",
+            "request": "Direct edit of preparation.briefing",
+            "changes": [
+              "preparation.briefing edited by Fresh Teacher (simulated)"
+            ],
+            "understood": true
+          },
+          {
+            "id": "rev6",
+            "at": "2026-11-14T05:39:04.116Z",
+            "request": "Direct edit of transfer.text",
+            "changes": [
+              "transfer.text edited by Fresh Teacher (simulated)"
+            ],
+            "understood": true
+          }
+        ],
+        "history": [
+          {
+            "at": "2026-11-14T05:38:57.890Z",
+            "actor": {
+              "type": "system",
+              "name": "Primer (deterministic provider)"
+            },
+            "action": "propose",
+            "from": null,
+            "to": "draft",
+            "note": "Proposed from educator intake."
+          },
+          {
+            "at": "2026-11-14T05:38:58.665Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher (simulated)"
+            },
+            "action": "revise",
+            "from": "draft",
+            "to": "revised",
+            "note": "Add a criterion: Uses the actual numbers from the nap study (17.1 versus 14.9 words, p = .03) when explaining, rather than talking only in general terms"
+          },
+          {
+            "at": "2026-11-14T05:38:59.917Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited character.role"
+          },
+          {
+            "at": "2026-11-14T05:39:00.968Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited practice.opening"
+          },
+          {
+            "at": "2026-11-14T05:39:02.017Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited criteria.1.lookFors"
+          },
+          {
+            "at": "2026-11-14T05:39:03.066Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited preparation.briefing"
+          },
+          {
+            "at": "2026-11-14T05:39:04.117Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher (simulated)"
+            },
+            "action": "edit",
+            "from": "revised",
+            "to": "revised",
+            "note": "Edited transfer.text"
+          },
+          {
+            "at": "2026-11-14T10:18:22.328Z",
+            "actor": {
+              "type": "test",
+              "name": "Fresh Teacher (simulated) (test approval)"
+            },
+            "action": "approve",
+            "from": "revised",
+            "to": "test-approved",
+            "note": ""
+          },
+          {
+            "at": "2026-11-14T10:18:37.134Z",
+            "actor": {
+              "type": "educator",
+              "name": "Fresh Teacher (simulated)"
+            },
+            "action": "approve",
+            "from": "test-approved",
+            "to": "educator-approved",
+            "note": ""
+          }
+        ],
+        "preparation": {
+          "briefing": "Purpose: Interpret a p-value from a two-group comparison in plain language, and explain what it does not tell us.\nYour role: Explain the result of the sleep-and-memory study to a sceptical classmate who missed the lecture and thinks p = .03 means there is a 3% chance the result is a fluke. Say what the p-value means, correct the wrong readings, and say what else you would look at before deciding whether the finding matters.\nYou will teach Jordan, a classmate who missed the lecture and has to write up the nap study for a lab report due tomorrow.\nKeep in mind: You have about 15 minutes. No formulas or calculation needed; plain-language reasoning only.",
+          "keyPoints": [
+            {
+              "text": "Start with the null hypothesis: in the population, napping makes no difference to recall.",
+              "source": {
+                "material": "Pasted material",
+                "excerpt": "Start with the null hypothesis: in the population, napping makes no difference to recall."
+              }
+            },
+            {
+              "text": "Start with the null hypothesis: in the population, napping makes no difference to recall.",
+              "source": {
+                "material": "Pasted material",
+                "excerpt": "Start with the null hypothesis: in the population, napping makes no difference to recall."
+              }
+            },
+            {
+              "text": "Forty students are randomly split into two groups.",
+              "source": {
+                "material": "Pasted material",
+                "excerpt": "Forty students are randomly split into two groups."
+              }
+            }
+          ],
+          "activation": [
+            "Before you begin: in your own words, what do you already know about hypothesis?",
+            "Your teacher expects you to bring this with you: They know means, standard deviations and the idea that samples vary by chance. They have met the null hypothesis in lectures and have run an independent-samples t-test in software by following instructions, but they have never had to say in words what the output means. Where might it matter in what you are about to do?"
+          ]
+        },
+        "practice": {
+          "opening": "Hi, I'm Jordan. I missed the stats lecture and I have to write up the nap study by tomorrow. The output says p = .03, so that means there's only a 3% chance the result is a fluke, right? Can I just write that?",
+          "challenges": [
+            {
+              "criterionId": "c1",
+              "prompt": "Here's what I don't get yet. Can you state that the p-value is calculated assuming the null hypothesis is true (it is the probability of data at least this extreme if there were really no difference), in a way a beginner would follow?",
+              "harder": "Okay, I think I follow. But what if someone said the opposite? How would you convince them, thinking about this: must fit in 15 minutes of a 50-minute seminar?",
+              "support": [
+                "I'm lost. Could you try again with one concrete example?",
+                "Go back to what you were given before we started. Which part of it deals with value and calculated? What does it imply here?"
+              ]
+            },
+            {
+              "criterionId": "c2",
+              "prompt": "Here's what I don't get yet. Can you explicitly rejects the reading that p is the probability the null hypothesis is true or that the result is due to chance, in a way a beginner would follow?",
+              "harder": "Okay, I think I follow. But what if someone said the opposite? How would you convince them, thinking about this: must fit in 15 minutes of a 50-minute seminar?",
+              "support": [
+                "I'm lost. Could you try again with one concrete example?",
+                "Go back to what you were given before we started. Which part of it deals with not the probability and does not mean? What does it imply here?"
+              ]
+            },
+            {
+              "criterionId": "c3",
+              "prompt": "Here's what I don't get yet. Can you separate statistical significance from the size or importance of the effect, and refers to the effect size or confidence interval, in a way a beginner would follow?",
+              "harder": "Okay, I think I follow. But what if someone said the opposite? How would you convince them, thinking about this: must fit in 15 minutes of a 50-minute seminar?",
+              "support": [
+                "I'm lost. Could you try again with one concrete example?",
+                "Go back to what you were given before we started. Which part of it deals with statistical and significance? What does it imply here?"
+              ]
+            },
+            {
+              "criterionId": "c4",
+              "prompt": "Here's what I don't get yet. Can you say that a non-significant result is not proof of no effect, and mentions sample size or power, in a way a beginner would follow?",
+              "harder": "Okay, I think I follow. But what if someone said the opposite? How would you convince them, thinking about this: must fit in 15 minutes of a 50-minute seminar?",
+              "support": [
+                "I'm lost. Could you try again with one concrete example?",
+                "Go back to what you were given before we started. Which part of it deals with non and significant? What does it imply here?"
+              ]
+            },
+            {
+              "criterionId": "c5",
+              "prompt": "Here's what I don't get yet. Can you use the actual numbers from the nap study (17.1 versus 14.9 words, p = .03) when explaining, rather than talking only in general terms, in a way a beginner would follow?",
+              "harder": "Okay, I think I follow. But what if someone said the opposite? How would you convince them, thinking about this: must fit in 15 minutes of a 50-minute seminar?",
+              "support": [
+                "I'm lost. Could you try again with one concrete example?",
+                "Go back to what you were given before we started. Which part of it deals with actual and numbers? What does it imply here?"
+              ]
+            }
+          ],
+          "probes": [
+            {
+              "misconceptionId": "m1",
+              "voice": "Oh! So that means p = .03 means there is a 3% chance the null hypothesis is true (or a 97% chance the treatment works), right?",
+              "challenge": "Hold on. A moment ago you said something that sounded like \"p = .03 means there is a 3% chance the null hypothesis is true (or a 97% chance the treatment works)\". If that were true, what would we expect to see? Does that match what you know?"
+            },
+            {
+              "misconceptionId": "m2",
+              "voice": "Oh! So that means a smaller p-value means a bigger or more important effect, and p > .05 proves there is no effect, right?",
+              "challenge": "Hold on. A moment ago you said something that sounded like \"a smaller p-value means a bigger or more important effect, and p > .05 proves there is no effect\". If that were true, what would we expect to see? Does that match what you know?"
+            }
+          ],
+          "closing": "Thank you. I think I could explain some of this to someone else now.",
+          "refusal": "I can't tell you the answer; I'm the one who doesn't know it! Try explaining the part you're surest of.",
+          "maxTurns": 17,
+          "raise": true,
+          "maxAttempts": 3,
+          "minTurns": 4
+        },
+        "feedback": {
+          "selfAssessment": [
+            "Before you see any feedback: how do you think that went? Which moment are you most satisfied with?",
+            "What would you do differently if you did it again?"
+          ],
+          "transfer": "A different situation: A newspaper headline says a new revision app 'significantly improves exam scores (p = .04)' in a study of 6,000 pupils. What would you want to know before recommending the app to a friend, and why?. What from this session would you use there, and what would you change?"
+        },
+        "prompts": {
+          "character": "You play Aiko Tanaka, a classmate who missed the lecture and has to write up the nap study for a lab report due tomorrow. Confident but wrong about what p = .03 means, and will push back until the explanation makes sense, in a teachback for these learners: Second-year undergraduate psychology students in a research methods seminar (ages 19-21, about 28 per group). Many are anxious about maths and switch off if spoken to in formulas. Speak to them in plain English, use the sleep-and-memory study as the running example, and do not be condescending.\nLearning goal (do not drift from it): Students can correctly interpret a p-value from a two-group comparison in plain language, and can explain what it does not tell us (it is not the probability the null hypothesis is true, and it says nothing about how large or important the effect is)\nThe learner's job: Explain the result of the sleep-and-memory study to a sceptical classmate who missed the lecture and thinks p = .03 means there is a 3% chance the result is a fluke. The student should say what the p-value means, correct the classmate's wrong readings, and say what else they would need to look at before deciding whether the finding matters\nStakes: Jordan writes in the lab report that 'there is only a 3% chance the null hypothesis is true, so napping definitely improves memory a lot'. The marker takes marks off for misinterpreting the test, and Jordan goes on repeating the mistake in their final-year project\nDifficulty: moderate. Help policy: questions-then-materials.\nStay in character. Never give the answer or do the learner's work. Raise the challenge only after the learner shows evidence; give support only as the help policy allows.\nConstraints: Must fit in 15 minutes of a 50-minute seminar; Text only: students work on their own laptops in a shared room with no headphones, so no audio; No formulas or calculation required; plain-language reasoning only",
+          "assessor": "Record evidence only for these educator-approved criteria, quoting the learner's own words:\n- c1: States that the p-value is calculated assuming the null hypothesis is true (it is the probability of data at least this extreme if there were really no difference) (look for: value, calculated, assuming, null, hypothesis, true, probability, data, least, extreme, really, difference)\n- c2: Explicitly rejects the reading that p is the probability the null hypothesis is true or that the result is due to chance (look for: not the probability, does not mean, null, assuming, if there were no difference, about the data)\n- c3: Separates statistical significance from the size or importance of the effect, and refers to the effect size or confidence interval (look for: statistical, significance, size, importance, effect, refers, confidence, interval, hypothesis, plausible, probable, information)\n- c4: Says that a non-significant result is not proof of no effect, and mentions sample size or power (look for: non, significant, result, proof, effect, mentions, sample, size, power, hypothesis, plausible, probable)\n- c5: Uses the actual numbers from the nap study (17.1 versus 14.9 words, p = .03) when explaining, rather than talking only in general terms (look for: actual, numbers, nap, study, versus, words, explaining, rather, talking, general, terms)\nWatch for these misconceptions:\n- m1: p = .03 means there is a 3% chance the null hypothesis is true (or a 97% chance the treatment works)\n- m2: A smaller p-value means a bigger or more important effect, and p > .05 proves there is no effect\nDo not assess anything the learner was not asked to do. Mark observation separately from inference.",
+          "feedback": "Write feedback for the learning goal \"Students can correctly interpret a p-value from a two-group comparison in plain language, and can explain what it does not tell us (it is not the probability the null hypothesis is true, and it says nothing about how large or important the effect is)\". Ask for self-assessment first. For each criterion cite the learner's actual words and the turn they came from. Say \"not assessed\" where the learner had no fair opportunity. Offer concrete next actions and finish with the transfer question."
+        }
+      }
+    }
+  ]
+}

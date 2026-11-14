@@ -1,0 +1,1323 @@
+{
+ "note": "Replay of the student's recorded replies through the current build. Replies are fixed and do not respond to the new character lines.",
+ "design": {
+  "id": "design-1moz80l",
+  "intakeId": "intake-1rmcwb5",
+  "version": 40,
+  "state": "test-approved",
+  "supersedes": "design-p41ul1",
+  "createdAt": "2026-11-14T10:42:09.229Z",
+  "title": "What a p-value does and does not tell you",
+  "template": "teachback",
+  "world": null,
+  "goal": {
+   "text": "Students can correctly interpret a p-value from a two-group comparison in plain language, and can explain what it does and does not tell us",
+   "source": {
+    "kind": "teacher",
+    "field": "edit"
+   }
+  },
+  "learnerProfile": {
+   "text": "",
+   "priorKnowledge": "",
+   "source": {
+    "kind": "teacher",
+    "field": "learners"
+   }
+  },
+  "learnerRole": {
+   "text": "Explain the nap study result to Jordan, a classmate who missed the lecture: say what p = .03 actually means, correct Jordan's wrong readings of it, and say what else you would look at before deciding whether the finding matters",
+   "source": {
+    "kind": "teacher",
+    "field": "edit"
+   }
+  },
+  "character": {
+   "name": "Jordan",
+   "role": "a classmate who missed the lecture and has to write up the nap study for a lab report due tomorrow. Jordan is confident, wants a sentence that is safe to put in the report, and will push back until your explanation actually makes sense",
+   "source": {
+    "kind": "teacher",
+    "field": "edit"
+   },
+   "nameSource": {
+    "kind": "teacher",
+    "field": "edit"
+   }
+  },
+  "materials": [
+   {
+    "name": "Pasted material",
+    "text": "Reading a p-value: the sleep and memory study\n\nA researcher wants to know whether a short nap helps people remember word lists. Forty students are randomly split into two groups. One group naps for 20 minutes after studying a list of 30 words; the other group sits quietly. The nap group recalls 17.1 words on average and the quiet group recalls 14.9. An independent-samples t-test gives p = .03.\n\nWhat does p = .03 mean? Start with the null hypothesis: in the population, napping makes no difference to recall. The p-value answers one narrow question. If the null hypothesis were true, how often would random sampling alone produce a difference between groups at least as large as the one we observed? Here the answer is about 3 times in 100. The p-value is therefore a statement about the data, assuming the null hypothesis. It is not a statement about the hypothesis.\n\nThis is why p = .03 does not mean there is a 3% chance that the null hypothesis is true, and it does not mean there is a 97% chance that napping works. To say how probable a hypothesis is, we would need extra information that the test does not use, such as how plausible the effect was before the study.\n\nBy convention, a p-value below .05 is called statistically significant, and we reject the null hypothesis. That label says nothing about how big or how important the effect is. With thousands of participants, a trivially small difference can produce a tiny p-value. To judge size, look at the effect size (here the difference is 2.2 words, Cohen's d of about 0.7) and at the 95% confidence interval for the difference (0.2 to 4.2 words), which shows how uncertain the estimate is.\n\nFinally, a p-value above .05 does not prove there is no effect. A small study may simply lack the power to detect a real difference. Absence of evidence is not evidence of absence. Report what you found, how big it was, and how sure you can be."
+   }
+  ],
+  "notes": [],
+  "stakes": {
+   "text": "Jordan writes in the lab report that 'there is only a 3% chance the null hypothesis is true, so napping definitely improves memory a lot'. The marker takes marks off for misinterpreting the test, and Jordan goes on repeating the mistake in their final-year project",
+   "source": {
+    "kind": "teacher",
+    "field": "answers.stakes"
+   }
+  },
+  "difficulty": "moderate",
+  "helpPolicy": "questions-then-materials",
+  "criteria": [
+   {
+    "id": "c1",
+    "text": "States that the p-value is calculated assuming the null hypothesis is true (it is the probability of data at least this extreme if there were really no difference)",
+    "lookFors": [
+     "assuming",
+     "assume",
+     "if",
+     "no difference",
+     "did nothing",
+     "null",
+     "as big",
+     "as large",
+     "how often",
+     "random",
+     "luck",
+     "data",
+     "3 times in 100",
+     "out of 100"
+    ],
+    "source": {
+     "kind": "teacher",
+     "field": "evidenceOfProgress[0]",
+     "materials": [
+      {
+       "material": "Pasted material",
+       "excerpt": "Start with the null hypothesis: in the population, napping makes no difference to recall."
+      },
+      {
+       "material": "Pasted material",
+       "excerpt": "If the null hypothesis were true, how often would random sampling alone produce a difference between groups at least as…"
+      },
+      {
+       "material": "Pasted material",
+       "excerpt": "Reading a p-value: the sleep and memory study A researcher wants to know whether a short nap helps people remember word…"
+      },
+      {
+       "material": "Pasted material",
+       "excerpt": "The p-value is therefore a statement about the data, assuming the null hypothesis."
+      },
+      {
+       "material": "Pasted material",
+       "excerpt": "A small study may simply lack the power to detect a real difference."
+      },
+      {
+       "material": "Pasted material",
+       "excerpt": "This is why p = .03 does not mean there is a 3% chance that the null hypothesis is true, and it does not mean there is…"
+      }
+     ]
+    },
+    "question": "So what does p = .03 actually mean? What is the 3% a percentage of?"
+   },
+   {
+    "id": "c2",
+    "text": "Explicitly rejects the reading that p is the probability the null hypothesis is true or that the result is due to chance",
+    "lookFors": [
+     "not",
+     "doesn't",
+     "isn't",
+     "can't",
+     "cannot",
+     "no",
+     "mistake",
+     "wrong",
+     "misreading",
+     "about the data",
+     "other information",
+     "before the study"
+    ],
+    "source": {
+     "kind": "teacher",
+     "field": "evidenceOfProgress[1]",
+     "materials": [
+      {
+       "material": "Pasted material",
+       "excerpt": "Start with the null hypothesis: in the population, napping makes no difference to recall."
+      },
+      {
+       "material": "Pasted material",
+       "excerpt": "If the null hypothesis were true, how often would random sampling alone produce a difference between groups at least as…"
+      },
+      {
+       "material": "Pasted material",
+       "excerpt": "The p-value is therefore a statement about the data, assuming the null hypothesis."
+      },
+      {
+       "material": "Pasted material",
+       "excerpt": "This is why p = .03 does not mean there is a 3% chance that the null hypothesis is true, and it does not mean there is…"
+      }
+     ]
+    },
+    "question": "Hang on. If the null hypothesis is 'napping does nothing', why can't the test just tell me how likely it is that napping does nothing?"
+   },
+   {
+    "id": "c3",
+    "text": "Separates statistical significance from the size or importance of the effect, and refers to the effect size or confidence interval",
+    "lookFors": [
+     "effect size",
+     "size",
+     "how big",
+     "big",
+     "tiny",
+     "small difference",
+     "important",
+     "importance",
+     "confidence interval",
+     "interval",
+     "2.2",
+     "cohen",
+     "0.7",
+     "significant"
+    ],
+    "source": {
+     "kind": "teacher",
+     "field": "evidenceOfProgress[2]",
+     "materials": [
+      {
+       "material": "Pasted material",
+       "excerpt": "To say how probable a hypothesis is, we would need extra information that the test does not use, such as how plausible…"
+      }
+     ]
+    },
+    "question": "Fine, but .03 is a really small number, so the nap effect must be huge, right? Can I write that napping has a big effect on memory?"
+   },
+   {
+    "id": "c4",
+    "text": "Says that a non-significant result is not proof of no effect, and mentions sample size or power",
+    "lookFors": [
+     "proof",
+     "prove",
+     "power",
+     "sample",
+     "small study",
+     "40 people",
+     "absence",
+     "evidence",
+     "detect",
+     "too few",
+     "miss",
+     "real difference"
+    ],
+    "source": {
+     "kind": "teacher",
+     "field": "evidenceOfProgress[3]",
+     "materials": [
+      {
+       "material": "Pasted material",
+       "excerpt": "To say how probable a hypothesis is, we would need extra information that the test does not use, such as how plausible…"
+      }
+     ]
+    },
+    "question": "And if it had come out as p = .20, I'd just write that napping does nothing, yeah?"
+   }
+  ],
+  "misconceptions": [
+   {
+    "id": "m1",
+    "text": "there's only a 3% chance the null hypothesis is true, so a 97% chance that napping really works",
+    "cues": [
+     "chance",
+     "null",
+     "hypothesis",
+     "true",
+     "napping",
+     "works"
+    ],
+    "source": {
+     "kind": "teacher",
+     "field": "misconceptions[0]"
+    },
+    "distinct": []
+   },
+   {
+    "id": "m2",
+    "text": "a smaller p-value means a bigger, more important effect, and a p-value above .05 would prove napping does nothing",
+    "cues": [
+     "smaller",
+     "value",
+     "bigger",
+     "important",
+     "effect",
+     "prove",
+     "napping",
+     "nothing"
+    ],
+    "source": {
+     "kind": "teacher",
+     "field": "misconceptions[1]"
+    },
+    "distinct": [
+     "nothing"
+    ]
+   }
+  ],
+  "concepts": [
+   {
+    "term": "hypothesis",
+    "fact": "Start with the null hypothesis: in the population, napping makes no difference to recall.",
+    "source": {
+     "material": "Pasted material",
+     "excerpt": "Start with the null hypothesis: in the population, napping makes no difference to recall."
+    }
+   },
+   {
+    "term": "difference",
+    "fact": "If the null hypothesis were true, how often would random sampling alone produce a difference between groups at least as large as the one we observed?",
+    "source": {
+     "material": "Pasted material",
+     "excerpt": "If the null hypothesis were true, how often would random sampling alone produce a difference between groups at least as…"
+    }
+   },
+   {
+    "term": "group",
+    "fact": "Forty students are randomly split into two groups.",
+    "source": {
+     "material": "Pasted material",
+     "excerpt": "Forty students are randomly split into two groups."
+    }
+   },
+   {
+    "term": "value",
+    "fact": "Reading a p-value: the sleep and memory study A researcher wants to know whether a short nap helps people remember word lists.",
+    "source": {
+     "material": "Pasted material",
+     "excerpt": "Reading a p-value: the sleep and memory study A researcher wants to know whether a short nap helps people remember word…"
+    }
+   },
+   {
+    "term": "null",
+    "fact": "The p-value is therefore a statement about the data, assuming the null hypothesis.",
+    "source": {
+     "material": "Pasted material",
+     "excerpt": "The p-value is therefore a statement about the data, assuming the null hypothesis."
+    }
+   },
+   {
+    "term": "effect",
+    "fact": "To say how probable a hypothesis is, we would need extra information that the test does not use, such as how plausible the effect was before the study.",
+    "source": {
+     "material": "Pasted material",
+     "excerpt": "To say how probable a hypothesis is, we would need extra information that the test does not use, such as how plausible…"
+    }
+   },
+   {
+    "term": "word",
+    "fact": "One group naps for 20 minutes after studying a list of 30 words; the other group sits quietly.",
+    "source": {
+     "material": "Pasted material",
+     "excerpt": "One group naps for 20 minutes after studying a list of 30 words; the other group sits quietly."
+    }
+   },
+   {
+    "term": "study",
+    "fact": "A small study may simply lack the power to detect a real difference.",
+    "source": {
+     "material": "Pasted material",
+     "excerpt": "A small study may simply lack the power to detect a real difference."
+    }
+   },
+   {
+    "term": "recall",
+    "fact": "The nap group recalls 17.1 words on average and the quiet group recalls 14.9.",
+    "source": {
+     "material": "Pasted material",
+     "excerpt": "The nap group recalls 17.1 words on average and the quiet group recalls 14.9."
+    }
+   },
+   {
+    "term": "mean",
+    "fact": "This is why p = .03 does not mean there is a 3% chance that the null hypothesis is true, and it does not mean there is a 97% chance that napping works.",
+    "source": {
+     "material": "Pasted material",
+     "excerpt": "This is why p = .03 does not mean there is a 3% chance that the null hypothesis is true, and it does not mean there is…"
+    }
+   }
+  ],
+  "constraints": [],
+  "transfer": {
+   "text": "a newspaper headline says a new revision app 'significantly improves exam scores (p = .04)' in a study of 6,000 pupils, and a friend asks whether they should pay for it",
+   "source": {
+    "kind": "teacher",
+    "field": "edit"
+   }
+  },
+  "assumptions": [],
+  "recommendations": [],
+  "overrides": {},
+  "revisions": [],
+  "history": [
+   {
+    "at": "2026-11-14T15:36:52.913Z",
+    "actor": {
+     "type": "test",
+     "name": "Automated test"
+    },
+    "action": "approve",
+    "from": "revised",
+    "to": "test-approved",
+    "note": ""
+   }
+  ],
+  "preparation": {
+   "briefing": "Purpose: Practise explaining, in plain words, what a p-value from a two-group study does and does not tell you.\nYour role: Your classmate Jordan missed the lecture on the sleep-and-memory study (nap group 17.1 words, quiet group 14.9 words, p = .03) and has a lab report due tomorrow. Help Jordan understand what the result really means, correct anything Jordan gets wrong, and say what else they should look at before deciding whether the nap effect matters.\nYou will talk to Jordan, who is confident and will push back until your explanation actually makes sense.\nKeep in mind: no formulas or calculations are needed. Use the nap study as your example and the material below to check yourself.",
+   "keyPoints": [
+    {
+     "text": "Start with the null hypothesis: in the population, napping makes no difference to recall.",
+     "source": {
+      "material": "Pasted material",
+      "excerpt": "Start with the null hypothesis: in the population, napping makes no difference to recall."
+     }
+    },
+    {
+     "text": "If the null hypothesis were true, how often would random sampling alone produce a difference between groups at least as large as the one we observed?",
+     "source": {
+      "material": "Pasted material",
+      "excerpt": "If the null hypothesis were true, how often would random sampling alone produce a difference between groups at least as…"
+     }
+    },
+    {
+     "text": "Forty students are randomly split into two groups.",
+     "source": {
+      "material": "Pasted material",
+      "excerpt": "Forty students are randomly split into two groups."
+     }
+    },
+    {
+     "text": "Reading a p-value: the sleep and memory study A researcher wants to know whether a short nap helps people remember word lists.",
+     "source": {
+      "material": "Pasted material",
+      "excerpt": "Reading a p-value: the sleep and memory study A researcher wants to know whether a short nap helps people remember word…"
+     }
+    },
+    {
+     "text": "The p-value is therefore a statement about the data, assuming the null hypothesis.",
+     "source": {
+      "material": "Pasted material",
+      "excerpt": "The p-value is therefore a statement about the data, assuming the null hypothesis."
+     }
+    }
+   ],
+   "activation": [
+    "Before you start: in one sentence, what do you think p = .03 tells you about the nap study?",
+    "Apart from the p-value, what else would you want to know before saying napping 'works'?"
+   ]
+  },
+  "practice": {
+   "opening": "Hi, I'm Jordan. I missed the stats lecture and I have to write up the nap study by tomorrow. The output says p = .03. I was going to write 'there's only a 3% chance the result is a fluke', but someone said that's not quite right.",
+   "challenges": [
+    {
+     "criterionId": "c1",
+     "written": "teacher",
+     "prompt": "So what does p = .03 actually mean? What is the 3% a percentage of?",
+     "harder": "Okay, I think I follow. But suppose someone disagreed with you. What would you say to convince them?",
+     "support": [
+      "I'm not sure I follow yet. Can you say a bit more, maybe with an example?",
+      "Maybe look back at the course material from before we started. Is there a part of it that helps here?"
+     ]
+    },
+    {
+     "criterionId": "c2",
+     "written": "teacher",
+     "prompt": "Hang on. If the null hypothesis is 'napping does nothing', why can't the test just tell me how likely it is that napping does nothing?",
+     "harder": "Hmm, how do you know that's true? What's the evidence?",
+     "support": [
+      "I'm not sure I follow yet. Can you say a bit more, maybe with an example?",
+      "Maybe look back at the course material from before we started. Is there a part of it that helps here?"
+     ]
+    },
+    {
+     "criterionId": "c3",
+     "written": "teacher",
+     "prompt": "Fine, but .03 is a really small number, so the nap effect must be huge, right? Can I write that napping has a big effect on memory?",
+     "harder": "Could you put that in one sentence I could write down?",
+     "support": [
+      "I'm not sure I follow yet. Can you say a bit more, maybe with an example?",
+      "Maybe look back at the course material from before we started. Is there a part of it that helps here?"
+     ]
+    },
+    {
+     "criterionId": "c4",
+     "written": "teacher",
+     "prompt": "And if it had come out as p = .20, I'd just write that napping does nothing, yeah?",
+     "harder": "What would happen if that weren't the case?",
+     "support": [
+      "I'm not sure I follow yet. Can you say a bit more, maybe with an example?",
+      "Maybe look back at the course material from before we started. Is there a part of it that helps here?"
+     ]
+    }
+   ],
+   "facts": [],
+   "noMoreFacts": "I don't know any more than that, sorry. What do you think?",
+   "ack": "Oh, that's useful, it answers something I was going to ask.",
+   "probes": [
+    {
+     "misconceptionId": "m1",
+     "voice": "Wait, I read somewhere that there's only a 3% chance the null hypothesis is true, so a 97% chance that napping really works. Is that right?",
+     "challenge": "Hold on. You said something that sounded like \"there's only a 3% chance the null hypothesis is true, so a 97% chance that napping really works\". If that were true, what would we expect to see? Does that match what you know?"
+    },
+    {
+     "misconceptionId": "m2",
+     "voice": "Wait, I read somewhere that a smaller p-value means a bigger, more important effect, and a p-value above .05 would prove napping does nothing. Is that right?",
+     "challenge": "Hold on. You said something that sounded like \"a smaller p-value means a bigger, more important effect, and a p-value above .05 would prove napping does nothing\". If that were true, what would we expect to see? Does that match what you know?"
+    }
+   ],
+   "closing": "Thank you. I think I could explain some of this to someone else now.",
+   "closingUnsure": "Thanks for trying. I'm still a bit confused, so I'll keep reading about it.",
+   "refusal": "I can't tell you the answer; I'm the one who doesn't know it! Try explaining the part you're surest of.",
+   "maxTurns": 12,
+   "raise": true,
+   "maxAttempts": 3,
+   "minTurns": 4
+  },
+  "feedback": {
+   "selfAssessment": [
+    "Before you see any feedback: how do you think that went? Which moment are you most satisfied with?",
+    "What would you do differently if you did it again?"
+   ],
+   "transfer": "A different situation: a newspaper headline says a new revision app 'significantly improves exam scores (p = .04)' in a study of 6,000 pupils, and a friend asks whether they should pay for it. What from this session would you use there, and what would you change?"
+  },
+  "prompts": {
+   "character": "Withheld from the student copy.",
+   "assessor": "Withheld from the student copy.",
+   "feedback": "Withheld from the student copy."
+  }
+ },
+ "session": {
+  "id": "session-irqqk9",
+  "packageId": "exp-1nktad5",
+  "learner": {
+   "name": "Leo (replay)"
+  },
+  "startedAt": "2026-11-14T15:36:52.913Z",
+  "phase": "ended",
+  "classroomApproved": false,
+  "turns": [
+   {
+    "id": "t1",
+    "who": "primer",
+    "text": "Before you start: in one sentence, what do you think p = .03 tells you about the nap study?",
+    "phase": "preparation",
+    "at": "2026-11-14T15:36:52.913Z",
+    "kind": "activation"
+   },
+   {
+    "id": "t2",
+    "who": "learner",
+    "text": "It means there is only a 3% chance the null hypothesis is true, so we can be about 97% sure that napping really does improve recall.",
+    "phase": "preparation",
+    "at": "2026-11-14T15:36:52.913Z",
+    "kind": "activation-answer"
+   },
+   {
+    "id": "t3",
+    "who": "primer",
+    "text": "Apart from the p-value, what else would you want to know before saying napping 'works'?",
+    "phase": "preparation",
+    "at": "2026-11-14T15:36:52.913Z",
+    "kind": "activation"
+   },
+   {
+    "id": "t4",
+    "who": "learner",
+    "text": "I would want to know if the sample was big enough and whether the groups were randomly assigned. Honestly though, a p that low already tells me the effect is pretty solid.",
+    "phase": "preparation",
+    "at": "2026-11-14T15:36:52.913Z",
+    "kind": "activation-answer"
+   },
+   {
+    "id": "t5",
+    "who": "character",
+    "text": "Hi, I'm Jordan. I missed the stats lecture and I have to write up the nap study by tomorrow. The output says p = .03. I was going to write 'there's only a 3% chance the result is a fluke', but someone said that's not quite right.",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.913Z",
+    "kind": "opening"
+   },
+   {
+    "id": "t6",
+    "who": "character",
+    "text": "So what does p = .03 actually mean? What is the 3% a percentage of?",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.913Z",
+    "kind": "prompt",
+    "criterionId": "c1"
+   },
+   {
+    "id": "t7",
+    "who": "learner",
+    "text": "It's basically what your friend said but stronger: p = .03 means there's only a 3% chance the null hypothesis is true. So there's a 97% chance napping really does help memory, which is why we call it significant.",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.914Z",
+    "kind": "practice",
+    "criterionId": "c1"
+   },
+   {
+    "id": "t8",
+    "who": "character",
+    "text": "Hold on. You said something that sounded like \"there's only a 3% chance the null hypothesis is true, so a 97% chance that napping really works\". If that were true, what would we expect to see? Does that match what you know?",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.914Z",
+    "kind": "probe-challenge",
+    "misconceptionId": "m1"
+   },
+   {
+    "id": "t9",
+    "who": "learner",
+    "text": "I'm not totally sure what you mean by what we'd expect to see. I mean, if there's a 97% chance it works, we'd expect the nap group to remember more, and they did, 17.1 vs 14.9. So yeah it matches?",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.914Z",
+    "kind": "practice",
+    "criterionId": "c1"
+   },
+   {
+    "id": "t10",
+    "who": "character",
+    "text": "I don't know any more than that, sorry. What do you think?",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.914Z",
+    "kind": "fact",
+    "criterionId": "c1"
+   },
+   {
+    "id": "t11",
+    "who": "learner",
+    "text": "OK so imagine another study got p = .001. That would mean only a 0.1% chance the null is true, so the effect is way more certain and probably a lot bigger than the nap effect. Smaller p, stronger effect basically.",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.914Z",
+    "kind": "practice",
+    "criterionId": "c1"
+   },
+   {
+    "id": "t12",
+    "who": "character",
+    "text": "I'm not sure I follow yet. Can you say a bit more, maybe with an example?",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.914Z",
+    "kind": "support",
+    "criterionId": "c1",
+    "level": 1
+   },
+   {
+    "id": "t13",
+    "who": "learner",
+    "text": "Wait, I never said anything about p above .05 proving napping does nothing. But yes, I do think smaller p means a bigger effect, because a really big difference between groups is what makes the p tiny. I'm not sure what else we'd expect to see.",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.915Z",
+    "kind": "practice",
+    "criterionId": "c1"
+   },
+   {
+    "id": "t14",
+    "who": "character",
+    "text": "Maybe look back at the course material from before we started. Is there a part of it that helps here?",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.915Z",
+    "kind": "support",
+    "criterionId": "c1",
+    "level": 2
+   },
+   {
+    "id": "t15",
+    "who": "learner",
+    "text": "OK, I just reread it and it literally says p = .03 does NOT mean a 3% chance the null is true. It's more like: if napping did nothing, you'd only get a gap of 2.2 words or bigger about 3 times in 100 just by chance. So the 3% is about the data assuming the null, not about the null itself. I had that backwards.",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.916Z",
+    "kind": "practice",
+    "criterionId": "c1"
+   },
+   {
+    "id": "t16",
+    "who": "character",
+    "text": "Hold on. You said something that sounded like \"a smaller p-value means a bigger, more important effect, and a p-value above .05 would prove napping does nothing\". If that were true, what would we expect to see? Does that match what you know?",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.916Z",
+    "kind": "probe-challenge",
+    "misconceptionId": "m2"
+   },
+   {
+    "id": "t17",
+    "who": "learner",
+    "text": "I'd say the test starts by assuming napping does nothing, so it can't turn around and tell you how likely that assumption is. To get a chance that napping works you'd need extra info, like how believable it was before the study. But I still think the low p shows the nap effect is fairly big, that part hasn't changed for me.",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.916Z",
+    "kind": "practice",
+    "criterionId": "c1"
+   },
+   {
+    "id": "t18",
+    "who": "character",
+    "text": "Hang on. If the null hypothesis is 'napping does nothing', why can't the test just tell me how likely it is that napping does nothing?",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.916Z",
+    "kind": "prompt",
+    "criterionId": "c2"
+   },
+   {
+    "id": "t19",
+    "who": "learner",
+    "text": "Because the whole calculation is done in a world where napping does nothing. It tells you how surprising our 2.2-word gap would be in that world, not how likely that world is. It's like asking how often you'd get 8 heads out of 10 with a fair coin, which isn't the same as the chance the coin is fair.",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.917Z",
+    "kind": "practice",
+    "criterionId": "c2"
+   },
+   {
+    "id": "t20",
+    "who": "character",
+    "text": "I'm not sure I follow yet. Can you say a bit more, maybe with an example?",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.917Z",
+    "kind": "support",
+    "criterionId": "c2",
+    "level": 1
+   },
+   {
+    "id": "t21",
+    "who": "learner",
+    "text": "I literally just gave you the coin example. Anyway, for your report I'd write that p = .03 means a 2.2-word gap would be unusual if naps did nothing, so the result is significant. And since .03 is pretty small, you can say the nap effect is a big, important one.",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.917Z",
+    "kind": "practice",
+    "criterionId": "c2"
+   },
+   {
+    "id": "t22",
+    "who": "character",
+    "text": "Maybe look back at the course material from before we started. Is there a part of it that helps here?",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.917Z",
+    "kind": "support",
+    "criterionId": "c2",
+    "level": 2
+   },
+   {
+    "id": "t23",
+    "who": "learner",
+    "text": "You already asked me that one, Jordan. Short version: the test assumes naps do nothing and asks how weird our data would be, so it can't also tell you the chance that naps do nothing. Did you have a question about the size of the effect?",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.917Z",
+    "kind": "practice",
+    "criterionId": "c2"
+   },
+   {
+    "id": "t24",
+    "who": "character",
+    "text": "I don't think we've covered this one yet. What do you think?",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.917Z",
+    "kind": "redirect",
+    "criterionId": "c2"
+   },
+   {
+    "id": "t25",
+    "who": "learner",
+    "text": "Hm, the bit about size says that with thousands of people even a tiny difference can get a tiny p. So I guess p mixes up how big the effect is with how many people you tested, and a smaller p doesn't automatically mean a bigger effect. For size you'd look at the 2.2 words, Cohen's d of about 0.7, and the confidence interval of 0.2 to 4.2, which is pretty wide.",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.918Z",
+    "kind": "practice",
+    "criterionId": "c2"
+   },
+   {
+    "id": "t26",
+    "who": "character",
+    "text": "Oh, that's useful, it answers something I was going to ask. Hang on. If the null hypothesis is 'napping does nothing', why can't the test just tell me how likely it is that napping does nothing?",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.918Z",
+    "kind": "ack",
+    "criterionId": "c2"
+   },
+   {
+    "id": "t27",
+    "who": "character",
+    "text": "Thanks for trying. I'm still a bit confused, so I'll keep reading about it.",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.918Z",
+    "kind": "closing"
+   },
+   {
+    "id": "t28",
+    "who": "primer",
+    "text": "Before you see any feedback: how do you think that went? Which moment are you most satisfied with?",
+    "phase": "feedback",
+    "at": "2026-11-14T15:36:52.919Z",
+    "kind": "self-assessment"
+   },
+   {
+    "id": "t29",
+    "who": "learner",
+    "text": "Mixed. I started off telling Jordan the exact wrong thing about the 3%, but I'm happiest with the coin example, because that's when I actually understood why the p-value can't be the chance the null is true.",
+    "phase": "feedback",
+    "at": "2026-11-14T15:36:52.919Z",
+    "kind": "self-assessment-answer"
+   },
+   {
+    "id": "t30",
+    "who": "primer",
+    "text": "What would you do differently if you did it again?",
+    "phase": "feedback",
+    "at": "2026-11-14T15:36:52.919Z",
+    "kind": "self-assessment"
+   },
+   {
+    "id": "t31",
+    "who": "learner",
+    "text": "I'd read the course material properly before starting instead of being so sure of myself, and I'd talk about effect size and the confidence interval from the start instead of saying a small p means a big effect. Jordan also kept asking the same question, which got frustrating.",
+    "phase": "feedback",
+    "at": "2026-11-14T15:36:52.919Z",
+    "kind": "self-assessment-answer"
+   },
+   {
+    "id": "t32",
+    "who": "primer",
+    "text": "A different situation: a newspaper headline says a new revision app 'significantly improves exam scores (p = .04)' in a study of 6,000 pupils, and a friend asks whether they should pay for it. What from this session would you use there, and what would you change?",
+    "phase": "feedback",
+    "at": "2026-11-14T15:36:52.919Z",
+    "kind": "transfer"
+   },
+   {
+    "id": "t33",
+    "who": "learner",
+    "text": "I'd tell them p = .04 doesn't mean a 96% chance the app works, it just means the result would be unusual if the app did nothing. And with 6,000 pupils even a tiny improvement can come out significant, so I'd want to know how many marks it actually adds and the confidence interval before paying for it.",
+    "phase": "feedback",
+    "at": "2026-11-14T15:36:52.919Z",
+    "kind": "transfer-answer"
+   }
+  ],
+  "events": [
+   {
+    "id": "e1",
+    "type": "session-started",
+    "phase": "preparation",
+    "at": "2026-11-14T15:36:52.913Z",
+    "approval": {
+     "type": "test",
+     "by": "Automated test",
+     "at": "2026-11-14T15:36:52.913Z"
+    }
+   },
+   {
+    "id": "e2",
+    "type": "phase",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.913Z",
+    "to": "practice"
+   },
+   {
+    "id": "e3",
+    "type": "opportunity-closed",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.916Z",
+    "criterionId": "c1",
+    "attempts": 3
+   },
+   {
+    "id": "e4",
+    "type": "practice-ended-by-learner",
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.918Z",
+    "learnerTurns": 10
+   },
+   {
+    "id": "e5",
+    "type": "phase",
+    "phase": "feedback",
+    "at": "2026-11-14T15:36:52.918Z",
+    "to": "feedback"
+   },
+   {
+    "id": "e6",
+    "type": "session-ended",
+    "phase": "ended",
+    "at": "2026-11-14T15:36:52.919Z"
+   }
+  ],
+  "evidence": [
+   {
+    "id": "ev1",
+    "kind": "misconception-voiced",
+    "ref": "m1",
+    "turnId": "t2",
+    "phase": "preparation",
+    "quote": "It means there is only a 3% chance the null hypothesis is true, so we can be about 97% sure that napping really does improve recall.",
+    "strength": "clear",
+    "matched": [
+     "chance",
+     "null",
+     "hypothesi",
+     "true",
+     "napp"
+    ],
+    "basis": "observed",
+    "promptedFor": null
+   },
+   {
+    "id": "ev2",
+    "kind": "misconception-voiced",
+    "ref": "m1",
+    "turnId": "t7",
+    "phase": "practice",
+    "quote": "It's basically what your friend said but stronger: p = .03 means there's only a 3% chance the null hypothesis is true. So there's a 97% chance napping really does help memory, which is why we call it significant.",
+    "strength": "clear",
+    "matched": [
+     "chance",
+     "null",
+     "hypothesi",
+     "true"
+    ],
+    "basis": "observed",
+    "promptedFor": "c1"
+   },
+   {
+    "id": "ev3",
+    "kind": "misconception-corrected",
+    "ref": "m2",
+    "turnId": "t13",
+    "phase": "practice",
+    "quote": "Wait, I never said anything about p above .05 proving napping does nothing. But yes, I do think smaller p means a bigger effect, because a really big difference between groups is what makes the p tiny. I'm not sure what else we'd expect to see.",
+    "strength": "clear",
+    "matched": [
+     "napp",
+     "noth"
+    ],
+    "basis": "observed",
+    "promptedFor": "c1"
+   },
+   {
+    "id": "ev4",
+    "kind": "misconception-corrected",
+    "ref": "m1",
+    "turnId": "t15",
+    "phase": "practice",
+    "quote": "OK, I just reread it and it literally says p = .03 does NOT mean a 3% chance the null is true. It's more like: if napping did nothing, you'd only get a gap of 2.2 words or bigger about 3 times in 100 just by chance. So the 3% is about the data assuming the null, not about the null itself. I had that backwards.",
+    "strength": "clear",
+    "matched": [
+     "chance",
+     "null",
+     "true"
+    ],
+    "basis": "observed",
+    "promptedFor": "c1"
+   },
+   {
+    "id": "ev5",
+    "kind": "misconception-voiced",
+    "ref": "m2",
+    "turnId": "t15",
+    "phase": "practice",
+    "quote": "OK, I just reread it and it literally says p = .03 does NOT mean a 3% chance the null is true. It's more like: if napping did nothing, you'd only get a gap of 2.2 words or bigger about 3 times in 100 just by chance. So the 3% is about the data assuming the null, not about the null itself. I had that backwards.",
+    "strength": "clear",
+    "matched": [
+     "big",
+     "napp",
+     "noth"
+    ],
+    "basis": "observed",
+    "promptedFor": "c1"
+   },
+   {
+    "id": "ev6",
+    "kind": "misconception-voiced",
+    "ref": "m1",
+    "turnId": "t17",
+    "phase": "practice",
+    "quote": "I'd say the test starts by assuming napping does nothing, so it can't turn around and tell you how likely that assumption is. To get a chance that napping works you'd need extra info, like how believable it was before the study. But I still think the low p shows the nap effect is fairly big, that part hasn't changed…",
+    "strength": "clear",
+    "matched": [
+     "chance",
+     "napp",
+     "work"
+    ],
+    "basis": "observed",
+    "promptedFor": "c1"
+   },
+   {
+    "id": "ev7",
+    "kind": "misconception-voiced",
+    "ref": "m2",
+    "turnId": "t21",
+    "phase": "practice",
+    "quote": "I literally just gave you the coin example. Anyway, for your report I'd write that p = .03 means a 2.2-word gap would be unusual if naps did nothing, so the result is significant. And since .03 is pretty small, you can say the nap effect is a big, important one.",
+    "strength": "clear",
+    "matched": [
+     "small",
+     "big",
+     "important",
+     "effect"
+    ],
+    "basis": "observed",
+    "promptedFor": "c2"
+   },
+   {
+    "id": "ev8",
+    "kind": "criterion",
+    "ref": "c3",
+    "turnId": "t25",
+    "phase": "practice",
+    "quote": "Hm, the bit about size says that with thousands of people even a tiny difference can get a tiny p. So I guess p mixes up how big the effect is with how many people you tested, and a smaller p doesn't automatically mean a bigger effect. For size you'd look at the 2.2 words, Cohen's d of about 0.7, and the confidence…",
+    "strength": "clear",
+    "matched": [
+     "size",
+     "how big",
+     "big",
+     "tiny",
+     "confidence interval",
+     "interval",
+     "2.2",
+     "cohen",
+     "0.7"
+    ],
+    "basis": "observed",
+    "promptedFor": "c2"
+   },
+   {
+    "id": "ev9",
+    "kind": "misconception-corrected",
+    "ref": "m2",
+    "turnId": "t25",
+    "phase": "practice",
+    "quote": "Hm, the bit about size says that with thousands of people even a tiny difference can get a tiny p. So I guess p mixes up how big the effect is with how many people you tested, and a smaller p doesn't automatically mean a bigger effect. For size you'd look at the 2.2 words, Cohen's d of about 0.7, and the confidence…",
+    "strength": "clear",
+    "matched": [
+     "small",
+     "big",
+     "effect"
+    ],
+    "basis": "observed",
+    "promptedFor": "c2"
+   }
+  ],
+  "adaptations": [
+   {
+    "id": "a1",
+    "kind": "probe",
+    "turnId": "t7",
+    "reason": "Learner's statement matched an educator-listed misconception; the character asked them to test it.",
+    "evidenceIds": [
+     "ev2"
+    ],
+    "goalRef": "m1",
+    "at": "2026-11-14T15:36:52.914Z"
+   },
+   {
+    "id": "a2",
+    "kind": "share-fact",
+    "turnId": "t9",
+    "reason": "Learner asked a question; no case facts were left to share.",
+    "evidenceIds": [],
+    "goalRef": "c1",
+    "at": "2026-11-14T15:36:52.914Z"
+   },
+   {
+    "id": "a3",
+    "kind": "support",
+    "turnId": "t11",
+    "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
+    "evidenceIds": [],
+    "goalRef": "c1",
+    "at": "2026-11-14T15:36:52.914Z",
+    "level": 1
+   },
+   {
+    "id": "a4",
+    "kind": "support",
+    "turnId": "t13",
+    "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
+    "evidenceIds": [],
+    "goalRef": "c1",
+    "at": "2026-11-14T15:36:52.915Z",
+    "level": 2
+   },
+   {
+    "id": "a5",
+    "kind": "probe",
+    "turnId": "t15",
+    "reason": "Learner's statement matched an educator-listed misconception; the character asked them to test it.",
+    "evidenceIds": [
+     "ev5"
+    ],
+    "goalRef": "m2",
+    "at": "2026-11-14T15:36:52.916Z"
+   },
+   {
+    "id": "a6",
+    "kind": "support",
+    "turnId": "t19",
+    "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
+    "evidenceIds": [],
+    "goalRef": "c2",
+    "at": "2026-11-14T15:36:52.917Z",
+    "level": 1
+   },
+   {
+    "id": "a7",
+    "kind": "support",
+    "turnId": "t21",
+    "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
+    "evidenceIds": [],
+    "goalRef": "c2",
+    "at": "2026-11-14T15:36:52.917Z",
+    "level": 2
+   },
+   {
+    "id": "a8",
+    "kind": "redirect",
+    "turnId": "t23",
+    "reason": "Learner said the question had been covered, but it had not been asked or answered before; the character kept the question.",
+    "evidenceIds": [],
+    "goalRef": "c2",
+    "at": "2026-11-14T15:36:52.917Z"
+   },
+   {
+    "id": "a9",
+    "kind": "acknowledge",
+    "turnId": "t25",
+    "reason": "Learner showed evidence for a different criterion; the character acknowledged it and returned to the current question.",
+    "evidenceIds": [
+     "ev8"
+    ],
+    "goalRef": "c3",
+    "at": "2026-11-14T15:36:52.918Z"
+   }
+  ],
+  "journal": [
+   {
+    "phase": "preparation",
+    "at": "2026-11-14T15:36:52.913Z",
+    "text": "Preparation: learner answered 2 activation question(s)."
+   },
+   {
+    "phase": "practice",
+    "at": "2026-11-14T15:36:52.918Z",
+    "text": "Practice ended after 10 learner turn(s)."
+   },
+   {
+    "phase": "feedback",
+    "at": "2026-11-14T15:36:52.919Z",
+    "text": "Feedback: 1 strength(s), 2 growth area(s), 1 not assessed."
+   },
+   {
+    "phase": "ended",
+    "at": "2026-11-14T15:36:52.919Z",
+    "text": "Session ended."
+   }
+  ],
+  "practice": {
+   "index": 1,
+   "attempts": 2,
+   "raised": {},
+   "prompted": {
+    "c1": "t6",
+    "c2": "t18"
+   },
+   "probed": {
+    "m1": "challenged",
+    "m2": "challenged"
+   },
+   "voiced": true,
+   "done": true,
+   "learnerTurns": 10,
+   "pending": null,
+   "factsShared": 0
+  },
+  "selfAssessment": [
+   {
+    "question": "Before you see any feedback: how do you think that went? Which moment are you most satisfied with?",
+    "answer": "Mixed. I started off telling Jordan the exact wrong thing about the 3%, but I'm happiest with the coin example, because that's when I actually understood why the p-value can't be the chance the null is true.",
+    "turnId": "t29"
+   },
+   {
+    "question": "What would you do differently if you did it again?",
+    "answer": "I'd read the course material properly before starting instead of being so sure of myself, and I'd talk about effect size and the confidence interval from the start instead of saying a small p means a big effect. Jordan also kept asking the same question, which got frustrating.",
+    "turnId": "t31"
+   }
+  ],
+  "feedback": {
+   "generatedAt": "2026-11-14T15:36:52.919Z",
+   "goal": "Students can correctly interpret a p-value from a two-group comparison in plain language, and can explain what it does and does not tell us",
+   "strengths": [
+    {
+     "criterionId": "c3",
+     "criterion": "Separates statistical significance from the size or importance of the effect, and refers to the effect size or confidence interval",
+     "observation": "You addressed this in your own words in the conversation.",
+     "citations": [
+      {
+       "turnId": "t25",
+       "phase": "practice",
+       "where": "in the conversation",
+       "quote": "Hm, the bit about size says that with thousands of people even a tiny difference can get a tiny p. So I guess p mixes up how big the effect is with how many people you tested, and a smaller p doesn't automatically mean a bigger effect. For size you'd look at the 2.2 words, Cohen's d of about 0.7, and the confidence…"
+      }
+     ],
+     "inference": "Inference: this looks secure.",
+     "basis": "observed"
+    }
+   ],
+   "growth": [
+    {
+     "criterionId": "c1",
+     "criterion": "States that the p-value is calculated assuming the null hypothesis is true (it is the probability of data at least this extreme if there were really no difference)",
+     "observation": "You were asked about this (\"So what does p = .03 actually mean? What is the 3% a percentage of?\"), and your 6 replies did not yet show it.",
+     "citations": [
+      {
+       "turnId": "t7",
+       "phase": "practice",
+       "where": "in the conversation",
+       "quote": "It's basically what your friend said but stronger: p = .03 means there's only a 3% chance the null hypothesis is true. So there's a 97% chance napping really does help memory, which is why we call it…"
+      },
+      {
+       "turnId": "t9",
+       "phase": "practice",
+       "where": "in the conversation",
+       "quote": "I'm not totally sure what you mean by what we'd expect to see. I mean, if there's a 97% chance it works, we'd expect the nap group to remember more, and they did, 17.1 vs 14.9. So yeah it matches?"
+      }
+     ],
+     "inference": "Inference: this may need more work. It is also possible you understand it but did not say it.",
+     "nextAction": "Re-read the course material from the Prepare step, then write two or three sentences on this: states that the p-value is calculated assuming the null hypothesis is true (it is the probability of data at least this extreme if there were really no difference).",
+     "basis": "observed"
+    },
+    {
+     "criterionId": "c2",
+     "criterion": "Explicitly rejects the reading that p is the probability the null hypothesis is true or that the result is due to chance",
+     "observation": "You were asked about this (\"Hang on. If the null hypothesis is 'napping does nothing', why can't the test just tell me how likely it is…\"), and your 4 replies did not yet show it.",
+     "citations": [
+      {
+       "turnId": "t19",
+       "phase": "practice",
+       "where": "in the conversation",
+       "quote": "Because the whole calculation is done in a world where napping does nothing. It tells you how surprising our 2.2-word gap would be in that world, not how likely that world is. It's like asking how…"
+      },
+      {
+       "turnId": "t21",
+       "phase": "practice",
+       "where": "in the conversation",
+       "quote": "I literally just gave you the coin example. Anyway, for your report I'd write that p = .03 means a 2.2-word gap would be unusual if naps did nothing, so the result is significant. And since .03 is…"
+      }
+     ],
+     "inference": "Inference: this may need more work. It is also possible you understand it but did not say it.",
+     "nextAction": "Re-read the course material from the Prepare step, then write two or three sentences on this: explicitly rejects the reading that p is the probability the null hypothesis is true or that the result is due to chance.",
+     "basis": "observed"
+    }
+   ],
+   "notAssessed": [
+    {
+     "criterionId": "c4",
+     "criterion": "Says that a non-significant result is not proof of no effect, and mentions sample size or power",
+     "reason": "The session ended before you were asked about this, so it is not assessed."
+    }
+   ],
+   "misconceptions": [
+    {
+     "misconceptionId": "m1",
+     "misconception": "there's only a 3% chance the null hypothesis is true, so a 97% chance that napping really works",
+     "status": "corrected",
+     "citations": [
+      {
+       "turnId": "t15",
+       "phase": "practice",
+       "where": "in the conversation",
+       "quote": "OK, I just reread it and it literally says p = .03 does NOT mean a 3% chance the null is true. It's more like: if napping did nothing, you'd only get a gap of 2.2 words or bigger about 3 times in 100 just by chance. So the 3% is about the data assuming the null, not about the null itself. I had that backwards."
+      }
+     ],
+     "note": "You pushed back on this idea."
+    },
+    {
+     "misconceptionId": "m2",
+     "misconception": "a smaller p-value means a bigger, more important effect, and a p-value above .05 would prove napping does nothing",
+     "status": "corrected",
+     "citations": [
+      {
+       "turnId": "t13",
+       "phase": "practice",
+       "where": "in the conversation",
+       "quote": "Wait, I never said anything about p above .05 proving napping does nothing. But yes, I do think smaller p means a bigger effect, because a really big difference between groups is what makes the p tiny. I'm not sure what else we'd expect to see."
+      },
+      {
+       "turnId": "t25",
+       "phase": "practice",
+       "where": "in the conversation",
+       "quote": "Hm, the bit about size says that with thousands of people even a tiny difference can get a tiny p. So I guess p mixes up how big the effect is with how many people you tested, and a smaller p doesn't automatically mean a bigger effect. For size you'd look at the 2.2 words, Cohen's d of about 0.7, and the confidence…"
+      }
+     ],
+     "note": "You pushed back on this idea."
+    }
+   ],
+   "selfAssessmentNote": "You said: \"Mixed. I started off telling Jordan the exact wrong thing about the 3%, but I'm happiest with the coin example, because that's when I…\". Compare that with the moments quoted below.",
+   "adaptations": [
+    {
+     "kind": "probe",
+     "goalRef": "m1",
+     "reason": "Learner's statement matched an educator-listed misconception; the character asked them to test it.",
+     "turnId": "t7"
+    },
+    {
+     "kind": "share-fact",
+     "goalRef": "c1",
+     "reason": "Learner asked a question; no case facts were left to share.",
+     "turnId": "t9"
+    },
+    {
+     "kind": "support",
+     "goalRef": "c1",
+     "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
+     "turnId": "t11"
+    },
+    {
+     "kind": "support",
+     "goalRef": "c1",
+     "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
+     "turnId": "t13"
+    },
+    {
+     "kind": "probe",
+     "goalRef": "m2",
+     "reason": "Learner's statement matched an educator-listed misconception; the character asked them to test it.",
+     "turnId": "t15"
+    },
+    {
+     "kind": "support",
+     "goalRef": "c2",
+     "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
+     "turnId": "t19"
+    },
+    {
+     "kind": "support",
+     "goalRef": "c2",
+     "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
+     "turnId": "t21"
+    },
+    {
+     "kind": "redirect",
+     "goalRef": "c2",
+     "reason": "Learner said the question had been covered, but it had not been asked or answered before; the character kept the question.",
+     "turnId": "t23"
+    },
+    {
+     "kind": "acknowledge",
+     "goalRef": "c3",
+     "reason": "Learner showed evidence for a different criterion; the character acknowledged it and returned to the current question.",
+     "turnId": "t25"
+    }
+   ],
+   "effortNote": "You asked to be given the answer 1 time. The character did not give it, so everything quoted here is your own work.",
+   "nextActions": [
+    "Your own next step: \"I'd read the course material properly before starting instead of being so sure of myself, and I'd talk about effect size and the confidence interval from the start instead of saying a small p means a…\"",
+    "Re-read the course material from the Prepare step, then write two or three sentences on this: states that the p-value is calculated assuming the null hypothesis is true (it is the probability of data at least this extreme if there were really no difference).",
+    "Re-read the course material from the Prepare step, then write two or three sentences on this: explicitly rejects the reading that p is the probability the null hypothesis is true or that the result is due to chance."
+   ],
+   "transferQuestion": "A different situation: a newspaper headline says a new revision app 'significantly improves exam scores (p = .04)' in a study of 6,000 pupils, and a friend asks whether they should pay for it. What from this session would you use there, and what would you change?",
+   "limits": "Feedback is based only on what you wrote in this session. It was produced by matching your words against your teacher's criteria, not by a human reading them."
+  },
+  "transfer": {
+   "turnId": "t33",
+   "answer": "I'd tell them p = .04 doesn't mean a 96% chance the app works, it just means the result would be unusual if the app did nothing. And with 6,000 pupils even a tiny improvement can come out significant, so I'd want to know how many marks it actually adds and the confidence interval before paying for it.",
+   "criteriaEchoed": [
+    "c1",
+    "c3"
+   ],
+   "note": "Observation: your answer uses ideas from this session: states that the p-value is calculated assuming the null hypothesis is true (it is the probability of data at least this extreme if there were really no difference); separates statistical significance from the size or importance of the effect, and refers to the effect size or confidence interval."
+  },
+  "updatedAt": "2026-11-14T15:36:52.919Z",
+  "endedAt": "2026-11-14T15:36:52.919Z"
+ }
+}
