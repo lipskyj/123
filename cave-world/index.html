@@ -145,6 +145,24 @@
   #reportBtn { padding:7px 14px; border-radius:999px; font-size:13px; font-weight:600; border-color:var(--acc); color:var(--acc); margin-left:auto; }
   #reportBtn:disabled { opacity:.45; border-color:var(--line); color:var(--dim); }
   #reportBtn ~ #nbBtn { margin-left:0; }
+  #phoneBtn { padding:7px 12px; border-radius:999px; font-size:13px; font-weight:600; margin-left:auto; }
+  #phoneBtn.ring { border-color:var(--acc); color:var(--acc); animation:ringb .5s infinite alternate; }
+  @keyframes ringb { to { box-shadow:0 0 0 6px rgba(95,224,181,.25); } }
+  #reportBtn { margin-left:0 !important; }
+  #phone { position:fixed; right:12px; top:56px; width:min(380px,calc(100vw - 24px)); z-index:4; display:none; background:linear-gradient(180deg,rgba(19,28,25,.97),rgba(11,17,15,.97));
+    border:1px solid var(--acc); border-radius:16px; padding:12px; box-shadow:0 16px 50px rgba(0,0,0,.6); }
+  #phone.on { display:block; } #phone.urgent { border-color:#ff6b6b; box-shadow:0 0 0 3px rgba(255,107,107,.3), 0 16px 50px rgba(0,0,0,.6); }
+  .ph-head { display:flex; gap:10px; align-items:center; margin-bottom:8px; } .ph-head b { font-size:15px; }
+  #phLines p { margin:6px 0; font-size:14px; line-height:1.45; } #phLines p.me { color:var(--acc); text-align:right; }
+  #phLines p .who { color:var(--dim); font-size:12px; display:block; }
+  #phTimer { display:none; height:22px; border-radius:11px; background:rgba(255,255,255,.08); position:relative; overflow:hidden; margin:8px 0; }
+  #phTimer.on { display:block; } #phTimer i { position:absolute; left:0; top:0; bottom:0; background:linear-gradient(90deg,#ff6b6b,#ffb86b); }
+  #phTimer span { position:relative; display:block; text-align:center; font-size:12px; font-weight:700; line-height:22px; }
+  #phOpts button { display:block; width:100%; text-align:left; padding:9px 12px; margin:6px 0; font-size:14px; }
+  #phOpts .row { display:flex; gap:8px; } #phOpts .row button { text-align:center; }
+  #phOpts .answer { border-color:var(--acc); color:var(--acc); font-weight:700; } #phOpts .decline { color:#ff8b8b; }
+  #flood { position:fixed; left:0; right:0; bottom:0; height:0; pointer-events:none; z-index:1; background:linear-gradient(180deg,rgba(40,120,160,.0),rgba(30,110,150,.55)); transition:height .3s linear; }
+  body.danger::before { content:""; position:fixed; inset:0; pointer-events:none; z-index:2; box-shadow:inset 0 0 120px rgba(255,60,60,.55); animation:pulse 1s infinite; }
   .mark::after { content:""; position:absolute; inset:3px; background:var(--warn); opacity:.7; }
   .mark.done::after { display:none; }
   #load { color:var(--dim); font-size:14px; margin-top:8px; }
@@ -164,6 +182,7 @@
 
 <div id="top">
   <div class="chip" id="score"></div>
+  <button id="phoneBtn" title="Call Dr. Reyes (C)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h4l2 5-2.500 1.500a11 11 0 0 0 5 5L15 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2"/></svg>Call</button>
   <button id="reportBtn" disabled title="Investigate at least 5 finds first">Report</button>
   <button id="nbBtn"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM8 3v18M12 8h4M12 12h4"/></svg>Notebook</button>
   <button id="mute" title="Sound"></button>
@@ -185,6 +204,7 @@
     <ul class="kit" id="kitList"></ul>
     <h3>How it works</h3>
     <p>Find something interesting, pick the right tool, then carry out the procedure yourself and interpret what you see. Each find earns up to three stars: done, clean technique, right interpretation first time. Using the wrong tool on something fragile damages the site, and that goes in your report. When you have enough evidence, press <b>Report</b> to make your recommendation.</p>
+    <p><b>Keep your phone on.</b> Dr. Reyes will call, sometimes when something is going wrong and you have seconds to act. You can call her too (the Call button, or C): she can nudge you, but she logs every hint.</p>
     <h3>Controls</h3>
     <p id="ctl"></p>
     <p style="font-size:13px"><a href="./classic.html" style="color:var(--acc)">Prefer quick exploring? Play the classic version</a></p>
@@ -192,6 +212,9 @@
     <div id="load">Loading cave…</div>
   </div>
 </div>
+<div id="phone" role="dialog" aria-label="Phone call" aria-live="polite"><div class="ph-head"><div class="avatar" id="phAv">AR</div><div><b id="phName"></b><br><span class="dim" id="phStatus"></span></div></div>
+  <div id="phLines"></div><div id="phTimer"><i></i><span></span></div><div id="phOpts"></div></div>
+<div id="flood"></div>
 <div id="radio" role="status" aria-live="polite"><div class="avatar" aria-hidden="true">AR</div><p id="radioText"></p></div>
 <div class="sheet" id="report"><div class="card" id="reportCard"></div></div>
 <div class="sheet" id="debrief"><div class="card" id="debriefCard"></div></div>
@@ -204,6 +227,7 @@ import { SparkRenderer, SplatMesh } from "@sparkjsdev/spark";
 import { TOOLS, POIS, WRONG } from "./pois.js";
 import { createGameAudio } from "./audio.js";
 import { SIM } from "./sim-data.js";
+import { CALLERS, PLACES, METHOD_HINTS, LINES } from "./calls.js";
 import { MENTOR, BRIEF, PRIOR, EVIDENCE, OPTIONS, TAG_NAMES, DAMAGE_TOOLS, RADIO, TRANSFER, NAMES } from "./mission.js";
 const audio = createGameAudio();
 
@@ -244,7 +268,7 @@ function canStand(x, z) {
 let yaw = 0, pitch = -0.05, playing = false, tool = TOOLS[0].id, target = null;
 const found = new Set();
 try { JSON.parse(localStorage.getItem("caveSimFound") || "[]").forEach((id) => found.add(id)); } catch {}
-const M0 = () => ({ prior: null, log: [], damage: [], wrong: {}, notes: {}, heights: {}, streakWrong: 0, ready: false, report: null, self: null, transfer: null, done: false });
+const M0 = () => ({ calls: {}, hints: 0, missed: 0, prior: null, log: [], damage: [], wrong: {}, notes: {}, heights: {}, streakWrong: 0, ready: false, report: null, self: null, transfer: null, done: false });
 let mission = M0(); try { const saved = JSON.parse(localStorage.getItem("caveSimMission") || "null"); if (saved) mission = { ...M0(), ...saved }; } catch {}
 const save = () => { try { localStorage.setItem("caveSimFound", JSON.stringify([...found])); localStorage.setItem("caveSimStars", JSON.stringify(stars)); localStorage.setItem("caveSimMission", JSON.stringify(mission)); } catch {} };
 const logEv = (type, data = {}) => { mission.log.push({ t: Date.now(), type, ...data }); save(); };
@@ -265,7 +289,7 @@ $("priorOpts").querySelectorAll(".opt").forEach((b) => (b.onclick = () => { miss
 $("kitList").innerHTML = TOOLS.map((t) => `<li>${t.icon}<span><b>${t.name}</b>${t.verb}</span></li>`).join("");
 $("ctl").textContent = (isTouch
   ? "Left stick to walk. Drag anywhere else to look around. Tap a tool to select it, then aim the circle at something and press USE."
-  : "Drag the mouse to look. W A S D or arrow keys to walk, Shift to hurry. Keys 1–6 pick a tool, E or Space uses it, N opens the notebook.") + " During a procedure, follow the panel at the bottom; press and hold the wide button and release in the green zone.";
+  : "Drag the mouse to look. W A S D or arrow keys to walk, Shift to hurry. Keys 1–6 pick a tool, E or Space uses it, N opens the notebook, C calls Dr. Reyes or answers her call.") + " During a procedure, follow the panel at the bottom; press and hold the wide button and release in the green zone.";
 TOOLS.forEach((t, i) => {
   const b = document.createElement("button");
   b.innerHTML = `<small>${i + 1}</small>${t.icon}`; b.title = t.name;
@@ -567,7 +591,91 @@ async function startProcedure(p, t) {
   openSheet("result");
   $("rOk").onclick = () => { closeSheet("result"); if (found.size === POIS.length) showNotebook(true); };
 }
+// ---------- phone ----------
+const phone = { state: "idle", who: "reyes" }; const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+function speak(text, who) { try { if (audio.muted || !window.speechSynthesis) return; const u = new SpeechSynthesisUtterance(text); Object.assign(u, CALLERS[who].voice); speechSynthesis.speak(u); } catch {} }
+function phShow(who, status, urgent = false) { $("radio").classList.remove("on"); phone.who = who; $("phAv").textContent = CALLERS[who].initials; $("phName").textContent = CALLERS[who].name; $("phStatus").textContent = status; $("phone").classList.add("on"); $("phone").classList.toggle("urgent", urgent); }
+function phHide() { $("phone").classList.remove("on", "urgent"); $("phLines").innerHTML = ""; $("phOpts").innerHTML = ""; $("phTimer").classList.remove("on"); $("phoneBtn").classList.remove("ring"); document.body.classList.remove("danger"); $("flood").style.height = "0"; try { speechSynthesis.cancel(); } catch {} phone.state = "idle"; }
+async function say(who, text, hold = true) { if (who !== phone.who) phShow(who, "On the line", $("phone").classList.contains("urgent"));
+  const el = document.createElement("p"); el.innerHTML = `<span class="who">${esc(CALLERS[who].name.split(",")[0])}</span>${esc(text)}`; $("phLines").appendChild(el);
+  while ($("phLines").children.length > 3) $("phLines").firstChild.remove(); speak(text, who); logEv("call-line", { who, text }); if (hold) await sleep(Math.min(5200, 900 + text.length * 38)); }
+function me(text) { const el = document.createElement("p"); el.className = "me"; el.textContent = text; $("phLines").appendChild(el); while ($("phLines").children.length > 3) $("phLines").firstChild.remove(); logEv("call-reply", { text }); }
+function timerBar(left, total) { $("phTimer").classList.add("on"); $("phTimer").querySelector("i").style.width = (100 * left) / total + "%"; $("phTimer").querySelector("span").textContent = Math.ceil(left) + " s"; }
+// Choice with an optional time limit. Resolves to the index chosen, or -1 on timeout.
+function ask(options, seconds = 0) { return new Promise((resolve) => { const box = $("phOpts"); box.innerHTML = options.map((o, i) => `<button data-i="${i}">${esc(o)}</button>`).join(""); let done = false, t0 = performance.now(), iv = 0;
+  const end = (i) => { if (done) return; done = true; clearInterval(iv); box.innerHTML = ""; $("phTimer").classList.remove("on"); if (i >= 0) me(options[i]); resolve(i); };
+  box.querySelectorAll("button").forEach((b) => (b.onclick = () => end(+b.dataset.i)));
+  if (seconds) iv = setInterval(() => { const left = seconds - (performance.now() - t0) / 1000; timerBar(Math.max(0, left), seconds); if (left <= 0) end(-1); }, 100); }); }
+// Real-time movement challenge: resolves { ok, secs } as soon as test(position) passes, or when time runs out.
+function race(seconds, test, onTick) { return new Promise((resolve) => { const t0 = performance.now(); document.body.classList.add("danger");
+  const iv = setInterval(() => { const el = (performance.now() - t0) / 1000, left = seconds - el; timerBar(Math.max(0, left), seconds); if (onTick) onTick(el, left);
+    if (test(camera.position)) { clearInterval(iv); document.body.classList.remove("danger"); $("phTimer").classList.remove("on"); resolve({ ok: true, secs: Math.max(1, Math.round(el)) }); }
+    else if (left <= 0) { clearInterval(iv); document.body.classList.remove("danger"); $("phTimer").classList.remove("on"); resolve({ ok: false, secs: seconds }); } }, 100); }); }
+// Incoming call. Urgent calls connect by themselves after two rings.
+function ring(id, flow, { who = "reyes", urgent = false } = {}) {
+  if (phone.state !== "idle" || !playing) return false; phone.state = "ringing"; phShow(who, urgent ? "Urgent call…" : "Incoming call…", urgent); $("phoneBtn").classList.add("ring");
+  let rings = 0; const rt = setInterval(() => { audio.play("select"); setTimeout(() => audio.play("select"), 180); rings++; if (urgent && rings >= 2) pick(); if (!urgent && rings >= 10) miss(); }, 1300); audio.play("select");
+  const pick = async () => { clearInterval(rt); $("phoneBtn").classList.remove("ring"); $("phOpts").innerHTML = ""; phone.state = "active"; $("phStatus").textContent = "On the line"; logEv("call", { id, answered: true }); try { await flow(); } finally { await sleep(1800); phHide(); } };
+  const miss = () => { clearInterval(rt); mission.missed++; mission.calls[id] = mission.calls[id] || { missed: true }; logEv("call", { id, answered: false }); save(); phHide(); };
+  $("phOpts").innerHTML = urgent ? "" : `<div class="row"><button class="answer">Answer (C)</button><button class="decline">Decline</button></div>`;
+  if (!urgent) { $("phOpts").querySelector(".answer").onclick = pick; $("phOpts").querySelector(".decline").onclick = miss; }
+  phone.answer = urgent ? null : pick; return true;
+}
+const dist2 = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
+const evidenceChoices = (tags) => POIS.filter((p) => found.has(p.id) && EVIDENCE[p.id].tags.some((t) => tags.includes(t)))
+  .sort((a, b) => Math.min(...EVIDENCE[a.id].tags.map((t) => tags.indexOf(t)).filter((i) => i >= 0)) - Math.min(...EVIDENCE[b.id].tags.map((t) => tags.indexOf(t)).filter((i) => i >= 0))).slice(0, 3);
+const consequence = (id) => { const parts = EVIDENCE[id].line.split(/(?<=[.:])\s+/); return parts.at(-1).replace(/\.$/, ""); };
+async function checkinFlow(open) {
+  await say("reyes", open || LINES.checkin.open); const have = POIS.filter((p) => found.has(p.id)).slice(-3);
+  const i = await ask([...have.map((p) => `The ${short(p)}: ${EVIDENCE[p.id].line.split(":")[0].split(".")[0]}.`), "Honestly, I'm not sure yet"]);
+  if (i < 0 || i >= have.length) { await say("reyes", "Then that's your next job: one find, one clear conclusion. Go and get it."); return; }
+  await say("reyes", LINES.checkin.good(`the ${short(have[i])}.`)); const j = await ask(LINES.checkin.sure);
+  mission.calls.checkin = { about: have[i].id, basis: LINES.checkin.sure[j] }; save(); await say("reyes", LINES.checkin.sureReply[j]); await say("reyes", LINES.checkin.close);
+}
+async function floodFlow() {
+  const f = $("flood"); say("reyes", LINES.flood.open, false); let ticked = false;
+  const r = await race(20, (pos) => pos.z > PLACES.safeZ, (el, left) => { f.style.height = Math.min(45, el * 2.2) + "vh"; if (left < 10 && !ticked) { ticked = true; say("reyes", LINES.flood.tick, false); } if (Math.floor(el * 2) % 3 === 0) audio.play("step"); });
+  mission.calls.flood = r; save(); f.style.height = "0"; await say("reyes", r.ok ? LINES.flood.ok(r.secs) : LINES.flood.fail);
+}
+async function rockFlow() {
+  say("reyes", LINES.rockfall.open, false);
+  const r = await race(6, (pos) => dist2([pos.x, pos.z], PLACES.skylight) > 7, (el) => { if (Math.random() < 0.15) { audio.play("hammer"); document.body.classList.add("shake"); setTimeout(() => document.body.classList.remove("shake"), 300); } });
+  mission.calls.rockfall = r; save(); await say("reyes", r.ok ? LINES.rockfall.ok(r.secs) : LINES.rockfall.fail);
+}
+async function tourFlow() {
+  await say("reyes", LINES.tour.intro); await say("hale", LINES.tour.ask);
+  const ev = evidenceChoices(["life", "archaeology", "fragile", "safety"]), opts = [...ev.map((p) => `Yes, the ${short(p)}: ${consequence(p.id).charAt(0).toLowerCase() + consequence(p.id).slice(1)}.`), "No reason, bring them in", "I'm not sure yet"];
+  const i = await ask(opts, 20); let verdict;
+  if (i >= 0 && i < ev.length) { verdict = "evidence"; await say("hale", LINES.tour.good); await say("reyes", LINES.tour.reyesGood); }
+  else if (i === ev.length) { verdict = "agreed"; await say("hale", LINES.tour.yes); await say("reyes", LINES.tour.reyesYes); }
+  else { verdict = i < 0 ? "timeout" : "unsure"; await say("hale", i < 0 ? LINES.tour.timeout : LINES.tour.vague); await say("reyes", LINES.tour.reyesWeak); }
+  mission.calls.tour = { verdict, said: i >= 0 ? opts[i] : "(no answer)", about: i >= 0 && i < ev.length ? ev[i].id : null }; save();
+}
+async function menuFlow() {
+  await say("reyes", LINES.menu.open, false); const i = await ask(LINES.menu.options);
+  if (i === 0) { const p = target || POIS.filter((x) => !found.has(x.id)).map((x) => [x, dist2([x.pos[0], x.pos[2]], [camera.position.x, camera.position.z])]).filter(([, d]) => d < 6).sort((a, b) => a[1] - b[1]).map(([x]) => x)[0];
+    if (!p) return say("reyes", LINES.menu.noTarget); if (found.has(p.id)) return say("reyes", `You've already done the ${short(p)}. Check your notebook.`);
+    mission.hints++; mission.calls.hintsAbout = [...(mission.calls.hintsAbout || []), p.id]; save(); return say("reyes", `${LINES.menu.hintCost} ${METHOD_HINTS[p.tool]}`); }
+  if (i === 1) { const left = POIS.filter((x) => !found.has(x.id)); if (!left.length) return say("reyes", LINES.menu.leftNone);
+    const [p, d] = left.map((x) => [x, dist2([x.pos[0], x.pos[2]], [camera.position.x, camera.position.z])]).sort((a, b) => a[1] - b[1])[0];
+    const ang = Math.atan2(-(p.pos[0] - camera.position.x), -(p.pos[2] - camera.position.z)) - yaw, a = Math.atan2(Math.sin(ang), Math.cos(ang));
+    const dir = Math.abs(a) < 0.6 ? "straight ahead" : Math.abs(a) > 2.4 ? "behind you" : a > 0 ? "to your left" : "to your right"; return say("reyes", LINES.menu.left(left.length, dir, Math.max(1, Math.round(d)))); }
+  if (i === 2) return found.size ? checkinFlow("Go on then. What have you found that matters most?") : say("reyes", "You haven't investigated anything yet. Start with whatever stands out.");
+  return say("reyes", LINES.menu.bye);
+}
+function callReyes() { if (phone.state === "ringing" && phone.answer) return phone.answer(); if (phone.state !== "idle" || !playing) return; phone.state = "active"; phShow("reyes", "Calling…"); audio.play("select");
+  logEv("call", { id: "outgoing", answered: true }); setTimeout(async () => { $("phStatus").textContent = "On the line"; try { await menuFlow(); } finally { await sleep(1500); phHide(); } }, 1200); }
+$("phoneBtn").onclick = () => callReyes();
+// Situations that trigger calls, checked a few times a second while the player is in the cave.
+let lastCheck = 0, readyAt = 0;
+function checkTriggers(now) { if (now - lastCheck < 400 || !playing || phone.state !== "idle") return; lastCheck = now; const pos = [camera.position.x, camera.position.z];
+  if (!mission.calls.flood && found.size >= 3 && camera.position.z < PLACES.deepZ) return ring("flood", floodFlow, { urgent: true });
+  if (!mission.calls.rockfall && found.size >= 2 && dist2(pos, PLACES.skylight) < 4.5) return ring("rockfall", rockFlow, { urgent: true });
+  if (mission.ready && (!mission.calls.tour || (mission.calls.tour.missed && !mission.calls.tourRetry))) { if (!readyAt) readyAt = now; if (now - readyAt > 25000) { if (mission.calls.tour && mission.calls.tour.missed) mission.calls.tourRetry = true; delete mission.calls.tour; ring("tour", tourFlow); } }
+  if (found.size >= 1 && !mission.calls.checkin && mission.calls.checkinAt && now > mission.calls.checkinAt) return ring("checkin", checkinFlow);
+}
 function afterFind(p, res) {
+  if (found.size === 1 && !mission.calls.checkin) mission.calls.checkinAt = performance.now() + 15000;
   const name = short(p), lines = [];
   if (res.notes.some((x) => /eye protection/.test(x))) lines.push(RADIO.goggles); else if (!res.tech) lines.push(RADIO.sloppy(name));
   mission.streakWrong = res.quizFirst ? 0 : mission.streakWrong + 1;
@@ -640,6 +748,13 @@ function showDebrief() {
     <h3>Your starting idea</h3><p>${!found.has(PRIOR.linkedFind) ? `You expected cave spikes to be “${esc(PRIOR.options[mission.prior])}”, but you never examined the stalactites, so this wasn't tested.`
       : mission.prior === PRIOR.correct ? `You expected mineral from dripping water, and your lens work on the stalactites confirmed it.` : `You came in thinking they were “${esc(PRIOR.options[mission.prior].toLowerCase())}”. Your own observation of the stalactites showed calcite deposited by drips.`}</p>
     <h3>Care for the site</h3><p>${mission.damage.length ? `You damaged the site ${mission.damage.length} time${mission.damage.length > 1 ? "s" : ""}: ${mission.damage.map((x) => `${x.tool} on the ${name(x.find)}`).join("; ")}. The council will read this.` : "No damage. The site is exactly as you found it."}</p>
+    <h3>On the phone</h3>${(() => { const c = mission.calls, rows = [];
+      if (c.flood && !c.flood.missed) rows.push(c.flood.ok ? `Flood alert: you reached safer ground in ${c.flood.secs} seconds.` : "Flood alert: you were still in the low chamber when time ran out.");
+      if (c.rockfall && !c.rockfall.missed) rows.push(c.rockfall.ok ? `Rockfall: clear of the skylight in ${c.rockfall.secs} seconds.` : "Rockfall: you stayed under the skylight.");
+      if (c.tour && !c.tour.missed) rows.push(c.tour.verdict === "evidence" ? `Tour operator: you held him off with evidence (“${esc(c.tour.said)}”).` : c.tour.verdict === "agreed" ? "Tour operator: you told him to bring forty people and bright lights. Your own notebook argues against that." : "Tour operator: you had no answer ready. Have one piece of evidence you can say in one sentence.");
+      if (c.checkin && c.checkin.basis) rows.push(`Check-in: you said your conclusion about the ${esc(short(POIS.find((p) => p.id === c.checkin.about)))} was based on: “${esc(c.checkin.basis)}”.`);
+      rows.push(mission.hints ? `You asked for ${mission.hints} hint${mission.hints > 1 ? "s" : ""}.` : "You asked for no hints."); if (mission.missed) rows.push(`You missed or declined ${mission.missed} call${mission.missed > 1 ? "s" : ""}.`);
+      return rows.map((x) => `<p>${x}</p>`).join(""); })()}
     ${J ? `<h3>Your report</h3><p>You recommended: <b>${J.opt.label}</b>, citing the ${mission.report.evidence.map(name).join(", the ")}.</p><div class="quote">“${esc(mission.report.why)}”</div>
       <div class="verdict ${J.good ? "good" : "weak"}">${J.verdict}</div>${J.ignored.length ? `<p>You found evidence on ${J.ignored.map((t) => TAG_NAMES[t]).join(" and ")} but didn't cite it. The council would want to know.</p>` : ""}
       ${J.offTopic.length ? `<p class="dim">${Cap(J.offTopic.map((x) => "the " + name(x)).join(", "))} ${J.offTopic.length > 1 ? "are" : "is"} interesting, but ${J.offTopic.length > 1 ? "don't" : "doesn't"} bear on this decision.</p>` : ""}` : ""}
@@ -661,6 +776,7 @@ addEventListener("keydown", (e) => {
   if (e.code === "KeyN") { $("notebook").classList.contains("on") ? closeSheet("notebook") : playing && showNotebook(false); return; }
   if (e.code === "Enter" || e.code === "Escape") { const b = document.querySelector(".sheet.on .ok:not([disabled])"); if (b) { b.click(); return; } }
   if (!playing) return;
+  if (e.code === "KeyC") { callReyes(); return; }
   if (/^Digit[1-6]$/.test(e.code)) selectTool(TOOLS[+e.code.slice(5) - 1].id);
   else if (e.code === "KeyE" || e.code === "Space") { e.preventDefault(); useTool(); }
   else keys.add(e.code);
@@ -711,6 +827,7 @@ renderer.setAnimationLoop((now) => {
   camera.position.y = EYE + Math.sin(bob) * 0.035;
   camera.rotation.set(pitch, yaw, 0);
   if (now > flashT) updateTargets(); else { const keep = $("prompt").textContent; updateTargets(); $("prompt").textContent = keep; $("prompt").classList.add("on"); }
+  checkTriggers(now);
   renderer.render(scene, camera);
 });
 
@@ -720,7 +837,7 @@ cave.initialized.then(() => {
   caveLoaded = true; canStart(); if (mission.prior === null) $("load").textContent = "Answer the question above to enter."; window.caveReady = true;
 }).catch((e) => ($("load").textContent = "Could not load the cave: " + e.message));
 $("start").onclick = () => { audio.start(); closeSheet("intro"); if (!mission.log.some((e) => e.type === "entered")) { logEv("entered"); setTimeout(() => radio(RADIO.start), 800); } updateReport(); if (mission.done) showDebrief(); };
-window.cave = { mission, showReport, showDebrief, judgeReport, camera, POIS, renderer, scene, keys, updateTargets, playFx, resolveUse, TOOLS, audio, setView: (x, z, y, p) => { camera.position.x = x; camera.position.z = z; yaw = y; pitch = p; }, select: selectTool, use: useTool, found };
+window.cave = { phone, ring, floodFlow, rockFlow, tourFlow, checkinFlow, callReyes, checkTriggers, get missionState() { return mission; }, mission, showReport, showDebrief, judgeReport, camera, POIS, renderer, scene, keys, updateTargets, playFx, resolveUse, TOOLS, audio, setView: (x, z, y, p) => { camera.position.x = x; camera.position.z = z; yaw = y; pitch = p; }, select: selectTool, use: useTool, found };
 </script>
 </body>
 </html>
