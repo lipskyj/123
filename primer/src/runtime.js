@@ -142,7 +142,7 @@ export function createRuntime(store, provider) {
         note: last.kind === "misconception-corrected" ? "You pushed back on this idea." : last.kind === "misconception-voiced" ? "You said something close to this idea and were asked to test it." : "The character suggested this idea and your reply did not correct it." }; }).filter(Boolean);
     const redirects = s.adaptations.filter((a) => a.kind === "redirect").length;
     return { generatedAt: now(), goal: d.goal.text, strengths, growth, notAssessed, misconceptions,
-      selfAssessmentNote: s.selfAssessment ? `You said: "${quote(s.selfAssessment[0].answer, 140)}". Compare that with the moments quoted below.` : "",
+      selfAssessmentNote: s.selfAssessment ? `You said: "${quote(s.selfAssessment[0].answer, 140).replace(/[.!?]+$/, "")}". Compare that with the moments quoted below.` : "",
       adaptations: s.adaptations.map((a) => ({ kind: a.kind, goalRef: a.goalRef, reason: a.reason, turnId: a.turnId })),
       effortNote: redirects ? `You asked to be given the answer ${redirects} time${redirects > 1 ? "s" : ""}. The character did not give it, so everything quoted here is your own work.` : "",
       nextActions: growth.map((g) => g.nextAction).concat(misconceptions.filter((m) => m.status !== "corrected").map((m) => `Test this idea against your materials: "${m.misconception}". What evidence would show it is wrong?`)),

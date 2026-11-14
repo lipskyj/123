@@ -83,7 +83,7 @@ export class DeterministicProvider {
     assumptions.push({ text: "Primer wrote the character's questions from your success criteria using fixed sentence patterns. Read them under \"Practice\" and edit any that sound wrong or give too much away.", source: "ai", field: "questions" });
     if (!role) { role = template === "teachback" ? "a curious newcomer who has never studied this topic" : `someone who depends on the outcome of this work: ${lc(strip(intake.studentWork))}`;
       assumptions.push({ text: `Practice character invented by Primer: ${name}, ${role}.`, source: "ai", field: "character" }); }
-    const stakes = strip(ans.stakes) || (assumptions.push({ text: "No stakes were given, so the scenario uses a generic consequence. Consider adding a specific one.", source: "ai", field: "stakes" }), `${name} will act on what the student says, so a wrong or vague answer leads to a bad decision`);
+    const stakes = strip(ans.stakes) || (assumptions.push({ text: "No stakes were given, so the scenario uses a generic consequence. Consider adding a specific one.", source: "ai", field: "stakes" }), (template === "teachback" ? `${name} will repeat what the student explains to other people, so any mistake will spread` : `${name} will act on what the student says, so a wrong or vague answer leads to a bad decision`));
 
     const criteria = (intake.evidenceOfProgress || []).map((text, i) => {
       const own = content(text.replace(/^\s*\S+\s+/, " ")); const ownStems = new Set(own.map(stem));   // drop the leading task verb ("Explains", "Uses", ...)
