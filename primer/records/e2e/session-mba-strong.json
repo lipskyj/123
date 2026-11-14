@@ -1,0 +1,774 @@
+{
+ "id": "session-8fheqj",
+ "packageId": "exp-1toksbv",
+ "learner": {
+  "name": "Ada"
+ },
+ "startedAt": "2026-11-14T05:29:47.069Z",
+ "phase": "ended",
+ "classroomApproved": true,
+ "turns": [
+  {
+   "id": "t1",
+   "who": "primer",
+   "text": "Before you begin: in your own words, what do you already know about value?",
+   "phase": "preparation",
+   "at": "2026-11-14T05:29:47.153Z",
+   "kind": "activation"
+  },
+  {
+   "id": "t2",
+   "who": "learner",
+   "text": "I know a BATNA is your fallback.",
+   "phase": "preparation",
+   "at": "2026-11-14T05:29:47.153Z",
+   "kind": "activation-answer"
+  },
+  {
+   "id": "t3",
+   "who": "primer",
+   "text": "Your teacher expects you to bring this with you: The terms BATNA, reservation price and ZOPA from last week's lecture. Where might it matter in what you are about to do?",
+   "phase": "preparation",
+   "at": "2026-11-14T05:29:47.153Z",
+   "kind": "activation"
+  },
+  {
+   "id": "t4",
+   "who": "learner",
+   "text": "Probably working out what the other side really wants.",
+   "phase": "preparation",
+   "at": "2026-11-14T05:29:47.153Z",
+   "kind": "activation-answer"
+  },
+  {
+   "id": "t5",
+   "who": "character",
+   "text": "I'm Dana Okafor, a colleague returning to work after five years away. Let me be direct about why I need you: the colleague will either accept a weak offer immediately or blurt out their bottom line and damage the relationship with their future manager.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:47.154Z",
+   "kind": "opening"
+  },
+  {
+   "id": "t6",
+   "who": "character",
+   "text": "Here is what I need from you. Can you distinguish the underlying interests of each party from their stated positions?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:47.154Z",
+   "kind": "prompt",
+   "criterionId": "c1"
+  },
+  {
+   "id": "t7",
+   "who": "learner",
+   "text": "Can you just tell me the answer?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:47.220Z",
+   "kind": "practice",
+   "criterionId": "c1"
+  },
+  {
+   "id": "t8",
+   "who": "character",
+   "text": "I can't answer that for you. Your judgement is exactly what I came for. Start with what you're surest of. Here is what I need from you. Can you distinguish the underlying interests of each party from their stated positions?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:47.220Z",
+   "kind": "redirect",
+   "criterionId": "c1"
+  },
+  {
+   "id": "t9",
+   "who": "learner",
+   "text": "My advice: Distinguishes the underlying interests of each party from their stated positions. That means thinking about underlying, interests, party, stated, positions, want, reason, says.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:47.420Z",
+   "kind": "practice",
+   "criterionId": "c1"
+  },
+  {
+   "id": "t10",
+   "who": "character",
+   "text": "You said \"My advice: Distinguishes the underlying interests of each party from…\". That helps. Now make it harder for yourself: the colleague has only one other offer, and it is weaker. Does what you said still hold, and why?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:47.421Z",
+   "kind": "raise",
+   "criterionId": "c1"
+  },
+  {
+   "id": "t11",
+   "who": "learner",
+   "text": "My advice: Distinguishes the underlying interests of each party from their stated positions. That means thinking about underlying, interests, party, stated, positions, want, reason, says.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:47.535Z",
+   "kind": "practice",
+   "criterionId": "c1"
+  },
+  {
+   "id": "t12",
+   "who": "character",
+   "text": "I've always heard that the best opening move is to state your bottom line so nobody wastes time. I'm planning on that basis. Any reason I shouldn't?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:47.536Z",
+   "kind": "probe-voice",
+   "misconceptionId": "m1"
+  },
+  {
+   "id": "t13",
+   "who": "learner",
+   "text": "No, that is wrong. That is a common misconception and it would hurt you.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:47.653Z",
+   "kind": "practice",
+   "criterionId": "c2"
+  },
+  {
+   "id": "t14",
+   "who": "character",
+   "text": "Here is what I need from you. Can you identify the BATNA and explains how it sets the reservation price?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:47.653Z",
+   "kind": "prompt",
+   "criterionId": "c2"
+  },
+  {
+   "id": "t15",
+   "who": "learner",
+   "text": "My advice: Identifies the BATNA and explains how it sets the reservation price. That means thinking about batna, explains, sets, reservation, price, alternative, determines, negotiated, better, negotiation, agreement.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:47.768Z",
+   "kind": "practice",
+   "criterionId": "c2"
+  },
+  {
+   "id": "t16",
+   "who": "character",
+   "text": "You said \"My advice: Identifies the BATNA and explains how it sets the reservat…\". That helps. Now make it harder for yourself: the colleague has only one other offer, and it is weaker. Does what you said still hold, and why?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:47.769Z",
+   "kind": "raise",
+   "criterionId": "c2"
+  },
+  {
+   "id": "t17",
+   "who": "learner",
+   "text": "My advice: Identifies the BATNA and explains how it sets the reservation price. That means thinking about batna, explains, sets, reservation, price, alternative, determines, negotiated, better, negotiation, agreement.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:47.885Z",
+   "kind": "practice",
+   "criterionId": "c2"
+  },
+  {
+   "id": "t18",
+   "who": "character",
+   "text": "Here is what I need from you. Can you propose at least one option that creates value for both sides instead of splitting the difference?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:47.885Z",
+   "kind": "prompt",
+   "criterionId": "c3"
+  },
+  {
+   "id": "t19",
+   "who": "learner",
+   "text": "My advice: Proposes at least one option that creates value for both sides instead of splitting the difference. That means thinking about least, option, creates, value, sides, instead, splitting, difference, start, date, issues, candidate.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:48.002Z",
+   "kind": "practice",
+   "criterionId": "c3"
+  },
+  {
+   "id": "t20",
+   "who": "character",
+   "text": "You said \"My advice: Proposes at least one option that creates value for both s…\". That helps. Now make it harder for yourself: the colleague has only one other offer, and it is weaker. Does what you said still hold, and why?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:48.003Z",
+   "kind": "raise",
+   "criterionId": "c3"
+  },
+  {
+   "id": "t21",
+   "who": "learner",
+   "text": "My advice: Proposes at least one option that creates value for both sides instead of splitting the difference. That means thinking about least, option, creates, value, sides, instead, splitting, difference, start, date, issues, candidate.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:48.119Z",
+   "kind": "practice",
+   "criterionId": "c3"
+  },
+  {
+   "id": "t22",
+   "who": "character",
+   "text": "Here is what I need from you. Can you recommend improving the BATNA before the meeting?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:48.120Z",
+   "kind": "prompt",
+   "criterionId": "c4"
+  },
+  {
+   "id": "t23",
+   "who": "learner",
+   "text": "My advice: Recommends improving the BATNA before the meeting. That means thinking about improving, batna, meeting.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:48.235Z",
+   "kind": "practice",
+   "criterionId": "c4"
+  },
+  {
+   "id": "t24",
+   "who": "character",
+   "text": "You said \"My advice: Recommends improving the BATNA before the meeting. That me…\". That helps. Now make it harder for yourself: the colleague has only one other offer, and it is weaker. Does what you said still hold, and why?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:48.235Z",
+   "kind": "raise",
+   "criterionId": "c4"
+  },
+  {
+   "id": "t25",
+   "who": "learner",
+   "text": "My advice: Recommends improving the BATNA before the meeting. That means thinking about improving, batna, meeting.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:48.352Z",
+   "kind": "practice",
+   "criterionId": "c4"
+  },
+  {
+   "id": "t26",
+   "who": "character",
+   "text": "All right. I have what I need to decide. Thank you for your time.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:48.352Z",
+   "kind": "closing"
+  },
+  {
+   "id": "t27",
+   "who": "primer",
+   "text": "Before you see any feedback: how do you think that went? Which moment are you most satisfied with?",
+   "phase": "feedback",
+   "at": "2026-11-14T05:29:48.486Z",
+   "kind": "self-assessment"
+  },
+  {
+   "id": "t28",
+   "who": "learner",
+   "text": "I think I explained interests well.",
+   "phase": "feedback",
+   "at": "2026-11-14T05:29:48.486Z",
+   "kind": "self-assessment-answer"
+  },
+  {
+   "id": "t29",
+   "who": "primer",
+   "text": "What would you do differently if you did it again?",
+   "phase": "feedback",
+   "at": "2026-11-14T05:29:48.486Z",
+   "kind": "self-assessment"
+  },
+  {
+   "id": "t30",
+   "who": "learner",
+   "text": "I would ask more questions first.",
+   "phase": "feedback",
+   "at": "2026-11-14T05:29:48.486Z",
+   "kind": "self-assessment-answer"
+  },
+  {
+   "id": "t31",
+   "who": "primer",
+   "text": "Imagine the same ideas coming up somewhere quite different from Dana Okafor's situation. Describe one such situation and how you would handle it.",
+   "phase": "feedback",
+   "at": "2026-11-14T05:29:48.552Z",
+   "kind": "transfer"
+  },
+  {
+   "id": "t32",
+   "who": "learner",
+   "text": "With another team I would look for their interests and my BATNA before proposing options.",
+   "phase": "feedback",
+   "at": "2026-11-14T05:29:48.552Z",
+   "kind": "transfer-answer"
+  }
+ ],
+ "events": [
+  {
+   "id": "e1",
+   "type": "session-started",
+   "phase": "preparation",
+   "at": "2026-11-14T05:29:47.069Z",
+   "approval": {
+    "type": "educator",
+    "by": "Synthetic Teacher (e2e test)",
+    "at": "2026-11-14T05:29:46.669Z"
+   }
+  },
+  {
+   "id": "e2",
+   "type": "phase",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:47.153Z",
+   "to": "practice"
+  },
+  {
+   "id": "e3",
+   "type": "phase",
+   "phase": "feedback",
+   "at": "2026-11-14T05:29:48.352Z",
+   "to": "feedback"
+  },
+  {
+   "id": "e4",
+   "type": "session-ended",
+   "phase": "ended",
+   "at": "2026-11-14T05:29:48.552Z"
+  }
+ ],
+ "evidence": [
+  {
+   "id": "ev1",
+   "kind": "criterion",
+   "ref": "c1",
+   "turnId": "t9",
+   "phase": "practice",
+   "quote": "My advice: Distinguishes the underlying interests of each party from their stated positions. That means thinking about underlying, interests, party, stated, positions, want, reason, says.",
+   "strength": "clear",
+   "matched": [
+    "underly",
+    "interest",
+    "party",
+    "stat",
+    "position",
+    "want",
+    "reason",
+    "says"
+   ],
+   "basis": "observed",
+   "promptedFor": "c1"
+  },
+  {
+   "id": "ev2",
+   "kind": "criterion",
+   "ref": "c1",
+   "turnId": "t11",
+   "phase": "practice",
+   "quote": "My advice: Distinguishes the underlying interests of each party from their stated positions. That means thinking about underlying, interests, party, stated, positions, want, reason, says.",
+   "strength": "clear",
+   "matched": [
+    "underly",
+    "interest",
+    "party",
+    "stat",
+    "position",
+    "want",
+    "reason",
+    "says"
+   ],
+   "basis": "observed",
+   "promptedFor": "c1"
+  },
+  {
+   "id": "ev3",
+   "kind": "misconception-unaddressed",
+   "ref": "m1",
+   "turnId": "t13",
+   "phase": "practice",
+   "quote": "No, that is wrong. That is a common misconception and it would hurt you.",
+   "strength": "clear",
+   "matched": [],
+   "basis": "observed",
+   "promptedFor": null
+  },
+  {
+   "id": "ev4",
+   "kind": "criterion",
+   "ref": "c2",
+   "turnId": "t15",
+   "phase": "practice",
+   "quote": "My advice: Identifies the BATNA and explains how it sets the reservation price. That means thinking about batna, explains, sets, reservation, price, alternative, determines, negotiated, better, negot…",
+   "strength": "clear",
+   "matched": [
+    "batna",
+    "explain",
+    "sets",
+    "reserv",
+    "price",
+    "alternative",
+    "determin",
+    "negotiat",
+    "better",
+    "negoti",
+    "agree"
+   ],
+   "basis": "observed",
+   "promptedFor": "c2"
+  },
+  {
+   "id": "ev5",
+   "kind": "criterion",
+   "ref": "c2",
+   "turnId": "t17",
+   "phase": "practice",
+   "quote": "My advice: Identifies the BATNA and explains how it sets the reservation price. That means thinking about batna, explains, sets, reservation, price, alternative, determines, negotiated, better, negot…",
+   "strength": "clear",
+   "matched": [
+    "batna",
+    "explain",
+    "sets",
+    "reserv",
+    "price",
+    "alternative",
+    "determin",
+    "negotiat",
+    "better",
+    "negoti",
+    "agree"
+   ],
+   "basis": "observed",
+   "promptedFor": "c2"
+  },
+  {
+   "id": "ev6",
+   "kind": "criterion",
+   "ref": "c3",
+   "turnId": "t19",
+   "phase": "practice",
+   "quote": "My advice: Proposes at least one option that creates value for both sides instead of splitting the difference. That means thinking about least, option, creates, value, sides, instead, splitting, diff…",
+   "strength": "clear",
+   "matched": [
+    "least",
+    "option",
+    "creat",
+    "value",
+    "side",
+    "instead",
+    "splitt",
+    "difference",
+    "start",
+    "date",
+    "issu",
+    "candidate"
+   ],
+   "basis": "observed",
+   "promptedFor": "c3"
+  },
+  {
+   "id": "ev7",
+   "kind": "criterion",
+   "ref": "c3",
+   "turnId": "t21",
+   "phase": "practice",
+   "quote": "My advice: Proposes at least one option that creates value for both sides instead of splitting the difference. That means thinking about least, option, creates, value, sides, instead, splitting, diff…",
+   "strength": "clear",
+   "matched": [
+    "least",
+    "option",
+    "creat",
+    "value",
+    "side",
+    "instead",
+    "splitt",
+    "difference",
+    "start",
+    "date",
+    "issu",
+    "candidate"
+   ],
+   "basis": "observed",
+   "promptedFor": "c3"
+  },
+  {
+   "id": "ev8",
+   "kind": "criterion",
+   "ref": "c4",
+   "turnId": "t23",
+   "phase": "practice",
+   "quote": "My advice: Recommends improving the BATNA before the meeting. That means thinking about improving, batna, meeting.",
+   "strength": "partial",
+   "matched": [
+    "improv",
+    "batna",
+    "meet"
+   ],
+   "basis": "observed",
+   "promptedFor": "c4"
+  },
+  {
+   "id": "ev9",
+   "kind": "criterion",
+   "ref": "c4",
+   "turnId": "t25",
+   "phase": "practice",
+   "quote": "My advice: Recommends improving the BATNA before the meeting. That means thinking about improving, batna, meeting.",
+   "strength": "partial",
+   "matched": [
+    "improv",
+    "batna",
+    "meet"
+   ],
+   "basis": "observed",
+   "promptedFor": "c4"
+  }
+ ],
+ "adaptations": [
+  {
+   "id": "a1",
+   "kind": "redirect",
+   "turnId": "t7",
+   "reason": "Learner asked to be given the answer; the character declined and restated the task.",
+   "evidenceIds": [],
+   "goalRef": "c1",
+   "at": "2026-11-14T05:29:47.220Z"
+  },
+  {
+   "id": "a2",
+   "kind": "raise",
+   "turnId": "t9",
+   "reason": "Learner showed evidence for this criterion, so the character raised the challenge within the same goal.",
+   "evidenceIds": [
+    "ev1"
+   ],
+   "goalRef": "c1",
+   "at": "2026-11-14T05:29:47.421Z"
+  },
+  {
+   "id": "a3",
+   "kind": "raise",
+   "turnId": "t15",
+   "reason": "Learner showed evidence for this criterion, so the character raised the challenge within the same goal.",
+   "evidenceIds": [
+    "ev4"
+   ],
+   "goalRef": "c2",
+   "at": "2026-11-14T05:29:47.769Z"
+  },
+  {
+   "id": "a4",
+   "kind": "raise",
+   "turnId": "t19",
+   "reason": "Learner showed evidence for this criterion, so the character raised the challenge within the same goal.",
+   "evidenceIds": [
+    "ev6"
+   ],
+   "goalRef": "c3",
+   "at": "2026-11-14T05:29:48.003Z"
+  },
+  {
+   "id": "a5",
+   "kind": "raise",
+   "turnId": "t23",
+   "reason": "Learner showed evidence for this criterion, so the character raised the challenge within the same goal.",
+   "evidenceIds": [
+    "ev8"
+   ],
+   "goalRef": "c4",
+   "at": "2026-11-14T05:29:48.235Z"
+  }
+ ],
+ "journal": [
+  {
+   "phase": "preparation",
+   "at": "2026-11-14T05:29:47.153Z",
+   "text": "Preparation: learner answered 2 activation question(s)."
+  },
+  {
+   "phase": "practice",
+   "at": "2026-11-14T05:29:48.352Z",
+   "text": "Practice ended after 10 learner turn(s)."
+  },
+  {
+   "phase": "feedback",
+   "at": "2026-11-14T05:29:48.487Z",
+   "text": "Feedback: 4 strength(s), 0 growth area(s), 0 not assessed."
+  },
+  {
+   "phase": "ended",
+   "at": "2026-11-14T05:29:48.552Z",
+   "text": "Session ended."
+  }
+ ],
+ "practice": {
+  "index": 4,
+  "attempts": 0,
+  "raised": {
+   "c1": true,
+   "c2": true,
+   "c3": true,
+   "c4": true
+  },
+  "prompted": {
+   "c1": "t6",
+   "c2": "t14",
+   "c3": "t18",
+   "c4": "t22"
+  },
+  "probed": {
+   "m1": "voiced"
+  },
+  "voiced": true,
+  "done": true,
+  "learnerTurns": 10,
+  "pending": null
+ },
+ "selfAssessment": [
+  {
+   "question": "Before you see any feedback: how do you think that went? Which moment are you most satisfied with?",
+   "answer": "I think I explained interests well.",
+   "turnId": "t28"
+  },
+  {
+   "question": "What would you do differently if you did it again?",
+   "answer": "I would ask more questions first.",
+   "turnId": "t30"
+  }
+ ],
+ "feedback": {
+  "generatedAt": "2026-11-14T05:29:48.487Z",
+  "goal": "Students prepare for and conduct a negotiation by separating interests from positions, identifying their BATNA, and proposing options that create value for both sides",
+  "strengths": [
+   {
+    "criterionId": "c1",
+    "criterion": "Distinguishes the underlying interests of each party from their stated positions",
+    "observation": "You addressed this in your own words in the conversation.",
+    "citations": [
+     {
+      "turnId": "t9",
+      "phase": "practice",
+      "where": "in the conversation",
+      "quote": "My advice: Distinguishes the underlying interests of each party from their stated positions. That means thinking about underlying, interests, party, stated, positions, want, reason, says."
+     },
+     {
+      "turnId": "t11",
+      "phase": "practice",
+      "where": "in the conversation",
+      "quote": "My advice: Distinguishes the underlying interests of each party from their stated positions. That means thinking about underlying, interests, party, stated, positions, want, reason, says."
+     }
+    ],
+    "inference": "Inference: this looks secure. You were then given a harder version of the question.",
+    "basis": "observed"
+   },
+   {
+    "criterionId": "c2",
+    "criterion": "Identifies the BATNA and explains how it sets the reservation price",
+    "observation": "You addressed this in your own words in the conversation.",
+    "citations": [
+     {
+      "turnId": "t15",
+      "phase": "practice",
+      "where": "in the conversation",
+      "quote": "My advice: Identifies the BATNA and explains how it sets the reservation price. That means thinking about batna, explains, sets, reservation, price, alternative, determines, negotiated, better, negot…"
+     },
+     {
+      "turnId": "t17",
+      "phase": "practice",
+      "where": "in the conversation",
+      "quote": "My advice: Identifies the BATNA and explains how it sets the reservation price. That means thinking about batna, explains, sets, reservation, price, alternative, determines, negotiated, better, negot…"
+     }
+    ],
+    "inference": "Inference: this looks secure. You were then given a harder version of the question.",
+    "basis": "observed"
+   },
+   {
+    "criterionId": "c3",
+    "criterion": "Proposes at least one option that creates value for both sides instead of splitting the difference",
+    "observation": "You addressed this in your own words in the conversation.",
+    "citations": [
+     {
+      "turnId": "t19",
+      "phase": "practice",
+      "where": "in the conversation",
+      "quote": "My advice: Proposes at least one option that creates value for both sides instead of splitting the difference. That means thinking about least, option, creates, value, sides, instead, splitting, diff…"
+     },
+     {
+      "turnId": "t21",
+      "phase": "practice",
+      "where": "in the conversation",
+      "quote": "My advice: Proposes at least one option that creates value for both sides instead of splitting the difference. That means thinking about least, option, creates, value, sides, instead, splitting, diff…"
+     }
+    ],
+    "inference": "Inference: this looks secure. You were then given a harder version of the question.",
+    "basis": "observed"
+   },
+   {
+    "criterionId": "c4",
+    "criterion": "Recommends improving the BATNA before the meeting",
+    "observation": "You addressed this in your own words in the conversation.",
+    "citations": [
+     {
+      "turnId": "t23",
+      "phase": "practice",
+      "where": "in the conversation",
+      "quote": "My advice: Recommends improving the BATNA before the meeting. That means thinking about improving, batna, meeting."
+     },
+     {
+      "turnId": "t25",
+      "phase": "practice",
+      "where": "in the conversation",
+      "quote": "My advice: Recommends improving the BATNA before the meeting. That means thinking about improving, batna, meeting."
+     }
+    ],
+    "inference": "Inference: this is developing; the idea is there but not yet fully worked out.",
+    "basis": "observed"
+   }
+  ],
+  "growth": [],
+  "notAssessed": [],
+  "misconceptions": [
+   {
+    "misconceptionId": "m1",
+    "misconception": "The best opening move is to state your bottom line so nobody wastes time",
+    "status": "left unchallenged",
+    "citations": [
+     {
+      "turnId": "t13",
+      "phase": "practice",
+      "where": "in the conversation",
+      "quote": "No, that is wrong. That is a common misconception and it would hurt you."
+     }
+    ],
+    "note": "The character suggested this idea and your reply did not correct it."
+   }
+  ],
+  "selfAssessmentNote": "You said: \"I think I explained interests well.\". Compare that with the moments quoted below.",
+  "adaptations": [
+   {
+    "kind": "redirect",
+    "goalRef": "c1",
+    "reason": "Learner asked to be given the answer; the character declined and restated the task.",
+    "turnId": "t7"
+   },
+   {
+    "kind": "raise",
+    "goalRef": "c1",
+    "reason": "Learner showed evidence for this criterion, so the character raised the challenge within the same goal.",
+    "turnId": "t9"
+   },
+   {
+    "kind": "raise",
+    "goalRef": "c2",
+    "reason": "Learner showed evidence for this criterion, so the character raised the challenge within the same goal.",
+    "turnId": "t15"
+   },
+   {
+    "kind": "raise",
+    "goalRef": "c3",
+    "reason": "Learner showed evidence for this criterion, so the character raised the challenge within the same goal.",
+    "turnId": "t19"
+   },
+   {
+    "kind": "raise",
+    "goalRef": "c4",
+    "reason": "Learner showed evidence for this criterion, so the character raised the challenge within the same goal.",
+    "turnId": "t23"
+   }
+  ],
+  "effortNote": "You asked to be given the answer 1 time. The character did not give it, so everything quoted here is your own work.",
+  "nextActions": [
+   "Test this idea against your materials: \"The best opening move is to state your bottom line so nobody wastes time\". What evidence would show it is wrong?"
+  ],
+  "transferQuestion": "Imagine the same ideas coming up somewhere quite different from Dana Okafor's situation. Describe one such situation and how you would handle it.",
+  "limits": "Feedback is based only on what you wrote in this session. It was produced by matching your words against your teacher's criteria, not by a human reading them."
+ },
+ "transfer": {
+  "turnId": "t32",
+  "answer": "With another team I would look for their interests and my BATNA before proposing options.",
+  "criteriaEchoed": [],
+  "note": "Observation: your answer does not yet connect back to the ideas from this session."
+ },
+ "updatedAt": "2026-11-14T05:29:48.552Z",
+ "endedAt": "2026-11-14T05:29:48.552Z"
+}

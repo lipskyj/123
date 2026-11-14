@@ -1,0 +1,897 @@
+{
+ "id": "session-zztc1a",
+ "packageId": "exp-j5tqkb",
+ "learner": {
+  "name": "Ben"
+ },
+ "startedAt": "2026-11-14T05:29:48.953Z",
+ "phase": "feedback",
+ "classroomApproved": false,
+ "turns": [
+  {
+   "id": "t1",
+   "who": "primer",
+   "text": "Before you begin: in your own words, what do you already know about limestone?",
+   "phase": "preparation",
+   "at": "2026-11-14T05:29:49.036Z",
+   "kind": "activation"
+  },
+  {
+   "id": "t2",
+   "who": "learner",
+   "text": "Limestone is a rock.",
+   "phase": "preparation",
+   "at": "2026-11-14T05:29:49.036Z",
+   "kind": "activation-answer"
+  },
+  {
+   "id": "t3",
+   "who": "primer",
+   "text": "Your teacher expects you to bring this with you: The rock cycle, and that acids react with carbonates to release carbon dioxide. Where might it matter in what you are about to do?",
+   "phase": "preparation",
+   "at": "2026-11-14T05:29:49.037Z",
+   "kind": "activation"
+  },
+  {
+   "id": "t4",
+   "who": "learner",
+   "text": "Explaining how long it takes.",
+   "phase": "preparation",
+   "at": "2026-11-14T05:29:49.037Z",
+   "kind": "activation-answer"
+  },
+  {
+   "id": "t5",
+   "who": "character",
+   "text": "Hi, I'm Dana. I'm a new volunteer guide who starts leading school tours next week and is worried about saying something wrong. I was told you can help me understand this. I really am starting from zero, so go slowly.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:49.037Z",
+   "kind": "opening"
+  },
+  {
+   "id": "t6",
+   "who": "learner",
+   "text": "It fizzes with the acid so the wall is calcite limestone and slightly acidic water dissolves it slowly.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:50.503Z",
+   "kind": "field-note",
+   "worldEventId": "e3",
+   "feature": "limestone"
+  },
+  {
+   "id": "t7",
+   "who": "learner",
+   "text": "It is about two metres tall and at a growth rate of 0.1 mm a year that makes it roughly twenty thousand years old.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:50.571Z",
+   "kind": "field-note",
+   "worldEventId": "e4",
+   "feature": "stalagmite"
+  },
+  {
+   "id": "t8",
+   "who": "learner",
+   "text": "There are crinoid fossils and shells in the wall so this limestone formed on an ancient sea floor.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:50.657Z",
+   "kind": "field-note",
+   "worldEventId": "e5",
+   "feature": "fossil"
+  },
+  {
+   "id": "t9",
+   "who": "character",
+   "text": "Here's what I don't get yet. Can you explain that slightly acidic water dissolves limestone and uses the acid fizz test as evidence the rock is calcite, in a way a beginner would follow?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:50.787Z",
+   "kind": "prompt",
+   "criterionId": "c1"
+  },
+  {
+   "id": "t10",
+   "who": "learner",
+   "text": "Stalactites are made of ice, frozen water I think.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:50.869Z",
+   "kind": "practice",
+   "criterionId": "c1"
+  },
+  {
+   "id": "t11",
+   "who": "character",
+   "text": "Hold on. A moment ago you said something that sounded like \"stalactites and stalagmites are made of ice or frozen water\". If that were true, what would we expect to see? Does that match what you know?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:50.869Z",
+   "kind": "probe-challenge",
+   "misconceptionId": "m2"
+  },
+  {
+   "id": "t12",
+   "who": "learner",
+   "text": "I am not sure.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:50.986Z",
+   "kind": "practice",
+   "criterionId": "c1"
+  },
+  {
+   "id": "t13",
+   "who": "character",
+   "text": "I'm lost. Could you try again with one concrete example?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:50.986Z",
+   "kind": "support",
+   "criterionId": "c1",
+   "level": 1
+  },
+  {
+   "id": "t14",
+   "who": "learner",
+   "text": "I am not sure.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:51.085Z",
+   "kind": "practice",
+   "criterionId": "c1"
+  },
+  {
+   "id": "t15",
+   "who": "character",
+   "text": "Go back to what you were given before we started. Which part of it deals with slightly and acidic? What does it imply here?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:51.086Z",
+   "kind": "support",
+   "criterionId": "c1",
+   "level": 2
+  },
+  {
+   "id": "t16",
+   "who": "learner",
+   "text": "I am not sure.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:51.204Z",
+   "kind": "practice",
+   "criterionId": "c1"
+  },
+  {
+   "id": "t17",
+   "who": "character",
+   "text": "Oh! So that means caves are carved by fast flowing rivers cutting through the rock, right?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:51.204Z",
+   "kind": "probe-voice",
+   "misconceptionId": "m1"
+  },
+  {
+   "id": "t18",
+   "who": "learner",
+   "text": "I am not sure.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:51.318Z",
+   "kind": "practice",
+   "criterionId": "c2"
+  },
+  {
+   "id": "t19",
+   "who": "character",
+   "text": "Here's what I don't get yet. Can you explain that stalactites and stalagmites grow when dripping water loses carbon dioxide and deposits calcite, in a way a beginner would follow?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:51.319Z",
+   "kind": "prompt",
+   "criterionId": "c2"
+  },
+  {
+   "id": "t20",
+   "who": "learner",
+   "text": "I am not sure.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:51.420Z",
+   "kind": "practice",
+   "criterionId": "c2"
+  },
+  {
+   "id": "t21",
+   "who": "character",
+   "text": "I'm lost. Could you try again with one concrete example?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:51.420Z",
+   "kind": "support",
+   "criterionId": "c2",
+   "level": 1
+  },
+  {
+   "id": "t22",
+   "who": "learner",
+   "text": "I am not sure.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:51.519Z",
+   "kind": "practice",
+   "criterionId": "c2"
+  },
+  {
+   "id": "t23",
+   "who": "character",
+   "text": "Go back to what you were given before we started. Which part of it deals with stalactites and stalagmites? What does it imply here?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:51.519Z",
+   "kind": "support",
+   "criterionId": "c2",
+   "level": 2
+  },
+  {
+   "id": "t24",
+   "who": "learner",
+   "text": "I am not sure.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:51.636Z",
+   "kind": "practice",
+   "criterionId": "c2"
+  },
+  {
+   "id": "t25",
+   "who": "character",
+   "text": "Here's what I don't get yet. Can you use a measurement and a growth rate to estimate how old a formation is, in a way a beginner would follow?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:51.636Z",
+   "kind": "prompt",
+   "criterionId": "c3"
+  },
+  {
+   "id": "t26",
+   "who": "learner",
+   "text": "I am not sure.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:51.754Z",
+   "kind": "practice",
+   "criterionId": "c3"
+  },
+  {
+   "id": "t27",
+   "who": "character",
+   "text": "I'm lost. Could you try again with one concrete example?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:51.754Z",
+   "kind": "support",
+   "criterionId": "c3",
+   "level": 1
+  },
+  {
+   "id": "t28",
+   "who": "learner",
+   "text": "I am not sure.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:51.871Z",
+   "kind": "practice",
+   "criterionId": "c3"
+  },
+  {
+   "id": "t29",
+   "who": "character",
+   "text": "Go back to what you were given before we started. Which part of it deals with measurement and growth? What does it imply here?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:51.871Z",
+   "kind": "support",
+   "criterionId": "c3",
+   "level": 2
+  },
+  {
+   "id": "t30",
+   "who": "learner",
+   "text": "I am not sure.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:51.986Z",
+   "kind": "practice",
+   "criterionId": "c3"
+  },
+  {
+   "id": "t31",
+   "who": "character",
+   "text": "Here's what I don't get yet. Can you use fossils in the wall as evidence that the limestone formed on an ancient sea floor, in a way a beginner would follow?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:51.986Z",
+   "kind": "prompt",
+   "criterionId": "c4"
+  },
+  {
+   "id": "t32",
+   "who": "learner",
+   "text": "I am not sure.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:52.103Z",
+   "kind": "practice",
+   "criterionId": "c4"
+  },
+  {
+   "id": "t33",
+   "who": "character",
+   "text": "I'm lost. Could you try again with one concrete example?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:52.103Z",
+   "kind": "support",
+   "criterionId": "c4",
+   "level": 1
+  },
+  {
+   "id": "t34",
+   "who": "learner",
+   "text": "I am not sure.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:52.219Z",
+   "kind": "practice",
+   "criterionId": "c4"
+  },
+  {
+   "id": "t35",
+   "who": "character",
+   "text": "Go back to what you were given before we started. Which part of it deals with fossils and wall? What does it imply here?",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:52.219Z",
+   "kind": "support",
+   "criterionId": "c4",
+   "level": 2
+  },
+  {
+   "id": "t36",
+   "who": "learner",
+   "text": "I am not sure.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:52.337Z",
+   "kind": "practice",
+   "criterionId": "c4"
+  },
+  {
+   "id": "t37",
+   "who": "character",
+   "text": "Thank you. I think I could explain some of this to someone else now.",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:52.337Z",
+   "kind": "closing"
+  },
+  {
+   "id": "t38",
+   "who": "primer",
+   "text": "Before you see any feedback: how do you think that went? Which moment are you most satisfied with?",
+   "phase": "feedback",
+   "at": "2026-11-14T05:29:52.501Z",
+   "kind": "self-assessment"
+  },
+  {
+   "id": "t39",
+   "who": "learner",
+   "text": "Not great.",
+   "phase": "feedback",
+   "at": "2026-11-14T05:29:52.501Z",
+   "kind": "self-assessment-answer"
+  },
+  {
+   "id": "t40",
+   "who": "primer",
+   "text": "What would you do differently if you did it again?",
+   "phase": "feedback",
+   "at": "2026-11-14T05:29:52.501Z",
+   "kind": "self-assessment"
+  },
+  {
+   "id": "t41",
+   "who": "learner",
+   "text": "Read the handout again.",
+   "phase": "feedback",
+   "at": "2026-11-14T05:29:52.501Z",
+   "kind": "self-assessment-answer"
+  }
+ ],
+ "events": [
+  {
+   "id": "e1",
+   "type": "session-started",
+   "phase": "preparation",
+   "at": "2026-11-14T05:29:48.953Z",
+   "approval": {
+    "type": "test",
+    "by": "Automated test",
+    "at": "2026-11-14T05:29:03.787Z"
+   }
+  },
+  {
+   "id": "e2",
+   "type": "phase",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:49.037Z",
+   "to": "practice"
+  },
+  {
+   "id": "e3",
+   "type": "world",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:50.503Z",
+   "feature": "limestone",
+   "featureName": "The wall fizzes",
+   "tool": "acid",
+   "wrongTools": [
+    "hammer"
+   ],
+   "observation": "One drop of dilute hydrochloric acid and the rock fizzes hard, releasing tiny bubbles.",
+   "note": "It fizzes with the acid so the wall is calcite limestone and slightly acidic water dissolves it slowly."
+  },
+  {
+   "id": "e4",
+   "type": "world",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:50.571Z",
+   "feature": "stalagmite",
+   "featureName": "Stalagmites",
+   "tool": "survey",
+   "wrongTools": [
+    "hammer"
+   ],
+   "observation": "Your tape reads about 2 m for the tallest spike. Its tip is rounded and wet.",
+   "note": "It is about two metres tall and at a growth rate of 0.1 mm a year that makes it roughly twenty thousand years old."
+  },
+  {
+   "id": "e5",
+   "type": "world",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:50.657Z",
+   "feature": "fossil",
+   "featureName": "Fossils in the wall",
+   "tool": "lens",
+   "wrongTools": [
+    "hammer"
+   ],
+   "observation": "Through the lens: small discs like stacked coins, and curved shell fragments, all cemented into the rock.",
+   "note": "There are crinoid fossils and shells in the wall so this limestone formed on an ancient sea floor."
+  },
+  {
+   "id": "e6",
+   "type": "world-left",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:50.787Z"
+  },
+  {
+   "id": "e7",
+   "type": "opportunity-closed",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:51.204Z",
+   "criterionId": "c1",
+   "attempts": 3
+  },
+  {
+   "id": "e8",
+   "type": "opportunity-closed",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:51.636Z",
+   "criterionId": "c2",
+   "attempts": 3
+  },
+  {
+   "id": "e9",
+   "type": "opportunity-closed",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:51.986Z",
+   "criterionId": "c3",
+   "attempts": 3
+  },
+  {
+   "id": "e10",
+   "type": "opportunity-closed",
+   "phase": "practice",
+   "at": "2026-11-14T05:29:52.337Z",
+   "criterionId": "c4",
+   "attempts": 3
+  },
+  {
+   "id": "e11",
+   "type": "phase",
+   "phase": "feedback",
+   "at": "2026-11-14T05:29:52.337Z",
+   "to": "feedback"
+  }
+ ],
+ "evidence": [
+  {
+   "id": "ev1",
+   "kind": "criterion",
+   "ref": "c1",
+   "turnId": "t6",
+   "phase": "practice",
+   "quote": "It fizzes with the acid so the wall is calcite limestone and slightly acidic water dissolves it slowly.",
+   "strength": "clear",
+   "matched": [
+    "slight",
+    "acidic",
+    "water",
+    "dissolv",
+    "limestone",
+    "acid",
+    "fizz",
+    "calcite"
+   ],
+   "basis": "observed",
+   "promptedFor": null
+  },
+  {
+   "id": "ev2",
+   "kind": "criterion",
+   "ref": "c3",
+   "turnId": "t7",
+   "phase": "practice",
+   "quote": "It is about two metres tall and at a growth rate of 0.1 mm a year that makes it roughly twenty thousand years old.",
+   "strength": "partial",
+   "matched": [
+    "growth",
+    "rate",
+    "old"
+   ],
+   "basis": "observed",
+   "promptedFor": null
+  },
+  {
+   "id": "ev3",
+   "kind": "criterion",
+   "ref": "c4",
+   "turnId": "t8",
+   "phase": "practice",
+   "quote": "There are crinoid fossils and shells in the wall so this limestone formed on an ancient sea floor.",
+   "strength": "clear",
+   "matched": [
+    "fossil",
+    "wall",
+    "limestone",
+    "form",
+    "ancient",
+    "sea",
+    "floor"
+   ],
+   "basis": "observed",
+   "promptedFor": null
+  },
+  {
+   "id": "ev4",
+   "kind": "misconception-voiced",
+   "ref": "m2",
+   "turnId": "t10",
+   "phase": "practice",
+   "quote": "Stalactites are made of ice, frozen water I think.",
+   "strength": "clear",
+   "matched": [
+    "stalactit",
+    "ice",
+    "frozen",
+    "water"
+   ],
+   "basis": "observed",
+   "promptedFor": "c1"
+  },
+  {
+   "id": "ev5",
+   "kind": "misconception-unaddressed",
+   "ref": "m1",
+   "turnId": "t18",
+   "phase": "practice",
+   "quote": "I am not sure.",
+   "strength": "clear",
+   "matched": [],
+   "basis": "observed",
+   "promptedFor": null
+  }
+ ],
+ "adaptations": [
+  {
+   "id": "a1",
+   "kind": "probe",
+   "turnId": "t10",
+   "reason": "Learner's statement matched an educator-listed misconception; the character asked them to test it.",
+   "evidenceIds": [
+    "ev4"
+   ],
+   "goalRef": "m2",
+   "at": "2026-11-14T05:29:50.869Z"
+  },
+  {
+   "id": "a2",
+   "kind": "support",
+   "turnId": "t12",
+   "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
+   "evidenceIds": [],
+   "goalRef": "c1",
+   "at": "2026-11-14T05:29:50.986Z",
+   "level": 1
+  },
+  {
+   "id": "a3",
+   "kind": "support",
+   "turnId": "t14",
+   "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
+   "evidenceIds": [],
+   "goalRef": "c1",
+   "at": "2026-11-14T05:29:51.086Z",
+   "level": 2
+  },
+  {
+   "id": "a4",
+   "kind": "support",
+   "turnId": "t20",
+   "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
+   "evidenceIds": [],
+   "goalRef": "c2",
+   "at": "2026-11-14T05:29:51.420Z",
+   "level": 1
+  },
+  {
+   "id": "a5",
+   "kind": "support",
+   "turnId": "t22",
+   "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
+   "evidenceIds": [],
+   "goalRef": "c2",
+   "at": "2026-11-14T05:29:51.519Z",
+   "level": 2
+  },
+  {
+   "id": "a6",
+   "kind": "support",
+   "turnId": "t26",
+   "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
+   "evidenceIds": [],
+   "goalRef": "c3",
+   "at": "2026-11-14T05:29:51.754Z",
+   "level": 1
+  },
+  {
+   "id": "a7",
+   "kind": "support",
+   "turnId": "t28",
+   "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
+   "evidenceIds": [],
+   "goalRef": "c3",
+   "at": "2026-11-14T05:29:51.871Z",
+   "level": 2
+  },
+  {
+   "id": "a8",
+   "kind": "support",
+   "turnId": "t32",
+   "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
+   "evidenceIds": [],
+   "goalRef": "c4",
+   "at": "2026-11-14T05:29:52.103Z",
+   "level": 1
+  },
+  {
+   "id": "a9",
+   "kind": "support",
+   "turnId": "t34",
+   "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
+   "evidenceIds": [],
+   "goalRef": "c4",
+   "at": "2026-11-14T05:29:52.219Z",
+   "level": 2
+  }
+ ],
+ "journal": [
+  {
+   "phase": "preparation",
+   "at": "2026-11-14T05:29:49.037Z",
+   "text": "Preparation: learner answered 2 activation question(s)."
+  },
+  {
+   "phase": "practice",
+   "at": "2026-11-14T05:29:50.787Z",
+   "text": "Field work: 3 investigation(s) recorded."
+  },
+  {
+   "phase": "practice",
+   "at": "2026-11-14T05:29:52.337Z",
+   "text": "Practice ended after 14 learner turn(s)."
+  },
+  {
+   "phase": "feedback",
+   "at": "2026-11-14T05:29:52.502Z",
+   "text": "Feedback: 3 strength(s), 1 growth area(s), 0 not assessed."
+  }
+ ],
+ "practice": {
+  "index": 3,
+  "attempts": 3,
+  "raised": {},
+  "prompted": {
+   "c1": "t9",
+   "c2": "t19",
+   "c3": "t25",
+   "c4": "t31"
+  },
+  "probed": {
+   "m2": "challenged",
+   "m1": "voiced"
+  },
+  "voiced": true,
+  "done": true,
+  "learnerTurns": 14,
+  "pending": null,
+  "worldLeft": true
+ },
+ "selfAssessment": [
+  {
+   "question": "Before you see any feedback: how do you think that went? Which moment are you most satisfied with?",
+   "answer": "Not great.",
+   "turnId": "t39"
+  },
+  {
+   "question": "What would you do differently if you did it again?",
+   "answer": "Read the handout again.",
+   "turnId": "t41"
+  }
+ ],
+ "feedback": {
+  "generatedAt": "2026-11-14T05:29:52.502Z",
+  "goal": "Students use field evidence to explain how a limestone cave and its formations are made, and what that evidence says about the past",
+  "strengths": [
+   {
+    "criterionId": "c1",
+    "criterion": "Explains that slightly acidic water dissolves limestone and uses the acid fizz test as evidence the rock is calcite",
+    "observation": "You addressed this in your own words in your field notes.",
+    "citations": [
+     {
+      "turnId": "t6",
+      "phase": "practice",
+      "where": "in your field notes",
+      "quote": "It fizzes with the acid so the wall is calcite limestone and slightly acidic water dissolves it slowly."
+     }
+    ],
+    "inference": "Inference: this looks secure.",
+    "basis": "observed"
+   },
+   {
+    "criterionId": "c3",
+    "criterion": "Uses a measurement and a growth rate to estimate how old a formation is",
+    "observation": "You addressed this in your own words in your field notes.",
+    "citations": [
+     {
+      "turnId": "t7",
+      "phase": "practice",
+      "where": "in your field notes",
+      "quote": "It is about two metres tall and at a growth rate of 0.1 mm a year that makes it roughly twenty thousand years old."
+     }
+    ],
+    "inference": "Inference: this is developing; the idea is there but not yet fully worked out.",
+    "basis": "observed"
+   },
+   {
+    "criterionId": "c4",
+    "criterion": "Uses fossils in the wall as evidence that the limestone formed on an ancient sea floor",
+    "observation": "You addressed this in your own words in your field notes.",
+    "citations": [
+     {
+      "turnId": "t8",
+      "phase": "practice",
+      "where": "in your field notes",
+      "quote": "There are crinoid fossils and shells in the wall so this limestone formed on an ancient sea floor."
+     }
+    ],
+    "inference": "Inference: this looks secure.",
+    "basis": "observed"
+   }
+  ],
+  "growth": [
+   {
+    "criterionId": "c2",
+    "criterion": "Explains that stalactites and stalagmites grow when dripping water loses carbon dioxide and deposits calcite",
+    "observation": "You were asked about this (\"Here's what I don't get yet. Can you explain that stalactites and stalagmites grow when dripping water loses…\") and your 4 replies did not bring in stalactites, stalagmites, grow.",
+    "citations": [
+     {
+      "turnId": "t18",
+      "phase": "practice",
+      "where": "in the conversation",
+      "quote": "I am not sure."
+     },
+     {
+      "turnId": "t20",
+      "phase": "practice",
+      "where": "in the conversation",
+      "quote": "I am not sure."
+     }
+    ],
+    "inference": "Inference: this may need more work. It is also possible you understand it but did not say it.",
+    "nextAction": "Go back to the course material shown in the Prepare step, find the part about stalactites and stalagmites, then write two sentences in which you explain that stalactites and stalagmites grow when dripping water loses carbon dioxide and deposits calcite.",
+    "basis": "observed"
+   }
+  ],
+  "notAssessed": [],
+  "misconceptions": [
+   {
+    "misconceptionId": "m1",
+    "misconception": "Caves are carved by fast flowing rivers cutting through the rock",
+    "status": "left unchallenged",
+    "citations": [
+     {
+      "turnId": "t18",
+      "phase": "practice",
+      "where": "in the conversation",
+      "quote": "I am not sure."
+     }
+    ],
+    "note": "The character suggested this idea and your reply did not correct it."
+   },
+   {
+    "misconceptionId": "m2",
+    "misconception": "Stalactites and stalagmites are made of ice or frozen water",
+    "status": "stated",
+    "citations": [
+     {
+      "turnId": "t10",
+      "phase": "practice",
+      "where": "in the conversation",
+      "quote": "Stalactites are made of ice, frozen water I think."
+     }
+    ],
+    "note": "You said something close to this idea and were asked to test it."
+   }
+  ],
+  "selfAssessmentNote": "You said: \"Not great.\". Compare that with the moments quoted below.",
+  "adaptations": [
+   {
+    "kind": "probe",
+    "goalRef": "m2",
+    "reason": "Learner's statement matched an educator-listed misconception; the character asked them to test it.",
+    "turnId": "t10"
+   },
+   {
+    "kind": "support",
+    "goalRef": "c1",
+    "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
+    "turnId": "t12"
+   },
+   {
+    "kind": "support",
+    "goalRef": "c1",
+    "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
+    "turnId": "t14"
+   },
+   {
+    "kind": "support",
+    "goalRef": "c2",
+    "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
+    "turnId": "t20"
+   },
+   {
+    "kind": "support",
+    "goalRef": "c2",
+    "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
+    "turnId": "t22"
+   },
+   {
+    "kind": "support",
+    "goalRef": "c3",
+    "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
+    "turnId": "t26"
+   },
+   {
+    "kind": "support",
+    "goalRef": "c3",
+    "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
+    "turnId": "t28"
+   },
+   {
+    "kind": "support",
+    "goalRef": "c4",
+    "reason": "No evidence yet for this criterion; support level 1 given (help policy: questions-then-materials).",
+    "turnId": "t32"
+   },
+   {
+    "kind": "support",
+    "goalRef": "c4",
+    "reason": "No evidence yet for this criterion; support level 2 given (help policy: questions-then-materials).",
+    "turnId": "t34"
+   }
+  ],
+  "effortNote": "",
+  "nextActions": [
+   "Go back to the course material shown in the Prepare step, find the part about stalactites and stalagmites, then write two sentences in which you explain that stalactites and stalagmites grow when dripping water loses carbon dioxide and deposits calcite.",
+   "Test this idea against your materials: \"Caves are carved by fast flowing rivers cutting through the rock\". What evidence would show it is wrong?",
+   "Test this idea against your materials: \"Stalactites and stalagmites are made of ice or frozen water\". What evidence would show it is wrong?"
+  ],
+  "transferQuestion": "A different situation: a sea cliff with layered rock and fossils that you visit on holiday. What from this session would you use there, and what would you change?",
+  "limits": "Feedback is based only on what you wrote in this session. It was produced by matching your words against your teacher's criteria, not by a human reading them."
+ },
+ "transfer": null,
+ "updatedAt": "2026-11-14T05:29:52.502Z"
+}

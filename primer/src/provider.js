@@ -64,7 +64,7 @@ export class DeterministicProvider {
     const stakes = strip(ans.stakes) || (assumptions.push({ text: "No stakes were given, so the scenario uses a generic consequence. Consider adding a specific one.", source: "ai", field: "stakes" }), `${name} will act on what the student says, so a wrong or vague answer leads to a bad decision`);
 
     const criteria = (intake.evidenceOfProgress || []).map((text, i) => {
-      const own = content(text); const ownStems = new Set(own.map(stem));
+      const own = content(text.replace(/^\s*\S+\s+/, " ")); const ownStems = new Set(own.map(stem));   // drop the leading task verb ("Explains", "Uses", ...)
       const rel = concepts.filter((c) => ownStems.has(stem(c.term)) || overlap(c.fact, [...ownStems]).hits.length >= 2);
       const extra = rel.flatMap((c) => content(c.fact)).filter((w) => !ownStems.has(stem(w)));
       const lookFors = [...new Set([...own, ...keyTerms(extra.join(" "), 6)])].slice(0, 12);
@@ -72,6 +72,7 @@ export class DeterministicProvider {
     });
     const misconceptions = (intake.misconceptions || []).map((text, i) => ({ id: "m" + (i + 1), text: strip(text), cues: content(text).slice(0, 10), source: { kind: "teacher", field: `misconceptions[${i}]` } }));
 
+    if (!ans.transfer) assumptions.push({ text: "No transfer situation was given, so the final question asks students to think of one themselves.", source: "ai", field: "transfer" });
     if (criteria.length > 5) recs.push({ id: "r1", text: `You listed ${criteria.length} success criteria. A single session rarely gives a fair chance at more than four or five; consider trimming.`, accepted: null });
     if (!misconceptions.length) recs.push({ id: "r2", text: "No misconceptions were listed. Adding one or two lets the character test for them.", accepted: null });
     if (allText.split(/\s+/).length < 80) recs.push({ id: "r3", text: "The materials are short. The preparation briefing and the look-fors will be richer with more source text.", accepted: null });
@@ -147,7 +148,7 @@ export class DeterministicProvider {
     if (/\b(harder|tougher|more (challenging|demanding|difficult)|push (them )?harder)\b/i.test(req)) { const n = lv[Math.min(2, ord[d.difficulty] + 1)]; if (n !== d.difficulty) { changes.push(`Difficulty: ${d.difficulty} → ${n}`); d.difficulty = n; } }
     if (/\b(easier|gentler|less (demanding|difficult|challenging)|more supportive)\b/i.test(req)) { const n = lv[Math.max(0, ord[d.difficulty] - 1)]; if (n !== d.difficulty) { changes.push(`Difficulty: ${d.difficulty} → ${n}`); d.difficulty = n; } }
     if ((m = req.match(/add (?:a |another |the )?(?:success )?criteri(?:on|a)\s*[:\-–]?\s*(.+)/i))) { const text = strip(m[1]); const id = "c" + (Math.max(0, ...d.criteria.map((c) => +c.id.slice(1))) + 1);
-      d.criteria.push({ id, text, lookFors: [...new Set(content(text))].slice(0, 12), source: { kind: "teacher", field: "revision" } }); changes.push(`Added criterion ${id}: ${text}`); }
+      d.criteria.push({ id, text, lookFors: [...new Set(content(text.replace(/^\s*\S+\s+/, " ")))].slice(0, 12), source: { kind: "teacher", field: "revision" } }); changes.push(`Added criterion ${id}: ${text}`); }
     if ((m = req.match(/(?:remove|drop|delete) (?:the )?criteri(?:on|a) (?:number |#)?(\d+)/i))) { const c = d.criteria[+m[1] - 1]; if (c && d.criteria.length > 1) { d.criteria = d.criteria.filter((x) => x !== c); changes.push(`Removed criterion ${c.id}: ${c.text}`); } }
     if ((m = req.match(/add (?:a |another |the )?misconception\s*[:\-–]?\s*(.+)/i))) { const text = strip(m[1]); const id = "m" + (Math.max(0, ...d.misconceptions.map((c) => +c.id.slice(1))) + 1);
       d.misconceptions.push({ id, text, cues: content(text).slice(0, 10), source: { kind: "teacher", field: "revision" } }); changes.push(`Added misconception ${id}: ${text}`); }
@@ -172,7 +173,9 @@ export class DeterministicProvider {
     const out = [], nWords = content(text).length;
     for (const c of design.criteria) { const target = [...new Set(c.lookFors.map(stem))]; const { hits } = overlap(text, target);
       const need = Math.max(2, Math.ceil(target.length * 0.25));
-      if (hits.length >= need && nWords >= 5) out.push({ kind: "criterion", ref: c.id, strength: hits.length >= need + 2 ? "clear" : "partial", matched: hits }); }
+      // Words shared with other criteria are not enough by themselves: at least one hit must be specific to this criterion.
+      const others = new Set(design.criteria.filter((x) => x !== c).flatMap((x) => x.lookFors.map(stem))); const own = target.filter((t) => !others.has(t));
+      if (hits.length >= need && nWords >= 5 && (!own.length || hits.some((h) => own.includes(h)))) out.push({ kind: "criterion", ref: c.id, strength: hits.length >= need + 2 ? "clear" : "partial", matched: hits }); }
     for (const m of design.misconceptions) { const target = [...new Set(m.cues.map(stem))]; const { hits, score } = overlap(text, target);
       const distinct = (m.distinct || []).map(stem), hasDistinct = !distinct.length || hits.some((h) => distinct.includes(h));
       if (hits.length >= 2 && score >= 0.4 && hasDistinct) out.push({ kind: NEGATION.test(text) ? "misconception-corrected" : "misconception-voiced", ref: m.id, strength: "clear", matched: hits }); }

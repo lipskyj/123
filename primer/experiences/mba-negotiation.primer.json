@@ -1,0 +1,431 @@
+{
+ "packages": [
+  {
+   "id": "exp-g60z4j",
+   "designId": "design-u2jqdo",
+   "designVersion": 1,
+   "title": "Salary negotiation: interests before positions",
+   "builtAt": "2026-11-14T05:29:03.783Z",
+   "provider": "deterministic",
+   "approval": {
+    "type": "test",
+    "by": "Automated test",
+    "at": "2026-11-14T05:29:03.783Z"
+   },
+   "design": {
+    "id": "design-u2jqdo",
+    "intakeId": "intake-181p7xd",
+    "version": 1,
+    "state": "test-approved",
+    "supersedes": null,
+    "createdAt": "2026-11-14T05:29:03.782Z",
+    "title": "Salary negotiation: interests before positions",
+    "template": "roleplay",
+    "world": null,
+    "goal": {
+     "text": "Students prepare for and conduct a negotiation by separating interests from positions, identifying their BATNA, and proposing options that create value for both sides",
+     "source": {
+      "kind": "teacher",
+      "field": "objective"
+     }
+    },
+    "learnerProfile": {
+     "text": "First-year MBA students in a core negotiations course. Most have 3-5 years of work experience and have negotiated a job offer at least once",
+     "priorKnowledge": "The terms BATNA, reservation price and ZOPA from last week's lecture",
+     "source": {
+      "kind": "teacher",
+      "field": "learners"
+     }
+    },
+    "learnerRole": {
+     "text": "Advise a colleague who is about to negotiate a job offer, and help them plan what to ask for and why",
+     "source": {
+      "kind": "teacher",
+      "field": "studentWork"
+     }
+    },
+    "character": {
+     "name": "Dana Okafor",
+     "role": "a nervous colleague, two years out of college, who has a job offer in hand and wants to be told what number to ask for",
+     "source": {
+      "kind": "teacher",
+      "field": "answers.character"
+     }
+    },
+    "stakes": {
+     "text": "the colleague will either accept a weak offer immediately or blurt out their bottom line and damage the relationship with their future manager",
+     "source": {
+      "kind": "teacher",
+      "field": "answers.stakes"
+     }
+    },
+    "difficulty": "moderate",
+    "helpPolicy": "questions-then-materials",
+    "criteria": [
+     {
+      "id": "c1",
+      "text": "Distinguishes the underlying interests of each party from their stated positions",
+      "lookFors": [
+       "underlying",
+       "interests",
+       "party",
+       "stated",
+       "positions",
+       "want",
+       "reason",
+       "says"
+      ],
+      "source": {
+       "kind": "teacher",
+       "field": "evidenceOfProgress[0]",
+       "materials": [
+        {
+         "material": "Lecture notes week 3",
+         "excerpt": "A position is what a party says they want; an interest is the reason they want it."
+        },
+        {
+         "material": "Lecture notes week 3",
+         "excerpt": "A position is what a party says they want; an interest is the reason they want it."
+        },
+        {
+         "material": "Lecture notes week 3",
+         "excerpt": "A position is what a party says they want; an interest is the reason they want it."
+        }
+       ]
+      }
+     },
+     {
+      "id": "c2",
+      "text": "Identifies the BATNA and explains how it sets the reservation price",
+      "lookFors": [
+       "batna",
+       "explains",
+       "sets",
+       "reservation",
+       "price",
+       "alternative",
+       "determines",
+       "negotiated",
+       "better",
+       "negotiation",
+       "agreement"
+      ],
+      "source": {
+       "kind": "teacher",
+       "field": "evidenceOfProgress[1]",
+       "materials": [
+        {
+         "material": "Lecture notes week 3",
+         "excerpt": "Your BATNA is your best alternative to a negotiated agreement: what you will do if this negotiation fails."
+        },
+        {
+         "material": "Lecture notes week 3",
+         "excerpt": "The BATNA determines your reservation price, the point at which you are better off walking away."
+        }
+       ]
+      }
+     },
+     {
+      "id": "c3",
+      "text": "Proposes at least one option that creates value for both sides instead of splitting the difference",
+      "lookFors": [
+       "least",
+       "option",
+       "creates",
+       "value",
+       "sides",
+       "instead",
+       "splitting",
+       "difference",
+       "start",
+       "date",
+       "issues",
+       "candidate"
+      ],
+      "source": {
+       "kind": "teacher",
+       "field": "evidenceOfProgress[2]",
+       "materials": [
+        {
+         "material": "Lecture notes week 3",
+         "excerpt": "Value is created when parties trade issues they value differently: a candidate may value a later start date or remote d…"
+        },
+        {
+         "material": "Lecture notes week 3",
+         "excerpt": "Splitting the difference on a single issue such as salary only divides value; adding issues such as start date, signing…"
+        }
+       ]
+      }
+     }
+    ],
+    "misconceptions": [
+     {
+      "id": "m1",
+      "text": "The best opening move is to state your bottom line so nobody wastes time",
+      "cues": [
+       "best",
+       "opening",
+       "move",
+       "state",
+       "bottom",
+       "line",
+       "nobody",
+       "wastes",
+       "time"
+      ],
+      "source": {
+       "kind": "teacher",
+       "field": "misconceptions[0]"
+      },
+      "distinct": [
+       "opening",
+       "move",
+       "state",
+       "bottom",
+       "line",
+       "nobody",
+       "wastes",
+       "time"
+      ]
+     },
+     {
+      "id": "m2",
+      "text": "Negotiation is a fixed pie where every gain for one side is a loss for the other",
+      "cues": [
+       "negotiation",
+       "fixed",
+       "pie",
+       "every",
+       "gain",
+       "side",
+       "loss"
+      ],
+      "source": {
+       "kind": "teacher",
+       "field": "misconceptions[1]"
+      },
+      "distinct": [
+       "fixed",
+       "pie",
+       "every",
+       "gain",
+       "loss"
+      ]
+     }
+    ],
+    "concepts": [
+     {
+      "term": "value",
+      "fact": "Value is created when parties trade issues they value differently: a candidate may value a later start date or remote days more than the employer values granting them.",
+      "source": {
+       "material": "Lecture notes week 3",
+       "excerpt": "Value is created when parties trade issues they value differently: a candidate may value a later start date or remote d…"
+      }
+     },
+     {
+      "term": "batna",
+      "fact": "Your BATNA is your best alternative to a negotiated agreement: what you will do if this negotiation fails.",
+      "source": {
+       "material": "Lecture notes week 3",
+       "excerpt": "Your BATNA is your best alternative to a negotiated agreement: what you will do if this negotiation fails."
+      }
+     },
+     {
+      "term": "interest",
+      "fact": "A position is what a party says they want; an interest is the reason they want it.",
+      "source": {
+       "material": "Lecture notes week 3",
+       "excerpt": "A position is what a party says they want; an interest is the reason they want it."
+      }
+     },
+     {
+      "term": "position",
+      "fact": "A position is what a party says they want; an interest is the reason they want it.",
+      "source": {
+       "material": "Lecture notes week 3",
+       "excerpt": "A position is what a party says they want; an interest is the reason they want it."
+      }
+     },
+     {
+      "term": "party",
+      "fact": "A position is what a party says they want; an interest is the reason they want it.",
+      "source": {
+       "material": "Lecture notes week 3",
+       "excerpt": "A position is what a party says they want; an interest is the reason they want it."
+      }
+     },
+     {
+      "term": "create",
+      "fact": "Splitting the difference on a single issue such as salary only divides value; adding issues such as start date, signing bonus, title, or review timing can create value for both sides.",
+      "source": {
+       "material": "Lecture notes week 3",
+       "excerpt": "Splitting the difference on a single issue such as salary only divides value; adding issues such as start date, signing…"
+      }
+     },
+     {
+      "term": "negotiation",
+      "fact": "Your BATNA is your best alternative to a negotiated agreement: what you will do if this negotiation fails.",
+      "source": {
+       "material": "Lecture notes week 3",
+       "excerpt": "Your BATNA is your best alternative to a negotiated agreement: what you will do if this negotiation fails."
+      }
+     },
+     {
+      "term": "reservation",
+      "fact": "The BATNA determines your reservation price, the point at which you are better off walking away.",
+      "source": {
+       "material": "Lecture notes week 3",
+       "excerpt": "The BATNA determines your reservation price, the point at which you are better off walking away."
+      }
+     },
+     {
+      "term": "revealed",
+      "fact": "A strong BATNA gives you leverage; a weak BATNA should be improved before you negotiate, not revealed during it.",
+      "source": {
+       "material": "Lecture notes week 3",
+       "excerpt": "A strong BATNA gives you leverage; a weak BATNA should be improved before you negotiate, not revealed during it."
+      }
+     },
+     {
+      "term": "agreement",
+      "fact": "Your BATNA is your best alternative to a negotiated agreement: what you will do if this negotiation fails.",
+      "source": {
+       "material": "Lecture notes week 3",
+       "excerpt": "Your BATNA is your best alternative to a negotiated agreement: what you will do if this negotiation fails."
+      }
+     }
+    ],
+    "constraints": [
+     "The colleague has only one other offer, and it is weaker"
+    ],
+    "transfer": {
+     "text": "negotiating project deadlines and resources with another team inside your own company",
+     "source": {
+      "kind": "teacher",
+      "field": "answers.transfer"
+     }
+    },
+    "assumptions": [],
+    "recommendations": [],
+    "overrides": {},
+    "revisions": [],
+    "history": [
+     {
+      "at": "2026-11-14T05:29:03.782Z",
+      "actor": {
+       "type": "system",
+       "name": "Primer (deterministic provider)"
+      },
+      "action": "propose",
+      "from": null,
+      "to": "draft",
+      "note": "Proposed from educator intake."
+     },
+     {
+      "at": "2026-11-14T05:29:03.783Z",
+      "actor": {
+       "type": "test",
+       "name": "Automated test"
+      },
+      "action": "approve",
+      "from": "draft",
+      "to": "test-approved",
+      "note": "Synthetic approval for the bundled sample."
+     }
+    ],
+    "preparation": {
+     "briefing": "Purpose: Students prepare for and conduct a negotiation by separating interests from positions, identifying their BATNA, and proposing options that create value for both sides.\nYour role: Advise a colleague who is about to negotiate a job offer, and help them plan what to ask for and why.\nYou will work with Dana Okafor, a nervous colleague, two years out of college, who has a job offer in hand and wants to be told what number to ask for.\nKeep in mind: The colleague has only one other offer, and it is weaker.",
+     "keyPoints": [
+      {
+       "text": "Value is created when parties trade issues they value differently: a candidate may value a later start date or remote days more than the employer values granting them.",
+       "source": {
+        "material": "Lecture notes week 3",
+        "excerpt": "Value is created when parties trade issues they value differently: a candidate may value a later start date or remote d…"
+       }
+      },
+      {
+       "text": "Your BATNA is your best alternative to a negotiated agreement: what you will do if this negotiation fails.",
+       "source": {
+        "material": "Lecture notes week 3",
+        "excerpt": "Your BATNA is your best alternative to a negotiated agreement: what you will do if this negotiation fails."
+       }
+      },
+      {
+       "text": "A position is what a party says they want; an interest is the reason they want it.",
+       "source": {
+        "material": "Lecture notes week 3",
+        "excerpt": "A position is what a party says they want; an interest is the reason they want it."
+       }
+      }
+     ],
+     "activation": [
+      "Before you begin: in your own words, what do you already know about value?",
+      "Your teacher expects you to bring this with you: The terms BATNA, reservation price and ZOPA from last week's lecture. Where might it matter in what you are about to do?"
+     ]
+    },
+    "practice": {
+     "opening": "I'm Dana Okafor, a nervous colleague, two years out of college, who has a job offer in hand and wants to be told what number to ask for. Let me be direct about why I need you: the colleague will either accept a weak offer immediately or blurt out their bottom line and damage the relationship with their future manager.",
+     "challenges": [
+      {
+       "criterionId": "c1",
+       "prompt": "Here is what I need from you. Can you distinguish the underlying interests of each party from their stated positions?",
+       "harder": "That helps. Now make it harder for yourself: the colleague has only one other offer, and it is weaker. Does what you said still hold, and why?",
+       "support": [
+        "I'm not sure that answers it. What exactly are you basing that on?",
+        "Go back to what you were given before we started. Which part of it deals with underlying and interests? What does it imply here?"
+       ]
+      },
+      {
+       "criterionId": "c2",
+       "prompt": "Here is what I need from you. Can you identify the BATNA and explains how it sets the reservation price?",
+       "harder": "That helps. Now make it harder for yourself: the colleague has only one other offer, and it is weaker. Does what you said still hold, and why?",
+       "support": [
+        "I'm not sure that answers it. What exactly are you basing that on?",
+        "Go back to what you were given before we started. Which part of it deals with batna and explains? What does it imply here?"
+       ]
+      },
+      {
+       "criterionId": "c3",
+       "prompt": "Here is what I need from you. Can you propose at least one option that creates value for both sides instead of splitting the difference?",
+       "harder": "That helps. Now make it harder for yourself: the colleague has only one other offer, and it is weaker. Does what you said still hold, and why?",
+       "support": [
+        "I'm not sure that answers it. What exactly are you basing that on?",
+        "Go back to what you were given before we started. Which part of it deals with least and option? What does it imply here?"
+       ]
+      }
+     ],
+     "probes": [
+      {
+       "misconceptionId": "m1",
+       "voice": "I've always heard that the best opening move is to state your bottom line so nobody wastes time. I'm planning on that basis. Any reason I shouldn't?",
+       "challenge": "Hold on. A moment ago you said something that sounded like \"the best opening move is to state your bottom line so nobody wastes time\". If that were true, what would we expect to see? Does that match what you know?"
+      },
+      {
+       "misconceptionId": "m2",
+       "voice": "I've always heard that negotiation is a fixed pie where every gain for one side is a loss for the other. I'm planning on that basis. Any reason I shouldn't?",
+       "challenge": "Hold on. A moment ago you said something that sounded like \"negotiation is a fixed pie where every gain for one side is a loss for the other\". If that were true, what would we expect to see? Does that match what you know?"
+      }
+     ],
+     "closing": "All right. I have what I need to decide. Thank you for your time.",
+     "refusal": "I can't answer that for you. Your judgement is exactly what I came for. Start with what you're surest of.",
+     "maxTurns": 11,
+     "raise": true,
+     "maxAttempts": 3,
+     "minTurns": 4
+    },
+    "feedback": {
+     "selfAssessment": [
+      "Before you see any feedback: how do you think that went? Which moment are you most satisfied with?",
+      "What would you do differently if you did it again?"
+     ],
+     "transfer": "A different situation: negotiating project deadlines and resources with another team inside your own company. What from this session would you use there, and what would you change?"
+    },
+    "prompts": {
+     "character": "You play Dana Okafor, a nervous colleague, two years out of college, who has a job offer in hand and wants to be told what number to ask for, in a roleplay for these learners: First-year MBA students in a core negotiations course. Most have 3-5 years of work experience and have negotiated a job offer at least once.\nLearning goal (do not drift from it): Students prepare for and conduct a negotiation by separating interests from positions, identifying their BATNA, and proposing options that create value for both sides\nThe learner's job: Advise a colleague who is about to negotiate a job offer, and help them plan what to ask for and why\nStakes: the colleague will either accept a weak offer immediately or blurt out their bottom line and damage the relationship with their future manager\nDifficulty: moderate. Help policy: questions-then-materials.\nStay in character. Never give the answer or do the learner's work. Raise the challenge only after the learner shows evidence; give support only as the help policy allows.\nConstraints: The colleague has only one other offer, and it is weaker",
+     "assessor": "Record evidence only for these educator-approved criteria, quoting the learner's own words:\n- c1: Distinguishes the underlying interests of each party from their stated positions (look for: underlying, interests, party, stated, positions, want, reason, says)\n- c2: Identifies the BATNA and explains how it sets the reservation price (look for: batna, explains, sets, reservation, price, alternative, determines, negotiated, better, negotiation, agreement)\n- c3: Proposes at least one option that creates value for both sides instead of splitting the difference (look for: least, option, creates, value, sides, instead, splitting, difference, start, date, issues, candidate)\nWatch for these misconceptions:\n- m1: The best opening move is to state your bottom line so nobody wastes time\n- m2: Negotiation is a fixed pie where every gain for one side is a loss for the other\nDo not assess anything the learner was not asked to do. Mark observation separately from inference.",
+     "feedback": "Write feedback for the learning goal \"Students prepare for and conduct a negotiation by separating interests from positions, identifying their BATNA, and proposing options that create value for both sides\". Ask for self-assessment first. For each criterion cite the learner's actual words and the turn they came from. Say \"not assessed\" where the learner had no fair opportunity. Offer concrete next actions and finish with the transfer question."
+    }
+   }
+  }
+ ]
+}

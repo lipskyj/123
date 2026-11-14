@@ -1,0 +1,480 @@
+{
+ "packages": [
+  {
+   "id": "exp-j5tqkb",
+   "designId": "design-tuh3vy",
+   "designVersion": 1,
+   "title": "Reading a limestone cave",
+   "builtAt": "2026-11-14T05:29:03.787Z",
+   "provider": "deterministic",
+   "approval": {
+    "type": "test",
+    "by": "Automated test",
+    "at": "2026-11-14T05:29:03.787Z"
+   },
+   "design": {
+    "id": "design-tuh3vy",
+    "intakeId": "intake-1k6h4k",
+    "version": 1,
+    "state": "test-approved",
+    "supersedes": null,
+    "createdAt": "2026-11-14T05:29:03.786Z",
+    "title": "Reading a limestone cave",
+    "template": "teachback",
+    "world": "cave",
+    "goal": {
+     "text": "Students use field evidence to explain how a limestone cave and its formations are made, and what that evidence says about the past",
+     "source": {
+      "kind": "teacher",
+      "field": "objective"
+     }
+    },
+    "learnerProfile": {
+     "text": "Year 9 earth science students (age 13-14) at the end of a unit on rocks and weathering. Mixed reading levels",
+     "priorKnowledge": "The rock cycle, and that acids react with carbonates to release carbon dioxide",
+     "source": {
+      "kind": "teacher",
+      "field": "learners"
+     }
+    },
+    "learnerRole": {
+     "text": "Explain to a new volunteer cave guide what the evidence in the cave shows, so the guide can explain it to visitors accurately",
+     "source": {
+      "kind": "teacher",
+      "field": "studentWork"
+     }
+    },
+    "character": {
+     "name": "Dana Okafor",
+     "role": "a new volunteer guide who starts leading school tours next week and is worried about saying something wrong",
+     "source": {
+      "kind": "teacher",
+      "field": "answers.character"
+     }
+    },
+    "stakes": {
+     "text": "the guide will repeat whatever they are told to hundreds of visitors, including any mistakes",
+     "source": {
+      "kind": "teacher",
+      "field": "answers.stakes"
+     }
+    },
+    "difficulty": "gentle",
+    "helpPolicy": "questions-then-materials",
+    "criteria": [
+     {
+      "id": "c1",
+      "text": "Explains that slightly acidic water dissolves limestone and uses the acid fizz test as evidence the rock is calcite",
+      "lookFors": [
+       "slightly",
+       "acidic",
+       "water",
+       "dissolves",
+       "limestone",
+       "uses",
+       "acid",
+       "fizz",
+       "test",
+       "evidence",
+       "rock",
+       "calcite"
+      ],
+      "source": {
+       "kind": "teacher",
+       "field": "evidenceOfProgress[0]",
+       "materials": [
+        {
+         "material": "Unit handout: karst and caves",
+         "excerpt": "Limestone is made mostly of the mineral calcite, which is calcium carbonate."
+        },
+        {
+         "material": "Unit handout: karst and caves",
+         "excerpt": "Limestone is made mostly of the mineral calcite, which is calcium carbonate."
+        },
+        {
+         "material": "Unit handout: karst and caves",
+         "excerpt": "This slightly acidic water seeps into cracks and slowly dissolves limestone; over hundreds of thousands of years the cr…"
+        },
+        {
+         "material": "Unit handout: karst and caves",
+         "excerpt": "This slightly acidic water seeps into cracks and slowly dissolves limestone; over hundreds of thousands of years the cr…"
+        },
+        {
+         "material": "Unit handout: karst and caves",
+         "excerpt": "A drop of dilute hydrochloric acid on limestone fizzes because the calcite reacts and releases carbon dioxide gas; a ro…"
+        },
+        {
+         "material": "Unit handout: karst and caves",
+         "excerpt": "This slightly acidic water seeps into cracks and slowly dissolves limestone; over hundreds of thousands of years the cr…"
+        }
+       ]
+      }
+     },
+     {
+      "id": "c2",
+      "text": "Explains that stalactites and stalagmites grow when dripping water loses carbon dioxide and deposits calcite",
+      "lookFors": [
+       "stalactites",
+       "stalagmites",
+       "grow",
+       "dripping",
+       "water",
+       "loses",
+       "carbon",
+       "dioxide",
+       "deposits",
+       "calcite",
+       "limestone",
+       "acid"
+      ],
+      "source": {
+       "kind": "teacher",
+       "field": "evidenceOfProgress[1]",
+       "materials": [
+        {
+         "material": "Unit handout: karst and caves",
+         "excerpt": "Limestone is made mostly of the mineral calcite, which is calcium carbonate."
+        },
+        {
+         "material": "Unit handout: karst and caves",
+         "excerpt": "Rainwater absorbs carbon dioxide from the air and soil and becomes a weak carbonic acid."
+        },
+        {
+         "material": "Unit handout: karst and caves",
+         "excerpt": "Rainwater absorbs carbon dioxide from the air and soil and becomes a weak carbonic acid."
+        },
+        {
+         "material": "Unit handout: karst and caves",
+         "excerpt": "Stalactites grow down from the ceiling and stalagmites grow up from the floor where the drips land."
+        },
+        {
+         "material": "Unit handout: karst and caves",
+         "excerpt": "Stalactites grow down from the ceiling and stalagmites grow up from the floor where the drips land."
+        },
+        {
+         "material": "Unit handout: karst and caves",
+         "excerpt": "A drop of dilute hydrochloric acid on limestone fizzes because the calcite reacts and releases carbon dioxide gas; a ro…"
+        }
+       ]
+      }
+     },
+     {
+      "id": "c3",
+      "text": "Uses a measurement and a growth rate to estimate how old a formation is",
+      "lookFors": [
+       "measurement",
+       "growth",
+       "rate",
+       "estimate",
+       "old",
+       "formation"
+      ],
+      "source": {
+       "kind": "teacher",
+       "field": "evidenceOfProgress[2]",
+       "materials": []
+      }
+     },
+     {
+      "id": "c4",
+      "text": "Uses fossils in the wall as evidence that the limestone formed on an ancient sea floor",
+      "lookFors": [
+       "fossils",
+       "wall",
+       "evidence",
+       "limestone",
+       "formed",
+       "ancient",
+       "sea",
+       "floor",
+       "grow",
+       "carbonate",
+       "stalactites",
+       "stalagmites"
+      ],
+      "source": {
+       "kind": "teacher",
+       "field": "evidenceOfProgress[3]",
+       "materials": [
+        {
+         "material": "Unit handout: karst and caves",
+         "excerpt": "Limestone is made mostly of the mineral calcite, which is calcium carbonate."
+        },
+        {
+         "material": "Unit handout: karst and caves",
+         "excerpt": "Stalactites grow down from the ceiling and stalagmites grow up from the floor where the drips land."
+        }
+       ]
+      }
+     }
+    ],
+    "misconceptions": [
+     {
+      "id": "m1",
+      "text": "Caves are carved by fast flowing rivers cutting through the rock",
+      "cues": [
+       "caves",
+       "carved",
+       "fast",
+       "flowing",
+       "rivers",
+       "cutting",
+       "rock"
+      ],
+      "source": {
+       "kind": "teacher",
+       "field": "misconceptions[0]"
+      },
+      "distinct": [
+       "carved",
+       "fast",
+       "flowing",
+       "rivers",
+       "cutting"
+      ]
+     },
+     {
+      "id": "m2",
+      "text": "Stalactites and stalagmites are made of ice or frozen water",
+      "cues": [
+       "stalactites",
+       "stalagmites",
+       "ice",
+       "frozen",
+       "water"
+      ],
+      "source": {
+       "kind": "teacher",
+       "field": "misconceptions[1]"
+      },
+      "distinct": [
+       "ice",
+       "frozen"
+      ]
+     }
+    ],
+    "concepts": [
+     {
+      "term": "limestone",
+      "fact": "Limestone is made mostly of the mineral calcite, which is calcium carbonate.",
+      "source": {
+       "material": "Unit handout: karst and caves",
+       "excerpt": "Limestone is made mostly of the mineral calcite, which is calcium carbonate."
+      }
+     },
+     {
+      "term": "calcite",
+      "fact": "Limestone is made mostly of the mineral calcite, which is calcium carbonate.",
+      "source": {
+       "material": "Unit handout: karst and caves",
+       "excerpt": "Limestone is made mostly of the mineral calcite, which is calcium carbonate."
+      }
+     },
+     {
+      "term": "cave",
+      "fact": "This slightly acidic water seeps into cracks and slowly dissolves limestone; over hundreds of thousands of years the cracks widen into caves.",
+      "source": {
+       "material": "Unit handout: karst and caves",
+       "excerpt": "This slightly acidic water seeps into cracks and slowly dissolves limestone; over hundreds of thousands of years the cr…"
+      }
+     },
+     {
+      "term": "dioxide",
+      "fact": "Rainwater absorbs carbon dioxide from the air and soil and becomes a weak carbonic acid.",
+      "source": {
+       "material": "Unit handout: karst and caves",
+       "excerpt": "Rainwater absorbs carbon dioxide from the air and soil and becomes a weak carbonic acid."
+      }
+     },
+     {
+      "term": "dissolves",
+      "fact": "This slightly acidic water seeps into cracks and slowly dissolves limestone; over hundreds of thousands of years the cracks widen into caves.",
+      "source": {
+       "material": "Unit handout: karst and caves",
+       "excerpt": "This slightly acidic water seeps into cracks and slowly dissolves limestone; over hundreds of thousands of years the cr…"
+      }
+     },
+     {
+      "term": "carbon",
+      "fact": "Rainwater absorbs carbon dioxide from the air and soil and becomes a weak carbonic acid.",
+      "source": {
+       "material": "Unit handout: karst and caves",
+       "excerpt": "Rainwater absorbs carbon dioxide from the air and soil and becomes a weak carbonic acid."
+      }
+     },
+     {
+      "term": "floor",
+      "fact": "Stalactites grow down from the ceiling and stalagmites grow up from the floor where the drips land.",
+      "source": {
+       "material": "Unit handout: karst and caves",
+       "excerpt": "Stalactites grow down from the ceiling and stalagmites grow up from the floor where the drips land."
+      }
+     },
+     {
+      "term": "grow",
+      "fact": "Stalactites grow down from the ceiling and stalagmites grow up from the floor where the drips land.",
+      "source": {
+       "material": "Unit handout: karst and caves",
+       "excerpt": "Stalactites grow down from the ceiling and stalagmites grow up from the floor where the drips land."
+      }
+     },
+     {
+      "term": "rock",
+      "fact": "A drop of dilute hydrochloric acid on limestone fizzes because the calcite reacts and releases carbon dioxide gas; a rock that does not fizz is not limestone.",
+      "source": {
+       "material": "Unit handout: karst and caves",
+       "excerpt": "A drop of dilute hydrochloric acid on limestone fizzes because the calcite reacts and releases carbon dioxide gas; a ro…"
+      }
+     },
+     {
+      "term": "year",
+      "fact": "This slightly acidic water seeps into cracks and slowly dissolves limestone; over hundreds of thousands of years the cracks widen into caves.",
+      "source": {
+       "material": "Unit handout: karst and caves",
+       "excerpt": "This slightly acidic water seeps into cracks and slowly dissolves limestone; over hundreds of thousands of years the cr…"
+      }
+     }
+    ],
+    "constraints": [
+     "Do not use the word 'erosion' when you mean dissolving"
+    ],
+    "transfer": {
+     "text": "a sea cliff with layered rock and fossils that you visit on holiday",
+     "source": {
+      "kind": "teacher",
+      "field": "answers.transfer"
+     }
+    },
+    "assumptions": [],
+    "recommendations": [],
+    "overrides": {},
+    "revisions": [],
+    "history": [
+     {
+      "at": "2026-11-14T05:29:03.786Z",
+      "actor": {
+       "type": "system",
+       "name": "Primer (deterministic provider)"
+      },
+      "action": "propose",
+      "from": null,
+      "to": "draft",
+      "note": "Proposed from educator intake."
+     },
+     {
+      "at": "2026-11-14T05:29:03.787Z",
+      "actor": {
+       "type": "test",
+       "name": "Automated test"
+      },
+      "action": "approve",
+      "from": "draft",
+      "to": "test-approved",
+      "note": "Synthetic approval for the bundled sample."
+     }
+    ],
+    "preparation": {
+     "briefing": "Purpose: Students use field evidence to explain how a limestone cave and its formations are made, and what that evidence says about the past.\nYour role: Explain to a new volunteer cave guide what the evidence in the cave shows, so the guide can explain it to visitors accurately.\nYou will teach Dana Okafor, a new volunteer guide who starts leading school tours next week and is worried about saying something wrong.\nKeep in mind: Do not use the word 'erosion' when you mean dissolving.",
+     "keyPoints": [
+      {
+       "text": "Limestone is made mostly of the mineral calcite, which is calcium carbonate.",
+       "source": {
+        "material": "Unit handout: karst and caves",
+        "excerpt": "Limestone is made mostly of the mineral calcite, which is calcium carbonate."
+       }
+      },
+      {
+       "text": "Limestone is made mostly of the mineral calcite, which is calcium carbonate.",
+       "source": {
+        "material": "Unit handout: karst and caves",
+        "excerpt": "Limestone is made mostly of the mineral calcite, which is calcium carbonate."
+       }
+      },
+      {
+       "text": "This slightly acidic water seeps into cracks and slowly dissolves limestone; over hundreds of thousands of years the cracks widen into caves.",
+       "source": {
+        "material": "Unit handout: karst and caves",
+        "excerpt": "This slightly acidic water seeps into cracks and slowly dissolves limestone; over hundreds of thousands of years the cr…"
+       }
+      }
+     ],
+     "activation": [
+      "Before you begin: in your own words, what do you already know about limestone?",
+      "Your teacher expects you to bring this with you: The rock cycle, and that acids react with carbonates to release carbon dioxide. Where might it matter in what you are about to do?"
+     ]
+    },
+    "practice": {
+     "opening": "Hi, I'm Dana. I'm a new volunteer guide who starts leading school tours next week and is worried about saying something wrong. I was told you can help me understand this. I really am starting from zero, so go slowly.",
+     "challenges": [
+      {
+       "criterionId": "c1",
+       "prompt": "Here's what I don't get yet. Can you explain that slightly acidic water dissolves limestone and uses the acid fizz test as evidence the rock is calcite, in a way a beginner would follow?",
+       "harder": "Okay, I think I follow. But what if someone said the opposite? How would you convince them, thinking about this: do not use the word 'erosion' when you mean dissolving?",
+       "support": [
+        "I'm lost. Could you try again with one concrete example?",
+        "Go back to what you were given before we started. Which part of it deals with slightly and acidic? What does it imply here?"
+       ]
+      },
+      {
+       "criterionId": "c2",
+       "prompt": "Here's what I don't get yet. Can you explain that stalactites and stalagmites grow when dripping water loses carbon dioxide and deposits calcite, in a way a beginner would follow?",
+       "harder": "Okay, I think I follow. But what if someone said the opposite? How would you convince them, thinking about this: do not use the word 'erosion' when you mean dissolving?",
+       "support": [
+        "I'm lost. Could you try again with one concrete example?",
+        "Go back to what you were given before we started. Which part of it deals with stalactites and stalagmites? What does it imply here?"
+       ]
+      },
+      {
+       "criterionId": "c3",
+       "prompt": "Here's what I don't get yet. Can you use a measurement and a growth rate to estimate how old a formation is, in a way a beginner would follow?",
+       "harder": "Okay, I think I follow. But what if someone said the opposite? How would you convince them, thinking about this: do not use the word 'erosion' when you mean dissolving?",
+       "support": [
+        "I'm lost. Could you try again with one concrete example?",
+        "Go back to what you were given before we started. Which part of it deals with measurement and growth? What does it imply here?"
+       ]
+      },
+      {
+       "criterionId": "c4",
+       "prompt": "Here's what I don't get yet. Can you use fossils in the wall as evidence that the limestone formed on an ancient sea floor, in a way a beginner would follow?",
+       "harder": "Okay, I think I follow. But what if someone said the opposite? How would you convince them, thinking about this: do not use the word 'erosion' when you mean dissolving?",
+       "support": [
+        "I'm lost. Could you try again with one concrete example?",
+        "Go back to what you were given before we started. Which part of it deals with fossils and wall? What does it imply here?"
+       ]
+      }
+     ],
+     "probes": [
+      {
+       "misconceptionId": "m1",
+       "voice": "Oh! So that means caves are carved by fast flowing rivers cutting through the rock, right?",
+       "challenge": "Hold on. A moment ago you said something that sounded like \"caves are carved by fast flowing rivers cutting through the rock\". If that were true, what would we expect to see? Does that match what you know?"
+      },
+      {
+       "misconceptionId": "m2",
+       "voice": "Oh! So that means stalactites and stalagmites are made of ice or frozen water, right?",
+       "challenge": "Hold on. A moment ago you said something that sounded like \"stalactites and stalagmites are made of ice or frozen water\". If that were true, what would we expect to see? Does that match what you know?"
+      }
+     ],
+     "closing": "Thank you. I think I could explain some of this to someone else now.",
+     "refusal": "I can't tell you the answer; I'm the one who doesn't know it! Try explaining the part you're surest of.",
+     "maxTurns": 14,
+     "raise": false,
+     "maxAttempts": 3,
+     "minTurns": 3
+    },
+    "feedback": {
+     "selfAssessment": [
+      "Before you see any feedback: how do you think that went? Which moment are you most satisfied with?",
+      "What would you do differently if you did it again?"
+     ],
+     "transfer": "A different situation: a sea cliff with layered rock and fossils that you visit on holiday. What from this session would you use there, and what would you change?"
+    },
+    "prompts": {
+     "character": "You play Dana Okafor, a new volunteer guide who starts leading school tours next week and is worried about saying something wrong, in a teachback for these learners: Year 9 earth science students (age 13-14) at the end of a unit on rocks and weathering. Mixed reading levels.\nLearning goal (do not drift from it): Students use field evidence to explain how a limestone cave and its formations are made, and what that evidence says about the past\nThe learner's job: Explain to a new volunteer cave guide what the evidence in the cave shows, so the guide can explain it to visitors accurately\nStakes: the guide will repeat whatever they are told to hundreds of visitors, including any mistakes\nDifficulty: gentle. Help policy: questions-then-materials.\nStay in character. Never give the answer or do the learner's work. Raise the challenge only after the learner shows evidence; give support only as the help policy allows.\nConstraints: Do not use the word 'erosion' when you mean dissolving",
+     "assessor": "Record evidence only for these educator-approved criteria, quoting the learner's own words:\n- c1: Explains that slightly acidic water dissolves limestone and uses the acid fizz test as evidence the rock is calcite (look for: slightly, acidic, water, dissolves, limestone, uses, acid, fizz, test, evidence, rock, calcite)\n- c2: Explains that stalactites and stalagmites grow when dripping water loses carbon dioxide and deposits calcite (look for: stalactites, stalagmites, grow, dripping, water, loses, carbon, dioxide, deposits, calcite, limestone, acid)\n- c3: Uses a measurement and a growth rate to estimate how old a formation is (look for: measurement, growth, rate, estimate, old, formation)\n- c4: Uses fossils in the wall as evidence that the limestone formed on an ancient sea floor (look for: fossils, wall, evidence, limestone, formed, ancient, sea, floor, grow, carbonate, stalactites, stalagmites)\nWatch for these misconceptions:\n- m1: Caves are carved by fast flowing rivers cutting through the rock\n- m2: Stalactites and stalagmites are made of ice or frozen water\nDo not assess anything the learner was not asked to do. Mark observation separately from inference.",
+     "feedback": "Write feedback for the learning goal \"Students use field evidence to explain how a limestone cave and its formations are made, and what that evidence says about the past\". Ask for self-assessment first. For each criterion cite the learner's actual words and the turn they came from. Say \"not assessed\" where the learner had no fair opportunity. Offer concrete next actions and finish with the transfer question."
+    }
+   }
+  }
+ ]
+}

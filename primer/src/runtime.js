@@ -2,6 +2,7 @@
 // recorded on the session and saved after each step, so an interrupted session can be resumed.
 import { validatePackage, validateSession } from "./schema.js";
 import { quote, hash, content, stem, overlap } from "./text.js";
+import { toTask } from "./provider.js";
 
 const now = () => new Date().toISOString();
 
@@ -107,17 +108,19 @@ export function createRuntime(store, provider) {
     return save(s);
   }
   function buildFeedback(s, d) {
-    const turn = (id) => s.turns.find((t) => t.id === id); const cite = (e) => ({ turnId: e.turnId, phase: e.phase, quote: e.quote });
+    const turn = (id) => s.turns.find((t) => t.id === id); const where = (id) => { const k = turn(id).kind; return k === "field-note" ? "in your field notes" : k === "activation-answer" ? "while preparing" : "in the conversation"; };
+    const cite = (e) => ({ turnId: e.turnId, phase: e.phase, where: where(e.turnId), quote: e.quote });
     const strengths = [], growth = [], notAssessed = [];
     for (const c of d.criteria) {
       const ev = s.evidence.filter((e) => e.kind === "criterion" && e.ref === c.id), promptId = s.practice.prompted[c.id];
       const support = s.adaptations.filter((a) => a.goalRef === c.id && (a.kind === "support" || a.kind === "repeat")).length, raised = s.adaptations.some((a) => a.goalRef === c.id && a.kind === "raise");
-      if (ev.length) strengths.push({ criterionId: c.id, criterion: c.text, observation: `You addressed this in your own words${support ? ` (after ${support} follow-up question${support > 1 ? "s" : ""})` : ""}.`, citations: ev.slice(0, 3).map(cite),
+      const places = [...new Set(ev.map((e) => where(e.turnId)))], helped = support && ev.every((e) => turn(e.turnId).kind === "practice");
+      if (ev.length) strengths.push({ criterionId: c.id, criterion: c.text, observation: `You addressed this in your own words ${places.join(" and ")}${helped ? ` (after ${support} follow-up question${support > 1 ? "s" : ""})` : ""}.`, citations: ev.slice(0, 3).map(cite),
         inference: ev.some((e) => e.strength === "clear") ? "Inference: this looks secure." + (raised ? " You were then given a harder version of the question." : "") : "Inference: this is developing; the idea is there but not yet fully worked out.", basis: "observed" });
       else if (promptId) { const replies = s.turns.filter((t) => t.who === "learner" && t.criterionId === c.id);
         growth.push({ criterionId: c.id, criterion: c.text, observation: `You were asked about this ("${quote(turn(promptId).text, 110)}") and your ${replies.length > 1 ? replies.length + " replies" : "reply"} did not bring in ${c.lookFors.slice(0, 3).join(", ")}.`,
-          citations: replies.slice(0, 2).map((t) => ({ turnId: t.id, phase: t.phase, quote: quote(t.text, 200) })), inference: "Inference: this may need more work. It is also possible you understand it but did not say it.",
-          nextAction: `Re-read the part of your preparation notes about ${c.lookFors.slice(0, 2).join(" and ")}, then write two sentences that do exactly this: ${c.text.charAt(0).toLowerCase() + c.text.slice(1)}.`, basis: "observed" }); }
+          citations: replies.slice(0, 2).map((t) => ({ turnId: t.id, phase: t.phase, where: where(t.id), quote: quote(t.text, 200) })), inference: "Inference: this may need more work. It is also possible you understand it but did not say it.",
+          nextAction: `Go back to the course material shown in the Prepare step, find the part about ${c.lookFors.slice(0, 2).join(" and ")}, then write two sentences in which you ${toTask(c.text)}.`, basis: "observed" }); }
       else notAssessed.push({ criterionId: c.id, criterion: c.text, reason: "The session ended before you were asked about this, so it is not assessed." });
     }
     const misconceptions = d.misconceptions.map((m) => { const ev = s.evidence.filter((e) => e.ref === m.id); if (!ev.length) return null;

@@ -1,0 +1,16 @@
+[
+ {
+  "id": "exp-g60z4j",
+  "title": "Salary negotiation: interests before positions",
+  "goal": "Students prepare for and conduct a negotiation by separating interests from positions, identifying their BATNA, and proposing options that create value for both sides",
+  "approval": "test",
+  "file": "experiences/mba-negotiation.primer.json"
+ },
+ {
+  "id": "exp-j5tqkb",
+  "title": "Reading a limestone cave",
+  "goal": "Students use field evidence to explain how a limestone cave and its formations are made, and what that evidence says about the past",
+  "approval": "test",
+  "file": "experiences/cave-geology.primer.json"
+ }
+]

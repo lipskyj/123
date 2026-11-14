@@ -1,0 +1,155 @@
+{
+ "ranAt": "2026-11-14T05:29:53.217Z",
+ "results": [
+  {
+   "name": "landing page shows teacher and student entry points",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "empty intake is refused with a readable message",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "interview asks one question at a time",
+   "ok": true,
+   "detail": "6 questions"
+  },
+  {
+   "name": "proposed design is shown as a draft with educator sources",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "design quotes the educator's material",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "skipped question is listed as a decision Primer made",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "no build button before approval",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "revision without a name is refused",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "revision produced version 2 and changed the design",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "direct edit propagated to the practice scene",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "educator approval recorded",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "student must give a name",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "preparation shows purpose, role and quoted material",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "asking for the answer is declined",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "session resumes after a reload",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "feedback quotes the learner and separates inference",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "feedback mentions the request for the answer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "the experience ends clearly",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "session record persisted with evidence and adaptations",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "teacher can trace evidence and adaptations for the session",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "bundled experiences are listed and labelled as test builds",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "field work gates the conversation",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "field notes arrive in the session from the 3D cave",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "the cave shows observations but not the explanation",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "weak practice gives growth areas, with field-note evidence still credited",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "stated misconception appears under ideas to check",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "accessibility basics on index.html",
+   "ok": true,
+   "detail": "{\"lang\":\"en\",\"title\":\"Primer\",\"h1\":1,\"unlabeled\":0,\"buttonsNoText\":0}"
+  },
+  {
+   "name": "accessibility basics on author.html#new",
+   "ok": true,
+   "detail": "{\"lang\":\"en\",\"title\":\"Primer — Teacher\",\"h1\":1,\"unlabeled\":0,\"buttonsNoText\":0}"
+  },
+  {
+   "name": "accessibility basics on learn.html",
+   "ok": true,
+   "detail": "{\"lang\":\"en\",\"title\":\"Primer — Student\",\"h1\":1,\"unlabeled\":0,\"buttonsNoText\":0}"
+  },
+  {
+   "name": "no page errors during the run",
+   "ok": true,
+   "detail": ""
+  }
+ ]
+}
