@@ -48,7 +48,15 @@ For anything non-trivial:
 - Report plainly: ✅ verified · ⚠️ problems · ❓ not verified and why.
   Never claim something works that wasn't checked.
 
-## 5. Learn and improve
+## 5. Learn and improve (no user feedback required)
+- The user has little time for feedback, so read **implicit signals** as
+  feedback: they redo or undo your work, repeat a request, sound frustrated,
+  ignore a suggestion twice, or a check fails. Each is a lesson.
+- After each substantial task, do a 10-second self-retrospective: what took
+  longer than needed, what would an expert have done differently? If there's a
+  durable lesson, record it (below) without asking.
+- When the user shares a skill/plugin/tool link, or asks if one is useful, run
+  the `skill-scout` skill (vet against its rubric; adopt the idea, not the bloat).
 - When the user corrects Claude or a gotcha appears, write one line under
   "## Lessons" in the project's CLAUDE.md (create the section if needed) and
   say so. This is the memory that survives between sessions.
