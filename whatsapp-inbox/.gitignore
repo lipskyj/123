@@ -20,3 +20,4 @@ public/wa-forwarder.apk
 
 # personalized guide output (may contain your server URL)
 guide/out/
+cloud/embedded.generated.js
