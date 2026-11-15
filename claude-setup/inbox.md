@@ -1,6 +1,4 @@
 # Inbox
 
-Drop any skill / plugin / repo link here (one per line, no explanation needed).
-The weekly skill scout reads it, vets each link, and clears this list.
-
-- https://github.com/addyosmani/agent-skills
+Optional: drop skill / plugin / repo links here, one per line. Pasting a link
+in any chat works too. The skill scout vets each link and clears this list.

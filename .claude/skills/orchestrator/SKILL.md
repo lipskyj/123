@@ -42,27 +42,43 @@ For anything non-trivial:
 | Repo has no CLAUDE.md and work will continue there | Offer to create one (`init` skill) |
 | Unsure how a Claude Code feature works | Check the official docs (code.claude.com) — don't guess |
 
-## 4. Verify before saying "done"
+## 4. Build in small slices, ground in docs, debug in order
+<!-- Ideas adapted from addyosmani/agent-skills (MIT): incremental-implementation,
+     source-driven-development, debugging-and-error-recovery, doubt-driven-development -->
+- Build in thin slices: implement one piece, run it, then the next. Commit at
+  working points so any step can be undone.
+- For framework/library/API decisions, check the official docs for the
+  version actually in use instead of relying on memory; cite the page.
+- When something breaks: save the error → reproduce it reliably → narrow it to
+  the smallest failing case → fix the root cause (ask "why" until it stops) →
+  add a guard (test or check) so it can't silently return.
+
+## 5. Verify before saying "done"
 - Run it for real (tests, the app, the script). Read the output.
 - Review the diff (step 3). For long tasks, consult the advisor if available.
+- For non-trivial decisions, doubt yourself on purpose: state the decision in
+  2–3 lines, then have a fresh-context reviewer (subagent or advisor) look at
+  the change and its requirements *without* your reasoning and try to break it.
+  Check each finding against the code; stop after findings turn trivial or 3 rounds.
 - Report plainly: ✅ verified · ⚠️ problems · ❓ not verified and why.
   Never claim something works that wasn't checked.
 
-## 5. Learn and improve (no user feedback required)
+## 6. Learn and improve (no user feedback required)
 - The user has little time for feedback, so read **implicit signals** as
   feedback: they redo or undo your work, repeat a request, sound frustrated,
   ignore a suggestion twice, or a check fails. Each is a lesson.
 - After each substantial task, do a 10-second self-retrospective: what took
   longer than needed, what would an expert have done differently? If there's a
   durable lesson, record it (below) without asking.
-- When the user shares a skill/plugin/tool link, or asks if one is useful, run
-  the `skill-scout` skill (vet against its rubric; adopt the idea, not the bloat).
+- When the user pastes a skill/plugin/tool link (even with no explanation), or
+  asks if one is useful, run the `skill-scout` skill: vet it, adopt the idea
+  not the bloat, and tell them the verdict in 2–3 lines.
 - When the user corrects Claude or a gotcha appears, write one line under
   "## Lessons" in the project's CLAUDE.md (create the section if needed) and
   say so. This is the memory that survives between sessions.
 - End substantial tasks with one line: the next most valuable thing to do.
 
-## 6. Things only the user can do — recommend at the right moment, in one line
+## 7. Things only the user can do — recommend at the right moment, in one line
 Claude cannot type these; suggest them only when they'd clearly help:
 - `/model` — switch to a stronger model for hard work, cheaper for routine.
 - `/advisor opus` (or `fable`) — automatic second opinion on long tasks.
@@ -73,7 +89,7 @@ Claude cannot type these; suggest them only when they'd clearly help:
   (check its repo, license, telemetry and activity first; warn about risks).
 - Permission prompts getting annoying → offer to run `fewer-permission-prompts`.
 
-## 7. Guardrails
+## 8. Guardrails
 - Ask before anything destructive, irreversible or outward-facing (deleting,
   force-pushing, publishing, sending messages, spending money).
 - Don't over-process small requests: ceremony must earn its cost.

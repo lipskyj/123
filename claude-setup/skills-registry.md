@@ -10,6 +10,7 @@ Last scan: 2026-11-15
 | orchestrator | own | account skill + repo copy | 2026-11-14 |
 | kickoff / blindspots / ship-check | own (game repo) | repo skills | 2026-11-14 |
 | advisor (built-in) | Claude Code | `/advisor opus` | 2026-11-14 |
+| agent-skills ideas: thin slices, docs-first, debug order, doubt review | addyosmani/agent-skills (MIT) | merged into orchestrator §4–5 in own words | 2026-11-15 |
 
 ## Rejected
 | Name | Source | Reason | Date |
@@ -21,5 +22,5 @@ Last scan: 2026-11-15
 ## Watching
 | Name | Source | Why / next step | Date |
 |---|---|---|---|
-| agent-skills (Addy Osmani) | addyosmani/agent-skills | MIT, ~118k★, 25 lifecycle skills. Good ideas to merge (doubt-driven review, source-driven development, incremental slices, debugging triage, frontend/perf checklists); full plugin overlaps built-ins + ours and has hooks to audit first | 2026-11-15 |
+| agent-skills (rest) | addyosmani/agent-skills | MIT, ~118k★. Full plugin not installed: overlaps built-ins/ours. Hooks audited 2026-11-15: no telemetry; `sdd-cache` only HEAD-revalidates docs URLs Claude fetched; `simplify-ignore` rewrites source files in place during reads (risky). Next candidates: frontend-ui-engineering + performance-optimization checklists for web/graphics work | 2026-11-15 |
 | task-observer | rebelytics/one-skill-to-rule-them-all | Self-improving skill logs; worth it once there are many custom skills | 2026-11-14 |
