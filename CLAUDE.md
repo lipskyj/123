@@ -14,7 +14,8 @@ telling the user to run slash commands. Explain things in plain language.
   - `index.html` — UI, styles, game loop, controls (desktop + touch)
   - `pois.js` — tools, points of interest, "wrong tool" feedback (science must stay accurate)
   - `audio.js` — procedural Web Audio music and SFX (no audio files)
-- `index.html` (root) — older "Educational Problem Solver" React demo, unrelated to the game.
+- `index.html` (root) — "Helios Breach", a single-file WebGL arena shooter (exported from a Claude artifact; ~2.2 MB, self-contained). Served at the GitHub Pages root.
+- `problem-solver/index.html` — older "Educational Problem Solver" React demo (moved from root), unrelated.
 
 ## How to run
 Serve the repo statically, e.g. `python3 -m http.server 8000`, then open
