@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Educational Problem Solver</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState } = React;
+
+    const EducationalProblemSolver = ({ initialProblem }) => {
+      const [problem, setProblem] = useState(initialProblem);
+      const [solution, setSolution] = useState('');
+
+      const solveProblem = () => {
+        setSolution(`Solution to: ${problem}`);
+      };
+
+      return (
+        <div>
+          <h1>Educational Problem Solver</h1>
+          <p>{problem}</p>
+          <button onClick={solveProblem}>Solve Problem</button>
+          <p>{solution}</p>
+        </div>
+      );
+    };
+
+    ReactDOM.render(
+      <EducationalProblemSolver initialProblem="What is 2 + 2?" />,
+      document.getElementById('root')
+    );
+  </script>
+</body>
+</html>
