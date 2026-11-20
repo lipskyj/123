@@ -26,6 +26,11 @@ import warnings
 from pathlib import Path
 
 warnings.filterwarnings("ignore")  # noisy library deprecation warnings
+import contextlib
+import io
+import logging
+
+logging.getLogger().setLevel(logging.ERROR)  # basic-pitch warns about backends we don't use
 
 import numpy as np
 import soundfile as sf
@@ -239,9 +244,56 @@ def beat_grid(y_mono: np.ndarray, sr: int, duration: float) -> tuple[float, np.n
     d = d[np.abs(d - np.median(d)) < 0.15 * np.median(d)]  # ignore skipped / doubled beats
     period = float(d.mean())
     tempo = 60.0 / period
-    pre = beats[0] - period * np.arange(1, int(beats[0] / period) + 2)[::-1]
+    n_pre = int(np.ceil((beats[0] - 0.05) / period)) if beats[0] > 0.05 else 0  # extend back to ~0 s
+    pre = beats[0] - period * np.arange(1, n_pre + 1)[::-1]
     post = beats[-1] + period * np.arange(1, int((duration - beats[-1]) / period) + 3)
     return tempo, np.concatenate([pre, beats, post])
+
+
+def align_downbeats(grid: np.ndarray, y_low: np.ndarray, y_pitched: np.ndarray, sr: int) -> np.ndarray:
+    """Shift the grid so beat 0, 4, 8… fall on bar downbeats ("one").
+
+    Two clues, as a musician would use them: chords usually change on beat 1, and
+    the kick drum / bass hit hardest there. We score each of the 4 possible bar
+    phases on both, then pad the front of the grid with whole beats so that the
+    winning downbeat lands on a multiple of 4.
+    """
+    import librosa
+
+    if len(grid) < 9:
+        return grid
+    env = librosa.onset.onset_strength(y=y_low, sr=sr, hop_length=256, fmax=150, n_mels=16)
+    frames = np.clip(librosa.time_to_frames(np.clip(grid, 0, None), sr=sr, hop_length=256), 0, len(env) - 1)
+    strength = np.array([env[max(0, f - 2): f + 3].max() for f in frames])
+    strength[grid < 0.1] = np.nan  # the first frames of a file always read as zero
+
+    # harmonic change: how different the chord is just after each beat vs. just before it
+    hop = 512
+    chroma = librosa.feature.chroma_cqt(y=y_pitched, sr=sr, hop_length=hop)
+    bf = np.clip(librosa.time_to_frames(np.clip(grid, 0, None), sr=sr, hop_length=hop), 0, chroma.shape[1] - 1)
+    change = np.full(len(grid), np.nan)
+    for i in range(1, len(grid) - 1):
+        if grid[i - 1] < 0.1:
+            continue
+        before = chroma[:, bf[i - 1]: bf[i]]
+        after = chroma[:, bf[i]: bf[i + 1]]
+        if before.shape[1] == 0 or after.shape[1] == 0:
+            continue
+        u, v = np.median(before, axis=1), np.median(after, axis=1)
+        change[i] = 1 - float(u @ v / (np.linalg.norm(u) * np.linalg.norm(v) + 1e-9))
+
+    def phase_scores(x):
+        if not np.isfinite(x).any():
+            return np.zeros(4)
+        x = x / (np.nanmean(x) + 1e-9)
+        return np.array([np.nanmean(x[p::4]) if np.isfinite(x[p::4]).any() else 0 for p in range(4)])
+
+    phase = int(np.argmax(phase_scores(strength) + 1.5 * phase_scores(change)))
+    if phase == 0:
+        return grid
+    period = float(np.median(np.diff(grid)))
+    pad = 4 - phase
+    return np.concatenate([grid[0] - period * np.arange(pad, 0, -1), grid])
 
 
 def level_db(x: np.ndarray, ref: np.ndarray) -> float:
@@ -284,16 +336,17 @@ def transcribe(path: Path, cfg: dict) -> tuple[list, object]:
     """Basic Pitch → list of [start_s, dur_s, midi, velocity 0..1], plus the PrettyMIDI object."""
     from basic_pitch.inference import predict
 
-    _, midi, events = predict(
-        str(path),
-        onset_threshold=0.55 if cfg["mono"] else 0.5,
-        frame_threshold=0.3,
-        minimum_note_length=90,
-        minimum_frequency=cfg["fmin"],
-        maximum_frequency=cfg["fmax"],
-        multiple_pitch_bends=False,
-        melodia_trick=True,
-    )
+    with contextlib.redirect_stdout(io.StringIO()):  # silence "Predicting MIDI for…"
+        _, midi, events = predict(
+            str(path),
+            onset_threshold=0.55 if cfg["mono"] else 0.5,
+            frame_threshold=0.3,
+            minimum_note_length=90,
+            minimum_frequency=cfg["fmin"],
+            maximum_frequency=cfg["fmax"],
+            multiple_pitch_bends=False,
+            melodia_trick=True,
+        )
     notes = [[round(float(s), 3), round(float(e - s), 3), int(p), round(float(a), 2)] for s, e, p, a, _ in events]
     notes = [n for n in notes if n[3] >= 0.25]
     if cfg["mono"]:
@@ -389,8 +442,11 @@ def write_musicxml(name: str, notes: list, grid, key, tempo, title, path: Path):
     score = stream.Score()
     score.insert(0, metadata.Metadata(title=f"{title} — {STEMS[name]['label']}", composer="auto-transcribed"))
     parts, group = build_part(name, notes, grid, key, tempo)
+    # every staff spans the same whole number of 4/4 bars, so piano hands line up
+    end = max([p.highestTime for p in parts] + [4.0])
+    end = float(np.ceil(end / 4) * 4)
     for p in parts:
-        p.makeRests(fillGaps=True, inPlace=True, timeRangeFromBarDuration=True)
+        p.makeRests(refStreamOrTimeRange=[0.0, end], fillGaps=True, inPlace=True)
         score.insert(0, p)
     if group:
         score.insert(0, group)
@@ -462,6 +518,9 @@ def process(source: str, title: str | None = None, progress_cb=None, song_id: st
     beat_src = stems["drums"].mean(axis=1) if level_db(stems["drums"], mix) > SILENT_DB else mono
     y22 = librosa.resample(beat_src, orig_sr=sr, target_sr=22050)
     tempo, grid = beat_grid(y22, 22050, duration)
+    low = (stems["drums"] + stems["bass"]).mean(axis=1)
+    grid = align_downbeats(grid, librosa.resample(low, orig_sr=sr, target_sr=22050),
+                           librosa.resample(pitched, orig_sr=sr, target_sr=22050), 22050)
     key = estimate_key(librosa.resample(pitched, orig_sr=sr, target_sr=22050), 22050)
 
     meta = dict(

@@ -15,6 +15,12 @@ telling the user to run slash commands. Explain things in plain language.
   - `pois.js` — tools, points of interest, "wrong tool" feedback (science must stay accurate)
   - `audio.js` — procedural Web Audio music and SFX (no audio files)
 - `index.html` (root) — "Helios Breach", a single-file WebGL arena shooter (exported from a Claude artifact; ~2.2 MB, self-contained). Served at the GitHub Pages root.
+- `song-splitter/` — "Song Splitter": paste a YouTube link / audio file → 6 instrument stems
+  (Demucs htdemucs_6s), notes (Basic Pitch, ONNX), key/tempo/downbeats (librosa), MIDI +
+  MusicXML (music21); local web app with synced mixer, piano roll, sheet music (vendored OSMD).
+  **Exception to the buildless rule**: it needs Python ML packages, managed by `uv` (`pyproject.toml`
+  + `uv.lock`, Python 3.11). Run: `cd song-splitter && uv run server.py`. Test audio is synthesized
+  (sines + noise drums with known notes) — never commit copyrighted audio; `cache/` is gitignored.
 - `problem-solver/index.html` — older "Educational Problem Solver" React demo (moved from root), unrelated.
 
 ## How to run
@@ -52,3 +58,5 @@ Serve the repo statically, e.g. `python3 -m http.server 8000`, then open
 ## Lessons
 <!-- One line each: what went wrong / what to always do. Newest at the bottom. -->
 - In the cloud container, headless Chromium loads the game with no console errors, but `page.screenshot` hangs (software WebGL + 32 MB splat), even with rAF frozen. Check load + console errors there and report "visuals not verified"; real visual checks need a GPU machine or the user's phone.
+- Song Splitter in the cloud container: YouTube is blocked (test with uploaded/synthesized audio); Demucs weights come from dl.fbaipublicfiles.com (allowed in the env); download.pytorch.org is blocked, so torch comes from PyPI. basic-pitch hard-requires TensorFlow on Linux — overridden away in pyproject (it runs on ONNX).
+- Beat/downbeat gotchas: beat trackers lock to half tempo (double below 70 BPM); the first frames of a file read as zero onset strength (exclude t<0.1 s); kick on 1 & 3 can't pick "beat 1" alone — chord changes decide it.
