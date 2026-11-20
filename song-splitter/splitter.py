@@ -241,8 +241,10 @@ def beat_grid(y_mono: np.ndarray, sr: int, duration: float) -> tuple[float, np.n
     while 60.0 / float(np.median(np.diff(beats))) < 70:
         beats = np.sort(np.concatenate([beats, (beats[:-1] + beats[1:]) / 2]))
     d = np.diff(beats)
-    d = d[np.abs(d - np.median(d)) < 0.15 * np.median(d)]  # ignore skipped / doubled beats
-    period = float(d.mean())
+    steady = d[np.abs(d - np.median(d)) < 0.15 * np.median(d)]  # ignore skipped / doubled beats
+    period = float(steady.mean()) if len(steady) else float(np.median(d))
+    if not np.isfinite(period) or period <= 0:
+        period = 0.5
     tempo = 60.0 / period
     n_pre = int(np.ceil((beats[0] - 0.05) / period)) if beats[0] > 0.05 else 0  # extend back to ~0 s
     pre = beats[0] - period * np.arange(1, n_pre + 1)[::-1]
@@ -374,6 +376,35 @@ def sec_to_beats(t, grid: np.ndarray):
     return np.interp(t, grid, np.arange(len(grid), dtype=float))
 
 
+def music21_key(key: dict):
+    from music21 import key as m21key
+
+    if key["name"] == "unknown":
+        return None
+    tonic = (NAMES_FLAT if key["flats"] else NAMES_SHARP)[key["tonic"]]
+    return m21key.Key(tonic[0] + tonic[1:].replace("b", "-"), key["mode"])
+
+
+def spelling_for_key(key: dict) -> dict[int, str]:
+    """Pitch class -> note name as a musician would write it in this key.
+
+    Scale notes use the key's own spelling (E♭ in B♭ major, D♯ in E major); in minor
+    keys the raised 6th and 7th are spelled as such (F♯ in G minor, not G♭). Any other
+    chromatic note uses sharps in sharp keys and flats in flat keys.
+    """
+    k = music21_key(key)
+    default = NAMES_FLAT if key["flats"] else NAMES_SHARP
+    names = {pc: default[pc].replace("b", "-") for pc in range(12)}
+    if k is None:
+        return names
+    pitches = list(k.getPitches())
+    if key["mode"] == "minor":
+        pitches += [k.tonic.transpose("M6"), k.tonic.transpose("M7")]
+    for p in pitches:
+        names[p.pitchClass] = p.name
+    return names
+
+
 def build_part(name: str, notes: list, grid: np.ndarray, key: dict, tempo: float):
     """Quantise notes to a 16th-note grid on the detected beats and build music21 parts."""
     from music21 import chord, clef, key as m21key, meter, note, stream, tempo as m21tempo, layout
@@ -386,12 +417,15 @@ def build_part(name: str, notes: list, grid: np.ndarray, key: dict, tempo: float
         b1 = round(float(sec_to_beats(s + d, grid)) * 4) / 4
         q.append((b0, max(b1, b0 + 0.25), p, v))
 
+    m21_key = music21_key(key)
+    names = spelling_for_key(key)
+
     def spell(midi):
         from music21 import pitch
 
-        p = pitch.Pitch(midi=midi)
-        if key["flats"] and p.accidental is not None and p.accidental.name == "sharp":
-            p = p.getEnharmonic()
+        p = pitch.Pitch(names[midi % 12])
+        p.octave = midi // 12 - 1
+        p.octave += (midi - p.midi) // 12  # B#/Cb sit across the octave boundary
         return p
 
     def make(stream_cls, items, clef_obj, first):
@@ -400,7 +434,7 @@ def build_part(name: str, notes: list, grid: np.ndarray, key: dict, tempo: float
         part.insert(0, clef_obj)
         if first:
             part.insert(0, m21tempo.MetronomeMark(number=round(tempo)))
-        part.insert(0, m21key.Key(NAMES_SHARP[key["tonic"]], key["mode"]) if key["name"] != "unknown" else m21key.KeySignature(0))
+        part.insert(0, m21_key if m21_key is not None else m21key.KeySignature(0))
         part.insert(0, meter.TimeSignature("4/4"))
         groups: dict[float, list] = {}
         for b0, b1, p, v in items:

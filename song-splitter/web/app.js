@@ -63,7 +63,11 @@ async function followJob(job) {
     const secs = Math.round((Date.now() - t0) / 1000);
     showProgress(job.progress || 0, `${job.text} (${fmt(secs)} elapsed)`);
     await new Promise((r) => setTimeout(r, 800));
-    job = await api(`/api/jobs/${job.id}`);
+    try {
+      job = await api(`/api/jobs/${job.id}`);
+    } catch (err) {
+      return showProgress(0, "Lost track of this song — was the Song Splitter window closed? Start it again and retry.", true);
+    }
   }
 }
 
@@ -111,7 +115,7 @@ function applyGains() {
   for (const t of tracks) {
     const g = audible(t) ? t.vol : 0;
     if (t.gain) t.gain.gain.setTargetAtTime(g, ctx.currentTime, 0.015);
-    else t.el.volume = g; // before the audio graph exists
+    else t.el.volume = Math.min(1, g); // before the audio graph exists (media volume max is 1)
     t.row.style.opacity = t.stem.silent ? 0.45 : audible(t) ? 1 : 0.6;
     t.row.querySelector(".m").classList.toggle("on", t.muted);
     t.row.querySelector(".s").classList.toggle("on", t.solo);
@@ -164,6 +168,18 @@ async function play() {
   await Promise.all(tracks.map((x) => x.el.play().catch(() => {})));
   playing = true;
   $("#playBtn").textContent = "❚❚";
+}
+
+let looping = false;
+async function restartLoop() {
+  if (looping) return; // one restart at a time
+  looping = true;
+  try {
+    await seekTo(0);
+    if (!playing) await play();
+  } finally {
+    looping = false;
+  }
 }
 
 function pause() {
@@ -243,10 +259,7 @@ function buildTracks() {
     tracks.push(t);
   }
   master = tracks[0].el;
-  master.addEventListener("ended", async () => {
-    if ($("#loop").checked) { await seekTo(0); if (!playing) play(); }
-    else pause();
-  });
+  master.addEventListener("ended", () => (playing && $("#loop").checked ? restartLoop() : pause()));
   applyGains();
 }
 
@@ -259,7 +272,8 @@ let seeking = false;
 $("#seek").addEventListener("input", (e) => { seeking = true; $("#tNow").textContent = fmt((e.target.value / 1000) * song.duration); });
 $("#seek").addEventListener("change", async (e) => { await seekTo((e.target.value / 1000) * song.duration); seeking = false; });
 document.addEventListener("keydown", (e) => {
-  if (!song || $("#player").style.display !== "block" || e.target.tagName === "INPUT" && e.target.type === "text") return;
+  if (!song || $("#player").style.display !== "block" || e.target.closest("input, select, textarea")) return;
+  if (e.code === "Space" && e.target.closest("button, a")) return; // the focused button handles Space itself
   if (e.code === "Space") { e.preventDefault(); if (!$("#playBtn").disabled) playing ? pause() : play(); }
   if (e.code === "ArrowRight") seekTo(now() + 5);
   if (e.code === "ArrowLeft") seekTo(now() - 5);
@@ -553,7 +567,7 @@ function frame() {
       $("#tNow").textContent = fmt(t);
       $("#seek").value = Math.round((t / song.duration) * 1000);
     }
-    if ($("#loop").checked && playing && master.currentTime > song.duration - 0.1) seekTo(0);
+    if ($("#loop").checked && playing && master.currentTime > song.duration - 0.1) restartLoop();
     for (const tr of tracks) {
       let lvl = 0;
       if (tr.analyser && playing) {

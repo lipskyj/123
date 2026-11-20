@@ -57,21 +57,29 @@ def worker():
         except Exception as e:  # report a friendly message, keep the details in the terminal
             traceback.print_exc()
             msg = str(e).splitlines()[0] if str(e) else e.__class__.__name__
-            low = msg.lower()
-            if "sign in to confirm" in low or "bot" in low:
-                msg = "YouTube refused the download (it thinks this is a bot). Try again later, or upload the audio file instead."
-            elif "private video" in low or "unavailable" in low or "removed" in low:
-                msg = "That video is private, removed or not available in your country."
-            elif "age" in low and "confirm" in low:
-                msg = "That video is age-restricted, so it can't be downloaded without signing in. Upload the audio file instead."
-            elif "proxy" in low or "connect" in low or "network" in low or "timed out" in low or "resolve" in low:
-                msg = "Couldn't reach YouTube — check your internet connection and try again."
-            elif low.startswith("error: [youtube]"):
-                msg = "YouTube download failed. Updating may help: run  uv sync --upgrade-package yt-dlp  then restart. Or upload the audio file instead."
+            if splitter.is_youtube(job["source"]):
+                msg = friendly_youtube_error(msg)
             job.update(state="error", text=msg[:300])
         finally:
             if job.get("tmpfile"):
                 Path(job["tmpfile"]).unlink(missing_ok=True)
+
+
+def friendly_youtube_error(msg: str) -> str:
+    low = msg.lower()
+    if "sign in to confirm you" in low or "not a bot" in low:
+        return "YouTube refused the download (it thinks this is a bot). Try again later, or upload the audio file instead."
+    if "private video" in low or "video unavailable" in low or "has been removed" in low:
+        return "That video is private, removed or not available in your country."
+    if "confirm your age" in low or "age-restricted" in low:
+        return "That video is age-restricted, so it can't be downloaded without signing in. Upload the audio file instead."
+    if any(w in low for w in ("unable to connect", "proxy", "network is unreachable", "timed out",
+                              "failed to resolve", "name resolution", "getaddrinfo")):
+        return "Couldn't reach YouTube — check your internet connection and try again."
+    if low.startswith("error: [youtube]"):
+        return ("YouTube download failed. Updating may help: in this folder run  uv sync --upgrade-package yt-dlp  "
+                "and restart. Or upload the audio file instead.")
+    return msg
 
 
 def new_job(source: str, song_id: str, title: str | None = None, tmpfile: str | None = None) -> dict:
@@ -183,11 +191,30 @@ class Handler(BaseHTTPRequestHandler):
             raise ValueError("request too large")
         return json.loads(self.rfile.read(n) or b"{}")
 
+    def request_allowed(self) -> bool:
+        """Block other websites from driving this local app.
+
+        - Host must be localhost or a raw IP (defeats DNS-rebinding tricks).
+        - Changes (POST/DELETE) from a browser must come from this page itself.
+        """
+        host = (self.headers.get("Host") or "").rsplit(":", 1)[0].strip("[]").lower()
+        if host != "localhost" and not re.fullmatch(r"[0-9.]+|[0-9a-f:]+", host):
+            self.send_json({"error": "forbidden host"}, 403)
+            return False
+        if self.command in ("POST", "DELETE"):
+            origin = self.headers.get("Origin")
+            if origin and urlparse(origin).netloc != self.headers.get("Host"):
+                self.send_json({"error": "forbidden origin"}, 403)
+                return False
+        return True
+
     # ------------------------------------------------------------ routes
     def do_HEAD(self):
         self.do_GET()
 
     def do_GET(self):
+        if not self.request_allowed():
+            return
         path = unquote(urlparse(self.path).path)
         if path in ("/", "/index.html"):
             return self.send_file(WEB / "index.html")
@@ -213,9 +240,13 @@ class Handler(BaseHTTPRequestHandler):
         self.send_error(HTTPStatus.NOT_FOUND)
 
     def do_POST(self):
+        if not self.request_allowed():
+            return
         path = urlparse(self.path).path
         try:
             if path == "/api/process":
+                if not (self.headers.get("Content-Type") or "").startswith("application/json"):
+                    return self.send_json({"error": "expected JSON"}, 415)
                 url = str(self.read_json().get("url", "")).strip()
                 if not splitter.is_youtube(url) or not url.startswith(("http://", "https://", "youtu", "www.", "music.")):
                     return self.send_json({"error": "That doesn't look like a YouTube link."}, 400)
@@ -223,6 +254,8 @@ class Handler(BaseHTTPRequestHandler):
                     url = "https://" + url
                 return self.send_json(public(new_job(url, splitter.song_id_for(url))))
             if path == "/api/upload":
+                if not self.headers.get("X-Filename"):  # custom header = browsers must ask permission first
+                    return self.send_json({"error": "missing file name"}, 400)
                 n = int(self.headers.get("Content-Length") or 0)
                 if n <= 0 or n > MAX_UPLOAD:
                     return self.send_json({"error": "File is empty or larger than 300 MB."}, 400)
@@ -237,6 +270,9 @@ class Handler(BaseHTTPRequestHandler):
                             break
                         f.write(chunk)
                         left -= len(chunk)
+                if left > 0:
+                    Path(tmp).unlink(missing_ok=True)
+                    return self.send_json({"error": "The upload was interrupted — please try again."}, 400)
                 title = Path(name).stem[:120] or "Uploaded song"
                 return self.send_json(public(new_job(tmp, splitter.song_id_for(tmp), title=title, tmpfile=tmp)))
         except Exception as e:
@@ -245,6 +281,8 @@ class Handler(BaseHTTPRequestHandler):
         self.send_error(HTTPStatus.NOT_FOUND)
 
     def do_DELETE(self):
+        if not self.request_allowed():
+            return
         m = re.match(r"^/api/songs/([^/]+)$", urlparse(self.path).path)
         if m and ID_RE.match(m.group(1)) and (CACHE / m.group(1)).is_dir():
             shutil.rmtree(CACHE / m.group(1))
