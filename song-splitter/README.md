@@ -13,17 +13,17 @@ Everything runs **on your own computer**. Nothing is uploaded anywhere except th
 
 | Your computer | What to do |
 |---|---|
-| **Windows** | Double-click `start-windows.bat` |
-| **Mac** (M1 or newer) | Double-click `start-mac.command`. If macOS blocks it, right-click → Open. |
+| **Windows** | Double-click `start-windows.bat`. If you see "Windows protected your PC", click **More info → Run anyway**. |
+| **Mac** (M1 or newer) | Double-click `start-mac.command`. If macOS blocks it, right-click → **Open**. If it says "permission denied", open Terminal, type `bash ` (with a space), drag the file into the window and press Enter. |
 | **Linux** | Run `./start-linux.sh` |
 
-The first start installs everything it needs: about 1–2 GB, a few minutes. It also needs an internet connection. After that it starts in seconds. Your browser opens **http://localhost:8765**. Keep the black terminal window open while you use it, and close it to stop.
+The first start installs everything it needs: about 1–2 GB on Windows/Mac (about 6 GB on Linux, where the AI library includes graphics-card support), a few minutes. It also needs an internet connection. After that it starts in seconds. Your browser opens **http://localhost:8765**. Keep the black terminal window open while you use it, and close it to stop.
 
 *(Advanced: the scripts just install [uv](https://docs.astral.sh/uv/) and run `uv run server.py`. Options: `--port 9000`, `--no-browser`, and `--lan`, which lets a phone or tablet on the same Wi-Fi open it at `http://<your-computer's-IP>:8765`.)*
 
 ## How long does it take?
 
-The first song also downloads the instrument-splitting AI (~80 MB). After that, a 4-minute song takes roughly **4–12 minutes** on a normal laptop, and much faster with an NVIDIA graphics card. Each song is saved, so opening it again is instant.
+The first song also downloads the instrument-splitting AI (~80 MB). After that, a 4-minute song takes roughly **2–6 minutes** on a normal laptop (measured: 2½ minutes on a 4-core machine without a graphics card), and less with an NVIDIA graphics card. It needs about 3 GB of free memory while working. Each song is saved, so opening it again is instant.
 
 ## What to expect (honest limits)
 

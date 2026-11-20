@@ -7,6 +7,6 @@ if ! command -v uv >/dev/null 2>&1; then
   curl -LsSf https://astral.sh/uv/install.sh | sh || { echo "Could not install uv."; read -r; exit 1; }
   export PATH="$HOME/.local/bin:$PATH"
 fi
-echo "Starting Song Splitter (the first start downloads ~1–2 GB and takes a few minutes)…"
+echo "Starting Song Splitter (the first start downloads a few GB and takes a few minutes)…"
 uv run server.py "$@"
 echo "Song Splitter stopped. Press Enter to close."; read -r
