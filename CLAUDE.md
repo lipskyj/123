@@ -16,6 +16,7 @@ telling the user to run slash commands. Explain things in plain language.
   - `audio.js` — procedural Web Audio music and SFX (no audio files)
 - `index.html` (root) — "Helios Breach", a single-file WebGL arena shooter (exported from a Claude artifact; ~2.2 MB, self-contained). Served at the GitHub Pages root.
 - `problem-solver/index.html` — older "Educational Problem Solver" React demo (moved from root), unrelated.
+- `kala-slides/` — scripts that restyle Kala Yoga Google Slides decks into the kalayoga.co.il look (see its README).
 
 ## How to run
 Serve the repo statically, e.g. `python3 -m http.server 8000`, then open
@@ -52,3 +53,4 @@ Serve the repo statically, e.g. `python3 -m http.server 8000`, then open
 ## Lessons
 <!-- One line each: what went wrong / what to always do. Newest at the bottom. -->
 - In the cloud container, headless Chromium loads the game with no console errors, but `page.screenshot` hangs (software WebGL + 32 MB splat), even with rAF frozen. Check load + console errors there and report "visuals not verified"; real visual checks need a GPU machine or the user's phone.
+- Google Slides connector returns "Permission denied" for every presentation (even new ones). To restyle decks: Drive pptx export → python-pptx (`kala-slides/`) → Drive upload with conversion (≤ ~3 MB); verify via Drive PDF export, not LibreOffice. kalayoga.co.il was added to the environment's allowed hosts.
