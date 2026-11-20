@@ -1,0 +1,25 @@
+[project]
+name = "song-splitter"
+version = "0.1.0"
+description = "Split a song into instruments, play them as a mixer, and show the notes."
+requires-python = ">=3.10,<3.12"
+dependencies = [
+  "torch>=2.1,<2.6",
+  "torchaudio>=2.1,<2.6",
+  "demucs==4.0.1",
+  "basic-pitch[onnx]==0.4.0",
+  "librosa>=0.10,<0.11",
+  "soundfile>=0.12",
+  "music21>=9.1,<10",
+  "yt-dlp[default]>=2025.11.12",
+  "deno>=2.5,<3",       # JavaScript runtime yt-dlp now needs for YouTube
+  "imageio-ffmpeg>=0.5",  # bundled ffmpeg, so users need not install it
+  "numpy<2",
+  "setuptools<81",  # resampy (used by basic-pitch) imports pkg_resources
+]
+
+[tool.uv]
+package = false
+# basic-pitch hard-requires TensorFlow on Linux (~1.4 GB) but runs fine on the
+# much smaller ONNX runtime we already install, so skip TensorFlow.
+override-dependencies = ["tensorflow; sys_platform == 'never'"]
