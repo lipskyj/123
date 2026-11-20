@@ -32,3 +32,5 @@ Done 2026-11-20 (Drive folder above):
 - pilot: 18b0y4LMrOwMI3MstIf-cbudZd3bZrSqSEs2S0bhBUYA
 - session 5 "Golden principles": 1J9weu7WWTZEW495VdCuuMlR44TtGBPvc-V5pTTHurPw
 - session 6 "Yama 1": 1ci5ydEPpQxPaTe3qvxlx7Ho03N--T9Es5GVJDdtSDog
+- session 7: 1PBtqfbQggIgb65-Wh8wIJsPf6U5s1e8m9Km1E6qHRdk
+- session 8 "Positions": 1jS3AODAc46PDZ0V3977s8Am25PEBkbfENH_p8eqfmTE
