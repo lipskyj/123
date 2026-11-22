@@ -52,7 +52,10 @@ def worker():
             job.update(progress=round(frac, 3), text=text)
 
         try:
-            meta = splitter.process(job["source"], title=job.get("title"), progress_cb=cb, song_id=job["song_id"])
+            if job.get("kind") == "update":
+                meta = splitter.reanalyse(job["song_id"], progress_cb=cb)
+            else:
+                meta = splitter.process(job["source"], title=job.get("title"), progress_cb=cb, song_id=job["song_id"])
             job.update(state="done", progress=1.0, text="Done", song_id=meta["id"])
         except Exception as e:  # report a friendly message, keep the details in the terminal
             traceback.print_exc()
@@ -82,19 +85,19 @@ def friendly_youtube_error(msg: str) -> str:
     return msg
 
 
-def new_job(source: str, song_id: str, title: str | None = None, tmpfile: str | None = None) -> dict:
+def new_job(source: str, song_id: str, title: str | None = None, tmpfile: str | None = None, kind: str = "split") -> dict:
     with lock:
         # same song already queued or running? reuse that job
         for j in jobs.values():
-            if j["song_id"] == song_id and j["state"] in ("queued", "running"):
+            if j["song_id"] == song_id and j.get("kind") == kind and j["state"] in ("queued", "running"):
                 if tmpfile:
                     Path(tmpfile).unlink(missing_ok=True)
                 return j
         job_id = uuid.uuid4().hex[:12]
-        job = dict(id=job_id, source=source, song_id=song_id, title=title, tmpfile=tmpfile,
+        job = dict(id=job_id, kind=kind, source=source, song_id=song_id, title=title, tmpfile=tmpfile,
                    state="queued", progress=0.0, text="In the queue…")
         jobs[job_id] = job
-    if (CACHE / song_id / "meta.json").exists():
+    if kind == "split" and (CACHE / song_id / "meta.json").exists():
         job.update(state="done", progress=1.0, text="Already processed")
         if tmpfile:
             Path(tmpfile).unlink(missing_ok=True)
@@ -114,7 +117,7 @@ def list_songs() -> list[dict]:
             m = json.loads(meta_path.read_text())
         except Exception:
             continue
-        out.append({k: m.get(k) for k in ("id", "title", "duration", "tempo", "created")} | {"key": m["key"]["name"]})
+        out.append({k: m.get(k) for k in ("id", "title", "duration", "tempo", "created", "version")} | {"key": m["key"]["name"]})
     out.sort(key=lambda m: m.get("created") or "", reverse=True)
     return out
 
@@ -225,6 +228,8 @@ class Handler(BaseHTTPRequestHandler):
             return self.send_file(target)
         if path == "/api/songs":
             return self.send_json(list_songs())
+        if path == "/api/info":
+            return self.send_json({"version": splitter.VERSION})
         m = re.match(r"^/api/jobs/([a-f0-9]{12})$", path)
         if m:
             job = jobs.get(m.group(1))
@@ -253,6 +258,13 @@ class Handler(BaseHTTPRequestHandler):
                 if not url.startswith("http"):
                     url = "https://" + url
                 return self.send_json(public(new_job(url, splitter.song_id_for(url))))
+            m = re.match(r"^/api/songs/([^/]+)/update$", path)
+            if m:
+                if not ID_RE.match(m.group(1)) or not (CACHE / m.group(1) / "meta.json").exists():
+                    return self.send_json({"error": "unknown song"}, 404)
+                if not (self.headers.get("Content-Type") or "").startswith("application/json"):
+                    return self.send_json({"error": "expected JSON"}, 415)
+                return self.send_json(public(new_job("update", m.group(1), kind="update")))
             if path == "/api/upload":
                 if not self.headers.get("X-Filename"):  # custom header = browsers must ask permission first
                     return self.send_json({"error": "missing file name"}, 400)

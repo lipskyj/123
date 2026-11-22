@@ -3,7 +3,7 @@
 Paste a YouTube link (or pick an audio file) and get:
 
 - **Each instrument on its own track**: vocals, guitar, piano/keys, bass, drums and "other". Play them together in a mixer with **mute**, **solo** and a **volume** per instrument, plus a **speed** control that slows the song down without changing the pitch, and **loop**.
-- **The notes**: a scrolling piano roll for every instrument and drum hits (kick / snare / hi-hat), and **sheet music** that follows along as the song plays.
+- **The notes**: a scrolling piano roll for every instrument and drum hits (kick / snare / hi-hat), and **sheet music for every instrument, drums included**, that follows along as the song plays.
 - **The song's key and tempo** (e.g. "A minor · 92 BPM").
 - **Downloads**: each instrument's audio (FLAC), MIDI per instrument or all together, and MusicXML sheet music you can open and fix in the free [MuseScore](https://musescore.org).
 
@@ -30,7 +30,9 @@ The first song also downloads the instrument-splitting AI (~80 MB). After that, 
 - **Splitting** (Meta's *Demucs* AI) is very good but not perfect. You will sometimes hear a faint "ghost" of other instruments in a track. It only knows these 6 groups, so violins, horns, synths and so on all land in **Other**. Two guitars stay together on one track.
 - **Notes** (Spotify's *Basic Pitch* AI) are a **draft**. Clear bass lines, piano and solo vocals come out mostly right. Busy, distorted or reverb-heavy parts have mistakes, and "Other" is the least reliable. In my tests on a synthetic song with known notes, it got 100% of the bass notes and about 80% of the melody notes.
 - **Sheet music** assumes 4/4 time and rounds rhythms to 16th notes. The first beat of each bar is guessed from where the chords change and where the kick and bass hit, and can occasionally be off by a beat. Bass and guitar are written an octave higher than they sound, which is the standard convention (the little "8" under the clef).
-- **Drums** are shown as hits (kick / snare / hi-hat), not full drum notation.
+- **Drums** get their own sheet music on a standard drum staff: kick (bottom), snare (middle), hi-hat (✕ on top). Toms and crash cymbals aren't told apart yet.
+- **Piano** is the instrument the splitting AI finds hardest. In many songs it ends up inside **Other**, so look there if "Piano / Keys" says no sheet music.
+- **Songs split with an older version** show an **Update this song** button. It adds the newest features, like drum sheet music, in about a minute without splitting the song again.
 - **YouTube** changes often and sometimes breaks downloaders. If a link fails, update the downloader with `uv sync --upgrade-package yt-dlp` in this folder, or save the audio another way and use **Choose audio file**.
 - Older **Intel Macs** aren't supported, because the AI library no longer ships for them.
 

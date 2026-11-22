@@ -50,6 +50,7 @@ STEMS = {
 }
 ORDER = ["vocals", "guitar", "piano", "bass", "other", "drums"]
 SILENT_DB = -32  # a track this far below the full mix is treated as "not in this song"
+VERSION = 2  # bump when analysis changes, so the app can offer to update older songs
 
 
 class Progress:
@@ -57,11 +58,11 @@ class Progress:
 
     PLAN = [("download", 0.08), ("separate", 0.62), ("analyse", 0.05), ("notes", 0.22), ("write", 0.03)]
 
-    def __init__(self, cb=None):
+    def __init__(self, cb=None, plan=None):
         self.cb = cb or (lambda frac, text: None)
         self.start = {}
         acc = 0.0
-        for name, w in self.PLAN:
+        for name, w in plan or self.PLAN:
             self.start[name] = (acc, w)
             acc += w
 
@@ -309,7 +310,10 @@ def drum_hits(drums: np.ndarray, sr: int) -> list[list]:
     y = drums.mean(axis=1)
     if np.sqrt(np.mean(y**2)) < 1e-4:
         return []
-    onsets = librosa.onset.onset_detect(y=y, sr=sr, hop_length=256, units="samples", backtrack=False, delta=0.08)
+    pad = int(0.1 * sr)  # a hit at the very first sample has no "before" to rise from, so add a little silence
+    onsets = librosa.onset.onset_detect(y=np.concatenate([np.zeros(pad, y.dtype), y]), sr=sr, hop_length=256,
+                                        units="samples", backtrack=False, delta=0.08) - pad
+    onsets = np.clip(onsets, 0, None)
     win = int(0.06 * sr)
     freqs = np.fft.rfftfreq(win, 1 / sr)
     low, mid, high = freqs < 150, (freqs >= 150) & (freqs < 4000), freqs >= 6000
@@ -543,6 +547,48 @@ def process(source: str, title: str | None = None, progress_cb=None, song_id: st
 
         stems = separate(wav, tmp_out, prog)
 
+    meta = analyse(tmp_out, stems, mix, sr, prog, dict(
+        id=song_id,
+        title=title,
+        source=source if is_youtube(source) else "uploaded file",
+        created=time.strftime("%Y-%m-%d %H:%M"),
+    ))
+    meta["seconds_to_process"] = round(time.time() - t_start)
+    (tmp_out / "meta.json").write_text(json.dumps(meta))
+    shutil.rmtree(out, ignore_errors=True)
+    tmp_out.rename(out)
+    prog("write", 1, "Done")
+    return meta
+
+
+def reanalyse(song_id: str, progress_cb=None) -> dict:
+    """Redo everything after the split (tempo, key, notes, sheet music) from the saved
+    instrument tracks — used to update songs made with an older version. ~1 minute."""
+    prog = Progress(progress_cb, plan=[("separate", 0.05), ("analyse", 0.2), ("notes", 0.7), ("write", 0.05)])
+    out = CACHE / song_id
+    old = json.loads((out / "meta.json").read_text())
+    prog("separate", 0.5, "Loading the instrument tracks…")
+    stems, sr = {}, SR
+    for name in ORDER:
+        stems[name], sr = sf.read(str(out / f"{name}.flac"), dtype="float32", always_2d=True)
+    n = min(len(x) for x in stems.values())
+    stems = {k: v[:n] for k, v in stems.items()}
+    mix = sum(stems.values())  # the six tracks add back up to the original song
+    meta = analyse(out, stems, mix, sr, prog, {k: old[k] for k in ("id", "title", "source", "created") if k in old})
+    meta["seconds_to_process"] = old.get("seconds_to_process")
+    tmp = out / "meta.json.tmp"
+    tmp.write_text(json.dumps(meta))
+    tmp.replace(out / "meta.json")
+    prog("write", 1, "Done")
+    return meta
+
+
+def analyse(out_dir: Path, stems: dict, mix: np.ndarray, sr: int, prog: Progress, base: dict) -> dict:
+    """Tempo, key, notes, drum hits, MIDI and sheet music from the separated tracks."""
+    from drums_notation import write_drum_musicxml
+
+    duration = len(mix) / sr
+    title = base.get("title") or "Song"
     prog("analyse", 0.1, "Finding the tempo, beats and key…")
     import librosa
 
@@ -558,15 +604,13 @@ def process(source: str, title: str | None = None, progress_cb=None, song_id: st
     key = estimate_key(librosa.resample(pitched, orig_sr=sr, target_sr=22050), 22050)
 
     meta = dict(
-        id=song_id,
-        title=title,
-        source=source if is_youtube(source) else "uploaded file",
+        base,
+        version=VERSION,
         duration=round(duration, 3),
         tempo=round(tempo, 1),
         key=key,
         beats=[round(float(b), 3) for b in grid],
         stems=[],
-        created=time.strftime("%Y-%m-%d %H:%M"),
     )
 
     pitched_names = [n for n in ORDER if n != "drums"]
@@ -578,29 +622,35 @@ def process(source: str, title: str | None = None, progress_cb=None, song_id: st
         if name == "drums":
             prog("notes", 1, "Finding drum hits…")
             st["hits"] = [] if st["silent"] else drum_hits(stems[name], sr)
+            if st["hits"]:
+                st.update(safe_sheet(name, lambda path: write_drum_musicxml(st["hits"], grid, tempo, title, path), out_dir))
         elif not st["silent"]:
             prog("notes", i / len(pitched_names), f"Reading the notes: {cfg['label']}…")
-            notes, midi = transcribe(tmp_out / f"{name}.flac", cfg)
+            notes, midi = transcribe(out_dir / f"{name}.flac", cfg)
             st["notes"] = notes
             if notes:
-                midi.write(str(tmp_out / f"{name}.mid"))
+                midi.write(str(out_dir / f"{name}.mid"))
                 st["midi"] = f"{name}.mid"
-                try:
-                    write_musicxml(name, notes, grid, key, tempo, title, tmp_out / f"{name}.musicxml")
-                    st["musicxml"] = f"{name}.musicxml"
-                except Exception as e:  # sheet music is a bonus; never fail the whole song for it
-                    st["musicxml_error"] = str(e)[:200]
+                st.update(safe_sheet(name, lambda path: write_musicxml(name, notes, grid, key, tempo, title, path), out_dir))
         meta["stems"].append(st)
 
     prog("write", 0.5, "Saving…")
-    write_full_midi(meta, tmp_out / "all-instruments.mid")
+    write_full_midi(meta, out_dir / "all-instruments.mid")
     meta["midi_all"] = "all-instruments.mid"
-    meta["seconds_to_process"] = round(time.time() - t_start)
-    (tmp_out / "meta.json").write_text(json.dumps(meta))
-    shutil.rmtree(out, ignore_errors=True)
-    tmp_out.rename(out)
-    prog("write", 1, "Done")
     return meta
+
+
+def safe_sheet(name: str, writer, out_dir: Path) -> dict:
+    """Write one instrument's sheet music. It's a bonus: never let it fail the whole song."""
+    path = out_dir / f"{name}.musicxml"
+    tmp = out_dir / f"{name}.tmp.musicxml"
+    try:
+        writer(tmp)
+        tmp.replace(path)  # only replace a previous sheet once the new one is written
+        return {"musicxml": path.name}
+    except Exception as e:
+        tmp.unlink(missing_ok=True)
+        return {"musicxml_error": str(e)[:200]}
 
 
 if __name__ == "__main__":

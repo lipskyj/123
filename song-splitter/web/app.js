@@ -426,24 +426,44 @@ function setTab(name) {
 }
 document.querySelectorAll(".tab").forEach((b) => b.addEventListener("click", () => setTab(b.dataset.tab)));
 
+let currentVersion = 2; // replaced by the server's value at start-up
+api("/api/info").then((i) => (currentVersion = i.version)).catch(() => {});
+
+const SHEET_ORDER = ["vocals", "guitar", "piano", "bass", "drums", "other"];
+
 function fillSheetPicker() {
   const sel = $("#sheetPart");
   sel.innerHTML = "";
-  const parts = song.stems.filter((s) => s.musicxml);
-  for (const s of parts) {
+  // every instrument is listed; ones without sheet music explain why when picked
+  for (const name of SHEET_ORDER) {
+    const s = song.stems.find((x) => x.name === name);
+    if (!s) continue;
     const o = document.createElement("option");
-    o.value = s.name; o.textContent = s.label;
+    o.value = s.name;
+    o.textContent = s.musicxml ? s.label : `${s.label} (no sheet music)`;
     sel.appendChild(o);
   }
-  // most useful first guess: the loudest pitched part
-  const best = [...parts].sort((a, b) => b.level_db - a.level_db)[0];
+  // most useful first guess: the loudest part that has sheet music
+  const best = song.stems.filter((s) => s.musicxml && s.name !== "drums").sort((a, b) => b.level_db - a.level_db)[0]
+    || song.stems.find((s) => s.musicxml);
   if (best) sel.value = best.name;
-  if (!parts.length) {
-    const o = document.createElement("option");
-    o.textContent = "No sheet music for this song";
-    sel.appendChild(o);
-  }
 }
+
+function whyNoSheet(stem) {
+  const old = (song.version || 1) < currentVersion;
+  if (stem.name === "drums" && old && !stem.silent) return "Drum sheet music is new — click “Update this song” above to add it (about a minute).";
+  if (stem.silent && stem.name === "piano") {
+    const other = song.stems.find((s) => s.name === "other");
+    return "The AI didn't find a separate piano in this song. It often mixes piano into “Other”"
+      + (other && other.musicxml ? " — pick “Other” in this list to see those notes." : ".");
+  }
+  if (stem.silent) return `No ${stem.label.toLowerCase()} was found in this song.`;
+  if (stem.name === "drums" && !(stem.hits || []).length) return "No clear drum hits were found.";
+  if (stem.musicxml_error) return `Couldn't write sheet music for this part (${stem.musicxml_error}).`;
+  if (stem.name !== "drums" && !(stem.notes || []).length) return "No clear notes were found in this track.";
+  return "No sheet music for this part.";
+}
+
 $("#sheetPart").addEventListener("change", () => loadSheet(true));
 
 async function loadSheet(force = false) {
@@ -451,8 +471,15 @@ async function loadSheet(force = false) {
   const stem = song.stems.find((s) => s.name === name);
   const key = `${song.id}/${name}`;
   if (!stem || !stem.musicxml) {
-    $("#sheet").innerHTML = '<p style="padding:20px;color:#555">No pitched instruments were found in this song.</p>';
+    const p = document.createElement("p");
+    p.style.cssText = "padding:20px;color:#444;margin:0";
+    p.textContent = stem ? whyNoSheet(stem) : "No sheet music for this song.";
+    $("#sheet").replaceChildren(p);
     $("#dlXml").style.display = "none";
+    $("#measureHi").style.display = "none";
+    $("#sheetNote").textContent = "";
+    sheetLoadedFor = null;
+    osmd = null;
     return;
   }
   if (sheetLoadedFor === key && !force) return;
@@ -463,7 +490,9 @@ async function loadSheet(force = false) {
     ? "“Other” mixes several instruments together (strings, synths, horns…), so its notation is the least reliable."
     : name === "bass" || name === "guitar"
       ? "Written an octave higher than it sounds, as is standard for bass and guitar (the small 8 under the clef)."
-      : "";
+      : name === "drums"
+        ? "Drum staff: kick drum = bottom space, snare = middle, hi-hat = ✕ above the staff. Toms and cymbal crashes aren't told apart yet."
+        : "";
   $("#sheet").innerHTML = '<p style="padding:20px;color:#555">Drawing the sheet music…</p>';
   $("#measureHi").style.display = "none";
   lastMeasure = -1;
@@ -539,12 +568,41 @@ async function openSong(id) {
   sheetLoadedFor = null;
   osmd = null;
   $("#sheet").innerHTML = "";
+  $("#updateBar").style.display = (song.version || 1) < currentVersion ? "flex" : "none";
+  $("#updateText").textContent = "This song was made with an older version. Update it to add drum sheet music and the latest fixes (about a minute — no need to split it again).";
+  $("#updateBtn").disabled = false;
   buildTracks();
   computePitchRange();
   fillSheetPicker();
   setTab(document.querySelector(".tab.on")?.dataset.tab || "roll");
   window.scrollTo(0, 0);
 }
+
+$("#updateBtn").addEventListener("click", async () => {
+  const id = song.id;
+  $("#updateBtn").disabled = true;
+  try {
+    let job = await api(`/api/songs/${id}/update`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
+    while (job.state !== "done" && job.state !== "error") {
+      $("#updateText").textContent = `Updating… ${Math.round((job.progress || 0) * 100)}% — ${job.text}`;
+      await new Promise((r) => setTimeout(r, 800));
+      job = await api(`/api/jobs/${job.id}`);
+    }
+    if (job.state === "error") throw new Error(job.text);
+    if (song && song.id === id) {
+      const wasPlaying = playing, at = now();
+      song = null; // force a full reload of the updated song
+      await openSong(id);
+      // carry on from the same spot once the reloaded tracks are ready
+      await new Promise((r) => { const w = () => ($("#playBtn").disabled ? setTimeout(w, 100) : r()); w(); });
+      await seekTo(at);
+      if (wasPlaying) await play();
+    }
+  } catch (err) {
+    $("#updateText").textContent = `Update failed: ${err.message}`;
+    $("#updateBtn").disabled = false;
+  }
+});
 
 function goHome() {
   pause();
