@@ -427,7 +427,10 @@ function setTab(name) {
 document.querySelectorAll(".tab").forEach((b) => b.addEventListener("click", () => setTab(b.dataset.tab)));
 
 let currentVersion = 2; // replaced by the server's value at start-up
-api("/api/info").then((i) => (currentVersion = i.version)).catch(() => {});
+const infoReady = api("/api/info").then((i) => {
+  currentVersion = i.version;
+  $("#appVersion").textContent = `version ${i.version}`;
+}).catch(() => {});
 
 const SHEET_ORDER = ["vocals", "guitar", "piano", "bass", "drums", "other"];
 
@@ -451,13 +454,13 @@ function fillSheetPicker() {
 
 function whyNoSheet(stem) {
   const old = (song.version || 1) < currentVersion;
-  if (stem.name === "drums" && old && !stem.silent) return "Drum sheet music is new — click “Update this song” above to add it (about a minute).";
+  if (stem.name === "drums" && old && !stem.silent) return "Drum sheet music is being added — the song is updating (see the blue bar above, about a minute).";
   if (stem.silent && stem.name === "piano") {
     const other = song.stems.find((s) => s.name === "other");
     return "The AI didn't find a separate piano in this song. It often mixes piano into “Other”"
       + (other && other.musicxml ? " — pick “Other” in this list to see those notes." : ".");
   }
-  if (stem.silent) return `No ${stem.label.toLowerCase()} was found in this song.`;
+  if (stem.silent) return `The AI didn't find any ${stem.label.toLowerCase()} in this song.`;
   if (stem.name === "drums" && !(stem.hits || []).length) return "No clear drum hits were found.";
   if (stem.musicxml_error) return `Couldn't write sheet music for this part (${stem.musicxml_error}).`;
   if (stem.name !== "drums" && !(stem.notes || []).length) return "No clear notes were found in this track.";
@@ -568,19 +571,29 @@ async function openSong(id) {
   sheetLoadedFor = null;
   osmd = null;
   $("#sheet").innerHTML = "";
-  $("#updateBar").style.display = (song.version || 1) < currentVersion ? "flex" : "none";
-  $("#updateText").textContent = "This song was made with an older version. Update it to add drum sheet music and the latest fixes (about a minute — no need to split it again).";
+  await infoReady;
+  const outdated = (song.version || 1) < currentVersion;
+  $("#updateBar").style.display = outdated ? "flex" : "none";
+  $("#updateText").textContent = "This song was made with an older version — updating it now (about a minute, no need to split it again)…";
   $("#updateBtn").disabled = false;
+  $("#updateBtn").style.display = "none";
   buildTracks();
   computePitchRange();
   fillSheetPicker();
   setTab(document.querySelector(".tab.on")?.dataset.tab || "roll");
   window.scrollTo(0, 0);
+  if (outdated) runUpdate(); // older songs update themselves — nothing to click
 }
 
-$("#updateBtn").addEventListener("click", async () => {
+$("#updateBtn").addEventListener("click", () => runUpdate());
+
+let updatingId = null;
+async function runUpdate() {
   const id = song.id;
+  if (updatingId === id) return;
+  updatingId = id;
   $("#updateBtn").disabled = true;
+  $("#updateBtn").style.display = "none";
   try {
     let job = await api(`/api/songs/${id}/update`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
     while (job.state !== "done" && job.state !== "error") {
@@ -600,9 +613,13 @@ $("#updateBtn").addEventListener("click", async () => {
     }
   } catch (err) {
     $("#updateText").textContent = `Update failed: ${err.message}`;
+    $("#updateBtn").textContent = "Try again";
+    $("#updateBtn").style.display = "";
     $("#updateBtn").disabled = false;
+  } finally {
+    updatingId = null;
   }
-});
+}
 
 function goHome() {
   pause();
