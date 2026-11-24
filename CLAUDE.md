@@ -52,3 +52,4 @@ Serve the repo statically, e.g. `python3 -m http.server 8000`, then open
 ## Lessons
 <!-- One line each: what went wrong / what to always do. Newest at the bottom. -->
 - In the cloud container, headless Chromium loads the game with no console errors, but `page.screenshot` hangs (software WebGL + 32 MB splat), even with rAF frozen. Check load + console errors there and report "visuals not verified"; real visual checks need a GPU machine or the user's phone.
+- The Rjukan game (protagonist Ingrid, a light/optics open-world sandbox built in the "Astra" Three.js environment) lives outside this repo; design notes so far are chat-only. The cave game's phone calls, POI data model, notebook and debrief are the pieces meant to transfer to it.
